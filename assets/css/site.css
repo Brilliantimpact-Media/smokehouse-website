@@ -713,15 +713,41 @@ html.js [data-reveal].in { opacity: 1; transform: none; }
   -webkit-mask-composite: source-in;
           mask-composite: intersect;
 }
-.card--ticket:hover {
+/* no-JS fallback keeps the simple lift */
+html:not(.js) .card--ticket:hover {
   transform: translateY(-6px) rotate(-.4deg);
   box-shadow: var(--shadow-3);
 }
+/* JS: pointer-tracked 3D tilt (site.js sets --rx/--ry/--mx/--my) */
+html.js .card--ticket[data-reveal].in {
+  transform: perspective(950px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px));
+  transition: transform .16s ease-out, box-shadow .35s cubic-bezier(.16,1,.3,1);
+}
+html.js .card--ticket:hover { --lift: -7px; box-shadow: var(--shadow-3); }
+
+/* warm ember spotlight that follows the cursor */
+.card--ticket::after {
+  content: "";
+  position: absolute; inset: 0; z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .35s ease;
+  background: radial-gradient(230px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255,190,110,.20), rgba(255,150,60,.07) 45%, transparent 70%);
+}
+.card--ticket:hover::after { opacity: 1; }
 .ticket-head {
   display: flex; align-items: center; justify-content: space-between;
   padding-bottom: 1.1rem; margin-bottom: 1.3rem;
-  border-bottom: 2px dashed var(--rule-strong);
+  position: relative;
 }
+/* perforation that marches on hover */
+.ticket-head::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: repeating-linear-gradient(90deg, var(--rule-strong) 0 8px, transparent 8px 16px);
+}
+.card--ticket:hover .ticket-head::after { animation: march .5s linear infinite; }
+@keyframes march { to { background-position-x: 16px; } }
 .ticket-no {
   font-family: var(--font-ui); font-size: .82rem; font-weight: 700;
   letter-spacing: .14em; text-transform: uppercase;
@@ -729,12 +755,37 @@ html.js [data-reveal].in { opacity: 1; transform: none; }
   border: 2px solid currentColor;
   padding: .3rem .65rem;
   transform: rotate(-2deg);
-  transition: transform .3s ease, color .3s ease;
+  transition: color .3s ease;
 }
-.card--ticket:hover .ticket-no { transform: rotate(1.5deg) scale(1.05); color: var(--ink-2); }
+.card--ticket:hover .ticket-no { color: var(--ink-2); }
+/* the stamp slams in after the card reveals */
+html.js [data-reveal] .ticket-no { opacity: 0; }
+html.js [data-reveal].in .ticket-no {
+  animation: stamp .5s cubic-bezier(.2,1.4,.3,1) forwards;
+  animation-delay: calc(var(--reveal-delay, 0s) + .6s);
+}
+@keyframes stamp {
+  0%   { opacity: 0; transform: rotate(-14deg) scale(2.3); filter: blur(2px); }
+  55%  { opacity: 1; transform: rotate(-1deg) scale(.93); filter: none; }
+  100% { opacity: 1; transform: rotate(-2deg) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal] .ticket-no { opacity: 1; animation: none; }
+}
 
-.ticket-icon { width: 54px; height: 54px; flex: none; transition: transform .35s cubic-bezier(.16,1,.3,1); }
-.card--ticket:hover .ticket-icon { transform: rotate(-5deg) scale(1.08); }
+.ticket-icon { width: 54px; height: 54px; flex: none; }
+/* each trade gets its own move */
+.card--ticket:hover .ticket-icon--cleaver { transform-origin: 78% 72%; animation: chop .6s cubic-bezier(.36,.07,.19,.97) 1; }
+@keyframes chop { 0% { transform: rotate(0); } 35% { transform: rotate(-24deg); } 60% { transform: rotate(5deg); } 100% { transform: rotate(0); } }
+.card--ticket:hover .ticket-icon--parcel { animation: hop .55s ease 1; }
+@keyframes hop { 0% { transform: none; } 30% { transform: translateY(-5px); } 55% { transform: translateY(0) scale(1.05, .94); } 78% { transform: translateY(-2px); } 100% { transform: none; } }
+.card--ticket:hover .ticket-icon--truck { animation: drive .6s ease 1; }
+@keyframes drive { 0% { transform: none; } 35% { transform: translateX(6px) rotate(-1.5deg); } 65% { transform: translateX(-2px); } 100% { transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .card--ticket:hover .ticket-icon--cleaver,
+  .card--ticket:hover .ticket-icon--parcel,
+  .card--ticket:hover .ticket-icon--truck { animation: none; }
+}
 .ticket-icon path {
   fill: none;
   stroke: var(--ink);

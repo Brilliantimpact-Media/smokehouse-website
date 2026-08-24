@@ -337,6 +337,26 @@
     smokeVideo.pause();
   }
 
+  // --- Ticket cards: pointer-tracked tilt + spotlight ----------------------
+  var tickets = document.querySelectorAll(".card--ticket");
+  if (tickets.length && !reduceMotion && window.matchMedia("(pointer: fine)").matches) {
+    tickets.forEach(function (card) {
+      card.addEventListener("pointermove", function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width;
+        var py = (e.clientY - r.top) / r.height;
+        card.style.setProperty("--ry", ((px - 0.5) * 7).toFixed(2) + "deg");
+        card.style.setProperty("--rx", ((0.5 - py) * 7).toFixed(2) + "deg");
+        card.style.setProperty("--mx", (px * 100).toFixed(1) + "%");
+        card.style.setProperty("--my", (py * 100).toFixed(1) + "%");
+      });
+      card.addEventListener("pointerleave", function () {
+        card.style.setProperty("--rx", "0deg");
+        card.style.setProperty("--ry", "0deg");
+      });
+    });
+  }
+
   // --- Cut chart (custom-processing) ---------------------------------------
   var chart = document.querySelector(".cut-chart");
   if (chart) {
