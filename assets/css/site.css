@@ -530,35 +530,6 @@ tr:last-child td { border-bottom: 0; }
   .cinema__smoke-canvas { display: none; }
 }
 
-/* --- Landing assembly: photo pieces dropping onto the board (site.js) ------- */
-.cinema__piece {
-  position: absolute;
-  pointer-events: none;
-  opacity: 0;
-  will-change: transform, opacity;
-}
-.cinema__piece.fall {
-  animation: piece-fall var(--dur, .8s) cubic-bezier(.3,.9,.35,1) var(--delay, 0s) forwards;
-}
-@keyframes piece-fall {
-  0% {
-    opacity: 0;
-    transform: translateY(var(--drop, -16vh)) rotate(var(--rot, 0deg)) scale(1.05);
-    filter: drop-shadow(0 26px 30px rgba(0,0,0,.6));
-  }
-  40% { opacity: 1; }
-  72% {
-    transform: translateY(.6%) rotate(0deg) scale(.996);
-    filter: drop-shadow(0 4px 10px rgba(0,0,0,.45));
-  }
-  86% { transform: translateY(-.4%) scale(1.003); }
-  100% {
-    opacity: 1;
-    transform: none;
-    filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
-  }
-}
-
 .cinema__content { position: relative; z-index: 2; }
 
 /* Typographic entrance — words rise out of clipped line boxes (site.js) */

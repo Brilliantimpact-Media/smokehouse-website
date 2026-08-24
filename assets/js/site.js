@@ -190,20 +190,22 @@
       for (var i = 0; i < SMOKE_N; i++) { smoke[i] = {}; spawnSmoke(smoke[i], true); }
 
       // embers: few, small, quick, flickering warm
-      var EMBER_N = 12, embers = [];
+      var EMBER_N = 7, embers = [];
       var spawnEmber = function (p, warm) {
         p.x0 = (0.60 + Math.random() * 0.26) * W;
         p.y0 = H * (0.40 + Math.random() * 0.26);
-        p.life = 5 + Math.random() * 4.5;
-        p.age = warm ? Math.random() * p.life : 0;
-        p.rise = H * (0.22 + Math.random() * 0.14);
+        p.life = 7 + Math.random() * 5;
+        // negative age = dormant; the ember waits its turn so sparks come
+        // and go instead of streaming constantly
+        p.age = warm ? Math.random() * (p.life + 9) - 9 : -(1.5 + Math.random() * 7);
+        p.rise = H * (0.15 + Math.random() * 0.12);
         p.r = 0.8 + Math.random() * 1.3;            // tiny, sharp core
         p.swayA = 10 + Math.random() * 26;
         p.swayF = 0.5 + Math.random() * 0.7;
-        p.turbF = 1.4 + Math.random() * 1.6;        // high-freq tumble
+        p.turbF = 0.9 + Math.random() * 1.1;        // high-freq tumble
         p.turbA = 2 + Math.random() * 4;
         p.phase = Math.random() * TAU;
-        p.drift = -(4 + Math.random() * 9);
+        p.drift = -(2.5 + Math.random() * 6);
         p.peak = 0.75 + Math.random() * 0.25;
         p.fl = 0.8;                                  // smoothed crackle level
         p.lx = null; p.ly = null;                    // last pos, for the streak
@@ -240,6 +242,7 @@
         for (i = 0; i < embers.length; i++) {
           p = embers[i];
           p.age += dt;
+          if (p.age < 0) { p.lx = null; p.ly = null; continue; }  // dormant
           if (p.age >= p.life) spawnEmber(p, false);
           t = p.age / p.life;
           x = p.x0 + p.drift * p.age +
@@ -310,75 +313,8 @@
     })();
   };
 
-  // --- Landing assembly ----------------------------------------------------
-  // The hero photo builds itself: empty board first, then the steak, the loose
-  // chunk, the slice fan, and finally the rosemary drop into place. Piece
-  // cutouts are pixel-aligned to the base via the object-fit cover math, so
-  // the landed composite is identical to the original photo. If anything
-  // fails to load in time, we skip straight to the finished photo.
-  var heroMedia = document.querySelector(".cinema__media");
-  var heroImg = heroMedia && heroMedia.querySelector("img");
-  var IW = 1920, IH = 1280, OBJ_X = 0.72, OBJ_Y = 0.5;
-  var PIECES = [
-    { n: "steak",    b: [944, 0, 836, 454],    delay: 0.15, drop: "-16vh", rot: "-2.5deg", dur: 0.8  },
-    { n: "chunk",    b: [1205, 592, 262, 239], delay: 0.85, drop: "-14vh", rot: "5deg",    dur: 0.7  },
-    { n: "fan",      b: [1278, 0, 642, 971],   delay: 1.25, drop: "-16vh", rot: "2deg",    dur: 0.85 },
-    { n: "rosemary", b: [1101, 0, 819, 552],   delay: 2.0,  drop: "-9vh",  rot: "-7deg",   dur: 0.9  }
-  ];
-
-  var beginHero = function () { startEntrance(); startSmoke(); };
-
-  if (heroImg && !reduceMotion && window.Image && Image.prototype.decode) {
-    (function () {
-      var base = new Image();
-      base.src = "assets/img/pieces/base-empty.jpg";
-      var els = PIECES.map(function (spec) {
-        var el = new Image();
-        el.src = "assets/img/pieces/" + spec.n + ".webp";
-        el.className = "cinema__piece";
-        el.alt = "";
-        el.style.setProperty("--delay", spec.delay + "s");
-        el.style.setProperty("--drop", spec.drop);
-        el.style.setProperty("--rot", spec.rot);
-        el.style.setProperty("--dur", spec.dur + "s");
-        return el;
-      });
-      var layout = function () {
-        var cw = heroMedia.clientWidth, ch = heroMedia.clientHeight;
-        var sc = Math.max(cw / IW, ch / IH);
-        var ox = (cw - IW * sc) * OBJ_X, oy = (ch - IH * sc) * OBJ_Y;
-        els.forEach(function (el, i) {
-          var b = PIECES[i].b;
-          el.style.left = (ox + b[0] * sc) + "px";
-          el.style.top = (oy + b[1] * sc) + "px";
-          el.style.width = (b[2] * sc) + "px";
-          el.style.height = (b[3] * sc) + "px";
-        });
-      };
-      var started = false;
-      var start = function (ok) {
-        if (started) return;
-        started = true;
-        if (!ok) { beginHero(); return; }
-        heroImg.src = base.src;
-        els.forEach(function (el) { heroMedia.appendChild(el); });
-        layout();
-        window.addEventListener("resize", layout);
-        requestAnimationFrame(function () {
-          requestAnimationFrame(function () {
-            els.forEach(function (el) { el.classList.add("fall"); });
-          });
-        });
-        setTimeout(startEntrance, 900);   // words rise while the fan is landing
-        setTimeout(startSmoke, 2500);     // smoke once everything is down
-      };
-      Promise.all([base.decode()].concat(els.map(function (el) { return el.decode(); })))
-        .then(function () { start(true); }, function () { start(false); });
-      setTimeout(function () { start(false); }, 2500); // slow network: skip the show
-    })();
-  } else {
-    beginHero();
-  }
+  startEntrance();
+  startSmoke();
 
   // --- Parallax ------------------------------------------------------------
   // [data-parallax="0.15"] drifts at 15% of scroll speed while its section
