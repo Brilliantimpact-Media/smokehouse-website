@@ -74,6 +74,7 @@
   // Words rise out of clipped line boxes, one after another — letterpress
   // being pulled. Word-level so it survives any line wrap.
   var heroH1 = document.querySelector(".cinema h1");
+  var startEntrance = function () {};
   if (heroH1 && !reduceMotion) {
     var words = heroH1.textContent.trim().split(/\s+/);
     heroH1.textContent = "";
@@ -89,11 +90,16 @@
       if (i < words.length - 1) heroH1.appendChild(document.createTextNode(" "));
     });
     heroH1.classList.add("type-in");
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () { heroH1.classList.add("go"); });
-    });
-    // fallback: if rAF never fires (hidden tab), show the headline anyway
-    setTimeout(function () { heroH1.classList.add("go"); }, 1200);
+    var entranceStarted = false;
+    startEntrance = function () {
+      if (entranceStarted) return;
+      entranceStarted = true;
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { heroH1.classList.add("go"); });
+      });
+    };
+    // hard fallback: never leave the headline hidden
+    setTimeout(function () { heroH1.classList.add("go"); }, 4000);
   }
 
   // --- Hero smoke + embers -------------------------------------------------
@@ -102,7 +108,11 @@
   // closed-form functions of a particle's age; the only integrated state is
   // the cursor-push offset, which decays back to zero.
   var smokeCanvas = document.querySelector(".cinema__smoke-canvas");
-  if (smokeCanvas && !reduceMotion && smokeCanvas.getContext) {
+  var smokeStarted = false;
+  var startSmoke = function () {
+    if (smokeStarted || !smokeCanvas || reduceMotion || !smokeCanvas.getContext) return;
+    smokeStarted = true;
+    smokeCanvas.classList.add("on");
     (function () {
       var ctx = smokeCanvas.getContext("2d");
       var heroEl = smokeCanvas.closest(".cinema");
@@ -298,6 +308,76 @@
       };
       requestAnimationFrame(frame);
     })();
+  };
+
+  // --- Landing assembly ----------------------------------------------------
+  // The hero photo builds itself: empty board first, then the steak, the loose
+  // chunk, the slice fan, and finally the rosemary drop into place. Piece
+  // cutouts are pixel-aligned to the base via the object-fit cover math, so
+  // the landed composite is identical to the original photo. If anything
+  // fails to load in time, we skip straight to the finished photo.
+  var heroMedia = document.querySelector(".cinema__media");
+  var heroImg = heroMedia && heroMedia.querySelector("img");
+  var IW = 1920, IH = 1280, OBJ_X = 0.72, OBJ_Y = 0.5;
+  var PIECES = [
+    { n: "steak",    b: [944, 0, 836, 454],    delay: 0.15, drop: "-16vh", rot: "-2.5deg", dur: 0.8  },
+    { n: "chunk",    b: [1205, 592, 262, 239], delay: 0.85, drop: "-14vh", rot: "5deg",    dur: 0.7  },
+    { n: "fan",      b: [1278, 0, 642, 971],   delay: 1.25, drop: "-16vh", rot: "2deg",    dur: 0.85 },
+    { n: "rosemary", b: [1101, 0, 819, 552],   delay: 2.0,  drop: "-9vh",  rot: "-7deg",   dur: 0.9  }
+  ];
+
+  var beginHero = function () { startEntrance(); startSmoke(); };
+
+  if (heroImg && !reduceMotion && window.Image && Image.prototype.decode) {
+    (function () {
+      var base = new Image();
+      base.src = "assets/img/pieces/base-empty.jpg";
+      var els = PIECES.map(function (spec) {
+        var el = new Image();
+        el.src = "assets/img/pieces/" + spec.n + ".webp";
+        el.className = "cinema__piece";
+        el.alt = "";
+        el.style.setProperty("--delay", spec.delay + "s");
+        el.style.setProperty("--drop", spec.drop);
+        el.style.setProperty("--rot", spec.rot);
+        el.style.setProperty("--dur", spec.dur + "s");
+        return el;
+      });
+      var layout = function () {
+        var cw = heroMedia.clientWidth, ch = heroMedia.clientHeight;
+        var sc = Math.max(cw / IW, ch / IH);
+        var ox = (cw - IW * sc) * OBJ_X, oy = (ch - IH * sc) * OBJ_Y;
+        els.forEach(function (el, i) {
+          var b = PIECES[i].b;
+          el.style.left = (ox + b[0] * sc) + "px";
+          el.style.top = (oy + b[1] * sc) + "px";
+          el.style.width = (b[2] * sc) + "px";
+          el.style.height = (b[3] * sc) + "px";
+        });
+      };
+      var started = false;
+      var start = function (ok) {
+        if (started) return;
+        started = true;
+        if (!ok) { beginHero(); return; }
+        heroImg.src = base.src;
+        els.forEach(function (el) { heroMedia.appendChild(el); });
+        layout();
+        window.addEventListener("resize", layout);
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            els.forEach(function (el) { el.classList.add("fall"); });
+          });
+        });
+        setTimeout(startEntrance, 900);   // words rise while the fan is landing
+        setTimeout(startSmoke, 2500);     // smoke once everything is down
+      };
+      Promise.all([base.decode()].concat(els.map(function (el) { return el.decode(); })))
+        .then(function () { start(true); }, function () { start(false); });
+      setTimeout(function () { start(false); }, 2500); // slow network: skip the show
+    })();
+  } else {
+    beginHero();
   }
 
   // --- Parallax ------------------------------------------------------------
