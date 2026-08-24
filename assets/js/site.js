@@ -70,6 +70,95 @@
     }
   }
 
+  // --- Hero smoke ----------------------------------------------------------
+  // Canvas particle plume rising off the steak. Pre-warmed so the smoke is
+  // already there on load. Position and sway are closed-form functions of a
+  // particle's age, so there is no integration to drift or explode.
+  var smokeCanvas = document.querySelector(".cinema__smoke-canvas");
+  if (smokeCanvas && !reduceMotion && smokeCanvas.getContext) {
+    (function () {
+      var ctx = smokeCanvas.getContext("2d");
+      var heroEl = smokeCanvas.closest(".cinema");
+      var DPR = Math.min(window.devicePixelRatio || 1, 2);
+      var W = 0, H = 0;
+      var resize = function () {
+        W = heroEl.clientWidth; H = heroEl.clientHeight;
+        smokeCanvas.width = Math.round(W * DPR);
+        smokeCanvas.height = Math.round(H * DPR);
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      };
+      resize();
+      window.addEventListener("resize", resize);
+
+      // one soft round sprite, stamped for every particle
+      var sprite = document.createElement("canvas");
+      sprite.width = sprite.height = 160;
+      var sctx = sprite.getContext("2d");
+      var grad = sctx.createRadialGradient(80, 80, 0, 80, 80, 80);
+      grad.addColorStop(0, "rgba(252,249,243,.60)");
+      grad.addColorStop(.45, "rgba(252,249,243,.24)");
+      grad.addColorStop(1, "rgba(252,249,243,0)");
+      sctx.fillStyle = grad;
+      sctx.fillRect(0, 0, 160, 160);
+
+      var TAU = Math.PI * 2;
+      var COUNT = 26;
+      var parts = [];
+      var spawn = function (p, warm) {
+        p.x0 = (0.60 + Math.random() * 0.28) * W;   // rises off the steak, right side
+        p.y0 = H * (0.70 + Math.random() * 0.22);
+        p.life = 9 + Math.random() * 6;             // seconds
+        p.age = warm ? Math.random() * p.life : 0;
+        p.rise = H * (0.5 + Math.random() * 0.2);   // total climb over a life
+        p.r0 = 20 + Math.random() * 30;
+        p.grow = 6 + Math.random() * 8;             // px/s
+        p.swayA = 18 + Math.random() * 38;
+        p.swayF = 0.22 + Math.random() * 0.33;
+        p.phase = Math.random() * TAU;
+        p.drift = -(5 + Math.random() * 12);        // gentle wind to the left
+        p.peak = 0.22 + Math.random() * 0.16;
+      };
+      for (var i = 0; i < COUNT; i++) { parts[i] = {}; spawn(parts[i], true); }
+
+      var draw = function (dt) {
+        ctx.clearRect(0, 0, W, H);
+        ctx.globalCompositeOperation = "lighter";
+        for (var i = 0; i < parts.length; i++) {
+          var p = parts[i];
+          p.age += dt;
+          if (p.age >= p.life) spawn(p, false);
+          var t = p.age / p.life;
+          var x = p.x0 + p.drift * p.age +
+                  Math.sin(p.phase + p.age * p.swayF * TAU) * p.swayA * (0.3 + t);
+          var y = p.y0 - t * p.rise;
+          var r = p.r0 + p.grow * p.age;
+          var env = t < 0.22 ? t / 0.22 : (1 - t) / 0.78;   // ramp up, long fade
+          ctx.globalAlpha = p.peak * env;
+          ctx.drawImage(sprite, x - r, y - r, r * 2, r * 2);
+        }
+        ctx.globalAlpha = 1;
+      };
+
+      draw(0); // first frame synchronously — smoke visible before rAF ticks
+
+      var onScreen = true;
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          onScreen = entries[0].isIntersecting;
+        }).observe(heroEl);
+      }
+      var last = null;
+      var frame = function (now) {
+        if (last === null) last = now;
+        var dt = Math.min((now - last) / 1000, 0.05); // clamp tab-throttle jumps
+        last = now;
+        if (onScreen) draw(dt);
+        requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+    })();
+  }
+
   // --- Parallax ------------------------------------------------------------
   // [data-parallax="0.15"] drifts at 15% of scroll speed while its section
   // is on screen. Kept subtle on purpose; disabled under reduced motion.

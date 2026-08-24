@@ -521,30 +521,19 @@ tr:last-child td { border-bottom: 0; }
   background: linear-gradient(180deg, rgba(14,12,9,0) 0%, rgba(14,12,9,.55) 55%, var(--char) 100%);
 }
 
-/* --- Smoke wisps ------------------------------------------------------------ */
-.cinema__smoke { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-.wisp {
-  position: absolute; bottom: -12%;
-  width: 26vmin; height: 52vmin;
-  border-radius: 50%;
-  background: radial-gradient(ellipse 40% 55% at 50% 60%, rgba(247,245,240,.34), rgba(247,245,240,.10) 55%, transparent 72%);
-  filter: blur(22px);
+/* --- Smoke (canvas particle plume; drawn by site.js) ----------------------- */
+.cinema__smoke-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none;
   mix-blend-mode: screen;
-  opacity: 0;
-  animation: rise var(--wisp-t, 16s) linear var(--wisp-d, 0s) infinite;
-  will-change: transform, opacity;
+  /* keep the plume off the headline: fade smoke out toward the text side */
+  -webkit-mask-image: linear-gradient(100deg, transparent 22%, rgba(0,0,0,.5) 42%, #000 58%);
+          mask-image: linear-gradient(100deg, transparent 22%, rgba(0,0,0,.5) 42%, #000 58%);
 }
-.wisp:nth-child(1) { left: 56%; --wisp-t: 15s; --wisp-d: 0s;   scale: .8; }
-.wisp:nth-child(2) { left: 68%; --wisp-t: 19s; --wisp-d: 4.5s; scale: 1.15; }
-.wisp:nth-child(3) { left: 78%; --wisp-t: 13.5s; --wisp-d: 9s; scale: .65; }
-.wisp:nth-child(4) { left: 47%; --wisp-t: 22s; --wisp-d: 7s;   scale: 1.3; opacity: 0; }
-@keyframes rise {
-  0%   { transform: translate3d(0, 6%, 0) skewX(0deg); opacity: 0; }
-  12%  { opacity: .5; }
-  55%  { transform: translate3d(-3vmin, -46%, 0) skewX(-4deg); opacity: .32; }
-  100% { transform: translate3d(2vmin, -95%, 0) skewX(3deg); opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .cinema__smoke-canvas { display: none; }
+  .cinema__media img { animation: none; }
 }
-@media (prefers-reduced-motion: reduce) { .wisp { display: none; } .cinema__media img { animation: none; } }
 
 .cinema__content { position: relative; z-index: 2; }
 .cinema__content h1, .cinema__content .lede { text-shadow: 0 1px 22px rgba(14,12,9,.65); }
