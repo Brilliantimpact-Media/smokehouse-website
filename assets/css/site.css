@@ -536,7 +536,7 @@ tr:last-child td { border-bottom: 0; }
   -webkit-mask-image: linear-gradient(100deg, transparent 22%, rgba(0,0,0,.5) 42%, #000 58%);
           mask-image: linear-gradient(100deg, transparent 22%, rgba(0,0,0,.5) 42%, #000 58%);
 }
-.cinema__smoke-video.on { opacity: .75; }
+.cinema__smoke-video.on { opacity: .65; }
 @media (prefers-reduced-motion: reduce) {
   .cinema__smoke-canvas, .cinema__smoke-video { display: none; }
 }
@@ -661,30 +661,27 @@ html.js [data-reveal].in { opacity: 1; transform: none; }
 }
 @media (min-width: 900px) { .cut-chart-grid { grid-template-columns: 1.25fr .75fr; } }
 
-.cut-chart svg { width: 100%; height: auto; display: block; }
-.cut-chart .cow-line { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
-.cut-chart .cow-extra { fill: var(--paper-3); stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: round; }
+.cut-chart { position: relative; }
+.cut-chart img { width: 100%; height: auto; display: block; }
+.cut-chart svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 
 .cut-chart .cut { cursor: pointer; outline-offset: 4px; }
 .cut-chart .cut polygon {
   fill: transparent;
-  stroke: var(--ink-3);
-  stroke-width: 1.5;
-  stroke-dasharray: 7 6;
-  transition: fill .25s ease;
-}
-.cut-chart .cut text {
-  font-family: var(--font-ui); font-size: 17px; font-weight: 600;
-  letter-spacing: .12em; fill: var(--ink-2);
-  pointer-events: none;
-  transition: fill .25s ease;
+  stroke: transparent;
+  stroke-width: 3;
+  stroke-linejoin: round;
+  transition: fill .22s ease, stroke .22s ease;
 }
 .cut-chart .cut:hover polygon,
-.cut-chart .cut:focus-visible polygon,
-.cut-chart .cut.active polygon { fill: var(--accent); }
-.cut-chart .cut:hover text,
-.cut-chart .cut:focus-visible text,
-.cut-chart .cut.active text { fill: var(--accent-ink); }
+.cut-chart .cut:focus-visible polygon {
+  fill: color-mix(in srgb, var(--accent) 12%, transparent);
+  stroke: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.cut-chart .cut.active polygon {
+  fill: color-mix(in srgb, var(--accent) 20%, transparent);
+  stroke: var(--accent);
+}
 
 .cut-info { border-left: 3px solid var(--ink); padding-left: clamp(1.2rem, 2vw, 1.8rem); min-height: 16rem; }
 .cut-info h3 { font-size: clamp(1.5rem, 2.4vw, 2rem); margin-bottom: .6rem; }
@@ -695,8 +692,77 @@ html.js [data-reveal].in { opacity: 1; transform: none; }
 }
 .cut-info p { margin: 0; }
 
-/* shank is a tap target over the legs — no floating dashed box */
-.cut-chart .cut[data-cut="shank"] polygon { stroke: none; }
-.cut-chart .cut[data-cut="shank"]:hover polygon,
-.cut-chart .cut[data-cut="shank"]:focus-visible polygon,
-.cut-chart .cut[data-cut="shank"].active polygon { fill: color-mix(in srgb, var(--accent) 88%, transparent); }
+/* ==========================================================================
+   BUTCHER-TICKET CARDS + LINE ICONS
+   ========================================================================== */
+.card--ticket {
+  --punch-y: 97px;  /* rides the perforation line */
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  box-shadow: var(--shadow-1);
+  padding: clamp(1.4rem, 2.5vw, 1.9rem);
+  transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1);
+  /* punched holes where the counter spike would go */
+  -webkit-mask-image:
+    radial-gradient(circle at 0 var(--punch-y), transparent 9px, #000 10px),
+    radial-gradient(circle at 100% var(--punch-y), transparent 9px, #000 10px);
+          mask-image:
+    radial-gradient(circle at 0 var(--punch-y), transparent 9px, #000 10px),
+    radial-gradient(circle at 100% var(--punch-y), transparent 9px, #000 10px);
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+}
+.card--ticket:hover {
+  transform: translateY(-6px) rotate(-.4deg);
+  box-shadow: var(--shadow-3);
+}
+.ticket-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 1.1rem; margin-bottom: 1.3rem;
+  border-bottom: 2px dashed var(--rule-strong);
+}
+.ticket-no {
+  font-family: var(--font-ui); font-size: .82rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-3);
+  border: 2px solid currentColor;
+  padding: .3rem .65rem;
+  transform: rotate(-2deg);
+  transition: transform .3s ease, color .3s ease;
+}
+.card--ticket:hover .ticket-no { transform: rotate(1.5deg) scale(1.05); color: var(--ink-2); }
+
+.ticket-icon { width: 54px; height: 54px; flex: none; transition: transform .35s cubic-bezier(.16,1,.3,1); }
+.card--ticket:hover .ticket-icon { transform: rotate(-5deg) scale(1.08); }
+.ticket-icon path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* icons draw themselves in as the card reveals */
+html.js [data-reveal] .ticket-icon path,
+html.js .hero-icon path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+html.js [data-reveal].in .ticket-icon path {
+  animation: drawline .9s ease forwards;
+  animation-delay: calc(var(--reveal-delay, 0s) + .25s + var(--i, 0) * .22s);
+}
+html.js .hero-icon path {
+  animation: drawline 1s ease forwards;
+  animation-delay: calc(.35s + var(--i, 0) * .25s);
+}
+.ticket-icon path:nth-of-type(2), .hero-icon path:nth-of-type(2) { --i: 1; }
+.ticket-icon path:nth-of-type(3), .hero-icon path:nth-of-type(3) { --i: 2; }
+@keyframes drawline { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal] .ticket-icon path, html.js .hero-icon path {
+    stroke-dashoffset: 0; animation: none;
+  }
+}
+.hero-icon { width: 44px; height: 44px; display: block; margin-bottom: 1.1rem; }
+.hero-icon path { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }

@@ -21,7 +21,6 @@ they exist.
 | Page | Slot | What it wants |
 |---|---|---|
 | `index.html` | hero | One strong wide shot: the counter, the case, or a hand at work |
-| `index.html` | audience cards ×3 | Freezer/cut sheet · retail case · restaurant kitchen or delivery |
 | `custom-processing.html` | process ×2 | Dry-aging room · labeled, wrapped packages |
 | `in-the-case.html` | products ×6 | The four award winners + deli + weekly special |
 | `wholesale.html` | 1 wide | Volume/bulk product or a delivery moment |

@@ -175,7 +175,7 @@
       var spawnSmoke = function (p, warm) {
         p.x0 = (0.58 + Math.random() * 0.30) * W;   // over the sliced steak
         p.y0 = H * (0.34 + Math.random() * 0.28);   // emit at steak height
-        p.life = 9 + Math.random() * 6;
+        p.life = 13 + Math.random() * 7;
         p.age = warm ? Math.random() * p.life : 0;
         p.rise = H * (0.34 + Math.random() * 0.16);
         p.r0 = 20 + Math.random() * 30;
@@ -319,6 +319,7 @@
   // --- Smoke video: fade in, and only play while the hero is on screen -----
   var smokeVideo = document.querySelector(".cinema__smoke-video");
   if (smokeVideo && !reduceMotion) {
+    smokeVideo.playbackRate = 0.55;   // real smoke, slowed to a drift
     var wake = function () {
       smokeVideo.classList.add("on");
       smokeVideo.play().catch(function () {});
