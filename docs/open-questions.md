@@ -20,10 +20,12 @@ each case.
 4. **Product catalog scope.** Current site lists hundreds of SKUs across dozens of
    categories. New site currently shows a category-level overview + the four named
    award winners. Full list vs. category pages vs. highlights — undecided.
-5. **Photography.** All image slots are hatched placeholders. Client wants to keep
-   existing product photos; web-pulled versions from thedurandsmokehouse.com are
-   acceptable placeholders but are compressed derivatives, NOT final assets. Ask
-   whether higher-res originals exist. (Slot map: `assets/img/README.md`.)
+5. **Photography.** CONFIRMED: the large steak photo stays as the homepage hero
+   (now live as `assets/img/hero-steak-WEB-PULLED.jpg`, pulled from
+   thedurandsmokehouse.com — 1920px compressed derivative, NOT a final asset; a
+   visible chip on the hero flags this). All other slots remain hatched
+   placeholders. Ask whether higher-res originals exist. (Slot map:
+   `assets/img/README.md`.)
 6. **Reviews.** Homepage review block uses placeholders. Need 3 real Google/Yelp
    quotes that name specific products or staff (per the guide) + permission to use
    names.
