@@ -184,16 +184,16 @@
       var spawnEmber = function (p, warm) {
         p.x0 = (0.60 + Math.random() * 0.26) * W;
         p.y0 = H * (0.40 + Math.random() * 0.26);
-        p.life = 2.6 + Math.random() * 3.2;
+        p.life = 5 + Math.random() * 4.5;
         p.age = warm ? Math.random() * p.life : 0;
-        p.rise = H * (0.30 + Math.random() * 0.20);
+        p.rise = H * (0.22 + Math.random() * 0.14);
         p.r = 0.8 + Math.random() * 1.3;            // tiny, sharp core
         p.swayA = 10 + Math.random() * 26;
         p.swayF = 0.5 + Math.random() * 0.7;
-        p.turbF = 2.2 + Math.random() * 2.6;        // high-freq tumble
+        p.turbF = 1.4 + Math.random() * 1.6;        // high-freq tumble
         p.turbA = 2 + Math.random() * 4;
         p.phase = Math.random() * TAU;
-        p.drift = -(8 + Math.random() * 16);
+        p.drift = -(4 + Math.random() * 9);
         p.peak = 0.75 + Math.random() * 0.25;
         p.fl = 0.8;                                  // smoothed crackle level
         p.lx = null; p.ly = null;                    // last pos, for the streak
