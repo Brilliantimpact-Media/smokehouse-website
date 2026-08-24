@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The SmokeHouse — Homepage Flow Prototype</title>
-<meta name="description" content="Prototype homepage flow. Meat processing that’s crafted locally, because your family deserves the real thing.">
+<meta name="description" content="Meat processing that’s crafted locally, because your family deserves the real thing.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,93 +12,27 @@
 <link rel="stylesheet" href="assets/css/site.css">
 <style>
 /* ==========================================================================
-   FLOW PROTOTYPE — scoped to this page. Inspired by the reference flow the
-   project owner shared; rebuilt from scratch on SmokeHouse messaging.
+   FLOW PROTOTYPE — scoped to this page.
+   Cinematic steak+smoke hero (unchanged) handing off into the scroll flow.
    ========================================================================== */
-.flow { background: var(--paper); }
-.flow main { overflow: clip; }
-.flow section { border: 0; padding: 0; }
 
-/* --- minimal top bar ------------------------------------------------------ */
-.bar {
-  position: fixed; inset-inline: 0; top: 0; z-index: 50;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 1.1rem clamp(1.25rem, 4vw, 3rem);
-  pointer-events: none;
+/* --- stats band: counts up on entry --------------------------------------- */
+.stats { padding-block: clamp(3.5rem, 9vh, 6rem) !important; border: 0 !important; }
+.stats__row {
+  display: grid; gap: clamp(2rem, 5vw, 4rem);
+  grid-template-columns: 1fr;
+  text-align: center;
 }
-.bar > * { pointer-events: auto; }
-.bar__tag {
-  font-family: var(--font-ui); font-size: .74rem; font-weight: 600;
-  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2);
-  text-decoration: none;
+@media (min-width: 760px) { .stats__row { grid-template-columns: repeat(3, 1fr); } }
+.stats__row b {
+  display: block; font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(3.4rem, 9vw, 6.5rem); line-height: 1; letter-spacing: -.045em;
+  font-variant-numeric: tabular-nums; color: var(--ink);
 }
-
-/* --- STAGE: giant wordmark -> stats + statement --------------------------- */
-.stage { height: 300vh; position: relative; }
-.stage__sticky {
-  position: sticky; top: 0; height: 100vh; overflow: hidden;
-  display: grid; place-items: center;
-}
-.stage__brand {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 2.5rem;
-  will-change: transform, opacity;
-}
-.stage__word {
-  font-family: var(--font-display); font-weight: 900;
-  font-size: clamp(3.4rem, 12.5vw, 12rem);
-  line-height: .92; letter-spacing: -.04em;
-  text-transform: uppercase; text-align: center;
-  color: var(--ink); margin: 0;
-}
-.stage__word small {
-  display: block; font-size: .16em; font-weight: 700;
-  letter-spacing: .55em; text-indent: .55em; color: var(--ink-3);
-  margin-bottom: .4em;
-}
-.stage__steak {
-  position: absolute; bottom: -24vh; left: 50%;
-  width: clamp(300px, 46vw, 560px); aspect-ratio: 1;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 10px solid var(--paper-2);
-  box-shadow: var(--shadow-3);
-  will-change: transform;
-}
-.stage__steak img { width: 100%; height: 100%; object-fit: cover; object-position: 72% 40%; }
-.stage__facts {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: clamp(1.5rem, 3vh, 3rem);
-  padding-inline: var(--gutter);
-  opacity: 0;
-  will-change: transform, opacity;
-}
-.stage__stats {
-  display: flex; gap: clamp(1.5rem, 6vw, 5rem);
-  font-family: var(--font-ui); text-align: center;
-}
-.stage__stats b {
-  display: block; font-family: var(--font-display); font-weight: 800;
-  font-size: clamp(2.2rem, 6vw, 4.4rem); line-height: 1; letter-spacing: -.03em;
-  font-variant-numeric: tabular-nums;
-}
-.stage__stats span {
-  display: block; margin-top: .5rem;
-  font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--ink-3); max-width: 12ch;
-}
-.stage__head {
-  font-family: var(--font-display); font-weight: 900;
-  font-size: clamp(2.6rem, 8.5vw, 7.5rem);
-  line-height: .95; letter-spacing: -.035em; text-transform: uppercase;
-  text-align: center; margin: 0; color: var(--ink);
-}
-.stage__oneliner {
-  font-family: var(--font-body);
-  font-size: clamp(1.05rem, 1.6vw, 1.35rem); line-height: 1.5;
-  color: var(--ink-2); text-align: center; max-width: 44ch; margin: 0;
+.stats__row span {
+  display: block; margin-top: .7rem;
+  font-family: var(--font-ui); font-size: .76rem; font-weight: 600;
+  letter-spacing: .15em; text-transform: uppercase; color: var(--ink-3);
 }
 
 /* --- marquee -------------------------------------------------------------- */
@@ -110,7 +44,7 @@
 }
 .marquee__track {
   display: inline-block;
-  animation: marquee 26s linear infinite;
+  animation: marquee 32s linear infinite;
   font-family: var(--font-display); font-weight: 800;
   font-size: clamp(1.1rem, 2.4vw, 1.9rem);
   letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2);
@@ -127,7 +61,7 @@
 }
 
 /* --- pinned differentiator sequence -------------------------------------- */
-.seq { height: 420vh; position: relative; background: var(--char); color: var(--paper); }
+.seq { height: 420vh; position: relative; background: var(--char); color: var(--paper); border: 0 !important; padding: 0 !important; }
 .seq__sticky {
   position: sticky; top: 0; height: 100vh; overflow: hidden;
   display: grid; align-content: center; gap: clamp(1.5rem, 4vh, 3rem);
@@ -163,10 +97,7 @@
   position: absolute; bottom: 7vh; left: var(--gutter); right: var(--gutter);
   height: 2px; background: color-mix(in srgb, var(--paper) 16%, transparent);
 }
-.seq__bar i {
-  position: absolute; inset-block: 0; left: 0; width: 0;
-  background: var(--paper);
-}
+.seq__bar i { position: absolute; inset-block: 0; left: 0; width: 0; background: var(--paper); }
 .seq__label {
   position: absolute; bottom: calc(7vh + 1rem); left: var(--gutter);
   font-family: var(--font-ui); font-size: .72rem; font-weight: 600;
@@ -174,7 +105,7 @@
   color: color-mix(in srgb, var(--paper) 55%, transparent);
 }
 
-/* --- comparison table ----------------------------------------------------- */
+/* --- comparison ----------------------------------------------------------- */
 .compare { padding-block: clamp(5rem, 12vh, 9rem) !important; }
 .compare table { min-width: 0; }
 .compare th:not(:first-child), .compare td:not(:first-child) { text-align: center; width: 9rem; }
@@ -195,6 +126,7 @@
   min-height: 92vh; display: grid; place-content: center; text-align: center;
   background: var(--char); color: var(--paper);
   gap: 2rem; padding: clamp(4rem, 10vh, 7rem) var(--gutter) !important;
+  border: 0 !important;
 }
 .closing h2 {
   font-family: var(--font-display); font-weight: 900;
@@ -204,8 +136,7 @@
 }
 .closing p { color: color-mix(in srgb, var(--paper) 75%, var(--char)); margin-inline: auto; }
 
-/* --- big footer ----------------------------------------------------------- */
-.flow .site-footer { padding-top: clamp(4rem, 10vh, 7rem); }
+/* --- big footer wordmark -------------------------------------------------- */
 .footer-mega {
   font-family: var(--font-display); font-weight: 900;
   font-size: clamp(2.6rem, 11vw, 10rem); line-height: .9; letter-spacing: -.04em;
@@ -214,34 +145,61 @@
 }
 </style>
 </head>
-<body class="flow">
+<body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<div class="bar">
-  <a class="bar__tag" href="index.html">The SmokeHouse · Durand &amp; Woodville, WI</a>
-  <a class="btn" href="visit.html#schedule" style="padding:.7rem 1.15rem;font-size:.85rem">Schedule your order today</a>
-</div>
+<header class="site-header site-header--overlay">
+  <div class="shell site-header__inner">
+    <a class="wordmark" href="index.html">The SmokeHouse<small>Durand &amp; Woodville, WI</small></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="custom-processing.html">Custom Processing</a>
+      <a href="in-the-case.html">In the Case</a>
+      <a href="wholesale.html">Wholesale</a>
+      <a href="about.html">About</a>
+      <a href="visit.html">Visit</a>
+    </nav>
+    <a class="btn header-cta" href="visit.html#schedule">Schedule your order today</a>
+  </div>
+</header>
 
 <main id="main">
 
-  <!-- STAGE -->
-  <section class="stage" id="stage">
-    <div class="stage__sticky">
-      <div class="stage__brand" id="stage-brand">
-        <h1 class="stage__word"><small>The</small>Smoke<br>House</h1>
-        <div class="stage__steak" id="stage-steak">
-          <img src="assets/img/hero-steak-WEB-PULLED.jpg" alt="Sliced dry-aged steak on a slate board">
-        </div>
+  <!-- CINEMATIC HERO — unchanged: steak, real smoke, embers, letterpress headline -->
+  <section class="cinema">
+    <div class="cinema__media" data-parallax="0.08">
+      <img src="assets/img/hero-steak-WEB-PULLED.jpg"
+           alt="Sliced dry-aged steak and a carving fork on a slate board over dark walnut wood"
+           fetchpriority="high">
+    </div>
+    <div class="cinema__scrim" aria-hidden="true"></div>
+    <video class="cinema__smoke-video" src="assets/video/smoke-loop.mp4"
+           autoplay muted loop playsinline aria-hidden="true"></video>
+    <canvas class="cinema__smoke-canvas" aria-hidden="true"></canvas>
+    <div class="cinema__grain" aria-hidden="true"></div>
+
+    <div class="shell cinema__content">
+      <p class="eyebrow eyebrow--plain" data-reveal="fade">Durand &amp; Woodville, Wisconsin</p>
+      <h1>Full-service butchering, cut to your order.</h1>
+      <p class="lede" data-reveal style="--reveal-delay:.12s">Meat processing that’s crafted locally, because your family deserves the real thing.</p>
+      <div class="btn-row" data-reveal style="--reveal-delay:.24s">
+        <a class="btn btn--on-dark" href="visit.html#schedule">Schedule your order today <span class="btn__arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn--on-dark btn--ghost" href="custom-processing.html">Here’s how custom processing works</a>
       </div>
-      <div class="stage__facts" id="stage-facts">
-        <div class="stage__stats">
-          <div><b data-count="30">0</b><span>Days dry-aged, up to</span></div>
-          <div><b data-count="2">0</b><span>Wisconsin locations</span></div>
-          <div><b data-count="5">0</b><span>Award-winning products</span></div>
-        </div>
-        <p class="stage__head">Dry-aged.<br>Never rushed.</p>
-        <p class="stage__oneliner">Meat processing that’s crafted locally, because your family deserves the real thing.</p>
-      </div>
+      <p class="hero__proof" data-reveal="fade" style="--reveal-delay:.4s">
+        <span>Family-owned</span>
+        <span>Dry-aged, never rushed</span>
+        <span>Split orders handled right</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- STATS — count up on entry -->
+  <section class="stats">
+    <div class="shell stats__row">
+      <div data-reveal><b data-count="30">0</b><span>Days dry-aged, up to</span></div>
+      <div data-reveal style="--reveal-delay:.1s"><b data-count="2">0</b><span>Wisconsin locations</span></div>
+      <div data-reveal style="--reveal-delay:.2s"><b data-count="5">0</b><span>Award-winning products</span></div>
     </div>
   </section>
 
@@ -258,9 +216,39 @@
       <p class="eyebrow" data-reveal="fade">Why we’re here</p>
       <h2 data-reveal>We know how frustrating it is to not trust what meat is in your freezer or your grocery cart. You deserve food that’s local and cut by a team who cares.</h2>
       <p style="margin-top:2rem;max-width:56ch" data-reveal>The SmokeHouse has been earning this craft for decades. We source, process, and smoke meat the way it’s supposed to be done, not the way a plant does it. Every order gets the same care, whether it’s a split beef order or a standing wholesale account.</p>
-      <div class="btn-row" data-reveal>
-        <a class="btn" href="visit.html#schedule">Schedule your order today <span class="btn__arrow" aria-hidden="true">→</span></a>
-        <a class="btn btn--ghost" href="custom-processing.html">Here’s how custom processing works</a>
+    </div>
+  </section>
+
+  <!-- THREE AUDIENCES — persona routing, kept from the live homepage -->
+  <section style="padding-block:clamp(4rem,9vh,7rem)">
+    <div class="shell">
+      <p class="eyebrow" data-reveal="fade">What are you here for</p>
+      <div class="grid grid--3" style="margin-top:2rem">
+
+        <article class="card card--slab" data-reveal>
+          <span class="slab-no" aria-hidden="true">01</span>
+          <svg class="ticket-icon ticket-icon--cleaver" viewBox="0 0 64 64" aria-hidden="true"><path pathLength="100" d="M7 13 L42 8 Q53 8 53 20 L53 28 L11 34 Z"/><path pathLength="100" d="M52 25 L59 50 Q60 55 54 56 Q48 57 47 51 L41 30"/><path pathLength="100" d="M15 20 a3 3 0 1 0 6 0 a3 3 0 1 0 -6 0"/></svg>
+          <h3>You have an animal, or want one sourced</h3>
+          <p>Bring us yours, or let us find it. You pick the date, fill out a cut sheet, and pick up exactly what you asked for — labeled clearly, ready for the freezer. Splitting with family or neighbors? Everyone on the list gets their own call and their own cut list.</p>
+          <a class="link-cta" href="custom-processing.html">Here’s how custom processing works <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="card card--slab" data-reveal style="--reveal-delay:.12s">
+          <span class="slab-no" aria-hidden="true">02</span>
+          <svg class="ticket-icon ticket-icon--parcel" viewBox="0 0 64 64" aria-hidden="true"><path pathLength="100" d="M8 24 L32 13 L56 24 L56 45 L32 56 L8 45 Z"/><path pathLength="100" d="M8 24 L32 34 L56 24 M32 34 L32 56"/><path pathLength="100" d="M20 18.5 L44 29 M31.5 21.5 a2.5 2.5 0 1 0 5 2 a2.5 2.5 0 1 0 -5 -2"/></svg>
+          <h3>You’re shopping for the week</h3>
+          <p>Fresh cuts, award-winning sausage and bacon, snack sticks, jerky, heat-and-eat, and the full deli in Woodville — sandwiches, salads, soups, hot plates, pizza. What’s good changes with the week, so we post it.</p>
+          <a class="link-cta" href="in-the-case.html">See what’s in the case this week <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="card card--slab" data-reveal style="--reveal-delay:.24s">
+          <span class="slab-no" aria-hidden="true">03</span>
+          <svg class="ticket-icon ticket-icon--truck" viewBox="0 0 64 64" aria-hidden="true"><path pathLength="100" d="M5 18 H38 V43 H5 Z"/><path pathLength="100" d="M38 25 H50 L57 34 V43 H38"/><path pathLength="100" d="M12 43 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0 M40 43 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0"/></svg>
+          <h3>You’re buying for a kitchen or a shelf</h3>
+          <p>Restaurants, bars, gas stations, and schools around Durand and Woodville. You get pricing fast enough to build a menu around, product that shows up the same every time, and a local name you can put in front of your customers.</p>
+          <a class="link-cta" href="wholesale.html">Talk to us about your next order <span aria-hidden="true">→</span></a>
+        </article>
+
       </div>
     </div>
   </section>
@@ -313,7 +301,7 @@
     </div>
   </section>
 
-  <!-- REVIEWS -->
+  <!-- REVIEWS — next to the ordering CTA, per the messaging guide -->
   <section style="padding-block:clamp(5rem,12vh,9rem)">
     <div class="shell">
       <p class="eyebrow" data-reveal="fade">Don’t take our word for it</p>
@@ -344,6 +332,26 @@
     </div>
   </section>
 
+  <!-- LOCATIONS -->
+  <section style="padding-block:clamp(5rem,12vh,9rem)">
+    <div class="shell">
+      <p class="eyebrow" data-reveal="fade">Two locations</p>
+      <h2 data-reveal>One does the cutting. One does the counter.</h2>
+      <div class="locations" style="margin-top:2.75rem">
+        <div class="location" data-reveal>
+          <p class="location__role">Durand — Slaughter, dry-aging, custom processing</p>
+          <address>W5823 State Hwy 85<br>Durand, WI 54736</address>
+          <p><a href="tel:+17156728073">715-672-8073</a></p>
+        </div>
+        <div class="location" data-reveal style="--reveal-delay:.12s">
+          <p class="location__role">Woodville — Retail, deli, grab-n-go</p>
+          <address>124 River St.<br>Woodville, WI 54023</address>
+          <p><a href="tel:+17156986328">715-698-6328</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CLOSING -->
   <section class="closing">
     <h2 data-reveal>Stop settling for low quality meat.</h2>
@@ -367,6 +375,7 @@
           <li><a href="custom-processing.html">Custom processing</a></li>
           <li><a href="in-the-case.html">In the case</a></li>
           <li><a href="wholesale.html">Wholesale</a></li>
+          <li><a href="visit.html#schedule">Schedule your slaughter date</a></li>
         </ul>
       </div>
       <div>
@@ -375,13 +384,14 @@
           <li><a href="visit.html">Durand — 715-672-8073</a></li>
           <li><a href="visit.html">Woodville — 715-698-6328</a></li>
           <li><a href="mailto:info@thedurandsmokehouse.com">info@thedurandsmokehouse.com</a></li>
+          <li><a href="about.html">About the shop</a></li>
         </ul>
       </div>
     </div>
     <p class="footer-mega" aria-hidden="true">The SmokeHouse</p>
     <div class="colophon">
-      <span>&copy; 2026 The SmokeHouse. Durand &amp; Woodville, Wisconsin.</span>
-      <span>Flow prototype — not linked from the live site</span>
+      <span>&copy; <span id="year">2026</span> The SmokeHouse. Durand &amp; Woodville, Wisconsin.</span>
+      <span>Mon–Wed 8–5 · Thu–Fri 8–6 · Sat 8–1</span>
     </div>
   </div>
 </footer>
@@ -391,63 +401,64 @@
 (function () {
   "use strict";
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var yr = document.getElementById("year");
+  if (yr) yr.textContent = new Date().getFullYear();
 
-  // double the marquee track so the loop is seamless
+  // seamless marquee
   var track = document.getElementById("marquee-track");
   if (track) track.innerHTML += track.innerHTML;
 
-  var clamp = function (v) { return Math.max(0, Math.min(1, v)); };
-
-  // --- stage scrub: wordmark+steak -> stats+statement ---
-  var stage = document.getElementById("stage");
-  var brand = document.getElementById("stage-brand");
-  var facts = document.getElementById("stage-facts");
-  var steak = document.getElementById("stage-steak");
+  // --- stats count up once, on entry ---
   var counts = Array.prototype.slice.call(document.querySelectorAll("[data-count]"));
+  if (counts.length) {
+    if (reduce || !("IntersectionObserver" in window)) {
+      counts.forEach(function (el) { el.textContent = el.getAttribute("data-count"); });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          io.unobserve(el);
+          var target = parseInt(el.getAttribute("data-count"), 10);
+          var t0 = null, dur = 1100, done = false;
+          var step = function (now) {
+            if (done) return;
+            if (t0 === null) t0 = now;
+            var p = Math.min(1, (now - t0) / dur);
+            var eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = String(Math.round(target * eased));
+            if (p < 1) requestAnimationFrame(step); else done = true;
+          };
+          requestAnimationFrame(step);
+          // guard: if rAF is throttled (background tab), land on the value anyway
+          setTimeout(function () {
+            if (!done) { done = true; el.textContent = String(target); }
+          }, dur + 400);
+        });
+      }, { threshold: 0.6 });
+      counts.forEach(function (el) { io.observe(el); });
+    }
+  }
 
-  // --- differentiator sequence scrub ---
+  // --- pinned differentiator sequence ---
   var seq = document.getElementById("seq");
   var panels = Array.prototype.slice.call(document.querySelectorAll(".seq__panel"));
   var seqNum = document.getElementById("seq-num");
   var seqBar = document.getElementById("seq-bar");
+  var clamp = function (v) { return Math.max(0, Math.min(1, v)); };
 
-  var update = function () {
-    var vh = window.innerHeight;
-
-    if (stage) {
-      var r = stage.getBoundingClientRect();
-      var p = clamp(-r.top / (r.height - vh));
-      // phase A: brand holds, steak rises + rotates; phase B: facts take over
-      var a = clamp(p / 0.45);            // 0..1 across the first phase
-      var b = clamp((p - 0.5) / 0.35);    // 0..1 across the second phase
-      brand.style.opacity = String(1 - clamp((p - 0.34) / 0.14));
-      brand.style.transform = "translateY(" + (-a * 8) + "vh) scale(" + (1 - a * 0.06) + ")";
-      steak.style.transform = "translateX(-50%) translateY(" + (-a * 26) + "vh) rotate(" + (a * 14) + "deg)";
-      facts.style.opacity = String(b);
-      facts.style.transform = "translateY(" + ((1 - b) * 6) + "vh)";
-      counts.forEach(function (el) {
-        el.textContent = String(Math.round(parseInt(el.getAttribute("data-count"), 10) * b));
-      });
-    }
-
-    if (seq) {
-      var r2 = seq.getBoundingClientRect();
-      var q = clamp(-r2.top / (r2.height - vh));
+  if (reduce && seq) {
+    seq.style.height = "auto";
+    panels.forEach(function (pn) { pn.classList.add("active"); pn.style.position = "relative"; });
+  } else if (seq) {
+    var update = function () {
+      var r = seq.getBoundingClientRect();
+      var q = clamp(-r.top / (r.height - window.innerHeight));
       var idx = Math.min(panels.length - 1, Math.floor(q * panels.length));
       panels.forEach(function (pn, i) { pn.classList.toggle("active", i === idx); });
       seqNum.textContent = "0" + (idx + 1);
       seqBar.style.width = (q * 100) + "%";
-    }
-  };
-
-  if (reduce) {
-    // no scrubbing: show the finished states
-    if (brand) brand.style.opacity = "1";
-    if (facts) { facts.style.opacity = "1"; facts.style.position = "relative"; }
-    counts.forEach(function (el) { el.textContent = el.getAttribute("data-count"); });
-    if (stage) stage.style.height = "auto";
-    if (seq) { seq.style.height = "auto"; panels.forEach(function (pn) { pn.classList.add("active"); pn.style.position = "relative"; }); }
-  } else {
+    };
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
     update();
