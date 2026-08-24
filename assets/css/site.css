@@ -118,25 +118,47 @@ p:last-child { margin-bottom: 0; }
 }
 .eyebrow--plain::after { display: none; }
 
-/* --- Buttons ------------------------------------------------------------- */
+/* --- Buttons: cleaver-cut corner + diagonal seam ------------------------- */
 .btn {
+  position: relative;
   display: inline-flex; align-items: center; gap: .6rem;
   font-family: var(--font-ui);
   font-size: .95rem; font-weight: 600; letter-spacing: .01em;
-  padding: .95rem 1.6rem;
+  padding: .95rem 1.7rem .95rem 1.6rem;
   text-decoration: none;
-  border: 1.5px solid var(--accent);
-  background: var(--accent); color: var(--accent-ink);
-  transition: background .16s ease, color .16s ease, transform .16s ease;
+  border: 0;
+  color: var(--accent-ink);
+  background: linear-gradient(var(--accent), var(--accent)) left / 100% 100% no-repeat;
+  clip-path: polygon(0 0, calc(100% - 13px) 0, 100% 13px, 100% 100%, 0 100%);
+  transition: transform .16s ease, background-size .3s cubic-bezier(.4,0,.2,1), color .3s ease;
 }
-.btn:hover { background: transparent; color: var(--accent); }
+.btn:hover { transform: translateY(-2px); }
 .btn:active { transform: translateY(1px); }
-.btn--ghost { background: transparent; color: var(--accent); }
-.btn--ghost:hover { background: var(--accent); color: var(--accent-ink); }
-.btn--on-dark { border-color: var(--paper); background: var(--paper); color: var(--ink); }
-.btn--on-dark:hover { background: transparent; color: var(--paper); }
-.btn--on-dark.btn--ghost { background: transparent; color: var(--paper); }
-.btn--on-dark.btn--ghost:hover { background: var(--paper); color: var(--ink); }
+/* the cut edge: ember seam on solid buttons, self-colored on ghosts */
+.btn::after {
+  content: ""; position: absolute; top: 0; right: 0;
+  width: 22px; height: 22px; pointer-events: none;
+  background: linear-gradient(135deg, transparent 42%, rgba(255,178,92,.95) 47%, rgba(255,122,44,.95) 53%, transparent 58%);
+  opacity: .45;
+  transition: opacity .25s ease;
+}
+.btn:hover::after { opacity: 1; }
+.btn--ghost {
+  color: var(--accent);
+  background-size: 0% 100%;
+}
+.btn--ghost::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  box-shadow: inset 0 0 0 1.5px currentColor;
+}
+.btn--ghost::after {
+  background: linear-gradient(135deg, transparent 44%, currentColor 47%, currentColor 53%, transparent 56%);
+  opacity: 1;
+}
+.btn--ghost:hover { color: var(--accent-ink); background-size: 100% 100%; }
+.btn--on-dark { background-image: linear-gradient(var(--paper), var(--paper)); color: var(--ink); }
+.btn--on-dark.btn--ghost { color: var(--paper); background-size: 0% 100%; }
+.btn--on-dark.btn--ghost:hover { color: var(--ink); background-size: 100% 100%; }
 .btn__arrow { transition: transform .16s ease; }
 .btn:hover .btn__arrow { transform: translateX(3px); }
 
@@ -463,9 +485,12 @@ tr:last-child td { border-bottom: 0; }
 .site-header--overlay:not(.is-scrolled) .nav a:hover { border-color: color-mix(in srgb, var(--paper) 45%, transparent); }
 .site-header--overlay:not(.is-scrolled) .nav-toggle { color: var(--paper); border-color: color-mix(in srgb, var(--paper) 45%, transparent); }
 .site-header--overlay:not(.is-scrolled) .header-cta {
-  border-color: var(--paper); background: transparent; color: var(--paper);
+  background-image: linear-gradient(var(--paper), var(--paper));
+  background-size: 0% 100%; background-repeat: no-repeat;
+  color: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--paper);
 }
-.site-header--overlay:not(.is-scrolled) .header-cta:hover { background: var(--paper); color: var(--ink); }
+.site-header--overlay:not(.is-scrolled) .header-cta:hover { background-size: 100% 100%; color: var(--ink); }
 .site-header--overlay.is-scrolled {
   background: color-mix(in srgb, var(--paper) 92%, transparent);
   border-bottom-color: var(--rule);
@@ -533,10 +558,12 @@ tr:last-child td { border-bottom: 0; }
   mix-blend-mode: screen;
   opacity: 0;
   transition: opacity 1.8s ease;
-  -webkit-mask-image: linear-gradient(100deg, transparent 22%, rgba(0,0,0,.5) 42%, #000 58%);
-          mask-image: linear-gradient(100deg, transparent 22%, rgba(0,0,0,.5) 42%, #000 58%);
+  /* anchored to the steak: visible above/around it, gone at the frame's
+     bottom and over the headline */
+  -webkit-mask-image: radial-gradient(72% 88% at 66% 30%, #000 32%, rgba(0,0,0,.45) 58%, transparent 78%);
+          mask-image: radial-gradient(72% 88% at 66% 30%, #000 32%, rgba(0,0,0,.45) 58%, transparent 78%);
 }
-.cinema__smoke-video.on { opacity: .65; }
+.cinema__smoke-video.on { opacity: .49; }
 @media (prefers-reduced-motion: reduce) {
   .cinema__smoke-canvas, .cinema__smoke-video { display: none; }
 }
@@ -693,102 +720,60 @@ html.js [data-reveal].in { opacity: 1; transform: none; }
 .cut-info p { margin: 0; }
 
 /* ==========================================================================
-   BUTCHER-TICKET CARDS + LINE ICONS
+   SLATE SLAB CARDS + LINE ICONS
+   Dark charcoal slabs echoing the hero's slate board, one corner sliced off
+   like a cleaver cut. The cut deepens on hover and its edge glows ember.
    ========================================================================== */
-.card--ticket {
-  --punch-y: 97px;  /* rides the perforation line */
+.card--slab {
+  --cut: 34px;
   position: relative;
-  background: var(--paper);
-  border: 1px solid var(--rule-strong);
-  box-shadow: var(--shadow-1);
-  padding: clamp(1.4rem, 2.5vw, 1.9rem);
-  transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1);
-  /* punched holes where the counter spike would go */
-  -webkit-mask-image:
-    radial-gradient(circle at 0 var(--punch-y), transparent 9px, #000 10px),
-    radial-gradient(circle at 100% var(--punch-y), transparent 9px, #000 10px);
-          mask-image:
-    radial-gradient(circle at 0 var(--punch-y), transparent 9px, #000 10px),
-    radial-gradient(circle at 100% var(--punch-y), transparent 9px, #000 10px);
-  -webkit-mask-composite: source-in;
-          mask-composite: intersect;
+  color: var(--paper);
+  background:
+    radial-gradient(140% 110% at 15% 0%, rgba(247,245,240,.05), transparent 55%),
+    linear-gradient(158deg, #211d17, #131109 70%);
+  padding: clamp(1.6rem, 2.6vw, 2.1rem);
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
+  box-shadow: var(--shadow-2);
+  transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1), clip-path .35s cubic-bezier(.16,1,.3,1);
 }
-/* no-JS fallback keeps the simple lift */
-html:not(.js) .card--ticket:hover {
-  transform: translateY(-6px) rotate(-.4deg);
+.card--slab:hover {
+  --cut: 52px;
+  transform: translateY(-7px);
   box-shadow: var(--shadow-3);
 }
-/* JS: pointer-tracked 3D tilt (site.js sets --rx/--ry/--mx/--my) */
-html.js .card--ticket[data-reveal].in {
-  transform: perspective(950px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px));
-  transition: transform .16s ease-out, box-shadow .35s cubic-bezier(.16,1,.3,1);
-}
-html.js .card--ticket:hover { --lift: -7px; box-shadow: var(--shadow-3); }
-
-/* warm ember spotlight that follows the cursor */
-.card--ticket::after {
-  content: "";
-  position: absolute; inset: 0; z-index: 2;
+/* the cut edge glows ember when the cut deepens */
+.card--slab::after {
+  content: ""; position: absolute; top: 0; right: 0;
+  width: var(--cut); height: var(--cut);
   pointer-events: none;
+  background: linear-gradient(135deg, transparent 45%, rgba(255,178,92,.9) 48.5%, rgba(255,122,44,.85) 52.5%, transparent 56%);
   opacity: 0;
-  transition: opacity .35s ease;
-  background: radial-gradient(230px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(255,190,110,.20), rgba(255,150,60,.07) 45%, transparent 70%);
+  transition: opacity .35s ease, width .35s cubic-bezier(.16,1,.3,1), height .35s cubic-bezier(.16,1,.3,1);
 }
-.card--ticket:hover::after { opacity: 1; }
-.ticket-head {
-  display: flex; align-items: center; justify-content: space-between;
-  padding-bottom: 1.1rem; margin-bottom: 1.3rem;
+.card--slab:hover::after { opacity: 1; }
+.card--slab h3 { color: var(--paper); position: relative; }
+.card--slab p { color: color-mix(in srgb, var(--paper) 74%, #131109); position: relative; }
+.card--slab .link-cta {
+  color: var(--paper);
+  border-color: color-mix(in srgb, var(--paper) 35%, transparent);
   position: relative;
 }
-/* perforation that marches on hover */
-.ticket-head::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
-  background: repeating-linear-gradient(90deg, var(--rule-strong) 0 8px, transparent 8px 16px);
+.card--slab .link-cta:hover { border-color: var(--paper); }
+/* oversized ghost numeral, like chalk on slate */
+.slab-no {
+  position: absolute; top: .4rem; right: 1.4rem;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(4.5rem, 7vw, 6rem); line-height: 1;
+  color: color-mix(in srgb, var(--paper) 8%, transparent);
+  pointer-events: none; user-select: none;
+  transition: color .35s ease;
 }
-.card--ticket:hover .ticket-head::after { animation: march .5s linear infinite; }
-@keyframes march { to { background-position-x: 16px; } }
-.ticket-no {
-  font-family: var(--font-ui); font-size: .82rem; font-weight: 700;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: var(--ink-3);
-  border: 2px solid currentColor;
-  padding: .3rem .65rem;
-  transform: rotate(-2deg);
-  transition: color .3s ease;
-}
-.card--ticket:hover .ticket-no { color: var(--ink-2); }
-/* the stamp slams in after the card reveals */
-html.js [data-reveal] .ticket-no { opacity: 0; }
-html.js [data-reveal].in .ticket-no {
-  animation: stamp .5s cubic-bezier(.2,1.4,.3,1) forwards;
-  animation-delay: calc(var(--reveal-delay, 0s) + .6s);
-}
-@keyframes stamp {
-  0%   { opacity: 0; transform: rotate(-14deg) scale(2.3); filter: blur(2px); }
-  55%  { opacity: 1; transform: rotate(-1deg) scale(.93); filter: none; }
-  100% { opacity: 1; transform: rotate(-2deg) scale(1); }
-}
-@media (prefers-reduced-motion: reduce) {
-  html.js [data-reveal] .ticket-no { opacity: 1; animation: none; }
-}
+.card--slab:hover .slab-no { color: color-mix(in srgb, var(--paper) 14%, transparent); }
 
-.ticket-icon { width: 54px; height: 54px; flex: none; }
-/* each trade gets its own move */
-.card--ticket:hover .ticket-icon--cleaver { transform-origin: 78% 72%; animation: chop .6s cubic-bezier(.36,.07,.19,.97) 1; }
-@keyframes chop { 0% { transform: rotate(0); } 35% { transform: rotate(-24deg); } 60% { transform: rotate(5deg); } 100% { transform: rotate(0); } }
-.card--ticket:hover .ticket-icon--parcel { animation: hop .55s ease 1; }
-@keyframes hop { 0% { transform: none; } 30% { transform: translateY(-5px); } 55% { transform: translateY(0) scale(1.05, .94); } 78% { transform: translateY(-2px); } 100% { transform: none; } }
-.card--ticket:hover .ticket-icon--truck { animation: drive .6s ease 1; }
-@keyframes drive { 0% { transform: none; } 35% { transform: translateX(6px) rotate(-1.5deg); } 65% { transform: translateX(-2px); } 100% { transform: none; } }
-@media (prefers-reduced-motion: reduce) {
-  .card--ticket:hover .ticket-icon--cleaver,
-  .card--ticket:hover .ticket-icon--parcel,
-  .card--ticket:hover .ticket-icon--truck { animation: none; }
-}
+.ticket-icon { width: 54px; height: 54px; flex: none; display: block; margin-bottom: 1.4rem; }
 .ticket-icon path {
   fill: none;
-  stroke: var(--ink);
+  stroke: var(--paper);
   stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -817,3 +802,16 @@ html.js .hero-icon path {
 }
 .hero-icon { width: 44px; height: 44px; display: block; margin-bottom: 1.1rem; }
 .hero-icon path { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+/* each trade still does its move on hover */
+.card--slab:hover .ticket-icon--cleaver { transform-origin: 78% 72%; animation: chop .6s cubic-bezier(.36,.07,.19,.97) 1; }
+@keyframes chop { 0% { transform: rotate(0); } 35% { transform: rotate(-24deg); } 60% { transform: rotate(5deg); } 100% { transform: rotate(0); } }
+.card--slab:hover .ticket-icon--parcel { animation: hop .55s ease 1; }
+@keyframes hop { 0% { transform: none; } 30% { transform: translateY(-5px); } 55% { transform: translateY(0) scale(1.05, .94); } 78% { transform: translateY(-2px); } 100% { transform: none; } }
+.card--slab:hover .ticket-icon--truck { animation: drive .6s ease 1; }
+@keyframes drive { 0% { transform: none; } 35% { transform: translateX(6px) rotate(-1.5deg); } 65% { transform: translateX(-2px); } 100% { transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .card--slab:hover .ticket-icon--cleaver,
+  .card--slab:hover .ticket-icon--parcel,
+  .card--slab:hover .ticket-icon--truck { animation: none; }
+}

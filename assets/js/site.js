@@ -175,7 +175,7 @@
       var spawnSmoke = function (p, warm) {
         p.x0 = (0.58 + Math.random() * 0.30) * W;   // over the sliced steak
         p.y0 = H * (0.34 + Math.random() * 0.28);   // emit at steak height
-        p.life = 13 + Math.random() * 7;
+        p.life = 26 + Math.random() * 14;
         p.age = warm ? Math.random() * p.life : 0;
         p.rise = H * (0.34 + Math.random() * 0.16);
         p.r0 = 20 + Math.random() * 30;
@@ -184,7 +184,7 @@
         p.swayF = 0.22 + Math.random() * 0.33;
         p.phase = Math.random() * TAU;
         p.drift = -(5 + Math.random() * 12);
-        p.peak = 0.22 + Math.random() * 0.16;
+        p.peak = 0.16 + Math.random() * 0.12;
         p.ox = 0; p.oy = 0;
       };
       for (var i = 0; i < SMOKE_N; i++) { smoke[i] = {}; spawnSmoke(smoke[i], true); }
@@ -319,7 +319,7 @@
   // --- Smoke video: fade in, and only play while the hero is on screen -----
   var smokeVideo = document.querySelector(".cinema__smoke-video");
   if (smokeVideo && !reduceMotion) {
-    smokeVideo.playbackRate = 0.55;   // real smoke, slowed to a drift
+    smokeVideo.playbackRate = 0.275;  // real smoke, slowed way down
     var wake = function () {
       smokeVideo.classList.add("on");
       smokeVideo.play().catch(function () {});
@@ -335,26 +335,6 @@
   } else if (smokeVideo) {
     smokeVideo.removeAttribute("autoplay");
     smokeVideo.pause();
-  }
-
-  // --- Ticket cards: pointer-tracked tilt + spotlight ----------------------
-  var tickets = document.querySelectorAll(".card--ticket");
-  if (tickets.length && !reduceMotion && window.matchMedia("(pointer: fine)").matches) {
-    tickets.forEach(function (card) {
-      card.addEventListener("pointermove", function (e) {
-        var r = card.getBoundingClientRect();
-        var px = (e.clientX - r.left) / r.width;
-        var py = (e.clientY - r.top) / r.height;
-        card.style.setProperty("--ry", ((px - 0.5) * 7).toFixed(2) + "deg");
-        card.style.setProperty("--rx", ((0.5 - py) * 7).toFixed(2) + "deg");
-        card.style.setProperty("--mx", (px * 100).toFixed(1) + "%");
-        card.style.setProperty("--my", (py * 100).toFixed(1) + "%");
-      });
-      card.addEventListener("pointerleave", function () {
-        card.style.setProperty("--rx", "0deg");
-        card.style.setProperty("--ry", "0deg");
-      });
-    });
   }
 
   // --- Cut chart (custom-processing) ---------------------------------------
