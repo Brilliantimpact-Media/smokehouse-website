@@ -180,23 +180,33 @@
       for (var i = 0; i < SMOKE_N; i++) { smoke[i] = {}; spawnSmoke(smoke[i], true); }
 
       // embers: few, small, quick, flickering warm
-      var EMBER_N = 9, embers = [];
+      var EMBER_N = 12, embers = [];
       var spawnEmber = function (p, warm) {
         p.x0 = (0.60 + Math.random() * 0.26) * W;
         p.y0 = H * (0.40 + Math.random() * 0.26);
-        p.life = 3.2 + Math.random() * 3.4;
+        p.life = 2.6 + Math.random() * 3.2;
         p.age = warm ? Math.random() * p.life : 0;
-        p.rise = H * (0.30 + Math.random() * 0.18);
-        p.r = 2 + Math.random() * 3;
+        p.rise = H * (0.30 + Math.random() * 0.20);
+        p.r = 0.8 + Math.random() * 1.3;            // tiny, sharp core
         p.swayA = 10 + Math.random() * 26;
         p.swayF = 0.5 + Math.random() * 0.7;
+        p.turbF = 2.2 + Math.random() * 2.6;        // high-freq tumble
+        p.turbA = 2 + Math.random() * 4;
         p.phase = Math.random() * TAU;
-        p.drift = -(8 + Math.random() * 14);
-        p.flickF = 6 + Math.random() * 7;
-        p.peak = 0.5 + Math.random() * 0.35;
+        p.drift = -(8 + Math.random() * 16);
+        p.peak = 0.75 + Math.random() * 0.25;
+        p.fl = 0.8;                                  // smoothed crackle level
+        p.lx = null; p.ly = null;                    // last pos, for the streak
         p.ox = 0; p.oy = 0;
       };
       for (var j = 0; j < EMBER_N; j++) { embers[j] = {}; spawnEmber(embers[j], true); }
+
+      // white-hot at birth, orange mid-flight, dull red as it dies
+      var emberColor = function (t) {
+        var a = [255, 235, 185], b = [255, 150, 60], c = [205, 70, 30], u;
+        if (t < 0.35) { u = t / 0.35;       return [a[0]+(b[0]-a[0])*u, a[1]+(b[1]-a[1])*u, a[2]+(b[2]-a[2])*u]; }
+        u = (t - 0.35) / 0.65;              return [b[0]+(c[0]-b[0])*u, b[1]+(c[1]-b[1])*u, b[2]+(c[2]-b[2])*u];
+      };
 
       var draw = function (dt) {
         ctx.clearRect(0, 0, W, H);
@@ -223,15 +233,49 @@
           if (p.age >= p.life) spawnEmber(p, false);
           t = p.age / p.life;
           x = p.x0 + p.drift * p.age +
-              Math.sin(p.phase + p.age * p.swayF * TAU) * p.swayA * t;
-          y = p.y0 - t * p.rise;
+              Math.sin(p.phase + p.age * p.swayF * TAU) * p.swayA * t +
+              Math.sin(p.phase * 3 + p.age * p.turbF * TAU) * p.turbA;  // tumble
+          y = p.y0 - t * p.rise +
+              Math.cos(p.phase * 2 + p.age * p.turbF * TAU) * p.turbA * 0.6;
           push(p, x, y, dt, 420);              // embers scatter a little faster
           x += p.ox; y += p.oy;
-          r = p.r * (1 - t * 0.4);
-          env = t < 0.15 ? t / 0.15 : (1 - t) / 0.85;
-          var flick = 0.65 + 0.35 * Math.sin(p.phase + p.age * p.flickF);
-          ctx.globalAlpha = p.peak * env * flick;
-          ctx.drawImage(emberSprite, x - r * 2, y - r * 2, r * 4, r * 4);
+
+          // crackle: smoothed random level with dropouts and the odd pop
+          var target = 0.55 + Math.random() * 0.45;
+          if (Math.random() < 0.07) target = 0.05;   // wink out
+          if (Math.random() < 0.025) target = 1.7;   // pop
+          p.fl += (target - p.fl) * Math.min(1, 14 * dt);
+
+          env = t < 0.12 ? t / 0.12 : (1 - t) / 0.88;
+          var alpha = Math.min(1, p.peak * env * p.fl);
+          if (alpha < 0.02) { p.lx = x; p.ly = y; continue; }
+          var col = emberColor(t);
+          r = p.r * (1 - t * 0.35);
+
+          // streak: short trail from where it just was
+          if (p.lx !== null) {
+            var sdx = x - p.lx, sdy = y - p.ly;
+            var sd = Math.sqrt(sdx * sdx + sdy * sdy);
+            if (sd > 0.5 && sd < 24) {
+              ctx.strokeStyle = "rgba(" + (col[0]|0) + "," + (col[1]|0) + "," + (col[2]|0) + "," + (alpha * 0.55).toFixed(3) + ")";
+              ctx.lineWidth = r;
+              ctx.lineCap = "round";
+              ctx.beginPath();
+              ctx.moveTo(p.lx, p.ly);
+              ctx.lineTo(x, y);
+              ctx.stroke();
+            }
+          }
+          p.lx = x; p.ly = y;
+
+          // sharp head: bright core with a faint halo
+          ctx.globalAlpha = alpha * 0.35;
+          ctx.drawImage(emberSprite, x - r * 3, y - r * 3, r * 6, r * 6);
+          ctx.globalAlpha = alpha;
+          ctx.fillStyle = "rgba(" + (col[0]|0) + "," + (col[1]|0) + "," + (col[2]|0) + ",1)";
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, TAU);
+          ctx.fill();
         }
         ctx.globalAlpha = 1;
       };
