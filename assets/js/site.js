@@ -105,11 +105,11 @@
       var COUNT = 26;
       var parts = [];
       var spawn = function (p, warm) {
-        p.x0 = (0.60 + Math.random() * 0.28) * W;   // rises off the steak, right side
-        p.y0 = H * (0.70 + Math.random() * 0.22);
+        p.x0 = (0.58 + Math.random() * 0.30) * W;   // over the sliced steak
+        p.y0 = H * (0.34 + Math.random() * 0.28);   // emit at steak height, not the fork
         p.life = 9 + Math.random() * 6;             // seconds
         p.age = warm ? Math.random() * p.life : 0;
-        p.rise = H * (0.5 + Math.random() * 0.2);   // total climb over a life
+        p.rise = H * (0.34 + Math.random() * 0.16); // total climb over a life
         p.r0 = 20 + Math.random() * 30;
         p.grow = 6 + Math.random() * 8;             // px/s
         p.swayA = 18 + Math.random() * 38;
