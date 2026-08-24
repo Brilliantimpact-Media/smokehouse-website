@@ -80,6 +80,87 @@
     </div>
   </section>
 
+
+  <section class="tear-top" style="background:var(--paper-2)">
+    <div class="shell">
+      <p class="eyebrow">Know your beef</p>
+      <h2>Where every cut comes from.</h2>
+      <p class="lede" style="margin-bottom:2.5rem">Hover or tap a section. This is the same map your cut sheet walks through &mdash; when you know what each part becomes, the choices get easy.</p>
+      <div class="cut-chart-grid">
+        <div class="cut-chart">
+          <svg viewBox="0 0 940 560" role="group" aria-label="Beef cut chart — interactive diagram of the primal cuts">
+            <defs>
+              <clipPath id="cowClip">
+                <path d="M186 118 C 250 88, 380 78, 480 84 C 580 90, 680 94, 736 118 C 772 136, 786 190, 780 244 L 774 300 C 770 332, 752 350, 724 358 C 640 372, 520 374, 420 370 C 350 368, 280 362, 232 348 C 204 340, 186 322, 178 300 C 170 276, 168 250, 172 220 C 175 186, 178 148, 186 118 Z"/>
+              </clipPath>
+            </defs>
+
+            <!-- legs, head, tail (decoration; shanks are legs) -->
+            <path class="cow-extra" d="M242 344 L 236 480 L 268 480 L 278 350 Z"/>
+            <path class="cow-extra" d="M312 352 L 308 480 L 340 480 L 350 356 Z"/>
+            <path class="cow-extra" d="M596 360 L 590 480 L 622 480 L 630 362 Z"/>
+            <path class="cow-extra" d="M668 358 L 664 480 L 696 480 L 704 358 Z"/>
+            <path class="cow-extra" d="M186 118 C 160 108, 120 116, 100 142 C 84 164, 82 200, 94 228 C 104 252, 130 268, 160 268 C 172 268, 178 258, 178 246 L 172 220 C 168 250, 170 276, 178 300 L 178 246 Z"/>
+            <path class="cow-line" d="M780 244 C 800 258, 806 292, 798 326"/>
+
+            <!-- primals (clipped to the body) -->
+            <g clip-path="url(#cowClip)">
+              <g class="cut" tabindex="0" role="button" data-cut="chuck" aria-label="Chuck">
+                <polygon points="160,70 330,70 330,252 160,252"/>
+                <text x="245" y="180" text-anchor="middle">CHUCK</text>
+              </g>
+              <g class="cut" tabindex="0" role="button" data-cut="rib" aria-label="Rib">
+                <polygon points="330,70 460,70 460,248 330,248"/>
+                <text x="395" y="170" text-anchor="middle">RIB</text>
+              </g>
+              <g class="cut" tabindex="0" role="button" data-cut="shortloin" aria-label="Short loin">
+                <polygon points="460,70 570,70 570,246 460,246"/>
+                <text x="515" y="150" text-anchor="middle">LOIN</text>
+              </g>
+              <g class="cut" tabindex="0" role="button" data-cut="sirloin" aria-label="Sirloin">
+                <polygon points="570,70 660,70 660,246 570,246"/>
+                <text x="615" y="150" text-anchor="middle">SIRLOIN</text>
+              </g>
+              <g class="cut" tabindex="0" role="button" data-cut="round" aria-label="Round">
+                <polygon points="660,70 800,70 800,380 660,380"/>
+                <text x="722" y="200" text-anchor="middle">ROUND</text>
+              </g>
+              <g class="cut" tabindex="0" role="button" data-cut="brisket" aria-label="Brisket">
+                <polygon points="160,252 330,252 330,380 160,380"/>
+                <text x="252" y="322" text-anchor="middle">BRISKET</text>
+              </g>
+              <g class="cut" tabindex="0" role="button" data-cut="plate" aria-label="Plate">
+                <polygon points="330,248 460,248 460,380 330,380"/>
+                <text x="395" y="318" text-anchor="middle">PLATE</text>
+              </g>
+              <g class="cut" tabindex="0" role="button" data-cut="flank" aria-label="Flank">
+                <polygon points="460,246 660,246 660,380 460,380"/>
+                <text x="558" y="316" text-anchor="middle">FLANK</text>
+              </g>
+            </g>
+
+            <!-- body outline on top -->
+            <path class="cow-line" d="M186 118 C 250 88, 380 78, 480 84 C 580 90, 680 94, 736 118 C 772 136, 786 190, 780 244 L 774 300 C 770 332, 752 350, 724 358 C 640 372, 520 374, 420 370 C 350 368, 280 362, 232 348 C 204 340, 186 322, 178 300 C 170 276, 168 250, 172 220 C 175 186, 178 148, 186 118 Z"/>
+
+            <!-- shank tap targets on the front legs -->
+            <g class="cut" tabindex="0" role="button" data-cut="shank" aria-label="Shank">
+              <polygon points="232,352 356,358 348,484 230,484"/>
+              <text x="292" y="446" text-anchor="middle">SHANK</text>
+            </g>
+          </svg>
+        </div>
+        <div class="cut-info" aria-live="polite">
+          <h3 id="cut-name">Rib</h3>
+          <p class="cut-info__label">What it becomes</p>
+          <p id="cut-becomes">Ribeyes, prime rib, and back ribs.</p>
+          <p class="cut-info__label">On your cut sheet</p>
+          <p id="cut-sheet">Ribeye thickness, bone-in or boneless, and whether a standing rib roast comes out whole.</p>
+        </div>
+      </div>
+      <p class="note"><strong>Build note:</strong> chart regions are simplified primals, drawn in-house &mdash; confirm with the crew that names and cut lists match how The SmokeHouse actually writes a cut sheet before launch.</p>
+    </div>
+  </section>
+
   <section id="split" class="band-dark">
     <div class="shell hero__grid">
       <div>

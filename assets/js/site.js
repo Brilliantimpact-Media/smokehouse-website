@@ -316,6 +316,46 @@
   startEntrance();
   startSmoke();
 
+  // --- Cut chart (custom-processing) ---------------------------------------
+  var chart = document.querySelector(".cut-chart");
+  if (chart) {
+    var CUTS = {
+      chuck:     { name: "Chuck",      becomes: "Chuck roasts, chuck steaks, stew meat, and the best ground beef on the animal.", sheet: "Roast size, how many roasts, and how much goes to grind." },
+      rib:       { name: "Rib",        becomes: "Ribeyes, prime rib, and back ribs.", sheet: "Ribeye thickness, bone-in or boneless, and whether a standing rib roast comes out whole." },
+      shortloin: { name: "Short Loin", becomes: "T-bones, porterhouse, strip steaks, and the tenderloin.", sheet: "T-bones as they are, or strips with the tenderloin pulled whole." },
+      sirloin:   { name: "Sirloin",    becomes: "Sirloin steaks, tri-tip, and sirloin tip roasts.", sheet: "Steak thickness and how many to a package." },
+      round:     { name: "Round",      becomes: "Round steaks and roasts, cube steak, jerky meat, and lean grind.", sheet: "Steaks, roasts, jerky, or grind \u2014 the round is the most flexible call on the sheet." },
+      brisket:   { name: "Brisket",    becomes: "The brisket \u2014 flat and point.", sheet: "Whole, split, or ground. Smokers ask for it whole." },
+      plate:     { name: "Plate",      becomes: "Short ribs, skirt steak, and grind.", sheet: "Short ribs kept or ground, and whether the skirt comes out separate." },
+      flank:     { name: "Flank",      becomes: "Flank steak and stir-fry strips.", sheet: "Kept as a steak or sent to grind." },
+      shank:     { name: "Shank",      becomes: "Soup bones and osso buco \u2014 the start of the best broth you\u2019ll make.", sheet: "Soup bones kept or passed. Keep them." }
+    };
+    var nameEl = document.getElementById("cut-name");
+    var becomesEl = document.getElementById("cut-becomes");
+    var sheetEl = document.getElementById("cut-sheet");
+    var regions = chart.querySelectorAll(".cut");
+    var activate = function (key, el) {
+      var d = CUTS[key];
+      if (!d) return;
+      nameEl.textContent = d.name;
+      becomesEl.textContent = d.becomes;
+      sheetEl.textContent = d.sheet;
+      regions.forEach(function (r) { r.classList.toggle("active", r === el); });
+    };
+    regions.forEach(function (r) {
+      var key = r.getAttribute("data-cut");
+      var go = function () { activate(key, r); };
+      r.addEventListener("mouseenter", go);
+      r.addEventListener("focus", go);
+      r.addEventListener("click", go);
+      r.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); }
+      });
+    });
+    var def = chart.querySelector('[data-cut="rib"]');
+    if (def) def.classList.add("active");
+  }
+
   // --- Parallax ------------------------------------------------------------
   // [data-parallax="0.15"] drifts at 15% of scroll speed while its section
   // is on screen. Kept subtle on purpose; disabled under reduced motion.
