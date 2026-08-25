@@ -994,6 +994,9 @@ td { border-bottom: 1px solid var(--rule); }
   position: relative;
   overflow: hidden;
   aspect-ratio: 16 / 10;
+  /* cap the height so the whole frame plus the top of the ledger fit one
+     screen; object-fit on the shots absorbs the wider effective ratio */
+  max-height: min(58vh, 560px);
   background: var(--paper-2);
   border-radius: 3px;
   box-shadow:
@@ -1004,7 +1007,7 @@ td { border-bottom: 1px solid var(--rule); }
   touch-action: pan-y;
   cursor: ew-resize;
 }
-@media (max-width: 620px) { .vs__stage { aspect-ratio: 4 / 3; } }
+@media (max-width: 620px) { .vs__stage { aspect-ratio: 4 / 3; max-height: 48vh; } }
 
 .vs__shot { position: absolute; inset: 0; margin: 0; }
 .vs__shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
