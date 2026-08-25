@@ -305,44 +305,61 @@
       <h2 data-reveal>The SmokeHouse vs. the meat aisle.</h2>
       <div class="vs" id="vs" data-reveal>
         <div class="vs__stage">
-          <!-- base layer: The SmokeHouse -->
           <figure class="vs__shot vs__shot--shop">
             <div class="vs__ph" data-slot="shop">Photo slot A — The SmokeHouse steak</div>
           </figure>
-          <!-- wiped layer: the meat aisle -->
           <figure class="vs__shot vs__shot--store" aria-hidden="true">
             <div class="vs__ph" data-slot="store">Photo slot B — grocery-store steak</div>
           </figure>
 
-          <span class="vs__pill vs__pill--shop">The SmokeHouse — dry-aged</span>
-          <span class="vs__pill vs__pill--store">The meat aisle — case-packed</span>
+          <span class="vs__tag vs__tag--shop"><b>The SmokeHouse</b>Dry-aged</span>
+          <span class="vs__tag vs__tag--store"><b>The meat aisle</b>Case-packed</span>
 
-          <div class="vs__divider" aria-hidden="true"></div>
+          <img class="vs__stamp" src="assets/img/stamp-dry-aged.webp" alt="" aria-hidden="true">
+
+          <div class="vs__blade" aria-hidden="true"></div>
           <button class="vs__grip" type="button" role="slider"
                   aria-label="Drag to compare a SmokeHouse steak with a grocery-store steak"
                   aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
                   aria-valuetext="Half SmokeHouse, half meat aisle"></button>
         </div>
 
-        <div class="vs__cols">
-          <div class="vs__col vs__col--shop">
-            <h3><i aria-hidden="true"></i>The SmokeHouse</h3>
-            <ul>
-              <li>Dry-aged up to 30 days — deeper flavor, real tenderness</li>
-              <li>Cut to your exact specs, not a pre-set package</li>
-              <li>Labeled clearly and ready for the freezer</li>
-              <li>You can ask the person who cut it</li>
-            </ul>
+        <div class="spec">
+          <div class="spec__head">
+            <p class="spec__side spec__side--shop">The SmokeHouse</p>
+            <p class="spec__col">Compared</p>
+            <p class="spec__side spec__side--store">The meat aisle</p>
           </div>
-          <div class="vs__col vs__col--store">
-            <h3><i aria-hidden="true"></i>The meat aisle</h3>
-            <ul>
-              <li>Wet-aged in the bag on a truck, however long that took</li>
-              <li>Whatever thickness the case happened to have</li>
-              <li>A barcode, a sell-by date, and not much else</li>
-              <li>Nobody to call when it isn’t right</li>
-            </ul>
-          </div>
+            <div class="spec__row">
+              <p class="spec__shop"><span class="spec__mark">✓</span>Dry-aged up to 30&nbsp;days</p>
+              <p class="spec__what">Aging</p>
+              <p class="spec__store">Wet-aged in the bag, in transit<span class="spec__mark">✕</span></p>
+            </div>
+            <div class="spec__row">
+              <p class="spec__shop"><span class="spec__mark">✓</span>Cut to your exact specs</p>
+              <p class="spec__what">The cut</p>
+              <p class="spec__store">Whatever the case was packed with<span class="spec__mark">✕</span></p>
+            </div>
+            <div class="spec__row">
+              <p class="spec__shop"><span class="spec__mark">✓</span>Cut, weight and date on the wrap</p>
+              <p class="spec__what">Labelling</p>
+              <p class="spec__store">A barcode and a sell-by<span class="spec__mark">✕</span></p>
+            </div>
+            <div class="spec__row">
+              <p class="spec__shop"><span class="spec__mark">✓</span>Every share called separately</p>
+              <p class="spec__what">Split orders</p>
+              <p class="spec__store">Not offered<span class="spec__mark">✕</span></p>
+            </div>
+            <div class="spec__row">
+              <p class="spec__shop"><span class="spec__mark">✓</span>Sourced locally, by name</p>
+              <p class="spec__what">Sourcing</p>
+              <p class="spec__store">&ldquo;Product of&rdquo; a distributor<span class="spec__mark">✕</span></p>
+            </div>
+            <div class="spec__row">
+              <p class="spec__shop"><span class="spec__mark">✓</span>You can ask them</p>
+              <p class="spec__what">Who cut it</p>
+              <p class="spec__store">No one to ask<span class="spec__mark">✕</span></p>
+            </div>
         </div>
       </div>
       <p class="vs__hint">Drag the handle — or use the arrow keys</p>
@@ -505,6 +522,7 @@
       pos = Math.max(0, Math.min(100, p));
       vs.style.setProperty("--pos", pos + "%");
       vs.parentNode.style.setProperty("--p", pos);
+      vs.classList.toggle("is-shop", pos > 55);
       grip.setAttribute("aria-valuenow", Math.round(pos));
       grip.setAttribute("aria-valuetext",
         pos < 12 ? "All The SmokeHouse" :
