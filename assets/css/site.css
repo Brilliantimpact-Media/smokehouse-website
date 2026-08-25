@@ -183,7 +183,7 @@ p:last-child { margin-bottom: 0; }
 }
 .site-header__inner {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 1.5rem; padding-block: .9rem;
+  gap: 1.5rem; padding-block: .7rem;
 }
 /* Wordmark stands in for the logo, which has not been delivered. */
 .wordmark {
@@ -939,7 +939,7 @@ td { border-bottom: 1px solid var(--rule); }
   text-decoration: none;
 }
 .wordmark img {
-  display: block; height: var(--logo-h, 38px); width: auto;
+  display: block; height: var(--logo-h, 54px); width: auto;
 }
 .wordmark .logo--ondark { position: absolute; inset: 0; opacity: 0; transition: opacity .3s ease; }
 .wordmark .logo--onlight { opacity: 1; transition: opacity .3s ease; }
@@ -951,8 +951,8 @@ td { border-bottom: 1px solid var(--rule); }
 .band-dark .wordmark .logo--ondark { opacity: 1; }
 .site-footer .wordmark .logo--onlight,
 .band-dark .wordmark .logo--onlight { opacity: 0; }
-.site-footer .wordmark { --logo-h: 58px; margin-bottom: 1.3rem; }
-@media (max-width: 560px) { .wordmark { --logo-h: 30px; } }
+.site-footer .wordmark { --logo-h: 82px; margin-bottom: 1.5rem; }
+@media (max-width: 560px) { .wordmark { --logo-h: 40px; } }
 
 /* --- Tagline (confirmed 2026-08-25) -------------------------------------- */
 .tagline {

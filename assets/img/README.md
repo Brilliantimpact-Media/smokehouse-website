@@ -7,8 +7,20 @@ lockup: flame mark + SMOKEHOUSE + "CRAFTED MEAT & PROCESSING" descriptor. Both
 ship; CSS swaps them by background — reversed on the hero/dark bands/footer,
 black on paper.
 
-**Still needed: vector originals (SVG/EPS/AI).** The supplied PNGs are 455×169,
-which is fine at header size but will soften if scaled large or used in print.
+**Still needed: usable vector originals.** SVGs were supplied on 2026-08-25 but
+are **not usable**: they were exported with live `<text>` rather than outlines,
+and depend on three fonts a browser will never have — Citrus Gothic Solid,
+Quincy CF, and Ultra. Browsers substitute a default serif, which renders the
+wordmark in the wrong typeface *and* too wide, so it overflows the viewBox and
+gets clipped. They also carry several duplicate copies of the mark positioned
+far outside the viewBox.
+
+Re-export from Illustrator with **Type > Create Outlines** applied first (or
+tick "Convert text to outlines" in the SVG export dialog), and delete the
+off-canvas duplicates. Once that lands, the PNGs can be retired.
+
+Until then the site uses the 455×169 PNGs, which are fine at the sizes in use
+(54px header, 82px footer) but will soften if scaled much larger or used in print.
 
 
 **Empty on purpose.** Every image slot on the site currently renders a hatched
