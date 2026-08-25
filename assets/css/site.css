@@ -1312,10 +1312,55 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
 /* hit regions stay invisible now — the artwork does the highlighting */
 .cut-chart .cut polygon { fill: transparent !important; stroke: transparent !important; }
 
-/* --- real photography dropped into a placeholder slot -------------------- */
-.photo--real { padding: 0; border: 1px solid var(--ink); background: var(--ink); }
-.photo--real::before { display: none; }
-.photo--real img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* --- real photography: registration brackets, not a frame ---------------- */
+/* Four L-brackets drawn as corner gradients, the way crop marks sit on a
+   press sheet. No box around the picture, so it reads as work in progress
+   on the bench rather than a framed print. */
+.photo--real {
+  /* .photo centres its child; a real print must fill the slot instead */
+  display: block;
+  --bkt: 3px;                 /* bracket weight */
+  --bkl: clamp(20px, 4vw, 34px);  /* bracket length */
+  --bkc: var(--oxblood);
+  position: relative;
+  border: 0;
+  background: none;
+  padding: clamp(9px, 1.4vw, 14px);
+  transition: padding .35s cubic-bezier(.16,1,.3,1), transform .35s cubic-bezier(.16,1,.3,1);
+}
+.photo--real::before {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--bkc) 0 0) 0    0    / var(--bkl) var(--bkt) no-repeat,
+    linear-gradient(var(--bkc) 0 0) 0    0    / var(--bkt) var(--bkl) no-repeat,
+    linear-gradient(var(--bkc) 0 0) 100% 0    / var(--bkl) var(--bkt) no-repeat,
+    linear-gradient(var(--bkc) 0 0) 100% 0    / var(--bkt) var(--bkl) no-repeat,
+    linear-gradient(var(--bkc) 0 0) 0    100% / var(--bkl) var(--bkt) no-repeat,
+    linear-gradient(var(--bkc) 0 0) 0    100% / var(--bkt) var(--bkl) no-repeat,
+    linear-gradient(var(--bkc) 0 0) 100% 100% / var(--bkl) var(--bkt) no-repeat,
+    linear-gradient(var(--bkc) 0 0) 100% 100% / var(--bkt) var(--bkl) no-repeat;
+  transition: opacity .3s ease;
+}
+.photo--real img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  /* the print sits on the bench: hard offset, same language as the buttons */
+  box-shadow: 5px 5px 0 var(--ink);
+  transition: box-shadow .35s cubic-bezier(.16,1,.3,1);
+}
+/* brackets pull outward and the print settles as you approach it */
+.photo--real:hover { padding: clamp(13px, 2vw, 20px); }
+.photo--real:hover img { box-shadow: 3px 3px 0 var(--ink); }
+@media (prefers-reduced-motion: reduce) {
+  .photo--real, .photo--real img { transition: none; }
+  .photo--real:hover { padding: clamp(9px, 1.4vw, 14px); }
+}
+
+/* on dark grounds the brackets and shadow flip to paper */
+.band-dark .photo--real { --bkc: var(--oxblood-soft); }
+.band-dark .photo--real img { box-shadow: 5px 5px 0 var(--paper); }
+.band-dark .photo--real:hover img { box-shadow: 3px 3px 0 var(--paper); }
 
 /* --- category icons (recoloured from the client's own artwork) ----------- */
 .cat-icons {
