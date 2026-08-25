@@ -604,12 +604,16 @@
         requestAnimationFrame(demo);
       }, { threshold: .5 }).observe(stage);
     }
-    // --- hovering a ledger name previews that side -----------------------
+    // --- the ledger drives the slider ------------------------------------
+    // Hovering anywhere on a side (the name, a mark, the wording) holds the
+    // wipe on that side; it only recentres when you leave the ledger.
     var spec = vs.querySelector(".spec");
-    var peeks = vs.querySelectorAll("[data-peek]");
-    var resting = 50, peeking = false;
-    var tween = function (to, cls) {
+    var resting = 50, peeking = false, releaseTimer = null;
+
+    var setSide = function (to, cls) {
+      if (peeking && vs.style.getPropertyValue("--pos") === to + "%") return;
       peeking = true;
+      clearTimeout(releaseTimer);
       stage.classList.add("is-tweening");
       spec.classList.remove("peek-shop", "peek-store");
       if (cls) spec.classList.add(cls);
@@ -620,28 +624,50 @@
       peeking = false;
       spec.classList.remove("peek-shop", "peek-store");
       apply(resting);
-      setTimeout(function () {
+      releaseTimer = setTimeout(function () {
         if (!peeking) stage.classList.remove("is-tweening");
       }, 520);
     };
-    peeks.forEach(function (btn) {
-      var to = parseFloat(btn.getAttribute("data-peek"));
-      var cls = btn.classList.contains("spec__side--shop") ? "peek-shop" : "peek-store";
-      var go = function () { tween(to, cls); };
-      btn.addEventListener("mouseenter", go);
-      btn.addEventListener("focus", go);
-      btn.addEventListener("mouseleave", release);
-      btn.addEventListener("blur", release);
-      // tapping pins that side; tapping again releases
-      btn.addEventListener("click", function (e) {
-        e.preventDefault();
-        resting = (resting === to) ? 50 : to;
-        peeking = false;
-        tween(resting, resting === to ? cls : null);
-        peeking = false;
+
+    var sideOf = function (el) {
+      if (!el || !el.closest) return null;
+      if (el.closest(".spec__shop, .spec__side--shop"))   return ["shop", 100];
+      if (el.closest(".spec__store, .spec__side--store")) return ["store", 0];
+      return null;   // the middle column is neutral: hold whatever we have
+    };
+
+    spec.addEventListener("mouseover", function (e) {
+      var side = sideOf(e.target);
+      if (side) setSide(side[1], "peek-" + side[0]);
+    });
+    spec.addEventListener("mouseleave", release);
+    // keyboard: focusing a name or a row previews its side too
+    spec.addEventListener("focusin", function (e) {
+      var side = sideOf(e.target);
+      if (side) setSide(side[1], "peek-" + side[0]);
+    });
+    spec.addEventListener("focusout", function (e) {
+      if (!spec.contains(e.relatedTarget)) release();
+    });
+
+    // --- picking a row keeps it highlighted -------------------------------
+    var rows = vs.querySelectorAll(".spec__row");
+    var pick = function (row) {
+      var already = row.classList.contains("is-selected");
+      rows.forEach(function (r) { r.classList.remove("is-selected", "is-picking"); });
+      if (already) return;
+      row.classList.add("is-selected", "is-picking");
+      setTimeout(function () { row.classList.remove("is-picking"); }, 700);
+    };
+    rows.forEach(function (row) {
+      row.setAttribute("tabindex", "0");
+      row.addEventListener("click", function () { pick(row); });
+      row.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(row); }
       });
     });
-    // a real drag takes over and clears any pinned preview
+
+    // a drag on the image takes over from any ledger preview
     stage.addEventListener("mousedown", function () {
       peeking = false;
       stage.classList.remove("is-tweening");
