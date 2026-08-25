@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site.css?v=20260825b">
 <style>
 /* ==========================================================================
    FLOW PROTOTYPE — scoped to this page.
@@ -324,6 +324,8 @@
                   aria-valuetext="Half SmokeHouse, half meat aisle"></button>
         </div>
 
+        <p class="vs__hint">Drag the handle — or use the arrow keys</p>
+
         <div class="spec">
           <div class="spec__head">
             <p class="spec__side spec__side--shop">The SmokeHouse</p>
@@ -362,7 +364,6 @@
             </div>
         </div>
       </div>
-      <p class="vs__hint">Drag the handle — or use the arrow keys</p>
     </div>
   </section>
 
@@ -467,7 +468,7 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js"></script>
+<script src="assets/js/site.js?v=20260825b"></script>
 <script>
 (function () {
   "use strict";
@@ -517,12 +518,19 @@
     var stage = vs && vs.querySelector(".vs__stage");
   if (vs) {
     var grip = vs.querySelector(".vs__grip");
+    var tagShop = vs.querySelector(".vs__tag--shop");
+    var tagStore = vs.querySelector(".vs__tag--store");
+    // a tag only belongs on screen while its own side is visible
+    var fade = function (el, v) { if (el) el.style.opacity = Math.max(0, Math.min(1, v)); };
     var pos = 50, dragging = false;
     var apply = function (p) {
       pos = Math.max(0, Math.min(100, p));
       vs.style.setProperty("--pos", pos + "%");
+      vs.style.setProperty("--p", pos);
       vs.parentNode.style.setProperty("--p", pos);
       vs.classList.toggle("is-shop", pos > 55);
+      fade(tagShop,  (pos - 6) / 9);
+      fade(tagStore, (94 - pos) / 9);
       grip.setAttribute("aria-valuenow", Math.round(pos));
       grip.setAttribute("aria-valuetext",
         pos < 12 ? "All The SmokeHouse" :
