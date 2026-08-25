@@ -248,7 +248,6 @@
   <!-- THREE AUDIENCES — persona routing, kept from the live homepage -->
   <section style="padding-block:clamp(4rem,9vh,7rem)">
     <div class="shell">
-      <span class="secno" data-reveal="fade">01</span>
       <p class="eyebrow" data-reveal="fade">What are you here for</p>
       <div class="grid grid--3" style="margin-top:2rem">
 
@@ -309,30 +308,58 @@
 
   <!-- COMPARISON -->
   <section class="compare">
-    <div class="shell shell--narrow">
-      <span class="secno" data-reveal="fade">02</span>
+    <div class="shell">
       <p class="eyebrow" data-reveal="fade">See the difference</p>
       <h2 data-reveal>The SmokeHouse vs. the meat aisle.</h2>
-      <div class="table-wrap" style="margin-top:2.5rem" data-reveal>
-        <table>
-          <thead><tr><th></th><th>The SmokeHouse</th><th>Grocery store</th></tr></thead>
-          <tbody>
-            <tr><td>Dry-aged, never rushed</td><td><b>✓</b></td><td class="no">—</td></tr>
-            <tr><td>Cut to your exact specs</td><td><b>✓</b></td><td class="no">—</td></tr>
-            <tr><td>Labeled clearly, ready for the freezer</td><td><b>✓</b></td><td class="no">—</td></tr>
-            <tr><td>Split orders handled right</td><td><b>✓</b></td><td class="no">—</td></tr>
-            <tr><td>Sourced locally</td><td><b>✓</b></td><td class="no">?</td></tr>
-            <tr><td>You know who cut it</td><td><b>✓</b></td><td class="no">—</td></tr>
-          </tbody>
-        </table>
+      <div class="vs-head" data-reveal>
+        <span class="vs-head__l">The meat aisle</span>
+        <span class="vs-head__r">The SmokeHouse</span>
       </div>
+      <div class="vs" id="vs" data-reveal>
+        <div class="vs__panel vs__panel--store">
+          <div class="vs__media">
+            <div class="vs__slot vs__slot--l">Graphic placeholder — grocery-store meat case</div>
+          </div>
+          <div class="vs__body">
+            <ul class="vs__rows">
+            <li><span class="vs__mark" aria-hidden="true">✕</span><span class="vs__txt">Dry-aged, never rushed</span><span></span></li>
+            <li><span class="vs__mark" aria-hidden="true">✕</span><span class="vs__txt">Cut to your exact specs</span><span></span></li>
+            <li><span class="vs__mark" aria-hidden="true">✕</span><span class="vs__txt">Labeled clearly, ready for the freezer</span><span></span></li>
+            <li><span class="vs__mark" aria-hidden="true">✕</span><span class="vs__txt">Split orders handled right</span><span></span></li>
+            <li><span class="vs__mark" aria-hidden="true">✕</span><span class="vs__txt">Sourced locally</span><span></span></li>
+            <li><span class="vs__mark" aria-hidden="true">✕</span><span class="vs__txt">You know who cut it</span><span></span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="vs__panel vs__panel--shop" aria-hidden="true">
+          <div class="vs__media">
+            <div class="vs__slot vs__slot--r">Graphic placeholder — the counter at The SmokeHouse</div>
+          </div>
+          <div class="vs__body">
+            <ul class="vs__rows">
+            <li><span></span><span class="vs__txt">Dry-aged, never rushed</span><span class="vs__mark" aria-hidden="true">✓</span></li>
+            <li><span></span><span class="vs__txt">Cut to your exact specs</span><span class="vs__mark" aria-hidden="true">✓</span></li>
+            <li><span></span><span class="vs__txt">Labeled clearly, ready for the freezer</span><span class="vs__mark" aria-hidden="true">✓</span></li>
+            <li><span></span><span class="vs__txt">Split orders handled right</span><span class="vs__mark" aria-hidden="true">✓</span></li>
+            <li><span></span><span class="vs__txt">Sourced locally</span><span class="vs__mark" aria-hidden="true">✓</span></li>
+            <li><span></span><span class="vs__txt">You know who cut it</span><span class="vs__mark" aria-hidden="true">✓</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="vs__divider" aria-hidden="true"></div>
+        <button class="vs__grip" type="button" role="slider" aria-label="Drag to compare the meat aisle with The SmokeHouse"
+                aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+                aria-valuetext="Half the meat aisle, half The SmokeHouse"></button>
+      </div>
+      <p class="vs__hint">Drag the handle — or use the arrow keys</p>
     </div>
   </section>
 
   <!-- REVIEWS — next to the ordering CTA, per the messaging guide -->
   <section style="padding-block:clamp(5rem,12vh,9rem)">
     <div class="shell">
-      <span class="secno" data-reveal="fade">03</span>
       <p class="eyebrow" data-reveal="fade">Don’t take our word for it</p>
       <div class="reviews">
         <blockquote class="review-placeholder" data-reveal><p>Review placeholder — a real Google review naming a specific product.</p><footer>Name, Town</footer></blockquote>
@@ -348,7 +375,6 @@
   <!-- AWARD WINNERS -->
   <section class="winners">
     <div class="shell">
-      <span class="secno" data-reveal="fade">04</span>
       <p class="eyebrow" data-reveal="fade">Award winners</p>
       <h2 data-reveal>Five things people drive here for.</h2>
       <div class="winners__row" style="margin-top:2.5rem">
@@ -474,6 +500,67 @@
       }, { threshold: 0.6 });
       counts.forEach(function (el) { io.observe(el); });
     }
+  }
+
+
+  // --- VS slider: drag / touch / keyboard ----------------------------------
+  var vs = document.getElementById("vs");
+  if (vs) {
+    var grip = vs.querySelector(".vs__grip");
+    var pos = 50, dragging = false;
+    var apply = function (p) {
+      pos = Math.max(0, Math.min(100, p));
+      vs.style.setProperty("--pos", pos + "%");
+      vs.parentNode.style.setProperty("--p", pos);
+      grip.setAttribute("aria-valuenow", Math.round(pos));
+      grip.setAttribute("aria-valuetext",
+        pos < 12 ? "All The SmokeHouse" :
+        pos > 88 ? "All the meat aisle" :
+        Math.round(100 - pos) + "% The SmokeHouse");
+    };
+    var fromEvent = function (e) {
+      var r = vs.getBoundingClientRect();
+      var x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+      apply((x / r.width) * 100);
+    };
+    var start = function (e) { dragging = true; vs.classList.add("is-dragging"); fromEvent(e); };
+    var move  = function (e) { if (dragging) { fromEvent(e); if (e.cancelable) e.preventDefault(); } };
+    var end   = function () { dragging = false; vs.classList.remove("is-dragging"); };
+
+    vs.addEventListener("mousedown", start);
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mouseup", end);
+    vs.addEventListener("touchstart", start, { passive: true });
+    window.addEventListener("touchmove", move, { passive: false });
+    window.addEventListener("touchend", end);
+
+    grip.addEventListener("keydown", function (e) {
+      var step = e.shiftKey ? 10 : 4;
+      if (e.key === "ArrowLeft")  { apply(pos - step); e.preventDefault(); }
+      if (e.key === "ArrowRight") { apply(pos + step); e.preventDefault(); }
+      if (e.key === "Home")       { apply(0); e.preventDefault(); }
+      if (e.key === "End")        { apply(100); e.preventDefault(); }
+    });
+    grip.addEventListener("click", function (e) { e.preventDefault(); });
+
+    // nudge once on first view so the control reads as interactive
+    if ("IntersectionObserver" in window && !reduce) {
+      var seen = false;
+      new IntersectionObserver(function (entries, obs) {
+        if (!entries[0].isIntersecting || seen) return;
+        seen = true; obs.disconnect();
+        var t0 = null;
+        var demo = function (now) {
+          if (t0 === null) t0 = now;
+          var t = Math.min(1, (now - t0) / 1400);
+          var e = t < .5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2;
+          apply(50 + Math.sin(e * Math.PI) * 16);
+          if (t < 1) requestAnimationFrame(demo); else apply(50);
+        };
+        requestAnimationFrame(demo);
+      }, { threshold: .5 }).observe(vs);
+    }
+    apply(50);
   }
 
   // --- pinned differentiator sequence ---

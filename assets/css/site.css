@@ -985,3 +985,136 @@ td { border-bottom: 1px solid var(--rule); }
 }
 /* hit regions stay invisible now — the artwork does the highlighting */
 .cut-chart .cut polygon { fill: transparent !important; stroke: transparent !important; }
+
+/* ==========================================================================
+   VS SLIDER — drag to wipe between the grocery store and The SmokeHouse.
+   Both panels share an identical row grid, so each line's ✗ flips to ✓ as
+   the divider passes over it.
+   ========================================================================== */
+.vs {
+  position: relative;
+  border: 2px solid var(--ink);
+  overflow: hidden;
+  background: var(--paper-2);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  cursor: ew-resize;
+  --pos: 50%;
+}
+.vs__panel { position: relative; }
+.vs__panel--shop {
+  position: absolute; inset: 0;
+  clip-path: inset(0 0 0 var(--pos));
+  background: var(--char);
+}
+html.js .vs__panel--shop { transition: none; }
+
+.vs__media {
+  position: relative;
+  height: clamp(150px, 22vw, 260px);
+  border-bottom: 2px solid var(--ink);
+  overflow: hidden;
+  background: var(--paper-3);
+}
+.vs__panel--shop .vs__media { background: var(--char-2); border-bottom-color: var(--oxblood); }
+.vs__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.vs__media::before {
+  content: ""; position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent 0 11px,
+    color-mix(in srgb, var(--ink) 12%, transparent) 11px 12px);
+}
+.vs__panel--shop .vs__media::before {
+  background: repeating-linear-gradient(45deg, transparent 0 11px,
+    color-mix(in srgb, var(--paper) 8%, transparent) 11px 12px);
+}
+.vs__slot {
+  position: absolute; inset: 0; display: grid; place-content: center; text-align: center;
+  font-family: var(--font-ui); font-size: .64rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3);
+  padding: 0 1rem;
+}
+.vs__panel--shop .vs__slot { color: color-mix(in srgb, var(--paper) 50%, transparent); }
+
+.vs__body { padding: clamp(1.4rem, 3vw, 2.2rem); }
+.vs__label {
+  font-family: var(--font-ui); font-size: .68rem; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3);
+  margin: 0 0 .35rem;
+}
+/* names sit outside the wipe so it can never bisect a word; each dims as the
+   divider moves away from its side */
+.vs-head {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  margin-bottom: 1rem;
+  --p: 50;
+}
+.vs-head span {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(1.4rem, 2.9vw, 2.3rem); line-height: 1;
+  text-transform: uppercase; color: var(--ink);
+  transition: opacity .18s ease;
+}
+.vs-head__l { opacity: calc(.28 + .72 * (var(--p) / 100)); }
+.vs-head__r { opacity: calc(.28 + .72 * (1 - var(--p) / 100)); color: var(--oxblood); }
+.vs__body { padding-top: clamp(1.1rem, 2.2vw, 1.6rem); }
+
+.vs__rows { list-style: none; margin: 0; padding: 0; }
+.vs__rows li {
+  display: grid; grid-template-columns: 2rem 1fr 2rem; gap: .9rem; align-items: center;
+  padding-block: clamp(.5rem, 1.1vw, .75rem);
+  border-top: 1px solid var(--rule);
+  font-size: clamp(.92rem, 1.05vw, 1.02rem);
+  white-space: nowrap;
+}
+.vs__rows li:first-child { border-top: 0; }
+.vs__panel--shop .vs__rows li { border-top-color: color-mix(in srgb, var(--paper) 16%, transparent); color: var(--paper); }
+.vs__mark {
+  font-family: var(--font-ui); font-weight: 700; font-size: 1.05rem;
+  width: 2rem; height: 2rem; display: grid; place-items: center;
+  border: 2px solid currentColor;
+}
+.vs__panel--store .vs__mark { color: var(--steel); }
+.vs__panel--store .vs__rows li { color: var(--ink-3); }
+.vs__panel--shop .vs__mark { color: var(--paper); background: var(--oxblood); border-color: var(--oxblood); }
+/* the row text is identical in both panels, so the wipe reads as one line
+   changing state rather than two lines colliding */
+.vs__txt { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vs__slot--l { justify-items: start; text-align: left; padding-left: clamp(1.4rem,3vw,2.2rem); }
+.vs__slot--r { justify-items: end; text-align: right; padding-right: clamp(1.4rem,3vw,2.2rem); }
+
+/* --- divider + grip ------------------------------------------------------- */
+.vs__divider {
+  position: absolute; top: 0; bottom: 0; left: var(--pos);
+  width: 3px; margin-left: -1.5px;
+  background: var(--ink);
+  pointer-events: none;
+}
+.vs__grip {
+  position: absolute; top: 50%; left: var(--pos);
+  width: 56px; height: 56px; margin: -28px 0 0 -28px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+  display: grid; place-items: center;
+  cursor: ew-resize;
+  box-shadow: 0 3px 0 var(--ink);
+  transition: transform .18s ease;
+}
+.vs__grip:hover, .vs__grip:focus-visible { transform: scale(1.08); }
+.vs__grip::before {
+  content: "◀ ▶";
+  font-family: var(--font-ui); font-size: .6rem; font-weight: 700;
+  letter-spacing: .04em; color: var(--ink);
+}
+.vs__hint {
+  font-family: var(--font-ui); font-size: .66rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3);
+  margin-top: .9rem; text-align: center;
+}
+@media (max-width: 620px) {
+  .vs__rows li { grid-template-columns: 1.7rem 1fr 1.7rem; gap: .6rem; font-size: .8rem; }
+  .vs__mark { width: 1.7rem; height: 1.7rem; font-size: .9rem; }
+}
+/* no JS: show both halves side by side, no interaction needed */
+html:not(.js) .vs__panel--shop { clip-path: inset(0 0 0 50%); }

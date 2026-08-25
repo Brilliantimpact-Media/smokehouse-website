@@ -38,6 +38,19 @@ multiply` so the chart's dashed lines and labels stay readable underneath.
 
 If the chart artwork is ever replaced, these placements must be re-derived.
 
+## VS slider graphics (home-v2, awaiting client artwork)
+
+The "SmokeHouse vs. the meat aisle" slider reserves two banner slots, both
+currently hatched placeholders. They must be the **same dimensions and framing**
+so the wipe lines up:
+
+| Side | Wants |
+|---|---|
+| Left | A grocery-store meat case — sterile, shrink-wrapped, fluorescent |
+| Right | The SmokeHouse counter — same camera distance, warm, real |
+
+Drop them in as `<img>` inside `.vs__media`, replacing the `.vs__slot` div.
+
 ## Slots the site is currently reserving
 
 | Page | Slot | What it wants |
