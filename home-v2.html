@@ -353,9 +353,9 @@
 
         <div class="spec">
           <div class="spec__head">
-            <p class="spec__side spec__side--shop">The SmokeHouse</p>
+            <button type="button" class="spec__side spec__side--shop" data-peek="100">The SmokeHouse</button>
             <p class="spec__col">Compared</p>
-            <p class="spec__side spec__side--store">The meat aisle</p>
+            <button type="button" class="spec__side spec__side--store" data-peek="0">The meat aisle</button>
           </div>
             <div class="spec__row">
               <p class="spec__shop"><span class="spec__mark">✓</span>Dry-aged up to 30&nbsp;days</p>
@@ -604,6 +604,50 @@
         requestAnimationFrame(demo);
       }, { threshold: .5 }).observe(stage);
     }
+    // --- hovering a ledger name previews that side -----------------------
+    var spec = vs.querySelector(".spec");
+    var peeks = vs.querySelectorAll("[data-peek]");
+    var resting = 50, peeking = false;
+    var tween = function (to, cls) {
+      peeking = true;
+      stage.classList.add("is-tweening");
+      spec.classList.remove("peek-shop", "peek-store");
+      if (cls) spec.classList.add(cls);
+      apply(to);
+    };
+    var release = function () {
+      if (!peeking) return;
+      peeking = false;
+      spec.classList.remove("peek-shop", "peek-store");
+      apply(resting);
+      setTimeout(function () {
+        if (!peeking) stage.classList.remove("is-tweening");
+      }, 520);
+    };
+    peeks.forEach(function (btn) {
+      var to = parseFloat(btn.getAttribute("data-peek"));
+      var cls = btn.classList.contains("spec__side--shop") ? "peek-shop" : "peek-store";
+      var go = function () { tween(to, cls); };
+      btn.addEventListener("mouseenter", go);
+      btn.addEventListener("focus", go);
+      btn.addEventListener("mouseleave", release);
+      btn.addEventListener("blur", release);
+      // tapping pins that side; tapping again releases
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        resting = (resting === to) ? 50 : to;
+        peeking = false;
+        tween(resting, resting === to ? cls : null);
+        peeking = false;
+      });
+    });
+    // a real drag takes over and clears any pinned preview
+    stage.addEventListener("mousedown", function () {
+      peeking = false;
+      stage.classList.remove("is-tweening");
+      spec.classList.remove("peek-shop", "peek-store");
+    });
+
     apply(50);
   }
 
