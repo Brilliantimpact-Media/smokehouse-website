@@ -38,6 +38,16 @@ multiply` so the chart's dashed lines and labels stay readable underneath.
 
 If the chart artwork is ever replaced, these placements must be re-derived.
 
+## Inspection stamp (`stamp-dry-aged.webp`, supplied 2026-08-25)
+
+Client-supplied circular stamp: THE SMOKEHOUSE / DRY-AGED / UP TO 30 DAYS /
+DURAND · WOODVILLE. Interior is transparent, so the butcher-paper ground shows
+through like real ink. Ink reads #79070F — effectively the palette's oxblood.
+Trimmed and downscaled to 509px (91KB); animates in with the stamp-hit "slam".
+
+Note the claim on it — *up to 30 days* — matches the differentiator copy. If the
+aging window ever changes, this artwork changes with it.
+
 ## VS slider graphics (home-v2, awaiting client artwork)
 
 The "SmokeHouse vs. the meat aisle" slider reserves two banner slots, both
