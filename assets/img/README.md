@@ -1,5 +1,31 @@
 # Image assets
 
+## Pulled from thedurandsmokehouse.com (2026-08-25)
+
+Migrated from the client's own live site, per the brief. **All web-sized
+derivatives, not final assets** — replace with originals before launch if they
+exist.
+
+In `shop/`: `brisket-sliced`, `steak-plated`, `owners-awards`, `award-wall`,
+`awards-medals`, `wood-grain`.
+In `icons/`: the six category marks, lifted off their green tiles and recoloured
+to `--ink` with transparency.
+
+**What the old site does NOT have.** Its photo library is far thinner than it
+looks. There are only three real product photographs on the whole site
+(`meat_slide`, `1.jpg`, `page-title`), plus award documentation. Notably the
+`/gallery` page — titled "Local Butcher Shop" — and `/programs` are filled with
+**stock yoga and fitness images** left over from the WordPress theme demo and
+never replaced. Nothing there is usable.
+
+So these slots still need a real shoot and cannot be filled from the old site:
+- the five named award winners (Cheddar Garden Brat, Hungarian Kielbasa,
+  Butches Franks, thick-cut and regular bacon) — no individual product shots exist
+- the two matched steaks for the homepage comparison wipe
+- the retail case, the deli counter, the dry-aging room, the crew at work,
+  and the Durand building exterior
+
+
 ## Logo (delivered 2026-08-25)
 
 `logo-onlight.png` (black) and `logo-ondark.png` (reversed/white) are the same
