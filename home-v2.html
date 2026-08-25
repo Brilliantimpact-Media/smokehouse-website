@@ -59,15 +59,35 @@
 @keyframes marquee { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; } }
 
-/* --- statement ------------------------------------------------------------ */
+/* --- statement: quiet connectives, loud claims ---------------------------- */
 .statement { padding-block: clamp(5rem, 12vh, 9rem) !important; }
 .statement__grid { display: grid; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
-@media (min-width: 940px) { .statement__grid { grid-template-columns: 1fr auto; } }
-.statement h2 {
-  font-size: clamp(2.1rem, 4.6vw, 4rem); line-height: 1.02;
-  max-width: 20ch;
+@media (min-width: 900px) { .statement__grid { grid-template-columns: 1.35fr .65fr; } }
+
+.q1 { margin: 0; max-width: none; text-transform: none; letter-spacing: 0; }
+.q1 .lo {
+  display: block;
+  font-family: var(--font-body); font-weight: 400; text-transform: none;
+  font-size: clamp(.98rem, 1.25vw, 1.18rem); line-height: 1.4;
+  color: var(--ink-3); letter-spacing: 0; margin-bottom: .25em;
 }
-.statement .stamp { --stamp-size: clamp(158px, 17vw, 230px); }
+.q1 .hi {
+  display: block;
+  font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(1.75rem, 3.5vw, 3.05rem); line-height: .98;
+  color: var(--ink); letter-spacing: 0;
+}
+.q1 .hi + .lo { margin-top: .5em; }
+.q1 .red { color: var(--oxblood); }
+
+.statement__aside {
+  border-left: 2px solid var(--oxblood);
+  padding-left: clamp(1rem, 1.6vw, 1.4rem);
+  font-size: .95rem; line-height: 1.6; color: var(--ink-3);
+}
+.statement__aside p { margin: 0; }
+.statement__aside .annot { margin-top: 1.1rem; }
+.statement__aside .stamp { --stamp-size: clamp(112px, 12vw, 150px); margin-top: 1.6rem; }
 
 /* --- pinned differentiator sequence -------------------------------------- */
 .seq { height: 420vh; position: relative; background: var(--char); color: var(--paper); border: 0 !important; padding: 0 !important; }
@@ -227,13 +247,21 @@
   <section class="statement">
     <div class="shell statement__grid" data-reveal>
       <div>
-      <p class="eyebrow">Why we’re here</p>
-      <h2>We know how frustrating it is to not trust what meat is in your freezer or your grocery cart. You deserve food that’s local and cut by a team who cares.</h2>
-      <p style="margin-top:2rem;max-width:56ch">The SmokeHouse has been earning this craft for decades. We source, process, and smoke meat the way it’s supposed to be done, not the way a plant does it. Every order gets the same care, whether it’s a split beef order or a standing wholesale account.</p>
-      <p class="annot" style="margin-top:1.8rem">Not a plant. A shop.</p>
+        <p class="eyebrow">Why we’re here</p>
+        <!-- verbatim empathy statement; the spans only change how it is set -->
+        <h2 class="q1">
+          <span class="lo">We know how frustrating it is</span>
+          <span class="hi">to not trust what meat is in your freezer</span>
+          <span class="lo">or your grocery cart. You deserve food that’s</span>
+          <span class="hi red">local and cut by a team who cares.</span>
+        </h2>
       </div>
-      <img class="stamp" src="assets/img/stamp-dry-aged.webp" width="520" height="532"
-           alt="The SmokeHouse stamp, dry-aged up to 30 days, Durand and Woodville">
+      <aside class="statement__aside">
+        <p>The SmokeHouse has been earning this craft for decades. We source, process, and smoke meat the way it’s supposed to be done, not the way a plant does it.</p>
+        <p class="annot">Not a plant. A shop.</p>
+        <img class="stamp" src="assets/img/stamp-dry-aged.webp" width="520" height="532"
+             alt="The SmokeHouse stamp, dry-aged up to 30 days, Durand and Woodville">
+      </aside>
     </div>
   </section>
 
