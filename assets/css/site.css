@@ -995,8 +995,10 @@ td { border-bottom: 1px solid var(--rule); }
   overflow: hidden;
   aspect-ratio: 16 / 10;
   /* cap the height so the whole frame plus the top of the ledger fit one
-     screen; object-fit on the shots absorbs the wider effective ratio */
+     screen. With the height definite the box shrinks its width to hold the
+     ratio, so centre it rather than letting it sit left. */
   max-height: min(58vh, 560px);
+  margin-inline: auto;
   background: var(--paper-2);
   border-radius: 3px;
   box-shadow:
