@@ -987,6 +987,137 @@ td { border-bottom: 1px solid var(--rule); }
 .cut-chart .cut polygon { fill: transparent !important; stroke: transparent !important; }
 
 /* ==========================================================================
+   VS SLIDER — two photographs of the same cut, wiped by a draggable divider,
+   with the reasons spelled out underneath.
+   ========================================================================== */
+.vs { --pos: 50%; }
+
+.vs__stage {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  background: var(--paper-2);
+  aspect-ratio: 16 / 10;
+  user-select: none; -webkit-user-select: none;
+  touch-action: pan-y;
+  cursor: ew-resize;
+}
+@media (max-width: 620px) { .vs__stage { aspect-ratio: 4 / 3; } }
+
+.vs__shot { position: absolute; inset: 0; margin: 0; }
+.vs__shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.vs__shot--store { clip-path: inset(0 0 0 var(--pos)); }
+
+/* placeholder until the photography lands */
+.vs__ph {
+  position: absolute; inset: 0;
+  display: grid; place-content: center; text-align: center;
+  padding: 1.5rem;
+  font-family: var(--font-ui); font-size: .68rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3);
+  background: var(--paper-3);
+}
+.vs__ph::before {
+  content: ""; position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent 0 12px,
+    color-mix(in srgb, var(--ink) 10%, transparent) 12px 13px);
+}
+.vs__shot--store .vs__ph { background: var(--paper-2); }
+
+/* corner labels */
+.vs__pill {
+  position: absolute; top: 1rem; z-index: 3;
+  font-family: var(--font-ui); font-size: .66rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  padding: .5rem .9rem;
+  border: 2px solid var(--ink);
+  pointer-events: none;
+  white-space: nowrap;
+  max-width: calc(50% - 1.5rem);
+  overflow: hidden; text-overflow: ellipsis;
+}
+.vs__pill--shop  { left: 1rem;  background: var(--oxblood); color: var(--paper); }
+.vs__pill--store { right: 1rem; background: var(--paper);   color: var(--ink-2); }
+@media (max-width: 620px) { .vs__pill { font-size: .58rem; padding: .4rem .6rem; top: .6rem; } }
+
+/* divider + grip */
+.vs__divider {
+  position: absolute; top: 0; bottom: 0; left: var(--pos); z-index: 2;
+  width: 3px; margin-left: -1.5px;
+  background: var(--paper);
+  box-shadow: 0 0 0 1px rgba(23,19,16,.35);
+  pointer-events: none;
+}
+.vs__grip {
+  position: absolute; top: 50%; left: var(--pos); z-index: 4;
+  width: 54px; height: 54px; margin: -27px 0 0 -27px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+  display: grid; place-items: center;
+  cursor: ew-resize;
+  box-shadow: 0 3px 0 var(--ink);
+  transition: transform .18s ease;
+}
+.vs__grip:hover, .vs__grip:focus-visible { transform: scale(1.08); }
+.vs__grip::before {
+  content: "◀ ▶";
+  font-family: var(--font-ui); font-size: .58rem; font-weight: 700; color: var(--ink);
+}
+
+/* --- the reasons, side by side ------------------------------------------- */
+.vs__cols {
+  display: grid; gap: clamp(1.5rem, 4vw, 3.5rem);
+  grid-template-columns: 1fr;
+  margin-top: clamp(1.6rem, 3vw, 2.4rem);
+}
+@media (min-width: 720px) { .vs__cols { grid-template-columns: 1fr 1fr; } }
+.vs__col h3 {
+  display: flex; align-items: center; gap: .7rem;
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  margin: 0 0 1rem;
+}
+.vs__col h3 i { width: 12px; height: 12px; flex: none; }
+.vs__col--shop  h3 i { background: var(--oxblood); }
+.vs__col--store h3 i { background: var(--steel); }
+.vs__col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .85rem; }
+.vs__col li {
+  display: grid; grid-template-columns: 12px 1fr; gap: .8rem; align-items: start;
+  font-size: clamp(.95rem, 1.1vw, 1.05rem); line-height: 1.5;
+}
+.vs__col li::before { content: ""; width: 8px; height: 8px; margin-top: .55em; }
+.vs__col--shop  li::before { background: var(--oxblood); }
+.vs__col--store li::before { background: var(--steel); }
+.vs__col--shop  li { color: var(--ink); }
+.vs__col--store li { color: var(--ink-3); }
+
+.vs__hint {
+  font-family: var(--font-ui); font-size: .66rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3);
+  margin-top: 1.1rem; text-align: center;
+}
+html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
+
+/* --- Cut chart: anatomical highlight pieces (supplied artwork) ------------ */
+.cut-chart .cut-hi {
+  /* full-canvas overlays generated from the chart itself — inset:0 guarantees
+     pixel-exact registration at every size, with no placement math */
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: multiply;   /* keeps the chart's own labels & lines readable */
+  transition: opacity .28s ease, transform .28s cubic-bezier(.16,1,.3,1);
+  will-change: opacity, transform;
+}
+.cut-chart .cut-hi.on { opacity: .82; }
+@media (prefers-reduced-motion: reduce) {
+  .cut-chart .cut-hi { transition: opacity .01ms; }
+}
+/* hit regions stay invisible now — the artwork does the highlighting */
+.cut-chart .cut polygon { fill: transparent !important; stroke: transparent !important; }
+
+/* ==========================================================================
    VS SLIDER — one steak, two provenances. No box: the cut itself is the
    comparison, wiped by a draggable divider.
    ========================================================================== */

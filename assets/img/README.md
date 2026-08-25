@@ -56,23 +56,32 @@ Trimmed and downscaled to 509px (91KB); animates in with the stamp-hit "slam".
 Note the claim on it — *up to 30 days* — matches the differentiator copy. If the
 aging window ever changes, this artwork changes with it.
 
-## VS slider (home-v2)
+## VS slider photography (home-v2) — NEEDED
 
-The "SmokeHouse vs. the meat aisle" comparison is **one steak, drawn twice** as
-inline SVG — no photography needed and nothing to source. The same ribeye path
-renders in both layers; only the styling differs:
+The "SmokeHouse vs. the meat aisle" comparison is a photo wipe. Two slots, both
+hatched placeholders right now:
 
-- **Meat aisle:** pale grey-pink fill, faint marbling, and two plastic-wrap
-  sheen strokes (clipped to the body so they stay on the meat).
-- **The SmokeHouse:** deep oxblood, a proper cream fat cap, heavy marbling, no
-  plastic.
+| Slot | Subject |
+|---|---|
+| A | A SmokeHouse dry-aged steak |
+| B | A steak bought from a grocery store |
 
-The wipe layer carries a paper-coloured background — without it the layer
-beneath ghosts through the transparent one. Paper on paper reads as no panel,
-which is the point: there is no box, just the cut.
+**The two frames must match exactly or the wipe breaks.** Shoot both in one
+session without moving the camera:
 
-To swap in real photography later, replace the two `.steak` SVGs with `<img>`
-of the same aspect — both sides must match framing exactly or the wipe breaks.
+- Tripod or a phone propped and untouched between shots
+- Same lighting, same background, same surface; plain white or the paper cream
+- Same distance, same angle (straight-on or straight-down — pick one)
+- Steak in the same position in frame, roughly the same size in frame
+- Landscape, 16:10-ish, highest resolution available
+- Manual/locked exposure and white balance if the camera allows — auto mode
+  will shift the colour between shots and give the comparison away
+
+Swap each `.vs__ph` div for an `<img>` inside its `.vs__shot` figure.
+
+**Honesty note:** the grocery-store steak must be a genuine, fairly-photographed
+one. Don't stage a bad example — a comparison that overreaches is both a legal
+risk and, if a customer notices, worse for trust than no comparison at all.
 
 ## Slots the site is currently reserving
 

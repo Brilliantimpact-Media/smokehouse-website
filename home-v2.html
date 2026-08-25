@@ -303,87 +303,47 @@
     <div class="shell">
       <p class="eyebrow" data-reveal="fade">See the difference</p>
       <h2 data-reveal>The SmokeHouse vs. the meat aisle.</h2>
-      <div class="vs-head" data-reveal>
-        <span class="vs-head__l">The meat aisle</span>
-        <span class="vs-head__r">The SmokeHouse</span>
-      </div>
       <div class="vs" id="vs" data-reveal>
-        <div class="vs__panel vs__panel--store">
-          <div class="vs__meat">
-            <svg class="steak" viewBox="0 0 620 400" aria-hidden="true">
-              <!-- ribeye: irregular body, fat cap along the top rim, eye + spinalis -->
-              <path class="steak__body" d="M78,206 C70,150 108,96 176,68 C244,40 332,32 414,44 C486,54 546,84 570,132 C594,180 580,240 536,286 C492,332 420,360 344,366 C266,372 190,356 140,320 C100,292 84,252 78,206 Z"/>
-              <path class="steak__fat" d="M176,68 C244,40 332,32 414,44 C486,54 546,84 570,132 C576,144 580,156 582,168 L556,172 C551,153 543,137 530,122 C496,84 434,62 366,56 C300,50 234,58 186,80 Z"/>
-              <path class="steak__seam" d="M198,96 C268,72 356,68 430,84 C486,96 528,120 550,152"/>
-              <path class="steak__eye" d="M212,206 C224,158 282,132 348,136 C416,140 466,176 470,224 C474,272 428,312 364,318 C298,324 240,296 220,254 C212,236 209,220 212,206 Z"/>
-              <g class="steak__marble">
-                <path d="M244,196 C282,172 328,168 364,180"/>
-                <path d="M256,246 C300,224 350,222 392,238"/>
-                <path d="M280,290 C320,276 360,278 396,292"/>
-                <path d="M300,160 C338,150 378,156 406,176"/>
-                <path d="M392,204 C420,198 442,208 456,226"/>
-                <path d="M150,180 C176,154 208,142 236,140"/>
-                <path d="M144,246 C170,228 198,220 222,220"/>
-                <path d="M470,150 C500,158 522,176 534,200"/>
-                <path d="M446,286 C472,272 494,250 504,226"/>
-                <path d="M188,308 C214,300 242,302 264,312"/>
-              </g>
-              <path class="steak__wrap" d="M118,120 C232,180 380,238 566,262"/>
-              <path class="steak__wrap steak__wrap--2" d="M104,196 C216,252 366,300 528,318"/>
-            </svg>
+        <div class="vs__stage">
+          <!-- base layer: The SmokeHouse -->
+          <figure class="vs__shot vs__shot--shop">
+            <div class="vs__ph" data-slot="shop">Photo slot A — The SmokeHouse steak</div>
+          </figure>
+          <!-- wiped layer: the meat aisle -->
+          <figure class="vs__shot vs__shot--store" aria-hidden="true">
+            <div class="vs__ph" data-slot="store">Photo slot B — grocery-store steak</div>
+          </figure>
+
+          <span class="vs__pill vs__pill--shop">The SmokeHouse — dry-aged</span>
+          <span class="vs__pill vs__pill--store">The meat aisle — case-packed</span>
+
+          <div class="vs__divider" aria-hidden="true"></div>
+          <button class="vs__grip" type="button" role="slider"
+                  aria-label="Drag to compare a SmokeHouse steak with a grocery-store steak"
+                  aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+                  aria-valuetext="Half SmokeHouse, half meat aisle"></button>
+        </div>
+
+        <div class="vs__cols">
+          <div class="vs__col vs__col--shop">
+            <h3><i aria-hidden="true"></i>The SmokeHouse</h3>
+            <ul>
+              <li>Dry-aged up to 30 days — deeper flavor, real tenderness</li>
+              <li>Cut to your exact specs, not a pre-set package</li>
+              <li>Labeled clearly and ready for the freezer</li>
+              <li>You can ask the person who cut it</li>
+            </ul>
           </div>
-          <div class="vs__body">
-            <ul class="vs__rows">
-            <li><span class="vs__mark" aria-hidden="true">✕</span><span class="vs__txt">Dry-aged, never rushed</span><span></span></li>
-            <li><span class="vs__mark" aria-hidden="true">✕</span><span class="vs__txt">Cut to your exact specs</span><span></span></li>
-            <li><span class="vs__mark" aria-hidden="true">✕</span><span class="vs__txt">Labeled clearly, ready for the freezer</span><span></span></li>
-            <li><span class="vs__mark" aria-hidden="true">✕</span><span class="vs__txt">Split orders handled right</span><span></span></li>
-            <li><span class="vs__mark" aria-hidden="true">✕</span><span class="vs__txt">Sourced locally</span><span></span></li>
-            <li><span class="vs__mark" aria-hidden="true">✕</span><span class="vs__txt">You know who cut it</span><span></span></li>
+          <div class="vs__col vs__col--store">
+            <h3><i aria-hidden="true"></i>The meat aisle</h3>
+            <ul>
+              <li>Wet-aged in the bag on a truck, however long that took</li>
+              <li>Whatever thickness the case happened to have</li>
+              <li>A barcode, a sell-by date, and not much else</li>
+              <li>Nobody to call when it isn’t right</li>
             </ul>
           </div>
         </div>
-
-        <div class="vs__panel vs__panel--shop" aria-hidden="true">
-          <div class="vs__meat">
-            <svg class="steak" viewBox="0 0 620 400" aria-hidden="true">
-              <!-- ribeye: irregular body, fat cap along the top rim, eye + spinalis -->
-              <path class="steak__body" d="M78,206 C70,150 108,96 176,68 C244,40 332,32 414,44 C486,54 546,84 570,132 C594,180 580,240 536,286 C492,332 420,360 344,366 C266,372 190,356 140,320 C100,292 84,252 78,206 Z"/>
-              <path class="steak__fat" d="M176,68 C244,40 332,32 414,44 C486,54 546,84 570,132 C576,144 580,156 582,168 L556,172 C551,153 543,137 530,122 C496,84 434,62 366,56 C300,50 234,58 186,80 Z"/>
-              <path class="steak__seam" d="M198,96 C268,72 356,68 430,84 C486,96 528,120 550,152"/>
-              <path class="steak__eye" d="M212,206 C224,158 282,132 348,136 C416,140 466,176 470,224 C474,272 428,312 364,318 C298,324 240,296 220,254 C212,236 209,220 212,206 Z"/>
-              <g class="steak__marble">
-                <path d="M244,196 C282,172 328,168 364,180"/>
-                <path d="M256,246 C300,224 350,222 392,238"/>
-                <path d="M280,290 C320,276 360,278 396,292"/>
-                <path d="M300,160 C338,150 378,156 406,176"/>
-                <path d="M392,204 C420,198 442,208 456,226"/>
-                <path d="M150,180 C176,154 208,142 236,140"/>
-                <path d="M144,246 C170,228 198,220 222,220"/>
-                <path d="M470,150 C500,158 522,176 534,200"/>
-                <path d="M446,286 C472,272 494,250 504,226"/>
-                <path d="M188,308 C214,300 242,302 264,312"/>
-              </g>
-              <path class="steak__wrap" d="M118,120 C232,180 380,238 566,262"/>
-              <path class="steak__wrap steak__wrap--2" d="M104,196 C216,252 366,300 528,318"/>
-            </svg>
-          </div>
-          <div class="vs__body">
-            <ul class="vs__rows">
-            <li><span></span><span class="vs__txt">Dry-aged, never rushed</span><span class="vs__mark" aria-hidden="true">✓</span></li>
-            <li><span></span><span class="vs__txt">Cut to your exact specs</span><span class="vs__mark" aria-hidden="true">✓</span></li>
-            <li><span></span><span class="vs__txt">Labeled clearly, ready for the freezer</span><span class="vs__mark" aria-hidden="true">✓</span></li>
-            <li><span></span><span class="vs__txt">Split orders handled right</span><span class="vs__mark" aria-hidden="true">✓</span></li>
-            <li><span></span><span class="vs__txt">Sourced locally</span><span class="vs__mark" aria-hidden="true">✓</span></li>
-            <li><span></span><span class="vs__txt">You know who cut it</span><span class="vs__mark" aria-hidden="true">✓</span></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="vs__divider" aria-hidden="true"></div>
-        <button class="vs__grip" type="button" role="slider" aria-label="Drag to compare the meat aisle with The SmokeHouse"
-                aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
-                aria-valuetext="Half the meat aisle, half The SmokeHouse"></button>
       </div>
       <p class="vs__hint">Drag the handle — or use the arrow keys</p>
     </div>
@@ -537,6 +497,7 @@
 
   // --- VS slider: drag / touch / keyboard ----------------------------------
   var vs = document.getElementById("vs");
+    var stage = vs && vs.querySelector(".vs__stage");
   if (vs) {
     var grip = vs.querySelector(".vs__grip");
     var pos = 50, dragging = false;
@@ -551,18 +512,18 @@
         Math.round(100 - pos) + "% The SmokeHouse");
     };
     var fromEvent = function (e) {
-      var r = vs.getBoundingClientRect();
+      var r = stage.getBoundingClientRect();
       var x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
       apply((x / r.width) * 100);
     };
-    var start = function (e) { dragging = true; vs.classList.add("is-dragging"); fromEvent(e); };
+    var start = function (e) { dragging = true; stage.classList.add("is-dragging"); fromEvent(e); };
     var move  = function (e) { if (dragging) { fromEvent(e); if (e.cancelable) e.preventDefault(); } };
-    var end   = function () { dragging = false; vs.classList.remove("is-dragging"); };
+    var end   = function () { dragging = false; stage.classList.remove("is-dragging"); };
 
-    vs.addEventListener("mousedown", start);
+    stage.addEventListener("mousedown", start);
     window.addEventListener("mousemove", move);
     window.addEventListener("mouseup", end);
-    vs.addEventListener("touchstart", start, { passive: true });
+    stage.addEventListener("touchstart", start, { passive: true });
     window.addEventListener("touchmove", move, { passive: false });
     window.addEventListener("touchend", end);
 
@@ -590,7 +551,7 @@
           if (t < 1) requestAnimationFrame(demo); else apply(50);
         };
         requestAnimationFrame(demo);
-      }, { threshold: .5 }).observe(vs);
+      }, { threshold: .5 }).observe(stage);
     }
     apply(50);
   }
