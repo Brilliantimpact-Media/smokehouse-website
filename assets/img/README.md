@@ -27,16 +27,24 @@ they exist.
    same aspect-ratio class so the layout doesn't shift.
 3. Every image needs real alt text — describe the cut or the scene, not "meat photo."
 
-## Cut-chart highlight pieces (`cuts/`, supplied 2026-08-25)
+## Cut-chart highlights (`cuts/`, generated)
 
-Nine anatomical shapes — chuck, rib, shortloin, sirloin, round, brisket, plate,
-flank, shank — used as hover/tap highlights on the beef chart. Processed from the
-supplied PNGs: trimmed, interiors flattened, and the baked-in labels removed (the
-chart already carries its own labels). Positioned as percentages of the
-1672x941 chart so they scale with it, and composited with `mix-blend-mode:
-multiply` so the chart's dashed lines and labels stay readable underneath.
+**Derived from the chart artwork itself, not hand-placed.** `tools/build-cut-
+regions.py` reads `cut-chart-cow.png`, bridges the dashed separators with a
+morphological dilation, seeds one point per primal, and runs a watershed so each
+region grows out to the actual drawn boundary. Output is nine full-canvas
+(1672x941) alpha WebPs — all nine total ~5KB, since each is a single flat colour
+over transparency.
 
-If the chart artwork is ever replaced, these placements must be re-derived.
+Because they are full-canvas, the page positions them with `inset: 0` and
+`width: 100%` — registration is pixel-exact at every screen size with zero
+placement math. Composited with `mix-blend-mode: multiply` so the chart's own
+labels and dashed lines stay readable through the highlight.
+
+Two tuned constants live in the script: the dilation kernel is 13 (needed to keep
+sirloin from leaking over the round and down the tail) except for the shank,
+which runs at 7 because the leg is too narrow for a 13px kernel and gets pinched
+shut. **Re-run the script if the chart artwork is ever replaced.**
 
 ## Inspection stamp (`stamp-dry-aged.webp`, supplied 2026-08-25)
 

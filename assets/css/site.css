@@ -969,17 +969,17 @@ td { border-bottom: 1px solid var(--rule); }
 
 /* --- Cut chart: anatomical highlight pieces (supplied artwork) ------------ */
 .cut-chart .cut-hi {
-  position: absolute;
-  height: auto;
+  /* full-canvas overlays generated from the chart itself — inset:0 guarantees
+     pixel-exact registration at every size, with no placement math */
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
   pointer-events: none;
   opacity: 0;
   mix-blend-mode: multiply;   /* keeps the chart's own labels & lines readable */
-  transform: scale(.985);
-  transform-origin: center;
   transition: opacity .28s ease, transform .28s cubic-bezier(.16,1,.3,1);
   will-change: opacity, transform;
 }
-.cut-chart .cut-hi.on { opacity: 1; transform: none; }
+.cut-chart .cut-hi.on { opacity: .82; }
 @media (prefers-reduced-motion: reduce) {
   .cut-chart .cut-hi { transition: opacity .01ms; }
 }
