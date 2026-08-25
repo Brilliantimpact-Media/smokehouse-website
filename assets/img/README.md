@@ -27,6 +27,17 @@ they exist.
    same aspect-ratio class so the layout doesn't shift.
 3. Every image needs real alt text — describe the cut or the scene, not "meat photo."
 
+## Cut-chart highlight pieces (`cuts/`, supplied 2026-08-25)
+
+Nine anatomical shapes — chuck, rib, shortloin, sirloin, round, brisket, plate,
+flank, shank — used as hover/tap highlights on the beef chart. Processed from the
+supplied PNGs: trimmed, interiors flattened, and the baked-in labels removed (the
+chart already carries its own labels). Positioned as percentages of the
+1672x941 chart so they scale with it, and composited with `mix-blend-mode:
+multiply` so the chart's dashed lines and labels stay readable underneath.
+
+If the chart artwork is ever replaced, these placements must be re-derived.
+
 ## Slots the site is currently reserving
 
 | Page | Slot | What it wants |

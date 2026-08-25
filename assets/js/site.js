@@ -351,6 +351,10 @@
       flank:     { name: "Flank",      becomes: "Flank steak and stir-fry strips.", sheet: "Kept as a steak or sent to grind." },
       shank:     { name: "Shank",      becomes: "Soup bones and osso buco \u2014 the start of the best broth you\u2019ll make.", sheet: "Soup bones kept or passed. Keep them." }
     };
+    var hi = {};
+    chart.querySelectorAll("[data-cut-img]").forEach(function (im) {
+      hi[im.getAttribute("data-cut-img")] = im;
+    });
     var nameEl = document.getElementById("cut-name");
     var becomesEl = document.getElementById("cut-becomes");
     var sheetEl = document.getElementById("cut-sheet");
@@ -362,6 +366,7 @@
       becomesEl.textContent = d.becomes;
       sheetEl.textContent = d.sheet;
       regions.forEach(function (r) { r.classList.toggle("active", r === el); });
+      Object.keys(hi).forEach(function (k) { hi[k].classList.toggle("on", k === key); });
     };
     regions.forEach(function (r) {
       var key = r.getAttribute("data-cut");
@@ -374,7 +379,7 @@
       });
     });
     var def = chart.querySelector('[data-cut="rib"]');
-    if (def) def.classList.add("active");
+    if (def) { def.classList.add("active"); if (hi.rib) hi.rib.classList.add("on"); }
   }
 
   // --- Parallax ------------------------------------------------------------

@@ -966,3 +966,22 @@ td { border-bottom: 1px solid var(--rule); }
 }
 .site-footer .tagline,
 .band-dark .tagline { color: color-mix(in srgb, var(--paper) 65%, transparent); }
+
+/* --- Cut chart: anatomical highlight pieces (supplied artwork) ------------ */
+.cut-chart .cut-hi {
+  position: absolute;
+  height: auto;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: multiply;   /* keeps the chart's own labels & lines readable */
+  transform: scale(.985);
+  transform-origin: center;
+  transition: opacity .28s ease, transform .28s cubic-bezier(.16,1,.3,1);
+  will-change: opacity, transform;
+}
+.cut-chart .cut-hi.on { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .cut-chart .cut-hi { transition: opacity .01ms; }
+}
+/* hit regions stay invisible now — the artwork does the highlighting */
+.cut-chart .cut polygon { fill: transparent !important; stroke: transparent !important; }
