@@ -6,11 +6,14 @@ each case.
 
 ## Blocking-ish (affect launch)
 
-1. **Visual identity direction.** Modernize the existing red/black/rustic look, or
-   move to something new once the updated logo arrives? The site currently uses a
-   deliberately neutral paper-and-ink palette with all colors isolated as CSS tokens
-   in `assets/css/site.css` (`:root`) — the whole identity swaps in one place when
-   this is decided. **Do not treat the current neutral palette as a proposal.**
+1. **Visual identity direction — RESOLVED 2026-08-25.** The client directed a
+   "modern blue-collar butcher shop / meat market / smokehouse" aesthetic and
+   specified the palette: butcher-paper cream, warm off-white, deep oxblood /
+   meat red, dark burgundy, charcoal, near-black, deep brown, muted steel gray,
+   kraft tan. This **supersedes the earlier hold on inventing brand colors.**
+   Implemented as CSS tokens in `assets/css/site.css` (`:root`). Type is
+   Big Shoulders Display (condensed signage) + Archivo (body).
+   **Still open:** whether the incoming logo agrees with this palette.
 2. **Logo.** Not yet received. A typographic wordmark stands in. When it arrives,
    replace `.wordmark` in the header/footer.
 3. **Tagline.** "Local Cuts. No Shortcuts." was rejected by the client and is not

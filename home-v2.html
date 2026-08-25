@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/site.css">
 <style>
 /* ==========================================================================
@@ -24,12 +24,16 @@
   text-align: center;
 }
 @media (min-width: 760px) { .stats__row { grid-template-columns: repeat(3, 1fr); } }
+.stats__row .plabel {
+  display: inline-flex; width: auto; margin: 0 auto 1.1rem;
+  font-size: .66rem; letter-spacing: .16em; color: var(--ink-2);
+}
 .stats__row b {
   display: block; font-family: var(--font-display); font-weight: 900;
   font-size: clamp(3.4rem, 9vw, 6.5rem); line-height: 1; letter-spacing: -.045em;
   font-variant-numeric: tabular-nums; color: var(--ink);
 }
-.stats__row span {
+.stats__row > div > span:last-child {
   display: block; margin-top: .7rem;
   font-family: var(--font-ui); font-size: .76rem; font-weight: 600;
   letter-spacing: .15em; text-transform: uppercase; color: var(--ink-3);
@@ -38,10 +42,12 @@
 /* --- marquee -------------------------------------------------------------- */
 .marquee {
   overflow: hidden; white-space: nowrap;
-  border-block: 1px solid var(--rule);
+  border-block: 2px solid var(--ink);
   padding-block: 1.1rem;
-  background: var(--paper-2);
+  background: var(--accent);
 }
+.marquee__track { color: var(--accent-ink) !important; }
+.marquee__track span { color: var(--accent-ink); }
 .marquee__track {
   display: inline-block;
   animation: marquee 32s linear infinite;
@@ -55,10 +61,13 @@
 
 /* --- statement ------------------------------------------------------------ */
 .statement { padding-block: clamp(5rem, 12vh, 9rem) !important; }
+.statement__grid { display: grid; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+@media (min-width: 940px) { .statement__grid { grid-template-columns: 1fr auto; } }
 .statement h2 {
-  font-size: clamp(1.9rem, 4.2vw, 3.4rem); line-height: 1.15;
-  max-width: 24ch; letter-spacing: -.02em;
+  font-size: clamp(2.1rem, 4.6vw, 4rem); line-height: 1.02;
+  max-width: 20ch;
 }
+.statement .stamp { --stamp-size: clamp(130px, 15vw, 190px); }
 
 /* --- pinned differentiator sequence -------------------------------------- */
 .seq { height: 420vh; position: relative; background: var(--char); color: var(--paper); border: 0 !important; padding: 0 !important; }
@@ -195,11 +204,11 @@
   </section>
 
   <!-- STATS — count up on entry -->
-  <section class="stats">
+  <section class="stats band-kraft">
     <div class="shell stats__row">
-      <div data-reveal><b data-count="30">0</b><span>Days dry-aged, up to</span></div>
-      <div data-reveal style="--reveal-delay:.1s"><b data-count="2">0</b><span>Wisconsin locations</span></div>
-      <div data-reveal style="--reveal-delay:.2s"><b data-count="5">0</b><span>Award-winning products</span></div>
+      <div data-reveal><span class="plabel">Aging room</span><b data-count="30">0</b><span>Days dry-aged, up to</span></div>
+      <div data-reveal style="--reveal-delay:.1s"><span class="plabel">Wisconsin</span><b data-count="2">0</b><span>Locations, one crew</span></div>
+      <div data-reveal style="--reveal-delay:.2s"><span class="plabel">The case</span><b data-count="5">0</b><span>Award-winning products</span></div>
     </div>
   </section>
 
@@ -212,16 +221,30 @@
 
   <!-- STATEMENT -->
   <section class="statement">
-    <div class="shell">
-      <p class="eyebrow" data-reveal="fade">Why we’re here</p>
-      <h2 data-reveal>We know how frustrating it is to not trust what meat is in your freezer or your grocery cart. You deserve food that’s local and cut by a team who cares.</h2>
-      <p style="margin-top:2rem;max-width:56ch" data-reveal>The SmokeHouse has been earning this craft for decades. We source, process, and smoke meat the way it’s supposed to be done, not the way a plant does it. Every order gets the same care, whether it’s a split beef order or a standing wholesale account.</p>
+    <div class="shell statement__grid" data-reveal>
+      <div>
+      <p class="eyebrow">Why we’re here</p>
+      <h2>We know how frustrating it is to not trust what meat is in your freezer or your grocery cart. You deserve food that’s local and cut by a team who cares.</h2>
+      <p style="margin-top:2rem;max-width:56ch">The SmokeHouse has been earning this craft for decades. We source, process, and smoke meat the way it’s supposed to be done, not the way a plant does it. Every order gets the same care, whether it’s a split beef order or a standing wholesale account.</p>
+      <p class="annot" style="margin-top:1.8rem">Not a plant. A shop.</p>
+      </div>
+      <svg class="stamp" viewBox="0 0 120 120" role="img" aria-label="The SmokeHouse — dry-aged up to 30 days">
+            <defs><path id="arcT" d="M60,60 m-44,0 a44,44 0 1,1 88,0"/><path id="arcB" d="M60,60 m-40,0 a40,40 0 1,0 80,0"/></defs>
+            <circle cx="60" cy="60" r="55" stroke-width="3"/>
+            <circle cx="60" cy="60" r="47" stroke-width="1.5"/>
+            <text font-size="11.5" letter-spacing="2.1"><textPath href="#arcT" startOffset="50%" text-anchor="middle">THE SMOKEHOUSE</textPath></text>
+            <text font-size="8.5" letter-spacing="1.9"><textPath href="#arcB" startOffset="50%" text-anchor="middle">DURAND · WOODVILLE, WI</textPath></text>
+            <line x1="30" y1="47" x2="90" y2="47" stroke-width="1.5"/>
+            <line x1="30" y1="76" x2="90" y2="76" stroke-width="1.5"/>
+            <text x="60" y="66" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="1">DRY-AGED</text>
+          </svg>
     </div>
   </section>
 
   <!-- THREE AUDIENCES — persona routing, kept from the live homepage -->
   <section style="padding-block:clamp(4rem,9vh,7rem)">
     <div class="shell">
+      <span class="secno" data-reveal="fade">01</span>
       <p class="eyebrow" data-reveal="fade">What are you here for</p>
       <div class="grid grid--3" style="margin-top:2rem">
 
@@ -283,6 +306,7 @@
   <!-- COMPARISON -->
   <section class="compare">
     <div class="shell shell--narrow">
+      <span class="secno" data-reveal="fade">02</span>
       <p class="eyebrow" data-reveal="fade">See the difference</p>
       <h2 data-reveal>The SmokeHouse vs. the meat aisle.</h2>
       <div class="table-wrap" style="margin-top:2.5rem" data-reveal>
@@ -304,6 +328,7 @@
   <!-- REVIEWS — next to the ordering CTA, per the messaging guide -->
   <section style="padding-block:clamp(5rem,12vh,9rem)">
     <div class="shell">
+      <span class="secno" data-reveal="fade">03</span>
       <p class="eyebrow" data-reveal="fade">Don’t take our word for it</p>
       <div class="reviews">
         <blockquote class="review-placeholder" data-reveal><p>Review placeholder — a real Google review naming a specific product.</p><footer>Name, Town</footer></blockquote>
@@ -319,6 +344,7 @@
   <!-- AWARD WINNERS -->
   <section class="winners">
     <div class="shell">
+      <span class="secno" data-reveal="fade">04</span>
       <p class="eyebrow" data-reveal="fade">Award winners</p>
       <h2 data-reveal>Five things people drive here for.</h2>
       <div class="winners__row" style="margin-top:2.5rem">
@@ -328,7 +354,8 @@
         <article class="card" data-reveal><div class="photo photo--square"><span>Photo placeholder</span></div><h3>Thick-Cut Bacon</h3><p>Award-winning.</p></article>
         <article class="card" data-reveal><div class="photo photo--square"><span>Photo placeholder</span></div><h3>Regular Bacon</h3><p>Award-winning.</p></article>
       </div>
-      <p style="margin-top:1.5rem"><a class="link-cta" href="in-the-case.html">See what’s in the case this week <span aria-hidden="true">→</span></a></p>
+      <p class="annot" style="margin-top:1.6rem">Ask for these by name.</p>
+      <p style="margin-top:1rem"><a class="link-cta" href="in-the-case.html">See what’s in the case this week <span aria-hidden="true">→</span></a></p>
     </div>
   </section>
 
