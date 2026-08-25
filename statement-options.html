@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Statement Section | Four Options</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=20260825b">
+<style>
+.optbar {
+  position: sticky; top: 0; z-index: 60;
+  background: var(--ink); color: var(--paper);
+  padding: .75rem var(--gutter);
+  display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: center;
+  font-family: var(--font-ui); font-size: .7rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+}
+.optbar a { color: color-mix(in srgb, var(--paper) 72%, transparent); text-decoration: none; }
+.optbar a:hover { color: var(--paper); }
+.optlabel {
+  background: var(--oxblood); color: var(--paper);
+  font-family: var(--font-ui); font-size: .64rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  padding: .45rem .85rem; display: inline-block; margin-bottom: 1.5rem;
+}
+.optnote {
+  font-family: var(--font-ui); font-size: .78rem; color: var(--ink-3);
+  max-width: 60ch; margin: 0 0 2.5rem; line-height: 1.5;
+}
+.band-dark .optnote { color: color-mix(in srgb, var(--paper) 60%, transparent); }
+
+/* ============ OPTION 1: emphasis + breathing room ============ */
+.q1 { margin: 0; }
+.q1 .lo {
+  display: block;
+  font-family: var(--font-body); font-weight: 400; text-transform: none;
+  font-size: clamp(.98rem, 1.25vw, 1.18rem); line-height: 1.4;
+  color: var(--ink-3); letter-spacing: 0; margin-bottom: .25em;
+}
+.q1 .hi {
+  font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(1.75rem, 3.5vw, 3.05rem); line-height: .98;
+  color: var(--ink); display: block;
+}
+.q1 .red { color: var(--oxblood); }
+.o1grid { display: grid; gap: clamp(2rem,5vw,4rem); align-items: start; }
+@media (min-width: 900px) { .o1grid { grid-template-columns: 1.35fr .65fr; } }
+.o1aside {
+  font-size: .95rem; line-height: 1.6; color: var(--ink-3);
+  border-left: 2px solid var(--oxblood); padding-left: 1.2rem;
+}
+.o1aside .stamp { --stamp-size: 120px; margin-top: 1.5rem; opacity: .9; }
+
+/* ============ OPTION 2: dark full-bleed quote wall ============ */
+.o2 { background: var(--char); color: var(--paper); padding-block: clamp(5rem,13vh,9rem) !important; position: relative; overflow: hidden; }
+.o2::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(120% 80% at 78% 12%, rgba(247,242,232,.07), transparent 62%);
+}
+.o2 .q {
+  font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(2.1rem, 5.6vw, 5rem); line-height: .95;
+  color: var(--paper); max-width: 17ch; margin: 0; position: relative;
+}
+.o2 .q .red { color: var(--oxblood-soft); }
+.o2 .stamp { --stamp-size: clamp(140px, 18vw, 240px); position: absolute; right: 4%; bottom: 12%; opacity: .95; }
+.o2 .sub { color: color-mix(in srgb, var(--paper) 62%, var(--char)); max-width: 48ch; margin-top: 2rem; }
+
+/* ============ OPTION 3: paired with a photo ============ */
+.o3grid { display: grid; gap: clamp(2rem,5vw,3rem); align-items: center; }
+@media (min-width: 900px) { .o3grid { grid-template-columns: 1.05fr .95fr; } }
+.o3 .q {
+  font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(2rem, 4.6vw, 3.9rem); line-height: .95;
+  margin: 0; max-width: 15ch; position: relative; z-index: 2;
+}
+.o3 .q .red { color: var(--oxblood); }
+.o3 .shot {
+  position: relative; aspect-ratio: 3/4;
+  background: var(--paper-3);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink) 16%, transparent), 0 20px 50px rgba(23,19,16,.2);
+  display: grid; place-content: center; text-align: center; padding: 2rem;
+  font-family: var(--font-ui); font-size: .66rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3);
+}
+.o3 .shot::before {
+  content: ""; position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent 0 12px, color-mix(in srgb, var(--ink) 9%, transparent) 12px 13px);
+}
+@media (min-width: 900px) { .o3 .q { margin-right: -14%; } }
+
+/* ============ OPTION 4: line-by-line reveal ============ */
+.o4 .q { margin: 0; max-width: 20ch; }
+.o4 .ln {
+  display: block; overflow: hidden;
+}
+.o4 .ln i {
+  display: block; font-style: normal;
+  font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(1.9rem, 4.6vw, 3.8rem); line-height: 1.02;
+  transform: translateY(105%);
+  transition: transform .7s cubic-bezier(.16,1,.3,1);
+}
+.o4 .ln.in i { transform: none; }
+.o4 .red i { color: var(--oxblood); }
+.o4 .prog {
+  position: sticky; top: 45vh; height: 2px; background: var(--rule);
+  margin-bottom: 2rem;
+}
+.o4 .prog b { display: block; height: 100%; width: 0; background: var(--oxblood); }
+</style>
+</head>
+<body>
+<div class="optbar">
+  <span>Statement section, four options</span>
+  <a href="#o1">1 Emphasis</a>
+  <a href="#o2">2 Dark wall</a>
+  <a href="#o3">3 With photo</a>
+  <a href="#o4">4 Line reveal</a>
+  <a href="home-v2.html">Back to the page</a>
+</div>
+
+<main>
+
+<!-- 1 -->
+<section id="o1">
+  <div class="shell o1grid">
+    <div>
+      <span class="optlabel">Option 1, Emphasis and breathing room</span>
+      <blockquote class="q1">
+        <span class="lo">We know how frustrating it is</span>
+        <span class="hi">to not trust what meat is in your freezer</span>
+        <span class="lo">or your grocery cart. You deserve food that’s</span>
+        <span class="hi red">local and cut by a team who cares.</span>
+      </blockquote>
+    </div>
+    <div class="o1aside">
+      <p>The SmokeHouse has been earning this craft for decades. We source, process, and smoke meat the way it’s supposed to be done, not the way a plant does it.</p>
+      <img class="stamp" src="assets/img/stamp-dry-aged.webp" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section id="o2" class="o2">
+  <div class="shell">
+    <span class="optlabel">Option 2, Dark full-bleed quote wall</span>
+    <blockquote class="q">We know how frustrating it is to not trust what meat is in your freezer or your grocery cart. You deserve food that’s <span class="red">local and cut by a team who cares.</span></blockquote>
+    <p class="sub">The SmokeHouse has been earning this craft for decades. We source, process, and smoke meat the way it’s supposed to be done, not the way a plant does it.</p>
+    <img class="stamp" src="assets/img/stamp-dry-aged.webp" alt="">
+  </div>
+</section>
+
+<!-- 3 -->
+<section id="o3" class="o3">
+  <div class="shell">
+    <span class="optlabel">Option 3, Paired with a photograph</span>
+    <div class="o3grid">
+      <blockquote class="q">We know how frustrating it is to not trust what meat is in your freezer or your grocery cart. You deserve food that’s <span class="red">local and cut by a team who cares.</span></blockquote>
+      <div class="shot">Photo slot: hands working at the block, shot close and tall</div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section id="o4" class="o4">
+  <div class="shell">
+    <span class="optlabel">Option 4, Line by line on scroll</span>
+    <p class="optnote">Scroll slowly through this one. Each line rises into place as it enters the viewport.</p>
+    <div class="prog"><b id="prog"></b></div>
+    <blockquote class="q">
+      <span class="ln"><i>We know how frustrating</i></span>
+      <span class="ln"><i>it is to not trust what</i></span>
+      <span class="ln"><i>meat is in your freezer</i></span>
+      <span class="ln"><i>or your grocery cart.</i></span>
+      <span class="ln"><i>You deserve food that’s</i></span>
+      <span class="ln red"><i>local and cut by a team</i></span>
+      <span class="ln red"><i>who cares.</i></span>
+    </blockquote>
+    <div style="height:60vh"></div>
+  </div>
+</section>
+
+</main>
+
+<script src="assets/js/site.js?v=20260825b"></script>
+<script>
+(function(){
+  var lines = document.querySelectorAll('.o4 .ln');
+  var prog = document.getElementById('prog');
+  if (!('IntersectionObserver' in window)) { lines.forEach(l=>l.classList.add('in')); return; }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    var done = document.querySelectorAll('.o4 .ln.in').length;
+    if (prog) prog.style.width = (done / lines.length * 100) + '%';
+  }, { rootMargin: '0px 0px -30% 0px', threshold: .2 });
+  lines.forEach(function(l){ io.observe(l); });
+})();
+</script>
+</body>
+</html>
