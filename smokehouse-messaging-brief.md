@@ -21,14 +21,18 @@ Meat processing that's crafted locally, because your family deserves the real th
 
 Use in: website About section, social profile bios, email signature, business card.
 
-## 3. Tagline — **DO NOT USE**
+## 3. Tagline — **VERBATIM** (confirmed 2026-08-25)
 
-The guide drafts **"Local Cuts. No Shortcuts."** The client rejected it. It is not
-to appear anywhere on this site, in any form.
+> Crafted Meat, Trusted Processing
 
-The existing site uses **"We Put the Thrill Back Into the Grill!"** Whether to keep,
-retire, or replace it is an **open question** — see `docs/open-questions.md`.
-Until it's decided, the site ships with **no tagline**.
+Use exactly as written — capitalization and comma included.
+
+**Rejected / retired:** the guide's drafted **"Local Cuts. No Shortcuts."** was
+rejected by the client and must never appear. The old site's **"We Put the Thrill
+Back Into the Grill!"** is retired and superseded by the confirmed tagline above.
+
+**Note:** the logo lockup carries its own descriptor, **"CRAFTED MEAT & PROCESSING"** —
+that is part of the logo artwork, not the tagline. Don't substitute one for the other.
 
 ## 4. Calls to action — **VERBATIM**
 

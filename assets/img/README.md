@@ -1,5 +1,16 @@
 # Image assets
 
+## Logo (delivered 2026-08-25)
+
+`logo-onlight.png` (black) and `logo-ondark.png` (reversed/white) are the same
+lockup: flame mark + SMOKEHOUSE + "CRAFTED MEAT & PROCESSING" descriptor. Both
+ship; CSS swaps them by background — reversed on the hero/dark bands/footer,
+black on paper.
+
+**Still needed: vector originals (SVG/EPS/AI).** The supplied PNGs are 455×169,
+which is fine at header size but will soften if scaled large or used in print.
+
+
 **Empty on purpose.** Every image slot on the site currently renders a hatched
 placeholder block (`.photo` in `assets/css/site.css`) so nobody mistakes a stand-in
 for a finished asset.

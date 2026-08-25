@@ -14,12 +14,14 @@ each case.
    Implemented as CSS tokens in `assets/css/site.css` (`:root`). Type is
    Big Shoulders Display (condensed signage) + Archivo (body).
    **Still open:** whether the incoming logo agrees with this palette.
-2. **Logo.** Not yet received. A typographic wordmark stands in. When it arrives,
-   replace `.wordmark` in the header/footer.
-3. **Tagline.** "Local Cuts. No Shortcuts." was rejected by the client and is not
-   used anywhere. The current site's "We Put the Thrill Back Into the Grill!" is
-   neither carried over nor retired — the site simply ships without a tagline until
-   the client decides keep / retire / replace.
+2. **Logo — RECEIVED 2026-08-25.** Flame mark + "SMOKEHOUSE" condensed caps +
+   "CRAFTED MEAT & PROCESSING" descriptor. Two colorways supplied and both are in
+   use: `logo-ondark.png` (reversed/white) on dark grounds, `logo-onlight.png`
+   (black) on paper. **Still needed: vector originals (SVG/EPS/AI).** The supplied
+   PNGs are 455×169 — fine at header size, soft if ever scaled large or printed.
+3. **Tagline — RESOLVED 2026-08-25.** Confirmed: **"Crafted Meat, Trusted
+   Processing"** — now treated as verbatim text. "Local Cuts. No Shortcuts."
+   remains rejected; "We Put the Thrill Back Into the Grill!" is retired.
 4. **Product catalog scope.** Current site lists hundreds of SKUs across dozens of
    categories. New site currently shows a category-level overview + the four named
    award winners. Full list vs. category pages vs. highlights — undecided.
@@ -58,5 +60,6 @@ each case.
 ## Explicitly rejected / do-not-do
 
 - "Local Cuts. No Shortcuts." — anywhere, in any form.
-- Inventing brand colors or designing around a placeholder logo.
+- "We Put the Thrill Back Into the Grill!" — retired.
+- Substituting the logo's "Crafted Meat & Processing" descriptor for the tagline.
 - Copying the current site's layout, tone, or structure.
