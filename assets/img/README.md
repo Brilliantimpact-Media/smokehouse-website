@@ -56,18 +56,23 @@ Trimmed and downscaled to 509px (91KB); animates in with the stamp-hit "slam".
 Note the claim on it — *up to 30 days* — matches the differentiator copy. If the
 aging window ever changes, this artwork changes with it.
 
-## VS slider graphics (home-v2, awaiting client artwork)
+## VS slider (home-v2)
 
-The "SmokeHouse vs. the meat aisle" slider reserves two banner slots, both
-currently hatched placeholders. They must be the **same dimensions and framing**
-so the wipe lines up:
+The "SmokeHouse vs. the meat aisle" comparison is **one steak, drawn twice** as
+inline SVG — no photography needed and nothing to source. The same ribeye path
+renders in both layers; only the styling differs:
 
-| Side | Wants |
-|---|---|
-| Left | A grocery-store meat case — sterile, shrink-wrapped, fluorescent |
-| Right | The SmokeHouse counter — same camera distance, warm, real |
+- **Meat aisle:** pale grey-pink fill, faint marbling, and two plastic-wrap
+  sheen strokes (clipped to the body so they stay on the meat).
+- **The SmokeHouse:** deep oxblood, a proper cream fat cap, heavy marbling, no
+  plastic.
 
-Drop them in as `<img>` inside `.vs__media`, replacing the `.vs__slot` div.
+The wipe layer carries a paper-coloured background — without it the layer
+beneath ghosts through the transparent one. Paper on paper reads as no panel,
+which is the point: there is no box, just the cut.
+
+To swap in real photography later, replace the two `.steak` SVGs with `<img>`
+of the same aspect — both sides must match framing exactly or the wipe breaks.
 
 ## Slots the site is currently reserving
 

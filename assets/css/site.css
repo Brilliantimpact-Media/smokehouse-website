@@ -987,17 +987,12 @@ td { border-bottom: 1px solid var(--rule); }
 .cut-chart .cut polygon { fill: transparent !important; stroke: transparent !important; }
 
 /* ==========================================================================
-   VS SLIDER — drag to wipe between the grocery store and The SmokeHouse.
-   Both panels share an identical row grid, so each line's ✗ flips to ✓ as
-   the divider passes over it.
+   VS SLIDER — one steak, two provenances. No box: the cut itself is the
+   comparison, wiped by a draggable divider.
    ========================================================================== */
 .vs {
   position: relative;
-  border: 2px solid var(--ink);
-  overflow: hidden;
-  background: var(--paper-2);
-  user-select: none;
-  -webkit-user-select: none;
+  user-select: none; -webkit-user-select: none;
   touch-action: pan-y;
   cursor: ew-resize;
   --pos: 50%;
@@ -1006,47 +1001,66 @@ td { border-bottom: 1px solid var(--rule); }
 .vs__panel--shop {
   position: absolute; inset: 0;
   clip-path: inset(0 0 0 var(--pos));
-  background: var(--char);
 }
-html.js .vs__panel--shop { transition: none; }
 
-.vs__media {
-  position: relative;
-  height: clamp(150px, 22vw, 260px);
-  border-bottom: 2px solid var(--ink);
-  overflow: hidden;
-  background: var(--paper-3);
+/* --- the cut ------------------------------------------------------------- */
+.vs__meat { padding: clamp(.5rem, 2vw, 1.5rem) 0 clamp(1rem, 2.5vw, 2rem); }
+.steak { display: block; width: 100%; height: auto; max-height: 46vh; }
+.steak__body { stroke-width: 5; stroke-linejoin: round; }
+.steak__fat  { stroke-width: 3; }
+.steak__eye  { fill: none; stroke-width: 2.5; opacity: .45; }
+.steak__seam { fill: none; stroke-width: 2.5; opacity: .5; }
+.steak__marble path { fill: none; stroke-linecap: round; }
+.steak__wrap {
+  fill: none; stroke-width: 6; stroke-linecap: round;
+  clip-path: path("M78,206 C70,150 108,96 176,68 C244,40 332,32 414,44 C486,54 546,84 570,132 C594,180 580,240 536,286 C492,332 420,360 344,366 C266,372 190,356 140,320 C100,292 84,252 78,206 Z");   /* keep the plastic sheen on the meat */
 }
-.vs__panel--shop .vs__media { background: var(--char-2); border-bottom-color: var(--oxblood); }
-.vs__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.vs__media::before {
-  content: ""; position: absolute; inset: 0;
-  background: repeating-linear-gradient(45deg, transparent 0 11px,
-    color-mix(in srgb, var(--ink) 12%, transparent) 11px 12px);
-}
-.vs__panel--shop .vs__media::before {
-  background: repeating-linear-gradient(45deg, transparent 0 11px,
-    color-mix(in srgb, var(--paper) 8%, transparent) 11px 12px);
-}
-.vs__slot {
-  position: absolute; inset: 0; display: grid; place-content: center; text-align: center;
-  font-family: var(--font-ui); font-size: .64rem; font-weight: 700;
-  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3);
-  padding: 0 1rem;
-}
-.vs__panel--shop .vs__slot { color: color-mix(in srgb, var(--paper) 50%, transparent); }
 
-.vs__body { padding: clamp(1.4rem, 3vw, 2.2rem); }
-.vs__label {
-  font-family: var(--font-ui); font-size: .68rem; font-weight: 700;
-  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3);
-  margin: 0 0 .35rem;
+/* the meat aisle: pale, uniform, shrink-wrapped */
+.vs__panel--store .steak__body { fill: #c9a9a4; stroke: #8e7a76; }
+.vs__panel--store .steak__fat  { fill: #e6ded2; stroke: #8e7a76; }
+.vs__panel--store .steak__eye  { stroke: #b6968f; }
+.vs__panel--store .steak__seam { stroke: #b6968f; }
+.vs__panel--store .steak__marble path { stroke: #d5bdb6; stroke-width: 2.5; opacity: .45; }
+.vs__panel--store .steak__wrap { stroke: rgba(255,255,255,.55); }
+
+/* The SmokeHouse: deep, dry-aged, properly marbled — and no plastic */
+.vs__panel--shop .steak__body { fill: var(--oxblood); stroke: var(--oxblood-deep); }
+.vs__panel--shop .steak__fat  { fill: #efe6d4; stroke: var(--oxblood-deep); }
+.vs__panel--shop .steak__eye  { stroke: #a8434a; }
+.vs__panel--shop .steak__seam { stroke: #efe6d4; opacity: .75; stroke-width: 4; }
+.vs__panel--shop .steak__marble path { stroke: #f0e2d2; stroke-width: 5; opacity: .85; }
+.vs__panel--shop .steak__wrap { display: none; }
+
+/* --- the checklist: type on paper, no panel ------------------------------ */
+.vs__body { padding: 0; }
+/* the wiped layer needs to be opaque or the layer beneath ghosts through;
+   paper on paper reads as no panel at all */
+.vs__panel--shop { background: var(--paper); }
+.vs__rows { list-style: none; margin: 0; padding: 0; }
+.vs__rows li {
+  display: grid; grid-template-columns: 2rem 1fr 2rem; gap: .9rem; align-items: center;
+  padding-block: clamp(.5rem, 1.1vw, .7rem);
+  border-top: 1px solid var(--rule);
+  font-size: clamp(.9rem, 1.05vw, 1rem);
+  white-space: nowrap;
 }
-/* names sit outside the wipe so it can never bisect a word; each dims as the
-   divider moves away from its side */
+.vs__rows li:first-child { border-top: 0; }
+.vs__txt { overflow: hidden; text-overflow: ellipsis; }
+.vs__mark {
+  font-family: var(--font-ui); font-weight: 700; font-size: 1rem;
+  width: 2rem; height: 2rem; display: grid; place-items: center;
+  border: 2px solid currentColor;
+}
+.vs__panel--store .vs__rows li { color: var(--ink-3); }
+.vs__panel--store .vs__mark { color: var(--steel); }
+.vs__panel--shop .vs__rows li { color: var(--ink); font-weight: 500; }
+.vs__panel--shop .vs__mark { color: var(--paper); background: var(--oxblood); border-color: var(--oxblood); }
+
+/* --- names + divider ------------------------------------------------------ */
 .vs-head {
   display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: .6rem;
   --p: 50;
 }
 .vs-head span {
@@ -1055,44 +1069,19 @@ html.js .vs__panel--shop { transition: none; }
   text-transform: uppercase; color: var(--ink);
   transition: opacity .18s ease;
 }
-.vs-head__l { opacity: calc(.28 + .72 * (var(--p) / 100)); }
-.vs-head__r { opacity: calc(.28 + .72 * (1 - var(--p) / 100)); color: var(--oxblood); }
-.vs__body { padding-top: clamp(1.1rem, 2.2vw, 1.6rem); }
+.vs-head__l { opacity: calc(.3 + .7 * (var(--p) / 100)); }
+.vs-head__r { opacity: calc(.3 + .7 * (1 - var(--p) / 100)); color: var(--oxblood); }
 
-.vs__rows { list-style: none; margin: 0; padding: 0; }
-.vs__rows li {
-  display: grid; grid-template-columns: 2rem 1fr 2rem; gap: .9rem; align-items: center;
-  padding-block: clamp(.5rem, 1.1vw, .75rem);
-  border-top: 1px solid var(--rule);
-  font-size: clamp(.92rem, 1.05vw, 1.02rem);
-  white-space: nowrap;
-}
-.vs__rows li:first-child { border-top: 0; }
-.vs__panel--shop .vs__rows li { border-top-color: color-mix(in srgb, var(--paper) 16%, transparent); color: var(--paper); }
-.vs__mark {
-  font-family: var(--font-ui); font-weight: 700; font-size: 1.05rem;
-  width: 2rem; height: 2rem; display: grid; place-items: center;
-  border: 2px solid currentColor;
-}
-.vs__panel--store .vs__mark { color: var(--steel); }
-.vs__panel--store .vs__rows li { color: var(--ink-3); }
-.vs__panel--shop .vs__mark { color: var(--paper); background: var(--oxblood); border-color: var(--oxblood); }
-/* the row text is identical in both panels, so the wipe reads as one line
-   changing state rather than two lines colliding */
-.vs__txt { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.vs__slot--l { justify-items: start; text-align: left; padding-left: clamp(1.4rem,3vw,2.2rem); }
-.vs__slot--r { justify-items: end; text-align: right; padding-right: clamp(1.4rem,3vw,2.2rem); }
-
-/* --- divider + grip ------------------------------------------------------- */
 .vs__divider {
   position: absolute; top: 0; bottom: 0; left: var(--pos);
-  width: 3px; margin-left: -1.5px;
+  width: 2px; margin-left: -1px;
   background: var(--ink);
+  opacity: .3;
   pointer-events: none;
 }
 .vs__grip {
-  position: absolute; top: 50%; left: var(--pos);
-  width: 56px; height: 56px; margin: -28px 0 0 -28px;
+  position: absolute; top: 34%; left: var(--pos);
+  width: 54px; height: 54px; margin: -27px 0 0 -27px;
   border: 3px solid var(--ink);
   border-radius: 50%;
   background: var(--paper);
@@ -1104,17 +1093,35 @@ html.js .vs__panel--shop { transition: none; }
 .vs__grip:hover, .vs__grip:focus-visible { transform: scale(1.08); }
 .vs__grip::before {
   content: "◀ ▶";
-  font-family: var(--font-ui); font-size: .6rem; font-weight: 700;
-  letter-spacing: .04em; color: var(--ink);
+  font-family: var(--font-ui); font-size: .58rem; font-weight: 700; color: var(--ink);
 }
 .vs__hint {
   font-family: var(--font-ui); font-size: .66rem; font-weight: 700;
   letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3);
-  margin-top: .9rem; text-align: center;
+  margin-top: 1.1rem; text-align: center;
 }
 @media (max-width: 620px) {
   .vs__rows li { grid-template-columns: 1.7rem 1fr 1.7rem; gap: .6rem; font-size: .8rem; }
-  .vs__mark { width: 1.7rem; height: 1.7rem; font-size: .9rem; }
+  .vs__mark { width: 1.7rem; height: 1.7rem; font-size: .88rem; }
 }
-/* no JS: show both halves side by side, no interaction needed */
 html:not(.js) .vs__panel--shop { clip-path: inset(0 0 0 50%); }
+
+/* --- Cut chart: anatomical highlight pieces (supplied artwork) ------------ */
+.cut-chart .cut-hi {
+  /* full-canvas overlays generated from the chart itself — inset:0 guarantees
+     pixel-exact registration at every size, with no placement math */
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: multiply;   /* keeps the chart's own labels & lines readable */
+  transition: opacity .28s ease, transform .28s cubic-bezier(.16,1,.3,1);
+  will-change: opacity, transform;
+}
+.cut-chart .cut-hi.on { opacity: .82; }
+@media (prefers-reduced-motion: reduce) {
+  .cut-chart .cut-hi { transition: opacity .01ms; }
+}
+/* hit regions stay invisible now — the artwork does the highlighting */
+.cut-chart .cut polygon { fill: transparent !important; stroke: transparent !important; }
+
