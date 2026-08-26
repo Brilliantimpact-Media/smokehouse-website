@@ -122,3 +122,21 @@ each case.
     different build.
     Stars removed from the popup headings too, 2026-08-26; group headings are
     now a plain rule either side of the name. No stars anywhere on the site.
+
+22. **Award labelling audited 2026-08-26.** Their product list labels exactly five
+    items "Award Winning!": Thick bacon, Regular bacon and Cheddar Garden Brat
+    under Pork, and Butches Franks and Hungarian Style Kielbasa under Sausage.
+    Beef, Venison, Lamb, Misc., Poultry and Woodville Deli carry none. Our popups
+    mirror that exactly, which is why some categories show labels and some do not.
+    Our wording is now theirs verbatim, "Award Winning!", on both the popup chips
+    and the best-seller cards. Ham keeps "Grand Champion." per client direction.
+    **FOR JOHN:** their product list does not label ham as award winning at all,
+    even though ham is the most-decorated product on their own awards page. It
+    does label Hungarian Style Kielbasa, which has no matching award record.
+    Those two contradictions are still unresolved.
+23. **Dry-aging bar** confirmed as `.seq__bar`, the scroll progress line. Now a
+    grass verge with a cow walking it as the four panels advance. The counter is
+    back on the right, top-aligned with the heading via a two-column grid.
+    A blanket `.seq__sticky > *` rule had overridden `position: absolute` on the
+    counter, label and bar, which is what moved the number left and dropped the
+    bar on top of the copy.
