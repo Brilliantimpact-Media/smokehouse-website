@@ -203,3 +203,19 @@ steaks where only the colour and surface differ. Raised with Alexia 2026-08-26.
 | `in-the-case.html` | products ×6 | The four award winners + deli + weekly special |
 | `wholesale.html` | 1 wide | Volume/bulk product or a delivery moment |
 | `about.html` | 2 | The crew · the Durand building on the Chippewa |
+
+## assets/img/cat/ (preview only, client-owned)
+
+beef.png, pork.png, sausage.png, venison.png, lamb.png, goat.png are the category
+glyphs pulled from thedurandsmokehouse.com/wp-content/uploads/2019/09/. They are
+the client's own artwork, used only in products-preview.html to show what "their
+line marks, recoloured" would look like. If that direction is chosen they should be
+redrawn as clean vectors rather than shipped as 800px PNG masks, and Poultry,
+Misc. and Deli have no glyph on their site so those three need drawing from scratch.
+
+## assets/data/catalog.json
+
+409 products across 8 categories, parsed from the client's homepage on 2026-08-26,
+keeping their own category and subhead hierarchy. Award and "Woodville Location
+Only" flags are still embedded in the item strings and get parsed out at render
+time. No prices exist anywhere on their site.

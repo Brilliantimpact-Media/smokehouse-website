@@ -1,0 +1,729 @@
+[
+ {
+  "name": "Beef",
+  "groups": [
+   {
+    "name": "Ground Beef",
+    "items": [
+     "Ground Beef 1 & 1 \u00bd lb tubes",
+     "Ground Beef Bunles"
+    ]
+   },
+   {
+    "name": "Beef Steaks",
+    "items": [
+     "Boneless Ribeye",
+     "New York Strip",
+     "T-Bone",
+     "Porterhouse",
+     "Sirloin Ball Tip",
+     "Filet Mignon",
+     "Burgundy Pepper Sirloin",
+     "Top Sirloin",
+     "Dry Aged Steaks",
+     "Chuck Eye Steaks (Woodville Location Only)"
+    ]
+   },
+   {
+    "name": "Assorted Beef",
+    "items": [
+     "Stew Meat",
+     "Ox Tail",
+     "Soup Bones",
+     "Liver",
+     "Heart",
+     "Beef Bacon",
+     "Tongue"
+    ]
+   },
+   {
+    "name": "Beef Patties",
+    "items": [
+     "1/4# Plain Patties",
+     "1/3# Plain Patties",
+     "1/2# Plain Patties",
+     "Bacon Cheese Patties",
+     "Jalapeno Cheddar Patties",
+     "Italian Style Pizza Patties",
+     "Mushroom and Swiss Patties",
+     "Black-N-Blue Patties (Woodville Location Only)",
+     "Chopped Sirloin Burgundy Pepper Patties (Woodville Location Only)",
+     "Butter Burger Patties"
+    ]
+   },
+   {
+    "name": "Beef Roasts",
+    "items": [
+     "Chuck",
+     "Arm",
+     "Sirloin Tip"
+    ]
+   },
+   {
+    "name": "Grilling Cuts",
+    "items": [
+     "Beef Tri-Tip",
+     "Pichana Roast (Woodville Location Only)",
+     "Prime Rib Roast (Seasoned or Unseasoned)",
+     "Beef Brisket Flats"
+    ]
+   }
+  ],
+  "count": 36
+ },
+ {
+  "name": "Pork",
+  "groups": [
+   {
+    "name": "Bacon",
+    "items": [
+     "Thick-Award Winning!",
+     "Regular-Award Winning!",
+     "Garlic",
+     "Cinnamon",
+     "Pepper",
+     "Natural Cure",
+     "Cottage",
+     "Canadian"
+    ]
+   },
+   {
+    "name": "Ham",
+    "items": [
+     "Smoked Boneless Ham",
+     "1/2 Smoked Boneless Ham",
+     "Smoked Bone-in Ham",
+     "1/2 Smoked Bone-in Ham",
+     "Ham Steak",
+     "Ground Ham (Woodville Location Only)"
+    ]
+   },
+   {
+    "name": "Pork Chops",
+    "items": [
+     "Smoked Pork Chops",
+     "Boneless Smoked Pork Chops",
+     "Boneless Pork Chops",
+     "Bone in Pork Chops",
+     "Pork Shoulder Steaks"
+    ]
+   },
+   {
+    "name": "Misc Pork",
+    "items": [
+     "Pork Hocks",
+     "Smoked Pork Hocks",
+     "Pork Belly Chunks",
+     "Seasoned Pork Belly",
+     "Pork Belly",
+     "Side Pork"
+    ]
+   },
+   {
+    "name": "Assorted Pork Sausage",
+    "items": [
+     "Ground Pork",
+     "Seasoned Pork",
+     "Italian",
+     "Hot Italian (Woodville Location Only)",
+     "Seasoned Pork Patty",
+     "Pork Cutlets",
+     "Side Pork",
+     "Pork Steak",
+     "Shoulder Roast",
+     "Porketta Roasts (Woodville Location Only)"
+    ]
+   },
+   {
+    "name": "Assorted Pork",
+    "items": [
+     "Pork Bundles",
+     "Brat Patties",
+     "Norwegian Meatballs (Woodville location only)",
+     "Smokehouse Meatballs (Woodville location only)",
+     "Breakfast Patties (Woodville location only)",
+     "Potato Sausage"
+    ]
+   },
+   {
+    "name": "Sausage Links",
+    "items": [
+     "Seasoned",
+     "Maple Bacon",
+     "Smoked Sausage"
+    ]
+   },
+   {
+    "name": "Brats",
+    "items": [
+     "Pork Chorizo Sausage",
+     "Cheddar Garden Brat-Award Winning!",
+     "Alfredo Brat",
+     "Hawaiian",
+     "Apple Brat",
+     "German Brat",
+     "Smokehouse Brat",
+     "Philly Steak Brat",
+     "Badger Brat",
+     "Taco Brat",
+     "Mushroom Brat",
+     "Bacon Cheeseburger Brat",
+     "Wild Rice Brat",
+     "Mac & Cheese Brat",
+     "Pre Cooked Brat",
+     "Cowboy Butter Brat",
+     "Street Corn",
+     "Sauerkraut Brat",
+     "Wisconsin Brat",
+     "Honey Mustard Brat",
+     "Garlic Brat",
+     "Cheddar Brat",
+     "3 Pepper & Cheese Brat",
+     "Bratwurst",
+     "Cranberry Wild Rice",
+     "Habanero Mango Brat",
+     "Dill Pickle Brat (Durand Location Only)",
+     "Wood-Fired Pizza Brat",
+     "Durand Beer Brat",
+     "Chili Cheese Brat",
+     "Jalapeno Cheese Brat",
+     "Sriracha & Onion Brat",
+     "Smoked Brat",
+     "River Street Brat ( Woodville Location Only)",
+     "Bacon Pepperjack Cheese (Woodville Location Only)",
+     "Horse and Barrel Brat (Woodville Location Only)",
+     "Bean and Baco Brat (Woodville Location Only)",
+     "Jalapeno Mac and Cheese Brat (Woodville Location Only)",
+     "Honey BBQ Brat (Woodville Location Only)"
+    ]
+   },
+   {
+    "name": "Grilling Cuts",
+    "items": [
+     "Pork Tenderloin",
+     "Pork Back Ribs",
+     "Pork Butt",
+     "St. Louis Ribs"
+    ]
+   }
+  ],
+  "count": 87
+ },
+ {
+  "name": "Sausage",
+  "groups": [
+   {
+    "name": "Snack Sticks",
+    "items": [
+     "Regular Beef",
+     "Beef & Cheese",
+     "Pepperoni",
+     "Habanero",
+     "Honey BBQ",
+     "Honey BBQ Cheese",
+     "Jalapeno Cheese",
+     "Garlic",
+     "Teriyaki",
+     "Dill Pickle",
+     "Pizza",
+     "Hunter",
+     "Dried Beef Jerky Stick",
+     "Honey Ham and Swiss",
+     "Chicken Honey BBQ"
+    ]
+   },
+   {
+    "name": "Jerky",
+    "items": [
+     "HBBQ Jerky Strips",
+     "Cowboy Chips"
+    ]
+   },
+   {
+    "name": "Lunch Meats",
+    "items": [
+     "Sliced Bologna",
+     "Sliced Summer Sausage",
+     "Smoked Beef",
+     "Jellied Beef",
+     "Ham",
+     "Braunschweiger",
+     "Slice Bologna with Cheese",
+     "Sliced Summer Sausage with Cheese",
+     "Sliced Roast Beef",
+     "Smoked Capicola"
+    ]
+   },
+   {
+    "name": "Franks/Wieners",
+    "items": [
+     "Butches Franks - Award Winning!",
+     "Uncured Butches Franks",
+     "All Beef",
+     "Smokehouse Hotdogs",
+     "Smoked Cheddarwurst",
+     "Smoked Andouille",
+     "Smoked Polish",
+     "Smoked Polish",
+     "Smoked Sausage",
+     "Hungarian Style Kielbasa - Award Winning!",
+     "Smokehouse Skinless Hotdogs"
+    ]
+   },
+   {
+    "name": "Summer Sausage",
+    "items": [
+     "Cheddar Cranberry",
+     "Beef Summer Sausage",
+     "German Summer Sausage",
+     "Garlic Summer Sausage",
+     "Bison Summer Sausage"
+    ]
+   },
+   {
+    "name": "Bologna",
+    "items": [
+     "Regular Bologna",
+     "Smokehouse Bologna",
+     "German"
+    ]
+   },
+   {
+    "name": "Heat & Eat",
+    "items": [
+     "Sloppy Joe Mix (Durand Location only)",
+     "Smoked Beef Brisket",
+     "Butter Flavored Beef",
+     "Butter Flavored Pork",
+     "Smoked Pulled Pork",
+     "Butter Flavored Chicken",
+     "Butter Flavored Turkey",
+     "Pork Carnitas"
+    ]
+   }
+  ],
+  "count": 54
+ },
+ {
+  "name": "Venison",
+  "groups": [
+   {
+    "name": "Fresh Products",
+    "items": [
+     "Brats (see flavors available in pork product list)",
+     "Breakfast Sausage",
+     "Italian Sausage",
+     "Breakfast Links",
+     "Italian Links",
+     "Flavored Brats",
+     "Potato Sausage"
+    ]
+   },
+   {
+    "name": "Snack Sticks",
+    "items": [
+     "Regular Venison",
+     "Beef & Cheese",
+     "Habanero",
+     "Honey BBQ",
+     "Honey BBQ Cheese",
+     "Jalapeno",
+     "Jalapeno Cheese",
+     "Garlic",
+     "Teriyaki",
+     "Dill Pickle",
+     "Pizza",
+     "Jerky Stick"
+    ]
+   },
+   {
+    "name": "Whole Leg Venison",
+    "items": [
+     "Whole Leg (cured & smoke)",
+     "Dried Venison",
+     "Jerky Sticks"
+    ]
+   },
+   {
+    "name": "Smoke Products",
+    "items": [
+     "Summer Sausage (Plain or Garlic or Cheddar Berry)",
+     "Jalapeno and Chesse",
+     "Snack Sticks",
+     "Smokehouse Franks",
+     "Butches Franks",
+     "Smokehouse Bologna",
+     "German Ring Bologna",
+     "Smoke Polish (Reg., or Kielbasa)",
+     "Smoke Brats",
+     "Smoked Cheddarwurst",
+     "Venison Bacon"
+    ]
+   }
+  ],
+  "count": 33
+ },
+ {
+  "name": "Lamb",
+  "groups": [
+   {
+    "name": "Lamb",
+    "items": [
+     "Lamb Roast",
+     "Lamb Neck Slices",
+     "Lamb Shank",
+     "Ground Lamb",
+     "Lamb Chops",
+     "Lamb Stew Meat",
+     "Gyro Meat"
+    ]
+   },
+   {
+    "name": "Goat (Seasonal)",
+    "items": [
+     "Loin Chops",
+     "Sirloin Chops",
+     "Shanks",
+     "Leg of Goat",
+     "Blade Roast",
+     "Spare Ribs",
+     "Stew Meat",
+     "Liver",
+     "Heart"
+    ]
+   },
+   {
+    "name": "Bison",
+    "items": [
+     "Ground Bison",
+     "Bison Snack Sticks",
+     "Bison Summer Sausage"
+    ]
+   },
+   {
+    "name": "Painted Outlaw Beef",
+    "items": [
+     "Ground Beef",
+     "Chuck Roast",
+     "Sirloin Tip Roast",
+     "Rump Roast",
+     "Arm Roast",
+     "Prime Rib Roast",
+     "Rib Steak",
+     "Soup Bones",
+     "Porterhouse",
+     "T-Bone"
+    ]
+   },
+   {
+    "name": "Grass Fed Beef",
+    "items": [
+     "Ground Beef",
+     "Chuck Roast",
+     "Sirloin Tip Roast",
+     "Rump Roast",
+     "Arm Roast",
+     "Prime Rib Roast",
+     "Rib Steak",
+     "Soup Bones",
+     "Porterhouse",
+     "T-Bone"
+    ]
+   }
+  ],
+  "count": 39
+ },
+ {
+  "name": "Misc.",
+  "groups": [
+   {
+    "name": "Grilling & Smoking",
+    "items": [
+     "Grillers Gold Pellets",
+     "Stoaked Pellets (Woodville Location only)"
+    ]
+   },
+   {
+    "name": "Snack Sticks",
+    "items": [
+     "Regular Beef",
+     "Beef & Cheese",
+     "Pepperoni",
+     "Habanero",
+     "Honey BBQ",
+     "Honey BBQ Cheese",
+     "Jalapeno Cheese",
+     "Garlic",
+     "Teriyaki",
+     "Dill Pickle",
+     "Pizza",
+     "Hunter",
+     "Jerky Stick"
+    ]
+   },
+   {
+    "name": "Jerky",
+    "items": [
+     "HBBQ Jerky Strips",
+     "Cowboy Chips"
+    ]
+   },
+   {
+    "name": "Heat & Eat",
+    "items": [
+     "Sloppy Joe Mix",
+     "Butter Flavored Pork",
+     "Butter Flavored Chicken",
+     "Butter Flavored Turkey",
+     "Smoked Pulled Pork",
+     "Butter Flavored Beef",
+     "Smoked Beef Brisket"
+    ]
+   },
+   {
+    "name": "Lunch Meats",
+    "items": [
+     "Ham",
+     "Smoked Beef",
+     "Jellied Beef",
+     "Braunschweiger",
+     "Sliced Bologna",
+     "Beef Summer"
+    ]
+   },
+   {
+    "name": "Dog Items",
+    "items": [
+     "Dog Bones",
+     "Smoked Rib Bones",
+     "Smoked Dog Knukles",
+     "Suet",
+     "Rolled Dog Food",
+     "Dog Pucks",
+     "Smoked Pig Ears"
+    ]
+   },
+   {
+    "name": "Grocery Items",
+    "items": [
+     "Breads and Buns (Woodville Location Only)",
+     "Milk (Woodville Location Only)",
+     "Egg (Woodville Location Only)",
+     "Produce(Woodville Location Only)",
+     "Specialty Seasonings",
+     "Salsa",
+     "Sauces",
+     "Popcorn",
+     "Jams and Jelly",
+     "Maple Syrup",
+     "Honey",
+     "Coffee",
+     "Nuts and Candy",
+     "Old Fashion Soda (Woodville Location Only)"
+    ]
+   },
+   {
+    "name": "Sea Food",
+    "items": [
+     "Cod",
+     "Salmon",
+     "Awesome Shrimp",
+     "Fire Roasted Applewood Salmon (Woodville Only)",
+     "Beer Battered Shrimp (Woodville Only)",
+     "Coconut Shrimp (Woodville Only)",
+     "Walleye (Woodville Only)"
+    ]
+   }
+  ],
+  "count": 58
+ },
+ {
+  "name": "Poultry",
+  "groups": [
+   {
+    "name": "Boneless/Skinless Marinated Chicken Breasts",
+    "items": [
+     "Garlic Pepper",
+     "Tomato Basil (Woodville Location Only)",
+     "Mandarin Teriyaki",
+     "Raspberry Chipotle (Woodville Location Only)",
+     "Pepper Ranch",
+     "Buffalo (Woodville Location Only)",
+     "Burgundy Pepper",
+     "Italian Parmesan",
+     "Habanero Parmesan",
+     "General TSO",
+     "Honey Barbecue (Woodville Location Only)",
+     "Boneless Skinless Chicken Breast (Unmarinated)",
+     "Fajita Marinated"
+    ]
+   },
+   {
+    "name": "Poultry Bone-In",
+    "items": [
+     "Whole Chicken",
+     "Half Chicken",
+     "Quartered Chicken",
+     "8 Piece Chicken",
+     "Leg Quarters",
+     "Drummies"
+    ]
+   },
+   {
+    "name": "Poultry Patties",
+    "items": [
+     "Chicken Patties"
+    ]
+   },
+   {
+    "name": "Ground Poultry",
+    "items": [
+     "Ground Chicken 1# tubes",
+     "Ground Turkey 1# tubes (Durand Location Only)"
+    ]
+   },
+   {
+    "name": "Bacon Wrapped Stuffed Chicken Breast",
+    "items": [
+     "Mushroom and Swiss",
+     "Wisconsin 3 Cheese",
+     "Jalapeno",
+     "Asparagus",
+     "Broccoli",
+     "Colorado",
+     "Cordon Bleu",
+     "Hawaiian",
+     "Available flavors are based on product rotation"
+    ]
+   },
+   {
+    "name": "Grab and Go Meals",
+    "items": [
+     "Italian Chicken Parmesan",
+     "Chicken Bacon Alfredo",
+     "Chicken Pot Pie",
+     "Chicken Enchilada",
+     "Beef Enchilada",
+     "Chicken Tator Tot",
+     "Beef Stroganoff",
+     "Queso Mac & Cheese",
+     "Brisket Mac & Cheese",
+     "Smoked Pulled Pork Mac & Cheese",
+     "Premium White Mac & Cheese",
+     "Cheesy Potatoes",
+     "Meat Loaf",
+     "Lasagna- Seasonal",
+     "Spaghetti & Meatballs"
+    ]
+   },
+   {
+    "name": "Smoke Poultry",
+    "items": [
+     "Smoked Chicken - Whole",
+     "Smoked Turkey Drumstick"
+    ]
+   }
+  ],
+  "count": 48
+ },
+ {
+  "name": "Woodville Deli",
+  "groups": [
+   {
+    "name": "Meats",
+    "items": [
+     "Krestschmar Roast Beef",
+     "Krestschmar Black Forrest Ham",
+     "Sun Dried Tomato Turkey",
+     "Hickory Honey Turkey",
+     "Krestschmar Honey Cured Ham",
+     "Turkey",
+     "Pepperoni",
+     "Salami",
+     "Krestschmar Herb Chicken"
+    ]
+   },
+   {
+    "name": "Cheese",
+    "items": [
+     "Cady Creek Colby Cheese",
+     "Cady Creek Mild Cheddar Cheese",
+     "Cady Creek Pepper Jack Cheese",
+     "Cady Creek Gold N Jack Cheese",
+     "Smoked Gouda"
+    ]
+   },
+   {
+    "name": "Sub Sandwiches",
+    "items": [
+     "Roast Beef",
+     "Turkey",
+     "Honey Ham",
+     "Italian",
+     "Philly",
+     "Club",
+     "Herb chicken",
+     "Black Forrest Ham"
+    ]
+   },
+   {
+    "name": "Salads",
+    "items": [
+     "Chef",
+     "Chicken Bacon",
+     "Caesar",
+     "Antipasto",
+     "Beef Feta"
+    ]
+   },
+   {
+    "name": "Soup",
+    "items": [
+     "Variety Offered (Soup of the Day)",
+     "Seasonal"
+    ]
+   },
+   {
+    "name": "Hot Plate Items",
+    "items": [
+     "Butches Franks",
+     "Smokehouse Wieners",
+     "Polish Sausages",
+     "Cheddarwurst",
+     "Bratwursts",
+     "Butter Flavored Hot Sandwiches:Pork Chicken TurkeyBeef",
+     "Smoked Pulled Pork Sandwich",
+     "Chicken Sandwiches",
+     "Burgers",
+     "Rotation of Entrees"
+    ]
+   },
+   {
+    "name": "Pasta Salad",
+    "items": [
+     "Variety and Seasonal Cold Salads Offered"
+    ]
+   },
+   {
+    "name": "Pizza",
+    "items": [
+     "Cheese",
+     "Pepperoni",
+     "Pepperoni w/ Pepper Jack Cheese",
+     "Sausage",
+     "Meat Lovers",
+     "BBQ Smoked Pulled Pork",
+     "Pepperoni/Sausage",
+     "Philly",
+     "Pepperoni/Sausage",
+     "Supreme",
+     "Chicken Alfredo",
+     "Jalapeno Popper",
+     "Hawaiian",
+     "Sausage & Pepperoni Cauliflower Crusted"
+    ]
+   }
+  ],
+  "count": 54
+ }
+]
