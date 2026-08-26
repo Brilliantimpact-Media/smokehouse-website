@@ -337,6 +337,64 @@
     smokeVideo.pause();
   }
 
+
+  // --- Review carousel -----------------------------------------------------
+  // Two labels per view above 860px, one below. Native scroll-snap does the
+  // swiping; the buttons and dots drive the same scroll position.
+  (function () {
+    var track = document.getElementById("rcarTrack");
+    var dots  = document.getElementById("rcarDots");
+    if (!track || !dots) return;
+    var btns = [].slice.call(document.querySelectorAll(".rcar__btn"));
+
+    var pages   = function () { return Math.max(1, Math.round(track.scrollWidth / track.clientWidth)); };
+    var current = function () { return Math.round(track.scrollLeft / track.clientWidth); };
+
+    var sync = function () {
+      var i = current(), n = pages();
+      [].forEach.call(dots.children, function (d, k) {
+        d.setAttribute("aria-current", String(k === i));
+      });
+      btns.forEach(function (b) {
+        var dir = parseInt(b.getAttribute("data-dir"), 10);
+        b.disabled = (dir < 0 && i <= 0) || (dir > 0 && i >= n - 1);
+      });
+    };
+    var buildDots = function () {
+      var n = pages();
+      dots.innerHTML = "";
+      for (var i = 0; i < n; i++) {
+        var d = document.createElement("button");
+        d.type = "button";
+        d.className = "rcar__dot";
+        d.setAttribute("aria-label", "Reviews, page " + (i + 1) + " of " + n);
+        (function (idx) {
+          d.addEventListener("click", function () {
+            track.scrollTo({ left: idx * track.clientWidth });
+          });
+        })(i);
+        dots.appendChild(d);
+      }
+      sync();
+    };
+
+    btns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        track.scrollBy({ left: parseInt(b.getAttribute("data-dir"), 10) * track.clientWidth });
+      });
+    });
+    track.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight") { e.preventDefault(); track.scrollBy({ left:  track.clientWidth }); }
+      if (e.key === "ArrowLeft")  { e.preventDefault(); track.scrollBy({ left: -track.clientWidth }); }
+    });
+    var t;
+    track.addEventListener("scroll", function () {
+      clearTimeout(t); t = setTimeout(sync, 90);
+    }, { passive: true });
+    window.addEventListener("resize", buildDots);
+    buildDots();
+  })();
+
   // --- Cut chart (custom-processing) ---------------------------------------
   var chart = document.querySelector(".cut-chart");
   if (chart) {
