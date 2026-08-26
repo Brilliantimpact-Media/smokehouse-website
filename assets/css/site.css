@@ -1467,8 +1467,8 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
   border-left: 1.5px solid color-mix(in srgb, var(--ink) 30%, transparent);
   padding-left: clamp(.6rem, 1.4vw, 1rem);
   background: var(--ink);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 135 100'%3E%3Cg fill='none' stroke='%23000' stroke-width='3.2' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M18 40 L18 84 M40 40 L40 84 M18 40 Q29 24 40 40 M18 84 H40'/%3E%3Cpath d='M18 40 Q29 30 40 40'/%3E%3Cpath d='M52 84 V52 L78 34 L104 52 V84 Z'/%3E%3Cpath d='M52 60 H104'/%3E%3Cpath d='M70 84 V66 H86 V84'/%3E%3Cpath d='M78 34 L78 44'/%3E%3Cpath d='M112 84 V62 M104 66 Q112 52 120 66 M112 62 Q104 56 106 48 M112 58 Q120 54 119 46'/%3E%3Cpath d='M6 86 H130'/%3E%3Cpath d='M6 92 H36 M46 92 H90 M100 92 H130'/%3E%3C/g%3E%3C/svg%3E") no-repeat center/contain;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 135 100'%3E%3Cg fill='none' stroke='%23000' stroke-width='3.2' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M18 40 L18 84 M40 40 L40 84 M18 40 Q29 24 40 40 M18 84 H40'/%3E%3Cpath d='M18 40 Q29 30 40 40'/%3E%3Cpath d='M52 84 V52 L78 34 L104 52 V84 Z'/%3E%3Cpath d='M52 60 H104'/%3E%3Cpath d='M70 84 V66 H86 V84'/%3E%3Cpath d='M78 34 L78 44'/%3E%3Cpath d='M112 84 V62 M104 66 Q112 52 120 66 M112 62 Q104 56 106 48 M112 58 Q120 54 119 46'/%3E%3Cpath d='M6 86 H130'/%3E%3Cpath d='M6 92 H36 M46 92 H90 M100 92 H130'/%3E%3C/g%3E%3C/svg%3E") no-repeat center/contain;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 135 100'%3E%3Cg fill='none' stroke='%23000' stroke-width='3.2' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M18 40 L18 84 M40 40 L40 84 M18 40 Q29 24 40 40 M18 84 H40'/%3E%3Cpath d='M18 40 Q29 30 40 40'/%3E%3Cpath d='M52 84 V52 L78 34 L104 52 V84 Z'/%3E%3Cpath d='M52 60 H104'/%3E%3Cpath d='M70 84 V66 H86 V84'/%3E%3Cpath d='M78 34 L78 44'/%3E%3Cpath d='M6 86 H130'/%3E%3Cpath d='M6 92 H36 M46 92 H90 M100 92 H130'/%3E%3C/g%3E%3C/svg%3E") no-repeat center/contain;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 135 100'%3E%3Cg fill='none' stroke='%23000' stroke-width='3.2' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M18 40 L18 84 M40 40 L40 84 M18 40 Q29 24 40 40 M18 84 H40'/%3E%3Cpath d='M18 40 Q29 30 40 40'/%3E%3Cpath d='M52 84 V52 L78 34 L104 52 V84 Z'/%3E%3Cpath d='M52 60 H104'/%3E%3Cpath d='M70 84 V66 H86 V84'/%3E%3Cpath d='M78 34 L78 44'/%3E%3Cpath d='M6 86 H130'/%3E%3Cpath d='M6 92 H36 M46 92 H90 M100 92 H130'/%3E%3C/g%3E%3C/svg%3E") no-repeat center/contain;
 }
 
 /* --- dotted rule ---------------------------------------------------------- */
@@ -1515,13 +1515,11 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
 .rlabel__field--date { padding-left: clamp(.9rem,2vw,1.4rem); border-left: 1.5px dotted color-mix(in srgb, var(--ink) 45%, transparent); }
 .rlabel__field--date b { font-family: var(--font-hand); font-size: 1.35rem; color: var(--oxblood); }
 .rlabel__stamp {
-  width: clamp(52px, 6.4vw, 74px); aspect-ratio: 1;
+  /* the same stamp used in the Why we're here section, so the site has one */
+  width: clamp(56px, 7vw, 82px); aspect-ratio: 1;
   justify-self: end; align-self: center;
   transform: rotate(-9deg); opacity: .85; pointer-events: none;
-  background: var(--oxblood);
-  -webkit-mask: var(--stamp-src) no-repeat center/contain;
-          mask: var(--stamp-src) no-repeat center/contain;
-  --stamp-src: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3Cpath id='t' d='M60 60 m-45 0 a45 45 0 1 1 90 0'/%3E%3Cpath id='b' d='M60 60 m-44 0 a44 44 0 1 0 88 0'/%3E%3C/defs%3E%3Cg fill='none' stroke='%23000'%3E%3Ccircle cx='60' cy='60' r='56' stroke-width='3'/%3E%3Ccircle cx='60' cy='60' r='30' stroke-width='2.5'/%3E%3C/g%3E%3Ctext font-family='Arial Black,Arial,sans-serif' font-size='13' font-weight='700' letter-spacing='1.6'%3E%3CtextPath href='%23t' startOffset='50%25' text-anchor='middle'%3ETHE SMOKEHOUSE%3C/textPath%3E%3C/text%3E%3Ctext font-family='Arial Black,Arial,sans-serif' font-size='11.5' font-weight='700' letter-spacing='2'%3E%3CtextPath href='%23b' startOffset='50%25' text-anchor='middle'%3EWISCONSIN%3C/textPath%3E%3C/text%3E%3Ctext x='60' y='55' text-anchor='middle' font-family='Arial Black,Arial,sans-serif' font-size='11' font-weight='700' letter-spacing='.5'%3EEST.%3C/text%3E%3Ctext x='60' y='69' text-anchor='middle' font-family='Arial Black,Arial,sans-serif' font-size='12' font-weight='700' letter-spacing='.5'%3E2011%3C/text%3E%3Crect x='48' y='74' width='19' height='4' rx='1.4'/%3E%3Crect x='66' y='75' width='9' height='2' rx='1'/%3E%3Cpath d='M14 57l3.2 6.6 7.3 1-5.3 5.1 1.3 7.2-6.5-3.4-6.5 3.4 1.3-7.2-5.3-5.1 7.3-1z' transform='translate(4,-6) scale(.62)'/%3E%3Cpath d='M14 57l3.2 6.6 7.3 1-5.3 5.1 1.3 7.2-6.5-3.4-6.5 3.4 1.3-7.2-5.3-5.1 7.3-1z' transform='translate(158,-6) scale(.62)'/%3E%3C/svg%3E");
+  background: url("../img/stamp-dry-aged.webp") no-repeat center / contain;
 }
 
 /* --- pinked thank-you banner --------------------------------------------- */
@@ -1551,15 +1549,60 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
 }
 .rlabel__banner s { text-decoration: none; color: color-mix(in srgb, var(--paper) 70%, var(--oxblood)); }
 
-/* --- the row --------------------------------------------------------------- */
-.rlabels {
-  display: grid; gap: clamp(1.2rem, 2.4vw, 1.9rem);
-  grid-template-columns: 1fr;
+/* --- carousel: two across, one on small screens, swipeable ------------- */
+.rcar { position: relative; }
+.rcar__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;                       /* one per view on mobile */
+  gap: clamp(1rem, 2.4vw, 1.9rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: .5rem;
+  /* the native scrollbar would fight the paper; the controls carry it */
+  scrollbar-width: none;
 }
-@media (min-width: 900px) { .rlabels { grid-template-columns: repeat(3, 1fr); } }
-.rlabel { transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease; }
-.rlabel:hover {
-  transform: translateY(-6px) rotate(-.5deg);
-  box-shadow: 0 0 0 1px rgba(90,66,44,.26), inset 0 0 40px rgba(120,88,58,.14), 0 20px 42px rgba(23,19,16,.26);
+.rcar__track::-webkit-scrollbar { display: none; }
+.rcar__track > * { scroll-snap-align: start; }
+@media (min-width: 860px) {
+  .rcar__track { grid-auto-columns: calc(50% - clamp(1rem, 2.4vw, 1.9rem) / 2); }
 }
+@media (prefers-reduced-motion: reduce) { .rcar__track { scroll-behavior: auto; } }
+
+.rcar__nav {
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(.8rem, 2vw, 1.4rem);
+  margin-top: clamp(1.2rem, 2.6vw, 1.8rem);
+}
+.rcar__btn {
+  width: 44px; height: 44px; flex: none;
+  display: grid; place-items: center;
+  background: transparent;
+  border: 2px solid var(--ink);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color .2s ease, transform .12s ease, box-shadow .12s ease;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.rcar__btn:hover:not(:disabled) { background: var(--ink); transform: translate(1px,1px); box-shadow: 2px 2px 0 var(--ink); }
+.rcar__btn:disabled { opacity: .28; cursor: default; box-shadow: none; }
+/* chevrons drawn, not glyphs */
+.rcar__btn::before {
+  content: ""; width: 9px; height: 9px;
+  border-left: 2.5px solid var(--ink); border-bottom: 2.5px solid var(--ink);
+  transition: border-color .2s ease;
+}
+.rcar__btn[data-dir="1"]::before { transform: rotate(-135deg); margin-left: -4px; }
+.rcar__btn[data-dir="-1"]::before { transform: rotate(45deg); margin-right: -4px; }
+.rcar__btn:hover:not(:disabled)::before { border-color: var(--paper); }
+
+.rcar__dots { display: flex; gap: .45rem; align-items: center; }
+.rcar__dot {
+  width: 26px; height: 5px; padding: 0;
+  border: 0; background: var(--rule-strong); cursor: pointer;
+  transition: background-color .25s ease, width .25s ease;
+}
+.rcar__dot[aria-current="true"] { background: var(--oxblood); width: 40px; }
+
 @media (prefers-reduced-motion: reduce) { .rlabel, .rlabel:hover { transition: none; transform: none; } }
