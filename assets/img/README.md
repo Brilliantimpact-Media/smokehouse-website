@@ -19,10 +19,12 @@ looks. There are only three real product photographs on the whole site
 never replaced. Nothing there is usable.
 
 So these slots still need a real shoot and cannot be filled from the old site:
-- the five named best sellers (Cheddar Garden Brat, Butches Franks, thick-cut and
-  regular bacon, Smoked Boneless Ham): no individual product shots exist. Ham
-  replaced Hungarian Kielbasa on 2026-08-26 (kielbasa has no award record; ham is
-  their most-decorated product) and is the one slot still showing a hatch.
+- the five named best sellers (Smoked Boneless Ham, Cheddar Garden Brat, Butches
+  Franks, thick-cut and regular bacon): the client site has no individual product
+  photography at all, so all five cards run generated stand-ins at 900x900 webp.
+  Ham replaced Hungarian Kielbasa on 2026-08-26 (kielbasa has no award record; ham
+  is their most-decorated product) and now leads the row. best/kielbasa.webp was
+  deleted. All five still need real photographs before launch.
 - the two matched steaks for the homepage comparison wipe
 - the retail case, the deli counter, the dry-aging room, the crew at work,
   and the Durand building exterior
@@ -95,10 +97,12 @@ looks. There are only three real product photographs on the whole site
 never replaced. Nothing there is usable.
 
 So these slots still need a real shoot and cannot be filled from the old site:
-- the five named best sellers (Cheddar Garden Brat, Butches Franks, thick-cut and
-  regular bacon, Smoked Boneless Ham): no individual product shots exist. Ham
-  replaced Hungarian Kielbasa on 2026-08-26 (kielbasa has no award record; ham is
-  their most-decorated product) and is the one slot still showing a hatch.
+- the five named best sellers (Smoked Boneless Ham, Cheddar Garden Brat, Butches
+  Franks, thick-cut and regular bacon): the client site has no individual product
+  photography at all, so all five cards run generated stand-ins at 900x900 webp.
+  Ham replaced Hungarian Kielbasa on 2026-08-26 (kielbasa has no award record; ham
+  is their most-decorated product) and now leads the row. best/kielbasa.webp was
+  deleted. All five still need real photographs before launch.
 - the two matched steaks for the homepage comparison wipe
 - the retail case, the deli counter, the dry-aging room, the crew at work,
   and the Durand building exterior
