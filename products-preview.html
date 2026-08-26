@@ -89,6 +89,66 @@
 .tile--photo .tile__cap{padding:.85rem 1rem 1rem;background:var(--paper);transition:background-color .22s ease}
 .tile--photo:hover .tile__cap{background:var(--ink)}
 
+/* ---------- art 4: the vintage sign ---------- */
+.signgrid{display:grid;gap:1.1rem;grid-template-columns:repeat(4,1fr)}
+@media (max-width:1100px){.signgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.signgrid{grid-template-columns:1fr}}
+
+.sign{position:relative;aspect-ratio:4/3;display:block;width:100%;padding:0;border:0;
+  background:var(--char);overflow:hidden;cursor:pointer;font:inherit;color:var(--paper);
+  transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease}
+.sign:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(20,16,13,.35)}
+.sign__bg{position:absolute;inset:0;background:var(--bg) center/cover no-repeat;
+  filter:brightness(.42) contrast(1.08) saturate(.92);
+  transition:transform .6s cubic-bezier(.16,1,.3,1),filter .35s ease}
+.sign:hover .sign__bg{transform:scale(1.045);filter:brightness(.5) contrast(1.08) saturate(.95)}
+.sign__vig{position:absolute;inset:0;
+  background:radial-gradient(120% 92% at 50% 45%,transparent 34%,rgba(20,16,13,.72) 100%)}
+.sign__grain{position:absolute;inset:0;pointer-events:none;opacity:.3;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E")}
+.sign__frame{position:absolute;inset:0;width:100%;height:100%;color:currentColor;opacity:.82}
+
+.sign__star{position:absolute;width:4.2%;aspect-ratio:1;background:var(--oxblood);
+  clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.sign__star--tl{top:7.5%;left:5.6%}.sign__star--tr{top:7.5%;right:5.6%}
+.sign__star--bl{bottom:7.5%;left:5.6%}.sign__star--br{bottom:7.5%;right:5.6%}
+
+.sign__inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:3.8cqw;padding:9% 9%}
+.sign__seal{width:19%;aspect-ratio:1;border-radius:50%;background:var(--oxblood);
+  display:grid;place-items:center;flex:none;
+  box-shadow:inset 0 0 0 2px var(--oxblood),inset 0 0 0 3px rgba(242,236,224,.8)}
+.sign__glyph{width:56%;aspect-ratio:1;background-color:var(--paper);
+  -webkit-mask:var(--g) no-repeat center/contain;mask:var(--g) no-repeat center/contain}
+.sign__rule{display:flex;align-items:center;gap:2cqw;width:72%;flex:none}
+.sign__rule i{flex:1;height:2px;background:var(--oxblood)}
+.sign__rule b{width:2.2cqw;height:2.2cqw;background:var(--oxblood);flex:none;
+  clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.sign__title{font-family:var(--font-display);font-weight:900;text-transform:uppercase;
+  font-size:clamp(1.1rem,9.2cqw,2.7rem);line-height:1;letter-spacing:.02em;text-align:center;
+  margin:0;flex:none;
+  color:var(--paper);text-shadow:0 2px 10px rgba(20,16,13,.5)}
+.sign__btn{background:var(--oxblood);color:var(--paper);font-family:var(--font-ui);font-weight:700;
+  font-size:clamp(.5rem,1.5cqw,.72rem);letter-spacing:.2em;text-transform:uppercase;
+  padding:.8em 2em;flex:none;margin-top:1cqw;
+  box-shadow:inset 0 0 0 1px var(--oxblood),inset 0 0 0 2px rgba(242,236,224,.9);
+  transition:background-color .22s ease}
+.sign:hover .sign__btn{background:var(--oxblood-deep)}
+.sign{container-type:inline-size}
+
+/* paper variant */
+.sign--paper{background:#e7dcc4;color:#3a2f24}
+.sign--paper .sign__bg{
+  background:radial-gradient(60% 55% at 32% 30%,rgba(255,252,244,.95),transparent 70%),
+             radial-gradient(70% 60% at 74% 72%,rgba(214,197,166,.85),transparent 72%),
+             linear-gradient(#ece2cc,#ddd0b2);
+  filter:none}
+.sign--paper:hover .sign__bg{transform:none}
+.sign--paper .sign__vig{background:radial-gradient(115% 90% at 50% 48%,transparent 42%,rgba(58,44,30,.5) 100%)}
+.sign--paper .sign__grain{mix-blend-mode:multiply;opacity:.22}
+.sign--paper .sign__title{color:#241c14;text-shadow:none}
+.sign--paper .sign__frame{opacity:.7}
+
 /* ---------- modal ---------- */
 .pv-modal{border:0;padding:0;max-width:min(940px,94vw);width:100%;background:var(--paper);
   color:var(--ink);box-shadow:0 30px 90px rgba(0,0,0,.45)}
@@ -125,6 +185,7 @@
   <strong>Products row, options</strong>
   <a href="#structure">1. Structure</a>
   <a href="#art">2. Tile art</a>
+  <a href="#sign">3. Sign design</a>
   <a href="index.html">Back to homepage</a>
 </div>
 
@@ -181,6 +242,25 @@
       exactly what the real thing would look like until a shoot happens.
       <strong>Every one of these would be a generated stand-in to replace before launch.</strong></p>
     <div class="pv-grid" id="art3"></div>
+  </div>
+  </div>
+</section>
+
+<section class="pv-sec" id="sign">
+  <div class="shell">
+    <span class="pv-tag">Art 4, your sign design</span>
+    <h2 class="pv-h">The vintage sign</h2>
+    <p class="pv-note">Built in CSS, no image files for the frame, seal, stars or rules, so it stays crisp
+      at any size and recolours from the tokens. <strong>Five tiles use their own category photographs</strong>,
+      pulled from the Elementor stylesheet on their site. The three they have no photo for fall back to their
+      wood texture, which still reads as designed rather than broken.</p>
+
+    <h3 style="margin-top:2.5rem">On the photograph</h3>
+    <div class="signgrid" id="sign1"></div>
+
+    <h3 style="margin-top:3.5rem">On paper</h3>
+    <p class="pv-note">Same construction, parchment ground built from gradients so it needs no texture file.</p>
+    <div class="signgrid" id="sign2"></div>
   </div>
 </section>
 
@@ -274,6 +354,35 @@ function tile(cat, mode, i){
   return b;
 }
 
+const PHOTO = {Beef:'beef', Pork:'pork', Sausage:'sausage', Venison:'venison', Poultry:'poultry'};
+const FRAME = `<svg class="sign__frame" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M13 31 L31 13 H369 L387 31 V269 L369 287 H31 L13 269 Z" fill="none" stroke="currentColor" stroke-width="2.5"/>
+  <path d="M21 35 L35 21 H365 L379 35 V265 L365 279 H35 L21 265 Z" fill="none" stroke="currentColor" stroke-width="1"/>
+</svg>`;
+
+function sign(cat, paper){
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'sign' + (paper ? ' sign--paper' : '');
+  b.onclick = () => openCat(cat);
+  const g = ART[cat.name];
+  const ph = PHOTO[cat.name];
+  b.style.setProperty('--g', `url("assets/img/cat/${g}")`);
+  if (!paper) b.style.setProperty('--bg', `url("assets/img/cat/photo/${ph || 'wood'}.webp")`);
+  b.innerHTML = `<span class="sign__bg"></span><span class="sign__vig"></span>
+    <span class="sign__grain"></span>${FRAME}
+    <span class="sign__star sign__star--tl"></span><span class="sign__star sign__star--tr"></span>
+    <span class="sign__star sign__star--bl"></span><span class="sign__star sign__star--br"></span>
+    <span class="sign__inner">
+      <span class="sign__seal"><span class="sign__glyph"></span></span>
+      <span class="sign__rule"><i></i><b></b><i></i></span>
+      <span class="sign__title">${cat.name}</span>
+      <span class="sign__rule"><i></i><b></b><i></i></span>
+      <span class="sign__btn">View Products</span>
+    </span>`;
+  return b;
+}
+
 function fill(id, list, mode){
   const el = document.getElementById(id);
   list.forEach((c,i) => el.appendChild(tile(c, mode, i)));
@@ -307,6 +416,8 @@ fetch('assets/data/catalog.json').then(r => r.json()).then(cats => {
 
   fill('art1', cats, 'glyph');
   fill('art1b', cats, 'onphoto');
+  cats.forEach(c => document.getElementById('sign1').appendChild(sign(c, false)));
+  cats.forEach(c => document.getElementById('sign2').appendChild(sign(c, true)));
   fill('art2', cats, 'type');
   fill('art3', cats, 'photo');
 });

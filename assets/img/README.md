@@ -226,3 +226,23 @@ the Sausage category. Ours depict a drumstick, a stack of deli slices, and a bas
 keeping their own category and subhead hierarchy. Award and "Woodville Location
 Only" flags are still embedded in the item strings and get parsed out at render
 time. No prices exist anywhere on their site.
+
+## assets/img/cat/photo/ (client's own category photography)
+
+beef, pork, sausage, venison, poultry and wood, resized to 1200x800 webp from
+thedurandsmokehouse.com/wp-content/uploads/2019/09/*.jpg. These are NOT in their
+page HTML; they are set as background-image in their Elementor stylesheet
+(uploads/elementor/css/post-*.css), which is why the first sweep missed them.
+
+Their file named lamb.jpg is actually a photograph of grilled CHICKEN DRUMSTICKS,
+so it is saved here as poultry.webp. Their site has been showing a chicken photo
+on the Lamb tile for years.
+
+No photo exists for Lamb, Misc. or Woodville Deli; those three fall back to
+wood.webp, their own wood texture.
+
+LICENSING, OPEN WITH JOHN: their media library also holds files named
+iStock-1128746000.jpg and similar, so they do license stock photography. These six
+are very likely licensed stock too. Same business and same owner, so a standard
+royalty-free licence should cover the new site, but John should confirm he holds
+the licences before launch.
