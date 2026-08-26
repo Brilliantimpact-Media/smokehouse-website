@@ -120,4 +120,5 @@ each case.
     Products button, taking "a few product" as dictation for "View Products".
     If she meant listing two or three example products on each tile, that is a
     different build.
-    Note the stars now live only in the popup headings, not the tiles.
+    Stars removed from the popup headings too, 2026-08-26; group headings are
+    now a plain rule either side of the name. No stars anywhere on the site.

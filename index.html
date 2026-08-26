@@ -165,10 +165,6 @@
   color: #241c14;
 }
 .pgroup h3 i { flex: 1; height: 2px; background: var(--oxblood); min-width: 14px; }
-.pgroup h3 b {
-  width: 9px; height: 9px; flex: none; background: var(--oxblood);
-  clip-path: polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
-}
 .pgroup ul { list-style: none; margin: 0; padding: 0; }
 .pgroup li {
   display: flex; gap: .55rem; align-items: flex-start; flex-wrap: wrap;
@@ -973,7 +969,7 @@
         sec.className = "pgroup";
         if (g.name) {
           var h = document.createElement("h3");
-          h.innerHTML = '<i></i><b></b><span></span><b></b><i></i>';
+          h.innerHTML = '<i></i><span></span><i></i>';
           h.querySelector("span").textContent = g.name;
           sec.appendChild(h);
         }
