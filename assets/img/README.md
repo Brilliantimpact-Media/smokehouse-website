@@ -246,3 +246,10 @@ iStock-1128746000.jpg and similar, so they do license stock photography. These s
 are very likely licensed stock too. Same business and same owner, so a standard
 royalty-free licence should cover the new site, but John should confirm he holds
 the licences before launch.
+
+Lamb added 2026-08-26 from a client-supplied render (lamb chop). It is a generated
+stand-in, not one of their photographs, and carries the same replace-before-launch
+caveat as the five best-seller shots. Misc. and Woodville Deli are still on wood.
+
+All seven files in cat/photo/ are now 1200x900, matching the 4:3 sign tile exactly
+so nothing is cropped a second time at render.
