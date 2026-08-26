@@ -21,6 +21,41 @@
    Cinematic steak+smoke hero (unchanged) handing off into the scroll flow.
    ========================================================================== */
 
+/* --- best sellers: same parchment card language as the products popup ---- */
+.card--best {
+  position: relative; overflow: hidden;
+  padding: clamp(.7rem,1.4vw,1rem) clamp(.7rem,1.4vw,1rem) clamp(1rem,2vw,1.4rem);
+  background:
+    radial-gradient(58% 52% at 30% 24%, rgba(255,252,244,.95), transparent 70%),
+    radial-gradient(66% 58% at 76% 78%, rgba(214,197,166,.75), transparent 74%),
+    linear-gradient(#ece2cc, #ded1b4);
+  border: 0;
+  transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease;
+}
+.card--best::before, .card--best::after { content: ""; position: absolute; pointer-events: none; }
+.card--best::before { inset: 7px; border: 2px solid var(--ink); border-radius: 9px; opacity: .8; }
+.card--best::after  { inset: 14px; border: 1px solid var(--ink); border-radius: 5px; opacity: .45; }
+.card--best:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(20,16,13,.25); }
+.card--best .best__shot {
+  position: relative; z-index: 1; border: 0; border-radius: 3px;
+  margin: clamp(1rem,2vw,1.5rem) clamp(1rem,2vw,1.5rem) 0;
+  width: auto;
+}
+.card--best h3 {
+  position: relative; z-index: 1;
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(1rem,1.5vw,1.25rem); line-height: 1.05; letter-spacing: .04em;
+  color: #241c14; text-align: center;
+  margin: clamp(.9rem,1.8vw,1.2rem) clamp(1rem,2vw,1.5rem) 0;
+  padding-top: .8rem; border-top: 2px solid var(--oxblood);
+}
+.card--best p {
+  position: relative; z-index: 1;
+  font-family: var(--font-ui); font-size: .8rem; color: #6b5c4a;
+  text-align: center; margin: .35rem clamp(1rem,2vw,1.5rem) 0;
+}
+@media (prefers-reduced-motion: reduce) { .card--best:hover { transform: none; } }
+
 /* --- products: the vintage category signs -------------------------------- */
 .products { padding-block: clamp(5rem, 12vh, 9rem); background: var(--paper-2); }
 .signgrid { display: grid; gap: 1.1rem; grid-template-columns: repeat(4, 1fr); margin-top: 2.5rem; }
@@ -48,7 +83,6 @@
   position: absolute; inset: 0; pointer-events: none; opacity: .3; mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
 }
-.sign__frame { position: absolute; inset: 0; width: 100%; height: 100%; color: currentColor; opacity: .82; }
 .sign__inner {
   position: absolute; inset: 0; display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 4.4cqw; padding: 9%;
@@ -264,6 +298,40 @@
   height: 2px; background: color-mix(in srgb, var(--paper) 16%, transparent);
 }
 .seq__bar i { position: absolute; inset-block: 0; left: 0; width: 0; background: var(--paper); }
+
+/* stylisation pass: the panel was flat charcoal, so it now carries the same
+   smoke, oxblood and letterpress the hero does. Structure and copy unchanged. */
+.seq__sticky::before, .seq__sticky::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+}
+.seq__sticky::before {
+  background:
+    radial-gradient(78% 62% at 10% 16%, rgba(122,31,38,.34), transparent 62%),
+    radial-gradient(70% 70% at 94% 90%, rgba(122,31,38,.20), transparent 66%);
+}
+.seq__sticky::after {
+  opacity: .26; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+}
+.seq__sticky > * { position: relative; z-index: 1; }
+.seq__count {
+  color: color-mix(in srgb, var(--oxblood) 48%, transparent);
+  text-shadow: 0 2px 0 rgba(0,0,0,.35);
+}
+.seq__panel h3 {
+  margin-bottom: 1rem;
+  text-shadow: 0 1px 0 rgba(255,255,255,.09), 0 -1px 0 rgba(0,0,0,.55);
+}
+.seq__panel h3::after {
+  content: ""; display: block; width: 92px; height: 5px;
+  background: var(--oxblood); margin-top: 1.2rem;
+}
+.seq__label { color: color-mix(in srgb, var(--paper) 66%, transparent); }
+.seq__bar { height: 3px; background: color-mix(in srgb, var(--paper) 13%, transparent); }
+.seq__bar i {
+  background: var(--oxblood);
+  box-shadow: 0 0 16px rgba(122,31,38,.85);
+}
 .seq__label {
   position: absolute; bottom: calc(7vh + 1rem); left: var(--gutter);
   font-family: var(--font-ui); font-size: .72rem; font-weight: 600;
@@ -289,18 +357,20 @@
 
 /* --- closing -------------------------------------------------------------- */
 .closing {
-  min-height: 92vh; display: grid; place-content: center; text-align: center;
+  min-height: 0; display: grid; place-content: center; text-align: center;
   background: var(--char); color: var(--paper);
-  gap: 2rem; padding: clamp(4rem, 10vh, 7rem) var(--gutter) !important;
+  gap: .7rem; padding: clamp(2.4rem, 5vh, 3.6rem) var(--gutter) !important;
   border: 0 !important;
 }
 .closing h2 {
   font-family: var(--font-display); font-weight: 900;
-  font-size: clamp(2.4rem, 7vw, 6rem); line-height: .98;
+  font-size: clamp(2rem, 5.2vw, 4rem); line-height: .96;
   letter-spacing: -.035em; text-transform: uppercase;
   color: var(--paper); max-width: 18ch; margin-inline: auto;
 }
 .closing p { color: color-mix(in srgb, var(--paper) 75%, var(--char)); margin-inline: auto; }
+.closing .btn-row { margin-top: .9rem; }
+.closing .btn { padding: .7rem 1.5rem; font-size: .72rem; letter-spacing: .14em; }
 
 /* --- big footer wordmark -------------------------------------------------- */
 .footer-mega {
@@ -951,10 +1021,6 @@
       "Beef": "beef", "Pork": "pork", "Sausage": "sausage", "Venison": "venison",
       "Lamb": "lamb", "Poultry": "poultry", "Woodville Deli": "deli", "Misc.": "misc"
     };
-    var FRAME = '<svg class="sign__frame" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">' +
-      '<path d="M13 31 L31 13 H369 L387 31 V269 L369 287 H31 L13 269 Z" fill="none" stroke="currentColor" stroke-width="2.5"/>' +
-      '<path d="M21 35 L35 21 H365 L379 35 V265 L365 279 H35 L21 265 Z" fill="none" stroke="currentColor" stroke-width="1"/></svg>';
-
     var lastFocus = null;
 
     var openCat = function (cat) {
@@ -1020,7 +1086,7 @@
         b.style.setProperty("--g", 'url("assets/img/cat/' + GLYPH[cat.name] + '")');
         b.style.setProperty("--bg", 'url("assets/img/cat/photo/' + (SHOT[cat.name] || "wood") + '.webp")');
         b.innerHTML =
-          '<span class="sign__bg"></span><span class="sign__vig"></span><span class="sign__grain"></span>' + FRAME +
+          '<span class="sign__bg"></span><span class="sign__vig"></span><span class="sign__grain"></span>' +
           '<span class="sign__inner">' +
             '<span class="sign__seal"><span class="sign__glyph"></span></span>' +
             '<span class="sign__title">' + cat.name + '</span>' +
