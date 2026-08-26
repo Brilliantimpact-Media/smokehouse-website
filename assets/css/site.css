@@ -932,25 +932,29 @@ td { border-bottom: 1px solid var(--rule); }
 .photo { background: var(--paper-3); border-color: var(--ink); }
 
 /* ==========================================================================
-   LOGO — delivered 2026-08-25. Two colorways, swapped by context.
+   LOGO — one vector mark, coloured by CSS.
+   The supplied artboard carried several overlapping copies plus leftover live
+   text that bled into the canvas; assets/img/logo.svg is the single clean
+   lockup extracted from it. Painted with currentColor via a mask, so one file
+   serves every ground instead of shipping a file per colourway.
    ========================================================================== */
 .wordmark {
-  display: block; position: relative; line-height: 0;
-  text-decoration: none;
+  display: block; line-height: 0; text-decoration: none;
+  color: var(--ink);
+  transition: color .3s ease;
 }
-.wordmark img {
-  display: block; height: var(--logo-h, 54px); width: auto;
+.wordmark__mark {
+  display: block;
+  height: var(--logo-h, 54px);
+  width: calc(var(--logo-h, 54px) * 2.6863);   /* 455.04 / 169.39 */
+  background-color: currentColor;
+  -webkit-mask: url("../img/logo.svg") no-repeat center / contain;
+          mask: url("../img/logo.svg") no-repeat center / contain;
 }
-.wordmark .logo--ondark { position: absolute; inset: 0; opacity: 0; transition: opacity .3s ease; }
-.wordmark .logo--onlight { opacity: 1; transition: opacity .3s ease; }
-/* over the hero photo: white mark. once the bar goes solid: black mark. */
-.site-header--overlay:not(.is-scrolled) .wordmark .logo--ondark { opacity: 1; }
-.site-header--overlay:not(.is-scrolled) .wordmark .logo--onlight { opacity: 0; }
-/* dark grounds always take the reversed mark */
-.site-footer .wordmark .logo--ondark,
-.band-dark .wordmark .logo--ondark { opacity: 1; }
-.site-footer .wordmark .logo--onlight,
-.band-dark .wordmark .logo--onlight { opacity: 0; }
+/* over the hero photo the mark reverses; once the bar goes solid it inks up */
+.site-header--overlay:not(.is-scrolled) .wordmark { color: var(--paper); }
+.site-footer .wordmark,
+.band-dark .wordmark { color: var(--paper); }
 .site-footer .wordmark { --logo-h: 82px; margin-bottom: 1.5rem; }
 @media (max-width: 560px) { .wordmark { --logo-h: 40px; } }
 

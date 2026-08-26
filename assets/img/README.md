@@ -26,6 +26,65 @@ So these slots still need a real shoot and cannot be filled from the old site:
   and the Durand building exterior
 
 
+## Logo — `logo.svg` (cleaned 2026-08-26)
+
+**Use `logo.svg`.** One vector lockup, painted with `currentColor` through a CSS
+mask, so a single file serves every ground. Colour it by setting `color` on the
+`.wordmark` wrapper; no per-colourway files needed.
+
+### How it was cleaned
+
+Two rounds of supplied SVGs were unusable as delivered:
+
+1. **First round** exported the wordmark as live `<text>` calling for Citrus
+   Gothic Solid, Quincy CF and Ultra. Browsers have none of them, so the type
+   fell back to a serif, set too wide, and clipped at the canvas edge.
+2. **Second round** outlined the type correctly, but shipped the whole artboard:
+   several overlapping copies of the lockup (black, white and a dark red
+   `#930000`), plus five leftover live-`<text>` duplicates. Two of those text
+   duplicates sat off to the left yet rendered wide enough in the fallback font
+   that their right edges pushed into the canvas — the stray red text and the
+   sliver of a letter that were showing on the site. On a machine with the real
+   fonts installed they are narrower and stay hidden, which is why they looked
+   fine to the designer.
+
+Measured every element's true bounds with the browser's `getBBox()` (parsing the
+path data by hand is unreliable — SVG uses relative commands), which isolated
+the 37 shapes that make up the genuine in-canvas lockup. `logo.svg` is those 37
+paths, class and fill stripped. 58KB to 26KB.
+
+**If a new logo file ever arrives, check it the same way** rather than trusting
+the visual in Illustrator.
+
+`logo-onlight.png` / `logo-ondark.png` are retained as raster fallbacks and for
+anywhere a mask is unsuitable (email, og:image).
+
+## Pulled from thedurandsmokehouse.com (2026-08-25)
+
+Migrated from the client's own live site, per the brief. **All web-sized
+derivatives, not final assets** — replace with originals before launch if they
+exist.
+
+In `shop/`: `brisket-sliced`, `steak-plated`, `owners-awards`, `award-wall`,
+`awards-medals`, `wood-grain`.
+In `icons/`: the six category marks, lifted off their green tiles and recoloured
+to `--ink` with transparency.
+
+**What the old site does NOT have.** Its photo library is far thinner than it
+looks. There are only three real product photographs on the whole site
+(`meat_slide`, `1.jpg`, `page-title`), plus award documentation. Notably the
+`/gallery` page — titled "Local Butcher Shop" — and `/programs` are filled with
+**stock yoga and fitness images** left over from the WordPress theme demo and
+never replaced. Nothing there is usable.
+
+So these slots still need a real shoot and cannot be filled from the old site:
+- the five named award winners (Cheddar Garden Brat, Hungarian Kielbasa,
+  Butches Franks, thick-cut and regular bacon) — no individual product shots exist
+- the two matched steaks for the homepage comparison wipe
+- the retail case, the deli counter, the dry-aging room, the crew at work,
+  and the Durand building exterior
+
+
 ## Logo (delivered 2026-08-25)
 
 `logo-onlight.png` (black) and `logo-ondark.png` (reversed/white) are the same
