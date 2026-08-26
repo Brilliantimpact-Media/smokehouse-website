@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reviews | Three Options</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=20260825b">
+<style>
+.optbar{position:sticky;top:0;z-index:60;background:var(--ink);color:var(--paper);
+  padding:.7rem var(--gutter);display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;align-items:center;
+  font-family:var(--font-ui);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.optbar a{color:color-mix(in srgb,var(--paper) 72%,transparent);text-decoration:none}
+.optbar a:hover{color:var(--paper)}
+.optlabel{background:var(--oxblood);color:var(--paper);font-family:var(--font-ui);font-size:.62rem;
+  font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.4rem .8rem;display:inline-block;margin-bottom:1.4rem}
+
+/* ============ 1. MEAT-CASE LABELS ============ */
+.lbl-grid{display:grid;gap:clamp(1.2rem,2.5vw,2rem);grid-template-columns:1fr}
+@media(min-width:820px){.lbl-grid{grid-template-columns:repeat(3,1fr)}}
+.lbl{
+  position:relative;background:var(--paper);border:1.5px solid var(--ink);
+  padding:1.1rem 1.2rem 1.3rem;
+  box-shadow:4px 4px 0 rgba(23,19,16,.16);
+  transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s ease;
+  transform-origin:top left;
+}
+.lbl:hover{transform:rotate(-1deg) translateY(-4px);box-shadow:8px 10px 0 rgba(23,19,16,.14)}
+.lbl__cut{font-family:var(--font-display);font-weight:900;font-size:1.15rem;line-height:1;
+  text-transform:uppercase;color:var(--oxblood);margin:0 0 .6rem}
+.lbl__rule{height:6px;margin-bottom:.9rem;
+  background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 7px)}
+.lbl__note{margin:0 0 1.2rem;font-size:1rem;line-height:1.5;color:var(--ink)}
+.lbl__foot{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;
+  border-top:1px solid var(--rule);padding-top:.7rem;
+  font-family:var(--font-ui);font-size:.6rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3)}
+.lbl__who b{display:block;font-size:.72rem;color:var(--ink);letter-spacing:.1em}
+.lbl__seal{width:34px;height:34px;border:2px solid var(--oxblood);border-radius:50%;
+  display:grid;place-items:center;color:var(--oxblood);font-size:.5rem;line-height:1;text-align:center;
+  transform:rotate(-11deg);flex:none}
+
+/* ============ 2. COUNTER BOARD ============ */
+.board{position:relative;background:var(--paper-2);border:2px solid var(--ink);
+  padding:clamp(2rem,5vw,3.5rem);min-height:420px;
+  background-image:radial-gradient(circle at 1px 1px,color-mix(in srgb,var(--ink) 7%,transparent) 1px,transparent 0);
+  background-size:9px 9px}
+.board__inner{display:grid;gap:clamp(1rem,2vw,1.6rem);grid-template-columns:1fr}
+@media(min-width:820px){.board__inner{grid-template-columns:repeat(3,1fr)}}
+.card{position:relative;background:var(--paper);padding:1.3rem 1.2rem 1.1rem;
+  box-shadow:0 6px 18px rgba(23,19,16,.2);
+  transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease,z-index 0s}
+.card:nth-child(1){transform:rotate(-1.8deg)}
+.card:nth-child(2){transform:rotate(1.1deg) translateY(10px)}
+.card:nth-child(3){transform:rotate(-.6deg) translateY(-6px)}
+.card:hover{transform:rotate(0) translateY(-8px) scale(1.03);box-shadow:0 18px 40px rgba(23,19,16,.3);z-index:3}
+.card::before{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(-3deg);
+  width:62px;height:20px;background:color-mix(in srgb,var(--kraft) 75%,transparent);
+  border:1px solid color-mix(in srgb,var(--ink) 18%,transparent)}
+.card p{margin:0 0 .9rem;font-size:.98rem;line-height:1.5}
+.card footer{font-family:var(--font-ui);font-size:.62rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--oxblood)}
+
+/* ============ 3. BUTCHER-PAPER SCRAWL ============ */
+.scrawl{position:relative;background:var(--paper-2);padding:clamp(2.5rem,6vw,4.5rem) clamp(1.5rem,4vw,3rem);
+  border-block:2px solid var(--ink)}
+.scrawl::before,.scrawl::after{content:"";position:absolute;inset-inline:0;height:14px;
+  background:var(--paper);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 14' preserveAspectRatio='none'%3E%3Cpath d='M0,14 H1200 V5 C1150,13 1110,2 1060,8 C1010,13 980,3 930,6 C880,11 850,1 800,5 C760,12 720,2 670,6 C620,13 590,3 540,8 C490,14 460,2 410,5 C360,11 330,1 280,6 C230,13 200,3 150,8 C100,12 60,2 30,5 C15,7 5,4 0,5 Z'/%3E%3C/svg%3E") repeat-x center/900px 14px;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 14' preserveAspectRatio='none'%3E%3Cpath d='M0,14 H1200 V5 C1150,13 1110,2 1060,8 C1010,13 980,3 930,6 C880,11 850,1 800,5 C760,12 720,2 670,6 C620,13 590,3 540,8 C490,14 460,2 410,5 C360,11 330,1 280,6 C230,13 200,3 150,8 C100,12 60,2 30,5 C15,7 5,4 0,5 Z'/%3E%3C/svg%3E") repeat-x center/900px 14px}
+.scrawl::before{top:-1px}
+.scrawl::after{bottom:-1px;transform:scaleY(-1)}
+.scrawl__q{font-family:var(--font-hand);font-size:clamp(1.7rem,4.4vw,3.4rem);line-height:1.2;
+  color:var(--ink);max-width:20ch;margin:0 auto;text-align:center}
+.scrawl__who{margin:1.6rem auto 0;text-align:center;font-family:var(--font-ui);font-size:.66rem;
+  font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--oxblood)}
+.scrawl__nav{display:flex;gap:.5rem;justify-content:center;margin-top:2rem}
+.scrawl__dot{width:30px;height:4px;background:var(--rule-strong);border:0;cursor:pointer;padding:0}
+.scrawl__dot[aria-selected="true"]{background:var(--oxblood)}
+.scrawl__item{display:none}
+.scrawl__item.on{display:block}
+</style>
+</head>
+<body>
+<div class="optbar">
+  <span>Reviews, three options</span>
+  <a href="#o1">1 Meat-case labels</a>
+  <a href="#o2">2 Counter board</a>
+  <a href="#o3">3 Butcher-paper scrawl</a>
+  <a href="index.html">Back to the site</a>
+</div>
+
+<main>
+<section id="o1">
+  <div class="shell">
+    <span class="optlabel">Option 1, meat-case labels</span>
+    <p class="eyebrow">From the people who keep coming back</p>
+    <div class="lbl-grid">
+      <article class="lbl">
+        <p class="lbl__cut">Cheddar Garden Brat</p>
+        <div class="lbl__rule"></div>
+        <p class="lbl__note">Review placeholder. A real Google review that names this product, pulled per the messaging guide.</p>
+        <div class="lbl__foot">
+          <span class="lbl__who">Customer<b>Name, Durand WI</b></span>
+          <span class="lbl__seal">EST<br>2011</span>
+        </div>
+      </article>
+      <article class="lbl">
+        <p class="lbl__cut">Split Beef Order</p>
+        <div class="lbl__rule"></div>
+        <p class="lbl__note">Review placeholder. One about communication and follow-through on a custom order.</p>
+        <div class="lbl__foot">
+          <span class="lbl__who">Customer<b>Name, Woodville WI</b></span>
+          <span class="lbl__seal">EST<br>2011</span>
+        </div>
+      </article>
+      <article class="lbl">
+        <p class="lbl__cut">Thick-Cut Bacon</p>
+        <div class="lbl__rule"></div>
+        <p class="lbl__note">Review placeholder. One that names a staff member, which the guide calls the strongest proof.</p>
+        <div class="lbl__foot">
+          <span class="lbl__who">Customer<b>Name, Menomonie WI</b></span>
+          <span class="lbl__seal">EST<br>2011</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="o2">
+  <div class="shell">
+    <span class="optlabel">Option 2, the counter board</span>
+    <p class="eyebrow">From the people who keep coming back</p>
+    <div class="board">
+      <div class="board__inner">
+        <article class="card"><p>Review placeholder. A real Google review that names a specific product.</p><footer>Name, Durand WI</footer></article>
+        <article class="card"><p>Review placeholder. One naming a staff member by name.</p><footer>Name, Woodville WI</footer></article>
+        <article class="card"><p>Review placeholder. One about a custom order handled right.</p><footer>Name, Menomonie WI</footer></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="o3">
+  <div class="shell">
+    <span class="optlabel">Option 3, butcher-paper scrawl</span>
+    <p class="eyebrow">From the people who keep coming back</p>
+  </div>
+  <div class="scrawl">
+    <div class="scrawl__item on"><p class="scrawl__q">Review placeholder, set in the hand you would scrawl on a wrapped package.</p><p class="scrawl__who">Name, Durand WI</p></div>
+    <div class="scrawl__item"><p class="scrawl__q">A second review, one that names a staff member at the counter.</p><p class="scrawl__who">Name, Woodville WI</p></div>
+    <div class="scrawl__item"><p class="scrawl__q">A third, about a split order that came back exactly right.</p><p class="scrawl__who">Name, Menomonie WI</p></div>
+    <div class="scrawl__nav">
+      <button class="scrawl__dot" aria-selected="true" aria-label="Review 1"></button>
+      <button class="scrawl__dot" aria-selected="false" aria-label="Review 2"></button>
+      <button class="scrawl__dot" aria-selected="false" aria-label="Review 3"></button>
+    </div>
+  </div>
+</section>
+</main>
+
+<script src="assets/js/site.js?v=20260825b"></script>
+<script>
+(function(){
+  var items=document.querySelectorAll('.scrawl__item');
+  var dots=document.querySelectorAll('.scrawl__dot');
+  function show(i){
+    items.forEach(function(el,n){el.classList.toggle('on',n===i)});
+    dots.forEach(function(d,n){d.setAttribute('aria-selected',String(n===i))});
+  }
+  dots.forEach(function(d,i){d.addEventListener('click',function(){show(i)})});
+  var i=0; setInterval(function(){i=(i+1)%items.length; show(i);},5200);
+})();
+</script>
+</body>
+</html>
