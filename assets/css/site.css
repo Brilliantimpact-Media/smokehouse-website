@@ -128,14 +128,6 @@ p:last-child { margin-bottom: 0; }
   content: ""; width: 26px; height: 10px; flex: none;
   background: repeating-linear-gradient(90deg, var(--accent) 0 3px, transparent 3px 6px);
 }
-/* measurement-mark rule, like a butcher's ruler */
-.eyebrow::after {
-  content: ""; flex: 1; height: 9px;
-  background:
-    linear-gradient(var(--rule-strong), var(--rule-strong)) 0 100% / 100% 1px no-repeat,
-    repeating-linear-gradient(90deg, var(--rule-strong) 0 1px, transparent 1px 12px);
-}
-.eyebrow--plain::after { display: none; }
 
 /* --- Buttons: sturdy stock, heavy rule, stamp-press on hover ------------- */
 .btn {
@@ -254,6 +246,7 @@ p:last-child { margin-bottom: 0; }
 /* --- Placeholder image slots -------------------------------------------- */
 /* Deliberately obvious. These are NOT design elements — they mark where the
    client's real product photography goes. See docs/open-questions.md. */
+figure.photo { margin: 0; }
 .photo {
   position: relative;
   background: var(--paper-3);
@@ -335,7 +328,6 @@ p:last-child { margin-bottom: 0; }
 .band-dark h2, .band-dark h3 { color: var(--paper); }
 .band-dark p { color: color-mix(in srgb, var(--paper) 82%, var(--ink)); }
 .band-dark .eyebrow { color: color-mix(in srgb, var(--paper) 62%, var(--ink)); }
-.band-dark .eyebrow::after { background: color-mix(in srgb, var(--paper) 30%, var(--ink)); }
 .band-dark .link-cta { border-color: color-mix(in srgb, var(--paper) 40%, var(--ink)); }
 .band-dark .link-cta:hover { border-color: var(--paper); }
 
