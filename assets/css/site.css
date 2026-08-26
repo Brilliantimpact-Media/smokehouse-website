@@ -1021,6 +1021,10 @@ td { border-bottom: 1px solid var(--rule); }
 
 .vs__shot { position: absolute; inset: 0; margin: 0; }
 .vs__shot img { width: 100%; height: 100%; object-fit: contain; display: block; }
+/* Each layer is clipped to its own side of the divider. Relying on the top
+   layer to cover the one beneath fails here: the steaks are cut-outs with
+   different silhouettes, so the taller one showed around the edges. */
+.vs__shot--shop  { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
 .vs__shot--store { clip-path: inset(0 0 0 var(--pos)); }
 
 .vs__ph {
@@ -1177,6 +1181,7 @@ td { border-bottom: 1px solid var(--rule); }
 .spec.peek-store .spec__side--shop { opacity: .45; }
 
 /* the wipe eases only when a name drives it; dragging stays 1:1 */
+.vs__stage.is-tweening .vs__shot--shop,
 .vs__stage.is-tweening .vs__shot--store { transition: clip-path .5s cubic-bezier(.16,1,.3,1); }
 .vs__stage.is-tweening .vs__blade,
 .vs__stage.is-tweening .vs__grip { transition: left .5s cubic-bezier(.16,1,.3,1), transform .18s cubic-bezier(.16,1,.3,1), box-shadow .18s ease; }
@@ -1299,6 +1304,7 @@ td { border-bottom: 1px solid var(--rule); }
   .spec__side--store { text-align: left; }
   .spec__head { display: none; }
 }
+html:not(.js) .vs__shot--shop  { clip-path: inset(0 50% 0 0); }
 html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
 
 /* --- Cut chart: anatomical highlight pieces (supplied artwork) ------------ */
