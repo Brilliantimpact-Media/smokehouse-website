@@ -71,8 +71,9 @@ each case.
     page, and ham (their most-decorated product) was absent from the site.
     Per client direction the kielbasa card was replaced with **Smoked Boneless
     Ham**, and the generic "Award-winning." line was replaced with the client's
-    own wording from /awards: **"Grand Champion, Ham Boneless Commercial"**
-    (2017 National). Ham also holds 2019 International Gold for Boneless and
+    own wording from /awards, shortened at the client's request to
+    **"Grand Champion"** (2017 National, full record reads "Grand Champion -
+    Ham Boneless Commercial"). Ham leads the row as the highest honour. Ham also holds 2019 International Gold for Boneless and
     Semi-Boneless Ham, and 2019 State Reserve Grand Champion (Commercial
     Boneless) and Champion (Traditional Boneless), if a stronger or different
     line is wanted later.
