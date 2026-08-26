@@ -113,15 +113,8 @@
       <p class="eyebrow">The full range</p>
       <h2>What we carry.</h2>
       <p class="lede" style="margin-bottom:2rem">Between the two locations, the case runs deeper than most people expect.</p>
-      <ul class="cat-icons">
-        <li><img src="assets/img/icons/beef.webp" alt="" loading="lazy"><span>Beef</span></li>
-        <li><img src="assets/img/icons/pork.webp" alt="" loading="lazy"><span>Pork</span></li>
-        <li><img src="assets/img/icons/sausage.webp" alt="" loading="lazy"><span>Sausage</span></li>
-        <li><img src="assets/img/icons/venison.webp" alt="" loading="lazy"><span>Venison</span></li>
-        <li><img src="assets/img/icons/lamb.webp" alt="" loading="lazy"><span>Lamb</span></li>
-        <li><img src="assets/img/icons/goat.webp" alt="" loading="lazy"><span>Goat</span></li>
-      </ul>
-      <p class="note"><strong>Build note:</strong> the current site lists hundreds of individual SKUs across these categories. How much of that catalog the new site carries, full list, category pages, or a short highlights page like this one, is <strong>not yet decided</strong>. See <code>docs/open-questions.md</code>.</p>
+      <div class="signgrid" id="signgrid"></div>
+      <p class="annot" style="margin-top:1.6rem">Open a category to see everything in it.</p>
     </div>
   </section>
 
@@ -138,6 +131,21 @@
     </div>
   </section>
 </main>
+
+<dialog class="pmodal" id="pmodal" aria-labelledby="pmodalTitle">
+  <div class="pmodal__sheet">
+    <button class="pmodal__close" id="pmodalClose" type="button" aria-label="Close"></button>
+    <header class="pmodal__head">
+      <span class="pmodal__seal" aria-hidden="true"><span class="pmodal__glyph" id="pmodalGlyph"></span></span>
+      <div>
+        <h2 class="pmodal__title" id="pmodalTitle">Sausage</h2>
+        <p class="pmodal__sub" id="pmodalSub">54 items</p>
+      </div>
+    </header>
+    <div class="pmodal__body" id="pmodalBody"></div>
+  </div>
+</dialog>
+
 
 <footer class="site-footer">
   <div class="shell">

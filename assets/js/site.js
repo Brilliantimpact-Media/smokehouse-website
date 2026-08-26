@@ -403,11 +403,11 @@
       rib:       { name: "Rib",        becomes: "Ribeyes, prime rib, and back ribs.", sheet: "Ribeye thickness, bone-in or boneless, and whether a standing rib roast comes out whole." },
       shortloin: { name: "Short Loin", becomes: "T-bones, porterhouse, strip steaks, and the tenderloin.", sheet: "T-bones as they are, or strips with the tenderloin pulled whole." },
       sirloin:   { name: "Sirloin",    becomes: "Sirloin steaks, tri-tip, and sirloin tip roasts.", sheet: "Steak thickness and how many to a package." },
-      round:     { name: "Round",      becomes: "Round steaks and roasts, cube steak, jerky meat, and lean grind.", sheet: "Steaks, roasts, jerky, or grind \u2014 the round is the most flexible call on the sheet." },
-      brisket:   { name: "Brisket",    becomes: "The brisket \u2014 flat and point.", sheet: "Whole, split, or ground. Smokers ask for it whole." },
+      round:     { name: "Round",      becomes: "Round steaks and roasts, cube steak, jerky meat, and lean grind.", sheet: "Steaks, roasts, jerky, or grind. The round is the most flexible call on the sheet." },
+      brisket:   { name: "Brisket",    becomes: "The brisket, flat and point.", sheet: "Whole, split, or ground. Smokers ask for it whole." },
       plate:     { name: "Plate",      becomes: "Short ribs, skirt steak, and grind.", sheet: "Short ribs kept or ground, and whether the skirt comes out separate." },
       flank:     { name: "Flank",      becomes: "Flank steak and stir-fry strips.", sheet: "Kept as a steak or sent to grind." },
-      shank:     { name: "Shank",      becomes: "Soup bones and osso buco \u2014 the start of the best broth you\u2019ll make.", sheet: "Soup bones kept or passed. Keep them." }
+      shank:     { name: "Shank",      becomes: "Soup bones and osso buco, the start of the best broth you\u2019ll make.", sheet: "Soup bones kept or passed. Keep them." }
     };
     var hi = {};
     chart.querySelectorAll("[data-cut-img]").forEach(function (im) {
@@ -463,5 +463,100 @@
       }
     }, { passive: true });
     applyParallax();
+  }
+
+
+  // --- products: category signs + full-catalogue popup ----------------------
+  var signgrid = document.getElementById("signgrid");
+  var pmodal = document.getElementById("pmodal");
+  if (signgrid && pmodal) {
+    var GLYPH = {
+      "Beef": "beef.png", "Pork": "pork.png", "Sausage": "sausage.png",
+      "Venison": "venison.png", "Lamb": "lamb.png", "Poultry": "poultry.svg",
+      "Woodville Deli": "deli.svg", "Misc.": "misc.svg"
+    };
+    var SHOT = {
+      "Beef": "beef", "Pork": "pork", "Sausage": "sausage", "Venison": "venison",
+      "Lamb": "lamb", "Poultry": "poultry", "Woodville Deli": "deli", "Misc.": "misc"
+    };
+    var lastFocus = null;
+
+    var openCat = function (cat) {
+      document.getElementById("pmodalTitle").textContent = cat.name;
+      document.getElementById("pmodalSub").textContent = cat.count + " items";
+      document.getElementById("pmodalGlyph").style.setProperty(
+        "--g", 'url("assets/img/cat/' + GLYPH[cat.name] + '")');
+      var body = document.getElementById("pmodalBody");
+      body.innerHTML = "";
+      cat.groups.forEach(function (g) {
+        var sec = document.createElement("div");
+        sec.className = "pgroup";
+        if (g.name) {
+          var h = document.createElement("h3");
+          h.innerHTML = '<i></i><span></span><i></i>';
+          h.querySelector("span").textContent = g.name;
+          sec.appendChild(h);
+        }
+        var ul = document.createElement("ul");
+        g.items.forEach(function (it) {
+          var li = document.createElement("li"), label = it, flags = [];
+          if (/-?\s*Award Winning!?/i.test(label)) {
+            flags.push(["award", "Award Winning!"]);
+            label = label.replace(/\s*-?\s*Award Winning!?/ig, "");
+          }
+          if (/\(Woodville [Ll]ocation [Oo]nly\)/.test(label)) {
+            flags.push(["wood", "Woodville only"]);
+            label = label.replace(/\s*\(Woodville [Ll]ocation [Oo]nly\)/g, "");
+          }
+          var chev = document.createElement("span");
+          chev.className = "pchev";
+          chev.setAttribute("aria-hidden", "true");
+          li.appendChild(chev);
+          var sp = document.createElement("span");
+          sp.textContent = label.trim();
+          li.appendChild(sp);
+          flags.forEach(function (f) {
+            var b = document.createElement("span");
+            b.className = "pflag pflag--" + f[0];
+            b.textContent = f[1];
+            li.appendChild(b);
+          });
+          ul.appendChild(li);
+        });
+        sec.appendChild(ul);
+        body.appendChild(sec);
+      });
+      body.scrollTop = 0;
+      lastFocus = document.activeElement;
+      pmodal.showModal();
+    };
+
+    document.getElementById("pmodalClose").addEventListener("click", function () { pmodal.close(); });
+    pmodal.addEventListener("click", function (e) { if (e.target === pmodal) pmodal.close(); });
+    pmodal.addEventListener("close", function () { if (lastFocus) lastFocus.focus(); });
+
+    fetch("assets/data/catalog.json").then(function (r) { return r.json(); }).then(function (cats) {
+      cats = cats.slice().sort(function (a, b) {
+        return (a.name === "Misc.") - (b.name === "Misc.");   // catch-all goes last
+      });
+      cats.forEach(function (cat) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "sign";
+        b.setAttribute("aria-label", "View " + cat.name + " products, " + cat.count + " items");
+        b.style.setProperty("--g", 'url("assets/img/cat/' + GLYPH[cat.name] + '")');
+        b.style.setProperty("--bg", 'url("assets/img/cat/photo/' + (SHOT[cat.name] || "wood") + '.webp")');
+        b.innerHTML =
+          '<span class="sign__bg"></span><span class="sign__vig"></span><span class="sign__grain"></span>' +
+          '<span class="sign__inner">' +
+            '<span class="sign__seal"><span class="sign__glyph"></span></span>' +
+            '<span class="sign__title">' + cat.name + '</span>' +
+            '<span class="sign__count" aria-hidden="true">' + cat.count + ' items</span>' +
+            '<span class="sign__btn">View Products</span>' +
+          '</span>';
+        b.addEventListener("click", function () { openCat(cat); });
+        signgrid.appendChild(b);
+      });
+    });
   }
 })();

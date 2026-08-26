@@ -1377,24 +1377,6 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
 .band-dark .photo--real:hover img { box-shadow: 3px 3px 0 var(--paper); }
 
 /* --- category icons (recoloured from the client's own artwork) ----------- */
-.cat-icons {
-  list-style: none; margin: 2rem 0 0; padding: 0;
-  display: grid; gap: clamp(1rem, 2.5vw, 2rem);
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-}
-.cat-icons li {
-  display: flex; flex-direction: column; align-items: center; gap: .75rem;
-  text-align: center;
-}
-.cat-icons img {
-  width: clamp(56px, 7vw, 84px); height: auto;
-  transition: transform .3s cubic-bezier(.16,1,.3,1);
-}
-.cat-icons li:hover img { transform: translateY(-4px) scale(1.06); }
-.cat-icons span {
-  font-family: var(--font-ui); font-size: .68rem; font-weight: 700;
-  letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2);
-}
 
 /* ==========================================================================
    REVIEW LABEL — a review printed as the label off a wrapped package.
@@ -1635,3 +1617,267 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
 .best__shot--real { padding: 0; overflow: hidden; display: block; }
 .best__shot--real::before { display: none; }
 .best__shot--real img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+
+/* ==========================================================================
+   SHARED PRODUCT LANGUAGE
+   Promoted out of index.html on 2026-08-26 so the sub-pages can use it too.
+   Was homepage-inline, which is why nothing here reached them before.
+   ========================================================================== */
+
+/* --- best sellers: no box fill, the frame sits around the picture -------- */
+.card--best {
+  position: relative; background: none; border: 0; padding: 0; overflow: visible;
+  transition: transform .35s cubic-bezier(.16,1,.3,1);
+}
+.card--best:hover { transform: translateY(-4px); }
+.card--best .best__shot {
+  border: 2px solid var(--ink);
+  outline: 1px solid color-mix(in srgb, var(--ink) 42%, transparent);
+  outline-offset: 6px;
+}
+.card--best h3 {
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(1rem,1.5vw,1.25rem); line-height: 1.05; letter-spacing: .04em;
+  color: var(--ink); text-align: center;
+  margin: .95rem 0 0;
+  padding-top: .6rem; border-top: 2px solid var(--oxblood);
+}
+.card--best p {
+  font-family: var(--font-ui); font-size: .8rem; color: var(--ink-3);
+  text-align: center; margin: .35rem 0 0;
+}
+@media (prefers-reduced-motion: reduce) { .card--best:hover { transform: none; } }
+
+/* --- products: the vintage category signs -------------------------------- */
+.products { padding-block: clamp(5rem, 12vh, 9rem); background: var(--paper-2); }
+.signgrid { display: grid; gap: 1.1rem; grid-template-columns: repeat(4, 1fr); margin-top: 2.5rem; }
+@media (max-width: 1100px) { .signgrid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px)  { .signgrid { grid-template-columns: 1fr; } }
+
+.sign {
+  position: relative; aspect-ratio: 4/3; display: block; width: 100%;
+  padding: 0; border: 0; background: var(--char); overflow: hidden;
+  cursor: pointer; font: inherit; color: var(--paper);
+  container-type: inline-size;
+  transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease;
+}
+.sign:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(20,16,13,.35); }
+.sign:focus-visible { outline: 3px solid var(--oxblood); outline-offset: 3px; }
+.sign__bg {
+  position: absolute; inset: 0; background: var(--bg) center/cover no-repeat;
+  filter: brightness(.58) contrast(1.04) saturate(.95);
+  transition: transform .6s cubic-bezier(.16,1,.3,1), filter .35s ease;
+}
+.sign:hover .sign__bg { transform: scale(1.045); filter: brightness(.66) contrast(1.04) saturate(.98); }
+.sign__vig { position: absolute; inset: 0;
+  background: radial-gradient(125% 95% at 50% 45%, transparent 40%, rgba(20,16,13,.52) 100%); }
+.sign__grain {
+  position: absolute; inset: 0; pointer-events: none; opacity: .3; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+}
+.sign__inner {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 3.4cqw; padding: 9%;
+}
+.sign__seal {
+  width: 21%; aspect-ratio: 1; border-radius: 50%; background: var(--oxblood);
+  display: grid; place-items: center; flex: none;
+  box-shadow: inset 0 0 0 2px var(--oxblood), inset 0 0 0 3px rgba(242,236,224,.8);
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease;
+}
+/* hover A: the seal presses, like a stamp coming down */
+.sign:hover .sign__seal {
+  transform: rotate(-8deg) scale(1.1);
+  box-shadow: inset 0 0 0 2px var(--oxblood), inset 0 0 0 3px rgba(242,236,224,.95),
+              0 8px 20px rgba(20,16,13,.45);
+}
+/* hover C: the item count reveals. Space is reserved so nothing shifts. */
+.sign__count {
+  font-family: var(--font-ui); font-weight: 700; font-size: clamp(.5rem, 1.6cqw, .68rem);
+  letter-spacing: .2em; text-transform: uppercase; flex: none;
+  color: color-mix(in srgb, var(--paper) 82%, transparent);
+  opacity: 0; transform: translateY(5px);
+  transition: opacity .3s ease, transform .3s cubic-bezier(.16,1,.3,1);
+}
+.sign:hover .sign__count, .sign:focus-visible .sign__count { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .sign__seal, .sign__count { transition: none; }
+  .sign:hover .sign__seal { transform: none; }
+}
+.sign__glyph {
+  width: 56%; aspect-ratio: 1; background-color: var(--paper);
+  -webkit-mask: var(--g) no-repeat center/contain; mask: var(--g) no-repeat center/contain;
+}
+.sign__title {
+  font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(1.3rem, 13cqw, 3.3rem); line-height: 1; letter-spacing: .02em;
+  text-align: center; margin: 0; flex: none; color: var(--paper);
+  text-shadow: 0 2px 10px rgba(20,16,13,.5);
+}
+.sign__btn {
+  background: var(--oxblood); color: var(--paper);
+  font-family: var(--font-ui); font-weight: 700;
+  font-size: clamp(.56rem, 1.9cqw, .8rem); letter-spacing: .2em; text-transform: uppercase;
+  padding: .8em 2em; flex: none; margin-top: 1cqw;
+  box-shadow: inset 0 0 0 1px var(--oxblood), inset 0 0 0 2px rgba(242,236,224,.9);
+  transition: background-color .22s ease;
+}
+.sign:hover .sign__btn { background: var(--oxblood-deep); }
+@media (prefers-reduced-motion: reduce) {
+  .sign, .sign__bg { transition: none; }
+  .sign:hover { transform: none; } .sign:hover .sign__bg { transform: none; }
+}
+
+/* --- products popup: the parchment menu card ----------------------------- */
+.pmodal {
+  border: 0; padding: 0; background: none; overflow: visible;
+  max-width: min(1080px, 94vw); width: 100%;
+}
+.pmodal::backdrop { background: rgba(20,16,13,.78); }
+.pmodal__sheet {
+  position: relative; isolation: isolate;
+  padding: clamp(2.4rem,4.4vw,3.4rem) clamp(1.8rem,3.6vw,3rem) clamp(2rem,3.6vw,3rem);
+  color: var(--ink);
+  background: #e8dec6;
+  box-shadow: 0 34px 90px rgba(0,0,0,.55);
+}
+.pmodal__sheet::before,
+.pmodal__sheet::after { content: ""; position: absolute; pointer-events: none; }
+.pmodal__sheet::before {
+  inset: 10px; border: 2px solid var(--ink); border-radius: 12px; opacity: .82;
+}
+.pmodal__sheet::after {
+  inset: 19px; border: 1px solid var(--ink); border-radius: 7px; opacity: .5;
+}
+.pmodal__close {
+  position: absolute; top: clamp(.9rem,2vw,1.5rem); right: clamp(.9rem,2vw,1.5rem); z-index: 3;
+  width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer;
+  background: var(--oxblood); display: grid; place-items: center;
+  transition: background-color .22s ease, transform .22s ease;
+}
+.pmodal__close:hover { background: var(--oxblood-deep); transform: rotate(90deg); }
+.pmodal__close::before, .pmodal__close::after {
+  content: ""; position: absolute; width: 18px; height: 2px; background: var(--paper);
+}
+.pmodal__close::before { transform: rotate(45deg); }
+.pmodal__close::after  { transform: rotate(-45deg); }
+
+.pmodal__head {
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(.9rem,2vw,1.6rem); margin: 0 0 clamp(1.6rem,3vw,2.4rem);
+  padding-inline: clamp(1.5rem,4vw,3.5rem);
+}
+.pmodal__seal {
+  width: clamp(58px,8vw,104px); aspect-ratio: 1; border-radius: 50%;
+  background: var(--oxblood); display: grid; place-items: center; flex: none;
+  box-shadow: inset 0 0 0 2px var(--oxblood), inset 0 0 0 3px rgba(242,236,224,.8);
+}
+.pmodal__glyph {
+  width: 56%; aspect-ratio: 1; background-color: var(--paper);
+  -webkit-mask: var(--g) no-repeat center/contain; mask: var(--g) no-repeat center/contain;
+}
+.pmodal__title {
+  font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(2rem,6.4vw,4rem); line-height: .92; letter-spacing: .04em;
+  margin: 0; color: #241c14; text-wrap: balance;
+}
+.pmodal__sub {
+  font-family: var(--font-ui); font-size: .62rem; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: color-mix(in srgb, #241c14 55%, transparent);
+  margin: .4rem 0 0; text-align: center;
+}
+.pmodal__body {
+  position: relative; max-height: min(64vh, 660px); overflow-y: auto;
+  padding-inline: clamp(1rem,2.4vw,2rem);
+  columns: 2; column-gap: clamp(1.8rem,4vw,3.2rem);
+  column-rule: 1px dotted color-mix(in srgb, var(--oxblood) 55%, transparent);
+}
+/* columns:1 is still a multicol container, and break-inside:avoid then pushes
+   each group to a fresh fragment, leaving a tall gap. columns:auto opts out. */
+@media (max-width: 720px) { .pmodal__body { columns: auto; column-rule: 0; } }
+
+.pgroup { break-inside: avoid; margin: 0 0 1.8rem; }
+.pgroup h3 {
+  display: flex; align-items: center; gap: .55rem; margin: 0 0 .7rem;
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(1.05rem,2.2vw,1.5rem); line-height: 1; letter-spacing: .06em;
+  color: #241c14;
+}
+.pgroup h3 i { flex: 1; height: 2px; background: var(--oxblood); min-width: 14px; }
+.pgroup ul { list-style: none; margin: 0; padding: 0; }
+.pgroup li {
+  display: flex; gap: .55rem; align-items: flex-start; flex-wrap: wrap;
+  font-family: var(--font-ui); font-size: clamp(.85rem,1.5vw,.98rem); line-height: 1.4;
+  padding: .26rem 0; color: #3a2f24;
+}
+.pchev { position: relative; width: 13px; height: 1em; flex: none; }
+.pchev::before, .pchev::after {
+  content: ""; position: absolute; top: .32em; width: 6px; height: 6px;
+  border-right: 2px solid var(--oxblood); border-top: 2px solid var(--oxblood);
+  transform: rotate(45deg);
+}
+.pchev::before { left: 0; } .pchev::after { left: 5px; }
+.pflag {
+  font-family: var(--font-ui); font-size: .56rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; padding: .16rem .42rem; white-space: nowrap; align-self: center;
+}
+.pflag--award { background: var(--oxblood); color: var(--paper); }
+.pflag--wood { border: 1px solid color-mix(in srgb, #3a2f24 35%, transparent); color: #6b5c4a; }
+@media (prefers-reduced-motion: reduce) { .pmodal__close:hover { transform: none; } }
+
+/* ==========================================================================
+   SUB-PAGE ALIGNMENT (2026-08-26)
+   The sub-pages carried the palette and type but none of the homepage's
+   card, photo or dark-band treatment, because all of it was inline in
+   index.html. These rules bring them onto the same language.
+   ========================================================================== */
+
+/* Photographs get the frame outside the picture, as on the best sellers. */
+.hero__grid .photo,
+.card .photo,
+.photo--real {
+  border: 2px solid var(--ink);
+  outline: 1px solid color-mix(in srgb, var(--ink) 42%, transparent);
+  outline-offset: 6px;
+}
+.band-dark .hero__grid .photo,
+.band-dark .card .photo,
+.band-dark .photo--real {
+  border-color: var(--paper);
+  outline-color: color-mix(in srgb, var(--paper) 40%, transparent);
+}
+
+/* Cards: name over an oxblood rule, matching the best-seller cards. */
+.card > h3 {
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.05; letter-spacing: .04em;
+  padding-top: .6rem; border-top: 2px solid var(--oxblood);
+  margin-bottom: .5rem;
+}
+.band-dark .card > h3 { border-top-color: var(--oxblood); }
+.card--raised { background: none; border: 0; box-shadow: none; padding: 0; }
+.card--raised:hover { transform: translateY(-4px); box-shadow: none; }
+.card--raised .photo { margin: 0 0 1.3rem; border-inline: 2px solid var(--ink); border-top: 2px solid var(--ink); }
+
+/* Sub-page hero: same rhythm and headline weight as the homepage sections. */
+.hero { padding-block: clamp(4rem, 10vw, 8rem) clamp(3rem, 7vw, 5.5rem); }
+.hero h1 {
+  font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+  letter-spacing: -.03em; line-height: .96;
+  font-size: clamp(2.2rem, 5.6vw, 4.2rem);
+}
+.hero .lede { max-width: 38ch; }
+.hero__grid .photo { align-self: stretch; }
+
+/* Dark bands pick up the smoke and grain the dry-aging panel uses. */
+.band-dark { position: relative; isolation: isolate; overflow: hidden; }
+.band-dark::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: -1;
+  opacity: .22; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+}
+.band-dark h2 { letter-spacing: -.02em; }
+
+/* The sign row sits on paper-2 wherever it appears, as on the homepage. */
+.products { padding-block: clamp(5rem, 12vh, 9rem); background: var(--paper-2); }

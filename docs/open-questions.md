@@ -140,3 +140,17 @@ each case.
     A blanket `.seq__sticky > *` rule had overridden `position: absolute` on the
     counter, label and bar, which is what moved the number left and dropped the
     bar on top of the copy.
+
+24. **Sub-page consistency pass, 2026-08-26.** Root cause of the drift: every
+    piece of homepage design lived in index.html's inline <style>, so the
+    sub-pages, which link only site.css, inherited none of it. The shared card,
+    sign and popup CSS is now in site.css, and the products JS is in site.js.
+    Applied to all five sub-pages: framed photographs, cards with the oxblood
+    rule over the name, restyled heroes, grain on the dark bands.
+    in-the-case.html now runs the real sign row and popup in place of the
+    duplicate .cat-icons list; assets/img/icons/ and its CSS are deleted.
+    Also removed three em dashes that were still in the cut-chart copy in
+    site.js, which had escaped the earlier sweep because they were \u2014
+    escapes rather than literal characters.
+    **Still open:** visit.html has no photography at all, and only six real
+    photos exist across the five sub-pages.
