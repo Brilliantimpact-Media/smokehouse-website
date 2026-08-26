@@ -36,8 +36,8 @@
   font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
   font-size: clamp(1rem,1.5vw,1.25rem); line-height: 1.05; letter-spacing: .04em;
   color: var(--ink); text-align: center;
-  margin: clamp(1.4rem,2.4vw,1.8rem) 0 0;
-  padding-top: .8rem; border-top: 2px solid var(--oxblood);
+  margin: .95rem 0 0;
+  padding-top: .6rem; border-top: 2px solid var(--oxblood);
 }
 .card--best p {
   font-family: var(--font-ui); font-size: .8rem; color: var(--ink-3);
@@ -268,7 +268,7 @@
   position: sticky; top: 0; height: 100vh; overflow: hidden;
   display: grid; align-content: center; gap: clamp(1.5rem, 4vh, 3rem);
   padding-inline: var(--gutter);
-  padding-bottom: 17vh;                 /* keeps the copy clear of the grass line */
+  padding-bottom: 20vh;                 /* keeps the copy clear of the grass line */
 }
 .seq__main {
   display: grid; grid-template-columns: minmax(0,1fr) auto;
@@ -360,7 +360,7 @@
   .seq__cow, .seq__grass { transition: none; }
 }
 .seq__label {
-  position: absolute; bottom: calc(9vh + 34px); left: var(--gutter);
+  position: absolute; bottom: calc(9vh + 78px); left: var(--gutter);
   font-family: var(--font-ui); font-size: .72rem; font-weight: 600;
   letter-spacing: .16em; text-transform: uppercase;
   color: color-mix(in srgb, var(--paper) 55%, transparent);
@@ -376,8 +376,9 @@
 /* --- award winners row ---------------------------------------------------- */
 .winners { padding-block: clamp(5rem, 12vh, 9rem) !important; background: var(--paper-2); }
 .winners__row {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem; align-items: start;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.8rem, 3.4vw, 3.2rem); align-items: start;
+  max-width: 1060px; margin-inline: auto;
 }
 @media (max-width: 900px) { .winners__row { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .winners__row { grid-template-columns: 1fr; } }
