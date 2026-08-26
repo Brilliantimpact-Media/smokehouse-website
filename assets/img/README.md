@@ -19,8 +19,10 @@ looks. There are only three real product photographs on the whole site
 never replaced. Nothing there is usable.
 
 So these slots still need a real shoot and cannot be filled from the old site:
-- the five named award winners (Cheddar Garden Brat, Hungarian Kielbasa,
-  Butches Franks, thick-cut and regular bacon) — no individual product shots exist
+- the five named best sellers (Cheddar Garden Brat, Butches Franks, thick-cut and
+  regular bacon, Smoked Boneless Ham): no individual product shots exist. Ham
+  replaced Hungarian Kielbasa on 2026-08-26 (kielbasa has no award record; ham is
+  their most-decorated product) and is the one slot still showing a hatch.
 - the two matched steaks for the homepage comparison wipe
 - the retail case, the deli counter, the dry-aging room, the crew at work,
   and the Durand building exterior
@@ -93,8 +95,10 @@ looks. There are only three real product photographs on the whole site
 never replaced. Nothing there is usable.
 
 So these slots still need a real shoot and cannot be filled from the old site:
-- the five named award winners (Cheddar Garden Brat, Hungarian Kielbasa,
-  Butches Franks, thick-cut and regular bacon) — no individual product shots exist
+- the five named best sellers (Cheddar Garden Brat, Butches Franks, thick-cut and
+  regular bacon, Smoked Boneless Ham): no individual product shots exist. Ham
+  replaced Hungarian Kielbasa on 2026-08-26 (kielbasa has no award record; ham is
+  their most-decorated product) and is the one slot still showing a hatch.
 - the two matched steaks for the homepage comparison wipe
 - the retail case, the deli counter, the dry-aging room, the crew at work,
   and the Durand building exterior

@@ -63,3 +63,20 @@ each case.
 - "We Put the Thrill Back Into the Grill!" — retired.
 - Substituting the logo's "Crafted Meat & Processing" descriptor for the tagline.
 - Copying the current site's layout, tone, or structure.
+
+## Resolved 2026-08-26
+
+13. **Kielbasa award claim / missing ham — RESOLVED.** The "Hungarian Style
+    Kielbasa" card had no supporting award record on the client's own /awards
+    page, and ham (their most-decorated product) was absent from the site.
+    Per client direction the kielbasa card was replaced with **Smoked Boneless
+    Ham**, and the generic "Award-winning." line was replaced with the client's
+    own wording from /awards: **"Grand Champion, Ham Boneless Commercial"**
+    (2017 National). Ham also holds 2019 International Gold for Boneless and
+    Semi-Boneless Ham, and 2019 State Reserve Grand Champion (Commercial
+    Boneless) and Champion (Traditional Boneless), if a stronger or different
+    line is wanted later.
+    **Still open:** the ham slot has no photograph, so it currently shows the
+    hatched "Ham photo pending" placeholder while the other four cards show
+    generated stand-ins. Also, the review label further up the homepage still
+    names the Hungarian Style Kielbasa.
