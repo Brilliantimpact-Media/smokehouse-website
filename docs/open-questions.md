@@ -154,3 +154,15 @@ each case.
     escapes rather than literal characters.
     **Still open:** visit.html has no photography at all, and only six real
     photos exist across the five sub-pages.
+
+25. **REGRESSION, found and fixed same day.** Promoting the sign and popup CSS
+    out of index.html into site.css broke every category photograph and seal
+    glyph on the products row. A relative url() carried in a custom property
+    resolves against the stylesheet that CONSUMES it, so
+    url("assets/img/cat/...") became assets/css/assets/img/cat/... and 404'd.
+    The tiles rendered as flat charcoal with empty seals.
+    Fixed by not routing paths through custom properties at all: site.js now
+    sets background-image and mask-image inline on the elements, which resolves
+    against the document. The CSS keeps only the non-URL longhands.
+    LESSON: moving CSS between files changes the base URL for every relative
+    url() in it, including ones passed through variables.

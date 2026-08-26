@@ -481,11 +481,19 @@
     };
     var lastFocus = null;
 
+    // url() written into a custom property resolves against the stylesheet that
+    // consumes it, which is assets/css/site.css, not the page. Setting the image
+    // longhands inline keeps every path relative to the document instead.
+    var setMask = function (el, path) {
+      el.style.webkitMaskImage = 'url("' + path + '")';
+      el.style.maskImage = 'url("' + path + '")';
+    };
+
     var openCat = function (cat) {
       document.getElementById("pmodalTitle").textContent = cat.name;
       document.getElementById("pmodalSub").textContent = cat.count + " items";
-      document.getElementById("pmodalGlyph").style.setProperty(
-        "--g", 'url("assets/img/cat/' + GLYPH[cat.name] + '")');
+      var pg = document.getElementById("pmodalGlyph");
+      setMask(pg, "assets/img/cat/" + GLYPH[cat.name]);
       var body = document.getElementById("pmodalBody");
       body.innerHTML = "";
       cat.groups.forEach(function (g) {
@@ -544,8 +552,7 @@
         b.type = "button";
         b.className = "sign";
         b.setAttribute("aria-label", "View " + cat.name + " products, " + cat.count + " items");
-        b.style.setProperty("--g", 'url("assets/img/cat/' + GLYPH[cat.name] + '")');
-        b.style.setProperty("--bg", 'url("assets/img/cat/photo/' + (SHOT[cat.name] || "wood") + '.webp")');
+  
         b.innerHTML =
           '<span class="sign__bg"></span><span class="sign__vig"></span><span class="sign__grain"></span>' +
           '<span class="sign__inner">' +
@@ -554,7 +561,10 @@
             '<span class="sign__count" aria-hidden="true">' + cat.count + ' items</span>' +
             '<span class="sign__btn">View Products</span>' +
           '</span>';
-        b.addEventListener("click", function () { openCat(cat); });
+        b.querySelector(".sign__bg").style.backgroundImage =
+        'url("assets/img/cat/photo/' + (SHOT[cat.name] || "wood") + '.webp")';
+      setMask(b.querySelector(".sign__glyph"), "assets/img/cat/" + GLYPH[cat.name]);
+      b.addEventListener("click", function () { openCat(cat); });
         signgrid.appendChild(b);
       });
     });

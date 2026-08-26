@@ -1665,7 +1665,8 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
 .sign:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(20,16,13,.35); }
 .sign:focus-visible { outline: 3px solid var(--oxblood); outline-offset: 3px; }
 .sign__bg {
-  position: absolute; inset: 0; background: var(--bg) center/cover no-repeat;
+  position: absolute; inset: 0;
+  background-position: center; background-size: cover; background-repeat: no-repeat;
   filter: brightness(.58) contrast(1.04) saturate(.95);
   transition: transform .6s cubic-bezier(.16,1,.3,1), filter .35s ease;
 }
@@ -1707,7 +1708,8 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
 }
 .sign__glyph {
   width: 56%; aspect-ratio: 1; background-color: var(--paper);
-  -webkit-mask: var(--g) no-repeat center/contain; mask: var(--g) no-repeat center/contain;
+  -webkit-mask-repeat: no-repeat; -webkit-mask-position: center; -webkit-mask-size: contain;
+          mask-repeat: no-repeat;         mask-position: center;         mask-size: contain;
 }
 .sign__title {
   font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
@@ -1775,7 +1777,8 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
 }
 .pmodal__glyph {
   width: 56%; aspect-ratio: 1; background-color: var(--paper);
-  -webkit-mask: var(--g) no-repeat center/contain; mask: var(--g) no-repeat center/contain;
+  -webkit-mask-repeat: no-repeat; -webkit-mask-position: center; -webkit-mask-size: contain;
+          mask-repeat: no-repeat;         mask-position: center;         mask-size: contain;
 }
 .pmodal__title {
   font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
