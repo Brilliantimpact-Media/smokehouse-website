@@ -1633,3 +1633,7 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
 }
 .card--best:hover .best__seal { transform: rotate(-3deg) scale(1.06); }
 .card--best h3 { margin-top: 1rem; }
+/* real product shot fills the square slot; the hatch and label step aside */
+.best__shot--real { padding: 0; overflow: hidden; display: block; }
+.best__shot--real::before { display: none; }
+.best__shot--real img { width: 100%; height: 100%; object-fit: cover; display: block; }
