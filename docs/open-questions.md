@@ -43,8 +43,8 @@ each case.
    locations, and whether deer-season hours differ.
 9. **"Decades" wording — RESOLVED 2026-08-26.** Client confirmed the singular:
    "The SmokeHouse has been earning this craft for **over a decade**." Applied to
-   the statement aside and to the sequence heading, now "Decade of craft, one
-   crew", matching the guide's own headline.
+   the statement aside and to the sequence heading, now "A decade of craft, one
+   crew" (client wording, 2026-08-26).
    **Deliberately NOT changed: about.html.** Its "Decades on the Chippewa" and
    "smoking meat for decades" describe the shop and the site, not the current
    ownership, and the very next sentence supports it: the previous owner ran it

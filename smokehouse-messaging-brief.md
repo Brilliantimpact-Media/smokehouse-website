@@ -200,7 +200,7 @@ order · Pricing that is fast and clear, doesn't waste your time
 - **Custom-to-Order** — Every order is cut to the customer's exact specs, not pulled
   from a pre-set package or a standard cut list. What you order is what you get, not
   what's convenient to produce.
-- **Decade of Craft, One Crew** (client confirmed singular, 2026-08-26) - Dry-aging, hand-cutting, and smoking every order
+- **A Decade of Craft, One Crew** (client confirmed singular, 2026-08-26) - Dry-aging, hand-cutting, and smoking every order
   ourselves. The SmokeHouse sources, processes, and smokes meat the way it's supposed
   to be done. *(The guide's heading reads "Decade of Craft, One Crew" while its body
   says "Decades" — treated as a typo in the guide; see `docs/open-questions.md`.)*
