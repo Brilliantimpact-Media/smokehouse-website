@@ -132,7 +132,7 @@ feeding a family or stocking a restaurant kitchen.
 
 **Authority — VERBATIM**
 
-> The SmokeHouse has been earning this craft for decades. We source, process, and
+> The SmokeHouse has been earning this craft for over a decade. We source, process, and
 > smoke meat the way it's supposed to be done, not the way a plant does it. Every
 > order gets the same care, whether it's a split beef order or a standing wholesale
 > account.
@@ -200,7 +200,7 @@ order · Pricing that is fast and clear, doesn't waste your time
 - **Custom-to-Order** — Every order is cut to the customer's exact specs, not pulled
   from a pre-set package or a standard cut list. What you order is what you get, not
   what's convenient to produce.
-- **Decades of Craft, One Crew** — Dry-aging, hand-cutting, and smoking every order
+- **Decade of Craft, One Crew** (client confirmed singular, 2026-08-26) - Dry-aging, hand-cutting, and smoking every order
   ourselves. The SmokeHouse sources, processes, and smokes meat the way it's supposed
   to be done. *(The guide's heading reads "Decade of Craft, One Crew" while its body
   says "Decades" — treated as a typo in the guide; see `docs/open-questions.md`.)*

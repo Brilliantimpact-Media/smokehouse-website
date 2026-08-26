@@ -41,9 +41,17 @@ each case.
    featured on `about.html`; confirm both are still active or remove.
 8. **Hours** — carried from the current site; confirm they're current, apply to both
    locations, and whether deer-season hours differ.
-9. **"Decades" wording** — the guide's competitor page headline reads "Decade of
-   Craft, One Crew" while its body copy says decades; the site uses "Decades."
-   Confirm.
+9. **"Decades" wording — RESOLVED 2026-08-26.** Client confirmed the singular:
+   "The SmokeHouse has been earning this craft for **over a decade**." Applied to
+   the statement aside and to the sequence heading, now "Decade of craft, one
+   crew", matching the guide's own headline.
+   **Deliberately NOT changed: about.html.** Its "Decades on the Chippewa" and
+   "smoking meat for decades" describe the shop and the site, not the current
+   ownership, and the very next sentence supports it: the previous owner ran it
+   34 years and the current owners bought the business in 2011. Changing those
+   would contradict the copy around them. The meta description still says
+   "serving the Chippewa and St. Croix Valley for decades" and reads either way.
+   Flagged for the client to confirm.
 
 ## Feature decisions (proposed, not built — need approval per the creative mandate)
 
@@ -166,3 +174,12 @@ each case.
     against the document. The CSS keeps only the non-URL longhands.
     LESSON: moving CSS between files changes the base URL for every relative
     url() in it, including ones passed through variables.
+
+26. **Client feedback 2026-08-25, second item is moot.** "Text overlay on the what
+    are you here for section, second black box, shorten 'you are' to 'you're'."
+    That three-column persona section was removed on 2026-08-26 at the client's
+    own request, so both the overlay and the title are gone. No "what are you
+    here for" copy remains anywhere on the site. The only text that briefly
+    overlaps now is the dry-aging panel crossfade, which is intentional and
+    settles to a single panel; measured one visible panel at rest at every scroll
+    position.
