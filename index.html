@@ -143,10 +143,18 @@
 /* --- award winners row ---------------------------------------------------- */
 .winners { padding-block: clamp(5rem, 12vh, 9rem) !important; background: var(--paper-2); }
 .winners__row {
-  display: grid; grid-auto-flow: column; grid-auto-columns: clamp(240px, 26vw, 320px);
-  gap: 1.25rem; overflow-x: auto; padding-bottom: 1rem;
+  display: grid; grid-auto-flow: column;
+  grid-auto-columns: clamp(280px, 30vw, 380px);
+  gap: 1.25rem;
+  overflow-x: auto;
+  /* overflow-x:auto makes the other axis auto too, which was producing a
+     short vertical scroll; pin it and let the cards size themselves */
+  overflow-y: hidden;
+  align-items: start;
   scroll-snap-type: x mandatory;
+  scrollbar-width: none;
 }
+.winners__row::-webkit-scrollbar { display: none; }
 .winners__row > article { scroll-snap-align: start; }
 
 /* --- closing -------------------------------------------------------------- */
@@ -575,12 +583,12 @@
     <div class="shell">
       <p class="eyebrow" data-reveal="fade">Award winners</p>
       <h2 data-reveal>Five things people drive here for.</h2>
-      <div class="winners__row" style="margin-top:2.5rem">
-        <article class="card" data-reveal><div class="photo photo--square"><span>Photo placeholder</span></div><h3>Cheddar Garden Brat</h3><p>Award-winning.</p></article>
-        <article class="card" data-reveal><div class="photo photo--square"><span>Photo placeholder</span></div><h3>Hungarian Style Kielbasa</h3><p>Award-winning.</p></article>
-        <article class="card" data-reveal><div class="photo photo--square"><span>Photo placeholder</span></div><h3>Butches Franks</h3><p>Award-winning.</p></article>
-        <article class="card" data-reveal><div class="photo photo--square"><span>Photo placeholder</span></div><h3>Thick-Cut Bacon</h3><p>Award-winning.</p></article>
-        <article class="card" data-reveal><div class="photo photo--square"><span>Photo placeholder</span></div><h3>Regular Bacon</h3><p>Award-winning.</p></article>
+      <div class="winners__row" style="margin-top:2.5rem" data-reveal>
+        <article class="card"><div class="photo photo--square"><span>Photo placeholder</span></div><h3>Cheddar Garden Brat</h3><p>Award-winning.</p></article>
+        <article class="card"><div class="photo photo--square"><span>Photo placeholder</span></div><h3>Hungarian Style Kielbasa</h3><p>Award-winning.</p></article>
+        <article class="card"><div class="photo photo--square"><span>Photo placeholder</span></div><h3>Butches Franks</h3><p>Award-winning.</p></article>
+        <article class="card"><div class="photo photo--square"><span>Photo placeholder</span></div><h3>Thick-Cut Bacon</h3><p>Award-winning.</p></article>
+        <article class="card"><div class="photo photo--square"><span>Photo placeholder</span></div><h3>Regular Bacon</h3><p>Award-winning.</p></article>
       </div>
       <p class="annot" style="margin-top:1.6rem">Ask for these by name.</p>
       <p style="margin-top:1rem"><a class="link-cta" href="in-the-case.html">See what’s in the case this week</a></p>

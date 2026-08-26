@@ -891,9 +891,8 @@ html.js [data-reveal].in .plabel {
 /* --- Handwritten butcher annotation -------------------------------------- */
 .annot {
   font-family: var(--font-hand);
-  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+  font-size: clamp(1.45rem, 2.1vw, 2rem);
   color: var(--accent);
-  transform: rotate(-2.5deg);
   display: inline-block;
   line-height: 1.25;
 }
