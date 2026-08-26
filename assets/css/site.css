@@ -128,6 +128,9 @@ p:last-child { margin-bottom: 0; }
   content: ""; width: 26px; height: 10px; flex: none;
   background: repeating-linear-gradient(90deg, var(--accent) 0 3px, transparent 3px 6px);
 }
+/* --plain has been in the markup all along with no rule behind it, so the tick
+   marks it was meant to suppress were still drawing. */
+.eyebrow--plain::before { display: none; }
 
 /* --- Buttons: sturdy stock, heavy rule, stamp-press on hover ------------- */
 .btn {
@@ -948,7 +951,10 @@ td { border-bottom: 1px solid var(--rule); }
 .site-footer .wordmark,
 .band-dark .wordmark { color: var(--paper); }
 .site-footer .wordmark { --logo-h: 82px; margin-bottom: 1.5rem; }
-@media (max-width: 560px) { .wordmark { --logo-h: 40px; } }
+/* header mark was 54px, too timid next to the footer lockup; matched to it */
+.site-header .wordmark { --logo-h: 78px; }
+@media (max-width: 1000px) { .site-header .wordmark { --logo-h: 60px; } }
+@media (max-width: 560px)  { .site-header .wordmark { --logo-h: 46px; } .site-footer .wordmark { --logo-h: 64px; } }
 
 /* --- Tagline (confirmed 2026-08-25) -------------------------------------- */
 .tagline {

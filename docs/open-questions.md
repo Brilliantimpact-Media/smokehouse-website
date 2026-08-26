@@ -81,3 +81,27 @@ each case.
     hatched "Ham photo pending" placeholder while the other four cards show
     generated stand-ins. Also, the review label further up the homepage still
     names the Hungarian Style Kielbasa.
+
+## Client revision round 1, applied 2026-08-26
+
+14. **Homepage reordered** to the client's numbering: hero, statement, best
+    sellers, products, comparison graphic + chart, dry-aging sequence, reviews,
+    two locations, closing CTA. Item 10 "cutting / custom processing" was
+    confirmed by the client as the existing "One does the cutting. One does the
+    counter." locations row, not a new section.
+15. **Removed:** the scrolling marquee ticker and the "What are you here for"
+    three-column persona row, with their CSS and JS.
+16. **Header logo** raised from 54px to 78px to sit with the footer lockup
+    (60px under 1000px, 46px under 560px). Applies to every page.
+17. **Hero tagline** enlarged and reversed to full paper with a double shadow.
+    While doing it: `.eyebrow--plain` had been in the markup since the start with
+    no rule behind it, so the tick marks it was meant to suppress were still
+    drawing on the hero. Now implemented.
+18. **Best sellers** cut to four (thick-cut bacon removed), retitled
+    "Award-Winning Meat That's Worth the Drive" with "Best sellers" demoted to
+    the eyebrow, and the row changed from a scrolling carousel to a four-column
+    grid so it fits without scrolling.
+19. **Products row added** using the approved sign design: their eight
+    categories, each opening the full grouped catalogue popup.
+    **Still open:** the popup itself has had no design pass, it is currently the
+    plain two-column list from the preview.
