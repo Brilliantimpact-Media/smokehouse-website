@@ -74,12 +74,32 @@
 }
 .sign__inner {
   position: absolute; inset: 0; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 4.4cqw; padding: 9%;
+  align-items: center; justify-content: center; gap: 3.4cqw; padding: 9%;
 }
 .sign__seal {
   width: 21%; aspect-ratio: 1; border-radius: 50%; background: var(--oxblood);
   display: grid; place-items: center; flex: none;
   box-shadow: inset 0 0 0 2px var(--oxblood), inset 0 0 0 3px rgba(242,236,224,.8);
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease;
+}
+/* hover A: the seal presses, like a stamp coming down */
+.sign:hover .sign__seal {
+  transform: rotate(-8deg) scale(1.1);
+  box-shadow: inset 0 0 0 2px var(--oxblood), inset 0 0 0 3px rgba(242,236,224,.95),
+              0 8px 20px rgba(20,16,13,.45);
+}
+/* hover C: the item count reveals. Space is reserved so nothing shifts. */
+.sign__count {
+  font-family: var(--font-ui); font-weight: 700; font-size: clamp(.5rem, 1.6cqw, .68rem);
+  letter-spacing: .2em; text-transform: uppercase; flex: none;
+  color: color-mix(in srgb, var(--paper) 82%, transparent);
+  opacity: 0; transform: translateY(5px);
+  transition: opacity .3s ease, transform .3s cubic-bezier(.16,1,.3,1);
+}
+.sign:hover .sign__count, .sign:focus-visible .sign__count { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .sign__seal, .sign__count { transition: none; }
+  .sign:hover .sign__seal { transform: none; }
 }
 .sign__glyph {
   width: 56%; aspect-ratio: 1; background-color: var(--paper);
@@ -289,13 +309,8 @@
 
 /* stylisation pass: the panel was flat charcoal, so it now carries the same
    smoke, oxblood and letterpress the hero does. Structure and copy unchanged. */
-.seq__sticky::before, .seq__sticky::after {
+.seq__sticky::after {
   content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-}
-.seq__sticky::before {
-  background:
-    radial-gradient(78% 62% at 10% 16%, rgba(122,31,38,.34), transparent 62%),
-    radial-gradient(70% 70% at 94% 90%, rgba(122,31,38,.20), transparent 66%);
 }
 .seq__sticky::after {
   opacity: .26; mix-blend-mode: overlay;
@@ -328,16 +343,22 @@
   -webkit-mask: url("assets/img/grass.svg") repeat-x bottom left / 72px 22px;
           mask: url("assets/img/grass.svg") repeat-x bottom left / 72px 22px;
   opacity: .9; pointer-events: none;
+  /* everything the cow has walked past has been eaten */
+  clip-path: inset(0 0 0 var(--q, 0%));
+  transition: clip-path .18s linear;
 }
 .seq__cow {
-  position: absolute; left: 0; bottom: 1px; width: clamp(46px, 5vw, 68px);
-  aspect-ratio: 124 / 92; transform: translateX(-58%);
+  position: absolute; left: var(--q, 0%); bottom: 2px;
+  width: clamp(62px, 6.5vw, 96px); aspect-ratio: 420 / 262;
+  transform: translateX(-88%);              /* muzzle lands on the grass edge */
   background-color: var(--paper);
-  -webkit-mask: url("assets/img/cow.svg") no-repeat center / contain;
-          mask: url("assets/img/cow.svg") no-repeat center / contain;
+  -webkit-mask: url("assets/img/cow.png") no-repeat center bottom / contain;
+          mask: url("assets/img/cow.png") no-repeat center bottom / contain;
   transition: left .18s linear; pointer-events: none;
 }
-@media (prefers-reduced-motion: reduce) { .seq__cow { transition: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .seq__cow, .seq__grass { transition: none; }
+}
 .seq__label {
   position: absolute; bottom: calc(9vh + 34px); left: var(--gutter);
   font-family: var(--font-ui); font-size: .72rem; font-weight: 600;
@@ -1000,11 +1021,11 @@
   var panels = Array.prototype.slice.call(document.querySelectorAll(".seq__panel"));
   var seqNum = document.getElementById("seq-num");
   var seqBar = document.getElementById("seq-bar");
-  var seqCow = document.getElementById("seq-cow");
   var clamp = function (v) { return Math.max(0, Math.min(1, v)); };
 
   if (reduce && seq) {
     seq.style.height = "auto";
+    seq.style.setProperty("--q", "10%");   /* no scroll driver, so park the cow */
     panels.forEach(function (pn) { pn.classList.add("active"); pn.style.position = "relative"; });
   } else if (seq) {
     var update = function () {
@@ -1014,7 +1035,7 @@
       panels.forEach(function (pn, i) { pn.classList.toggle("active", i === idx); });
       seqNum.textContent = "0" + (idx + 1);
       seqBar.style.width = (q * 100) + "%";
-      if (seqCow) seqCow.style.left = (q * 100) + "%";
+      seq.style.setProperty("--q", (q * 100) + "%");
     };
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
@@ -1103,6 +1124,7 @@
           '<span class="sign__inner">' +
             '<span class="sign__seal"><span class="sign__glyph"></span></span>' +
             '<span class="sign__title">' + cat.name + '</span>' +
+            '<span class="sign__count" aria-hidden="true">' + cat.count + ' items</span>' +
             '<span class="sign__btn">View Products</span>' +
           '</span>';
         b.addEventListener("click", function () { openCat(cat); });
