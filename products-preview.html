@@ -55,6 +55,22 @@
   font-family:var(--font-display);font-size:2.6rem;font-weight:900;opacity:.16;
   display:flex;align-items:flex-start;line-height:.8}
 
+/* art 1b: mark over photo */
+.tile--onphoto{justify-content:flex-end;color:var(--paper);background:var(--char);overflow:hidden;border-color:var(--ink)}
+.tile--onphoto .tile__bg{position:absolute;inset:0;background-size:cover;background-position:center;
+  filter:grayscale(.25) brightness(.55) contrast(1.05);transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.tile--onphoto:hover .tile__bg{transform:scale(1.05)}
+.tile--onphoto::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(20,16,13,.15) 0%,rgba(20,16,13,.82) 78%)}
+.tile--onphoto:hover{background:var(--char);color:var(--paper);transform:translateY(-3px)}
+.tile--onphoto .tile__art,.tile--onphoto .tile__name,.tile--onphoto .tile__count{position:relative;z-index:2}
+.tile--onphoto .tile__art{width:clamp(46px,28%,72px);aspect-ratio:1;margin-bottom:auto;
+  background-color:currentColor;opacity:.95;
+  -webkit-mask:var(--g) no-repeat center/contain;mask:var(--g) no-repeat center/contain}
+.tile--onphoto .tile__name,.tile--onphoto .tile__count{display:block}
+.tile--onphoto .tile__count{color:color-mix(in srgb,var(--paper) 62%,transparent)}
+.tile--onphoto.no-photo .tile__bg{background:var(--ink)}
+
 /* art 2: type only */
 .tile--type{justify-content:space-between;min-height:200px}
 .tile--type .tile__idx{font-family:var(--font-ui);font-size:.6rem;font-weight:700;letter-spacing:.18em;
@@ -150,6 +166,12 @@
       here with a letter placeholder so you can see the gap: those three would need drawing.</p>
     <div class="pv-grid" id="art1"></div>
 
+    <h3 style="margin-top:3.5rem">Art 1b, the mark over a photo</h3>
+    <p class="pv-note">Your "image behind it" idea. Same marks, dropped on a darkened photo with the type
+      reversed out. Only four stand-ins exist so the other four fall back to a flat ink ground, which is
+      what the real thing would do until a shoot happens.</p>
+    <div class="pv-grid" id="art1b"></div>
+
     <h3 style="margin-top:3.5rem">Art 2, type only</h3>
     <p class="pv-note">No art at all. Nothing to commission, nothing to replace before launch.</p>
     <div class="pv-grid" id="art2"></div>
@@ -174,7 +196,8 @@
 </dialog>
 
 <script>
-const ART = {Beef:'beef', Pork:'pork', Sausage:'sausage', Venison:'venison', Lamb:'lamb'};
+const ART = {Beef:'beef.png', Pork:'pork.png', Sausage:'sausage.png', Venison:'venison.png',
+  Lamb:'lamb.png', Poultry:'poultry.svg', 'Woodville Deli':'deli.svg', 'Misc.':'misc.svg'};
 const modal = document.getElementById('pvModal');
 let CATS = [];
 
@@ -215,10 +238,24 @@ function tile(cat, mode, i){
     if (mode === 'glyph'){
       const art = document.createElement('span');
       art.className = 'tile__art';
-      if (glyph) art.style.setProperty('--g', `url("assets/img/cat/${glyph}.png")`);
+      if (glyph) art.style.setProperty('--g', `url("assets/img/cat/${glyph}")`);
       else { b.classList.add('is-missing'); art.textContent = cat.name[0]; }
       b.appendChild(art);
     }
+    b.insertAdjacentHTML('beforeend',
+      `<span class="tile__name">${cat.name}</span><span class="tile__count">${cat.count} items</span>`);
+  } else if (mode === 'onphoto'){
+    const shots = {Beef:'best/brat.webp', Pork:'best/ham.webp', Sausage:'best/franks.webp', Venison:'best/bacon.webp'};
+    const src = shots[cat.name];
+    b.className = 'tile tile--onphoto' + (src ? '' : ' no-photo');
+    const bg = document.createElement('span');
+    bg.className = 'tile__bg';
+    if (src) bg.style.backgroundImage = `url("assets/img/${src}")`;
+    b.appendChild(bg);
+    const art = document.createElement('span');
+    art.className = 'tile__art';
+    if (glyph) art.style.setProperty('--g', `url("assets/img/cat/${glyph}")`);
+    b.appendChild(art);
     b.insertAdjacentHTML('beforeend',
       `<span class="tile__name">${cat.name}</span><span class="tile__count">${cat.count} items</span>`);
   } else if (mode === 'type'){
@@ -269,6 +306,7 @@ fetch('assets/data/catalog.json').then(r => r.json()).then(cats => {
   });
 
   fill('art1', cats, 'glyph');
+  fill('art1b', cats, 'onphoto');
   fill('art2', cats, 'type');
   fill('art3', cats, 'photo');
 });

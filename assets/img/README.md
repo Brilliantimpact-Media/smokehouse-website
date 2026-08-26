@@ -210,8 +210,15 @@ beef.png, pork.png, sausage.png, venison.png, lamb.png, goat.png are the categor
 glyphs pulled from thedurandsmokehouse.com/wp-content/uploads/2019/09/. They are
 the client's own artwork, used only in products-preview.html to show what "their
 line marks, recoloured" would look like. If that direction is chosen they should be
-redrawn as clean vectors rather than shipped as 800px PNG masks, and Poultry,
-Misc. and Deli have no glyph on their site so those three need drawing from scratch.
+redrawn as clean vectors rather than shipped as 800px PNG masks.
+
+poultry.svg, deli.svg and misc.svg are OURS, drawn 2026-08-26 to fill the three
+categories their top icon row does not cover. Their lower row does cover them, but
+with Font Awesome PRO glyphs served from a paid kit (Poultry = fa-meat, Woodville
+Deli = fa-turkey, Misc. = fa-sausage, Contact Us = fa-envelope). That artwork is
+licensed to them, not to us, so it must not be copied into this repo. The mappings
+are also wrong: fa-meat is a ham, fa-turkey is a roast bird, and fa-sausage repeats
+the Sausage category. Ours depict a drumstick, a stack of deli slices, and a basket.
 
 ## assets/data/catalog.json
 
