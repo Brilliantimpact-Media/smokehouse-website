@@ -253,3 +253,13 @@ caveat as the five best-seller shots. Misc. and Woodville Deli are still on wood
 
 All seven files in cat/photo/ are now 1200x900, matching the 4:3 sign tile exactly
 so nothing is cropped a second time at render.
+
+Misc. (beef and cheese board with honey) and Woodville Deli (deli meat and cheese
+platter) added 2026-08-26, also client-supplied renders. All eight category tiles
+now carry art: five are the client's own photographs, three are generated
+stand-ins. wood.webp stays as the fallback for any category added later.
+
+MIXED PROVENANCE, note for launch: Beef, Pork, Sausage, Venison and Poultry are
+the client's real (probably licensed stock) photographs. Lamb, Misc. and Woodville
+Deli are generated. They sit in the same row, so the three stand-ins should be
+reshot or re-licensed alongside the five best-seller product shots.

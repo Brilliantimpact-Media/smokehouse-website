@@ -252,8 +252,9 @@
     <h2 class="pv-h">The vintage sign</h2>
     <p class="pv-note">Built in CSS, no image files for the frame, seal, stars or rules, so it stays crisp
       at any size and recolours from the tokens. <strong>Five tiles use their own category photographs</strong>,
-      pulled from the Elementor stylesheet on their site. Lamb is a client-supplied stand-in. Misc. and
-      Woodville Deli still fall back to their wood texture, which reads as designed rather than broken.</p>
+      pulled from the Elementor stylesheet on their site. Lamb, Misc. and Woodville Deli are
+      client-supplied stand-ins. All eight categories now carry art; wood.webp stays in the repo as the
+      fallback for any category added later.</p>
 
     <h3 style="margin-top:2.5rem">On the photograph</h3>
     <div class="signgrid" id="sign1"></div>
@@ -354,7 +355,8 @@ function tile(cat, mode, i){
   return b;
 }
 
-const PHOTO = {Beef:'beef', Pork:'pork', Sausage:'sausage', Venison:'venison', Poultry:'poultry', Lamb:'lamb'};
+const PHOTO = {Beef:'beef', Pork:'pork', Sausage:'sausage', Venison:'venison', Poultry:'poultry', Lamb:'lamb',
+  'Misc.':'misc', 'Woodville Deli':'deli'};
 const FRAME = `<svg class="sign__frame" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">
   <path d="M13 31 L31 13 H369 L387 31 V269 L369 287 H31 L13 269 Z" fill="none" stroke="currentColor" stroke-width="2.5"/>
   <path d="M21 35 L35 21 H365 L379 35 V265 L365 279 H35 L21 265 Z" fill="none" stroke="currentColor" stroke-width="1"/>
