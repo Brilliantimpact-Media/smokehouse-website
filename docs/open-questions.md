@@ -105,3 +105,19 @@ each case.
     categories, each opening the full grouped catalogue popup.
     **Still open:** the popup itself has had no design pass, it is currently the
     plain two-column list from the preview.
+
+20. **Products popup designed 2026-08-26** from the client's mockup: parchment
+    ground, double rounded frame, seal beside the category name, round oxblood
+    close button, two columns split by a dotted rule, star-ruled group headings,
+    chevron bullets. Typography deliberately stays on the site system, Big
+    Shoulders Display and Archivo, rather than the distressed western face in the
+    mockup, per the client's "font should be consistent the whole way out".
+21. **Category tiles simplified:** corner stars and rule dividers removed (client
+    found them too western), names enlarged, photo scrim lightened from 42% to
+    58% brightness.
+    **ASSUMPTION TO CONFIRM:** the client wrote "we could just have the symbol,
+    sausage, and then a few product". Read as symbol + category name + the View
+    Products button, taking "a few product" as dictation for "View Products".
+    If she meant listing two or three example products on each tile, that is a
+    different build.
+    Note the stars now live only in the popup headings, not the tiles.

@@ -38,29 +38,23 @@
 .sign:focus-visible { outline: 3px solid var(--oxblood); outline-offset: 3px; }
 .sign__bg {
   position: absolute; inset: 0; background: var(--bg) center/cover no-repeat;
-  filter: brightness(.42) contrast(1.08) saturate(.92);
+  filter: brightness(.58) contrast(1.04) saturate(.95);
   transition: transform .6s cubic-bezier(.16,1,.3,1), filter .35s ease;
 }
-.sign:hover .sign__bg { transform: scale(1.045); filter: brightness(.5) contrast(1.08) saturate(.95); }
+.sign:hover .sign__bg { transform: scale(1.045); filter: brightness(.66) contrast(1.04) saturate(.98); }
 .sign__vig { position: absolute; inset: 0;
-  background: radial-gradient(120% 92% at 50% 45%, transparent 34%, rgba(20,16,13,.72) 100%); }
+  background: radial-gradient(125% 95% at 50% 45%, transparent 40%, rgba(20,16,13,.52) 100%); }
 .sign__grain {
   position: absolute; inset: 0; pointer-events: none; opacity: .3; mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
 }
 .sign__frame { position: absolute; inset: 0; width: 100%; height: 100%; color: currentColor; opacity: .82; }
-.sign__star {
-  position: absolute; width: 4.2%; aspect-ratio: 1; background: var(--oxblood);
-  clip-path: polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
-}
-.sign__star--tl { top: 7.5%; left: 5.6%; }  .sign__star--tr { top: 7.5%; right: 5.6%; }
-.sign__star--bl { bottom: 7.5%; left: 5.6%; } .sign__star--br { bottom: 7.5%; right: 5.6%; }
 .sign__inner {
   position: absolute; inset: 0; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 3.8cqw; padding: 9%;
+  align-items: center; justify-content: center; gap: 4.4cqw; padding: 9%;
 }
 .sign__seal {
-  width: 19%; aspect-ratio: 1; border-radius: 50%; background: var(--oxblood);
+  width: 21%; aspect-ratio: 1; border-radius: 50%; background: var(--oxblood);
   display: grid; place-items: center; flex: none;
   box-shadow: inset 0 0 0 2px var(--oxblood), inset 0 0 0 3px rgba(242,236,224,.8);
 }
@@ -68,22 +62,16 @@
   width: 56%; aspect-ratio: 1; background-color: var(--paper);
   -webkit-mask: var(--g) no-repeat center/contain; mask: var(--g) no-repeat center/contain;
 }
-.sign__rule { display: flex; align-items: center; gap: 2cqw; width: 72%; flex: none; }
-.sign__rule i { flex: 1; height: 2px; background: var(--oxblood); }
-.sign__rule b {
-  width: 2.2cqw; height: 2.2cqw; background: var(--oxblood); flex: none;
-  clip-path: polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
-}
 .sign__title {
   font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
-  font-size: clamp(1.1rem, 9.2cqw, 2.7rem); line-height: 1; letter-spacing: .02em;
+  font-size: clamp(1.3rem, 13cqw, 3.3rem); line-height: 1; letter-spacing: .02em;
   text-align: center; margin: 0; flex: none; color: var(--paper);
   text-shadow: 0 2px 10px rgba(20,16,13,.5);
 }
 .sign__btn {
   background: var(--oxblood); color: var(--paper);
   font-family: var(--font-ui); font-weight: 700;
-  font-size: clamp(.5rem, 1.5cqw, .72rem); letter-spacing: .2em; text-transform: uppercase;
+  font-size: clamp(.56rem, 1.9cqw, .8rem); letter-spacing: .2em; text-transform: uppercase;
   padding: .8em 2em; flex: none; margin-top: 1cqw;
   box-shadow: inset 0 0 0 1px var(--oxblood), inset 0 0 0 2px rgba(242,236,224,.9);
   transition: background-color .22s ease;
@@ -94,53 +82,113 @@
   .sign:hover { transform: none; } .sign:hover .sign__bg { transform: none; }
 }
 
-/* --- products popup ------------------------------------------------------ */
+/* --- products popup: the parchment menu card ----------------------------- */
 .pmodal {
-  border: 0; padding: 0; max-width: min(940px, 94vw); width: 100%;
-  background: var(--paper); color: var(--ink); box-shadow: 0 30px 90px rgba(0,0,0,.45);
+  border: 0; padding: 0; background: none; overflow: visible;
+  max-width: min(1080px, 94vw); width: 100%;
 }
-.pmodal::backdrop { background: rgba(20,16,13,.72); }
+.pmodal::backdrop { background: rgba(20,16,13,.78); }
+.pmodal__sheet {
+  position: relative; isolation: isolate;
+  padding: clamp(2.4rem,4.4vw,3.4rem) clamp(1.8rem,3.6vw,3rem) clamp(2rem,3.6vw,3rem);
+  color: var(--ink);
+  background:
+    radial-gradient(58% 52% at 30% 24%, rgba(255,252,244,.95), transparent 70%),
+    radial-gradient(66% 58% at 76% 78%, rgba(214,197,166,.8), transparent 74%),
+    linear-gradient(#ece2cc, #ded1b4);
+  box-shadow: 0 34px 90px rgba(0,0,0,.55);
+}
+.pmodal__sheet::before,
+.pmodal__sheet::after { content: ""; position: absolute; pointer-events: none; }
+.pmodal__sheet::before {
+  inset: 10px; border: 2px solid var(--ink); border-radius: 12px; opacity: .82;
+}
+.pmodal__sheet::after {
+  inset: 19px; border: 1px solid var(--ink); border-radius: 7px; opacity: .5;
+}
+.pmodal__grain {
+  position: absolute; inset: 0; pointer-events: none; opacity: .3; mix-blend-mode: multiply; z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+}
+.pmodal__close {
+  position: absolute; top: clamp(.9rem,2vw,1.5rem); right: clamp(.9rem,2vw,1.5rem); z-index: 3;
+  width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer;
+  background: var(--oxblood); display: grid; place-items: center;
+  transition: background-color .22s ease, transform .22s ease;
+}
+.pmodal__close:hover { background: var(--oxblood-deep); transform: rotate(90deg); }
+.pmodal__close::before, .pmodal__close::after {
+  content: ""; position: absolute; width: 18px; height: 2px; background: var(--paper);
+}
+.pmodal__close::before { transform: rotate(45deg); }
+.pmodal__close::after  { transform: rotate(-45deg); }
+
 .pmodal__head {
-  position: sticky; top: 0; background: var(--ink); color: var(--paper);
-  padding: 1.2rem clamp(1.2rem,3vw,2rem);
-  display: flex; align-items: baseline; gap: 1rem; justify-content: space-between;
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(.9rem,2vw,1.6rem); margin: 0 0 clamp(1.6rem,3vw,2.4rem);
+  padding-inline: clamp(1.5rem,4vw,3.5rem);
+}
+.pmodal__seal {
+  width: clamp(58px,8vw,104px); aspect-ratio: 1; border-radius: 50%;
+  background: var(--oxblood); display: grid; place-items: center; flex: none;
+  box-shadow: inset 0 0 0 2px var(--oxblood), inset 0 0 0 3px rgba(242,236,224,.8);
+}
+.pmodal__glyph {
+  width: 56%; aspect-ratio: 1; background-color: var(--paper);
+  -webkit-mask: var(--g) no-repeat center/contain; mask: var(--g) no-repeat center/contain;
 }
 .pmodal__title {
   font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
-  font-size: clamp(1.6rem,4vw,2.4rem); line-height: .9; margin: 0;
+  font-size: clamp(2rem,6.4vw,4rem); line-height: .92; letter-spacing: .04em;
+  margin: 0; color: #241c14; text-wrap: balance;
 }
 .pmodal__sub {
-  font-family: var(--font-ui); font-size: .62rem; font-weight: 700; letter-spacing: .16em;
-  text-transform: uppercase; color: color-mix(in srgb, var(--paper) 62%, transparent); margin: .35rem 0 0;
+  font-family: var(--font-ui); font-size: .62rem; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: color-mix(in srgb, #241c14 55%, transparent);
+  margin: .4rem 0 0; text-align: center;
 }
-.pmodal__close {
-  background: none; border: 1px solid color-mix(in srgb, var(--paper) 45%, transparent);
-  color: var(--paper); font-family: var(--font-ui); font-size: .62rem; font-weight: 700;
-  letter-spacing: .14em; text-transform: uppercase; padding: .5rem .85rem; cursor: pointer;
-}
-.pmodal__close:hover { background: var(--oxblood); border-color: var(--oxblood); }
 .pmodal__body {
-  padding: clamp(1.4rem,3vw,2.2rem); max-height: min(68vh,700px); overflow-y: auto;
-  columns: 2; column-gap: 2.4rem;
+  position: relative; max-height: min(64vh, 660px); overflow-y: auto;
+  padding-inline: clamp(1rem,2.4vw,2rem);
+  columns: 2; column-gap: clamp(1.8rem,4vw,3.2rem);
+  column-rule: 1px dotted color-mix(in srgb, var(--oxblood) 55%, transparent);
 }
-@media (max-width: 720px) { .pmodal__body { columns: 1; } }
-.pgroup { break-inside: avoid; margin: 0 0 1.6rem; }
+/* columns:1 is still a multicol container, and break-inside:avoid then pushes
+   each group to a fresh fragment, leaving a tall gap. columns:auto opts out. */
+@media (max-width: 720px) { .pmodal__body { columns: auto; column-rule: 0; } }
+
+.pgroup { break-inside: avoid; margin: 0 0 1.8rem; }
 .pgroup h3 {
-  font-family: var(--font-ui); font-size: .66rem; font-weight: 700; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--oxblood); margin: 0 0 .5rem;
-  padding-bottom: .4rem; border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; gap: .55rem; margin: 0 0 .7rem;
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(1.05rem,2.2vw,1.5rem); line-height: 1; letter-spacing: .06em;
+  color: #241c14;
+}
+.pgroup h3 i { flex: 1; height: 2px; background: var(--oxblood); min-width: 14px; }
+.pgroup h3 b {
+  width: 9px; height: 9px; flex: none; background: var(--oxblood);
+  clip-path: polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
 }
 .pgroup ul { list-style: none; margin: 0; padding: 0; }
 .pgroup li {
-  font-family: var(--font-ui); font-size: .87rem; line-height: 1.45; padding: .22rem 0;
-  color: var(--ink-2); display: flex; gap: .5rem; align-items: baseline; flex-wrap: wrap;
+  display: flex; gap: .55rem; align-items: flex-start; flex-wrap: wrap;
+  font-family: var(--font-ui); font-size: clamp(.85rem,1.5vw,.98rem); line-height: 1.4;
+  padding: .26rem 0; color: #3a2f24;
 }
+.pchev { position: relative; width: 13px; height: 1em; flex: none; }
+.pchev::before, .pchev::after {
+  content: ""; position: absolute; top: .32em; width: 6px; height: 6px;
+  border-right: 2px solid var(--oxblood); border-top: 2px solid var(--oxblood);
+  transform: rotate(45deg);
+}
+.pchev::before { left: 0; } .pchev::after { left: 5px; }
 .pflag {
-  font-size: .56rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-  padding: .14rem .4rem; white-space: nowrap;
+  font-family: var(--font-ui); font-size: .56rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; padding: .16rem .42rem; white-space: nowrap; align-self: center;
 }
 .pflag--award { background: var(--oxblood); color: var(--paper); }
-.pflag--wood { border: 1px solid var(--rule-strong); color: var(--ink-3); }
+.pflag--wood { border: 1px solid color-mix(in srgb, #3a2f24 35%, transparent); color: #6b5c4a; }
+@media (prefers-reduced-motion: reduce) { .pmodal__close:hover { transform: none; } }
 
 /* --- hero tagline: was too small and too low-contrast over the steak ----- */
 .cinema .eyebrow--plain {
@@ -674,14 +722,18 @@
 </main>
 
 <dialog class="pmodal" id="pmodal" aria-labelledby="pmodalTitle">
-  <div class="pmodal__head">
-    <div>
-      <h2 class="pmodal__title" id="pmodalTitle">Beef</h2>
-      <p class="pmodal__sub" id="pmodalSub">36 items</p>
-    </div>
-    <button class="pmodal__close" id="pmodalClose" type="button">Close</button>
+  <div class="pmodal__sheet">
+    <span class="pmodal__grain" aria-hidden="true"></span>
+    <button class="pmodal__close" id="pmodalClose" type="button" aria-label="Close"></button>
+    <header class="pmodal__head">
+      <span class="pmodal__seal" aria-hidden="true"><span class="pmodal__glyph" id="pmodalGlyph"></span></span>
+      <div>
+        <h2 class="pmodal__title" id="pmodalTitle">Sausage</h2>
+        <p class="pmodal__sub" id="pmodalSub">54 items</p>
+      </div>
+    </header>
+    <div class="pmodal__body" id="pmodalBody"></div>
   </div>
-  <div class="pmodal__body" id="pmodalBody"></div>
 </dialog>
 
 <footer class="site-footer">
@@ -912,12 +964,19 @@
     var openCat = function (cat) {
       document.getElementById("pmodalTitle").textContent = cat.name;
       document.getElementById("pmodalSub").textContent = cat.count + " items";
+      document.getElementById("pmodalGlyph").style.setProperty(
+        "--g", 'url("assets/img/cat/' + GLYPH[cat.name] + '")');
       var body = document.getElementById("pmodalBody");
       body.innerHTML = "";
       cat.groups.forEach(function (g) {
         var sec = document.createElement("div");
         sec.className = "pgroup";
-        if (g.name) { var h = document.createElement("h3"); h.textContent = g.name; sec.appendChild(h); }
+        if (g.name) {
+          var h = document.createElement("h3");
+          h.innerHTML = '<i></i><b></b><span></span><b></b><i></i>';
+          h.querySelector("span").textContent = g.name;
+          sec.appendChild(h);
+        }
         var ul = document.createElement("ul");
         g.items.forEach(function (it) {
           var li = document.createElement("li"), label = it, flags = [];
@@ -929,6 +988,10 @@
             flags.push(["wood", "Woodville only"]);
             label = label.replace(/\s*\(Woodville [Ll]ocation [Oo]nly\)/g, "");
           }
+          var chev = document.createElement("span");
+          chev.className = "pchev";
+          chev.setAttribute("aria-hidden", "true");
+          li.appendChild(chev);
           var sp = document.createElement("span");
           sp.textContent = label.trim();
           li.appendChild(sp);
@@ -962,13 +1025,9 @@
         b.style.setProperty("--bg", 'url("assets/img/cat/photo/' + (SHOT[cat.name] || "wood") + '.webp")');
         b.innerHTML =
           '<span class="sign__bg"></span><span class="sign__vig"></span><span class="sign__grain"></span>' + FRAME +
-          '<span class="sign__star sign__star--tl"></span><span class="sign__star sign__star--tr"></span>' +
-          '<span class="sign__star sign__star--bl"></span><span class="sign__star sign__star--br"></span>' +
           '<span class="sign__inner">' +
             '<span class="sign__seal"><span class="sign__glyph"></span></span>' +
-            '<span class="sign__rule"><i></i><b></b><i></i></span>' +
             '<span class="sign__title">' + cat.name + '</span>' +
-            '<span class="sign__rule"><i></i><b></b><i></i></span>' +
             '<span class="sign__btn">View Products</span>' +
           '</span>';
         b.addEventListener("click", function () { openCat(cat); });
