@@ -998,6 +998,10 @@ td { border-bottom: 1px solid var(--rule); }
   position: relative;
   overflow: hidden;
   aspect-ratio: 16 / 10;
+  /* cut-out steaks sit on the butcher paper, not inside a white photo box */
+  background:
+    radial-gradient(120% 80% at 50% 42%, rgba(120,88,58,.10), transparent 62%),
+    linear-gradient(var(--paper-2), var(--paper-3));
   /* cap the height so the whole frame plus the top of the ledger fit one
      screen. With the height definite the box shrinks its width to hold the
      ratio, so centre it rather than letting it sit left. */
@@ -1016,7 +1020,7 @@ td { border-bottom: 1px solid var(--rule); }
 @media (max-width: 620px) { .vs__stage { aspect-ratio: 4 / 3; max-height: 48vh; } }
 
 .vs__shot { position: absolute; inset: 0; margin: 0; }
-.vs__shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.vs__shot img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .vs__shot--store { clip-path: inset(0 0 0 var(--pos)); }
 
 .vs__ph {

@@ -153,32 +153,23 @@ Trimmed and downscaled to 509px (91KB); animates in with the stamp-hit "slam".
 Note the claim on it — *up to 30 days* — matches the differentiator copy. If the
 aging window ever changes, this artwork changes with it.
 
-## VS slider photography (home-v2) — NEEDED
+## VS slider steaks (`steaks/`, added 2026-08-26)
 
-The "SmokeHouse vs. the meat aisle" comparison is a photo wipe. Two slots, both
-hatched placeholders right now:
+`steak-dryaged.webp` and `steak-store.webp`. Client-generated on white, then
+processed here: the ground was removed with a corner flood fill (so pale
+intramuscular fat is never mistaken for background), the cut-outs were scaled
+to an identical 1429px subject width, and both were centred on the same
+1600x1000 canvas. Because the subject sits at the same size and centre in both
+files, the wipe transforms one steak into the other without any shift.
 
-| Slot | Subject |
-|---|---|
-| A | A SmokeHouse dry-aged steak |
-| B | A steak bought from a grocery store |
+They are transparent, so the stage renders them over the butcher-paper ground
+rather than inside a white photo box.
 
-**The two frames must match exactly or the wipe breaks.** Shoot both in one
-session without moving the camera:
-
-- Tripod or a phone propped and untouched between shots
-- Same lighting, same background, same surface; plain white or the paper cream
-- Same distance, same angle (straight-on or straight-down — pick one)
-- Steak in the same position in frame, roughly the same size in frame
-- Landscape, 16:10-ish, highest resolution available
-- Manual/locked exposure and white balance if the camera allows — auto mode
-  will shift the colour between shots and give the comparison away
-
-Swap each `.vs__ph` div for an `<img>` inside its `.vs__shot` figure.
-
-**Honesty note:** the grocery-store steak must be a genuine, fairly-photographed
-one. Don't stage a bad example — a comparison that overreaches is both a legal
-risk and, if a customer notices, worse for trust than no comparison at all.
+**Open question for the client.** The pairing shows a difference in *marbling*
+as much as ageing, and marbling is a function of grade, not of dry-ageing. If
+The SmokeHouse mostly sells Choice-grade beef, the dry-aged image promises more
+than a customer will receive. The honest version is two similarly-marbled
+steaks where only the colour and surface differ. Raised with Alexia 2026-08-26.
 
 ## Slots the site is currently reserving
 

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Award Winners | Medallion Preview</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&family=Caveat:wght@600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=20260825b">
+<style>
+.optbar{position:sticky;top:0;z-index:60;background:var(--ink);color:var(--paper);
+  padding:.7rem var(--gutter);display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;align-items:center;
+  font-family:var(--font-ui);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.optbar a{color:color-mix(in srgb,var(--paper) 72%,transparent);text-decoration:none}
+.optbar a:hover{color:var(--paper)}
+.optlabel{background:var(--oxblood);color:var(--paper);font-family:var(--font-ui);font-size:.62rem;
+  font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.4rem .8rem;display:inline-block;margin-bottom:1.3rem}
+.optnote{font-family:var(--font-ui);font-size:.8rem;color:var(--ink-3);max-width:64ch;line-height:1.55;margin:0 0 2rem}
+.winners{padding-block:clamp(4rem,9vh,6.5rem) !important;background:var(--paper-2)}
+.winners__row{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(280px,30vw,380px);
+  gap:1.25rem;overflow-x:auto;overflow-y:hidden;align-items:start;
+  scroll-snap-type:x mandatory;scrollbar-width:none}
+.winners__row::-webkit-scrollbar{display:none}
+.winners__row>*{scroll-snap-align:start}
+
+/* ---------- A: medallion ---------- */
+.medal{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;
+  background:linear-gradient(#f4ecdc,#efe5d1);border:2px solid var(--ink);border-radius:3px;
+  padding:clamp(1.6rem,3vw,2.2rem) clamp(1.1rem,2.4vw,1.6rem) clamp(1.2rem,2.4vw,1.6rem);
+  box-shadow:5px 5px 0 var(--ink);
+  transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease}
+.medal:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--ink)}
+.medal::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.4;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E")}
+.medal>*{position:relative}
+.medal__seal{width:clamp(78px,10vw,104px);aspect-ratio:1;margin-bottom:1.1rem;
+  background:url("assets/img/stamp-dry-aged.webp") no-repeat center/contain;
+  transform:rotate(-8deg);opacity:.9;
+  transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.medal:hover .medal__seal{transform:rotate(-3deg) scale(1.05)}
+.medal__cut{font-family:var(--font-display);font-weight:900;text-transform:uppercase;
+  font-size:clamp(1.45rem,2.4vw,1.95rem);line-height:.95;color:var(--ink);margin:0 0 .7rem;max-width:14ch}
+.medal__rule{width:52px;height:3px;background:var(--oxblood);margin:0 0 .8rem}
+.medal__award{font-family:var(--font-ui);font-size:.6rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--oxblood);margin:0}
+.medal__note{font-family:var(--font-type);font-size:.85rem;line-height:1.6;color:var(--ink-2);margin:.9rem 0 0;max-width:26ch}
+
+/* ---------- B: ticket strip ---------- */
+.tkt{position:relative;background:var(--ink);color:var(--paper);border-radius:3px;overflow:hidden;
+  display:flex;flex-direction:column;min-height:260px;
+  transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.tkt:hover{transform:translateY(-6px)}
+.tkt__top{padding:clamp(1.4rem,2.6vw,1.9rem) clamp(1.1rem,2.2vw,1.5rem) 1rem;flex:1;
+  display:flex;flex-direction:column;justify-content:center}
+.tkt__no{font-family:var(--font-ui);font-size:.58rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:color-mix(in srgb,var(--paper) 55%,transparent);margin:0 0 .8rem}
+.tkt__cut{font-family:var(--font-display);font-weight:900;text-transform:uppercase;
+  font-size:clamp(1.6rem,2.7vw,2.2rem);line-height:.95;color:var(--paper);margin:0}
+.tkt__band{background:var(--oxblood);color:var(--paper);text-align:center;
+  padding:.75rem 1rem .65rem;font-family:var(--font-ui);font-size:.6rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;position:relative}
+.tkt__band::before{content:"";position:absolute;left:0;right:0;top:-7px;height:8px;background:var(--oxblood);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 8' preserveAspectRatio='none'%3E%3Cpath d='M0 8 L8 0 L16 8 Z'/%3E%3C/svg%3E") repeat-x bottom/16px 8px;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 8' preserveAspectRatio='none'%3E%3Cpath d='M0 8 L8 0 L16 8 Z'/%3E%3C/svg%3E") repeat-x bottom/16px 8px}
+.tkt__seal{position:absolute;right:.9rem;top:.9rem;width:clamp(52px,6vw,68px);aspect-ratio:1;
+  background:var(--paper);opacity:.16;
+  -webkit-mask:url("assets/img/stamp-dry-aged.webp") no-repeat center/contain;
+          mask:url("assets/img/stamp-dry-aged.webp") no-repeat center/contain;
+  transform:rotate(-9deg)}
+
+/* ---------- C: case card, photo-ready ---------- */
+.slot{background:var(--paper);border:2px solid var(--ink);border-radius:3px;overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:5px 5px 0 rgba(23,19,16,.14);
+  transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.slot:hover{transform:translateY(-6px)}
+.slot__img{position:relative;aspect-ratio:4/3;background:var(--paper-3);
+  display:grid;place-content:center;text-align:center;padding:1rem;
+  border-bottom:2px solid var(--ink)}
+.slot__img::before{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg,transparent 0 12px,color-mix(in srgb,var(--ink) 9%,transparent) 12px 13px)}
+.slot__img span{position:relative;font-family:var(--font-ui);font-size:.58rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.slot__seal{position:absolute;right:.7rem;bottom:.7rem;width:clamp(44px,5vw,60px);aspect-ratio:1;
+  background:url("assets/img/stamp-dry-aged.webp") no-repeat center/contain;transform:rotate(-8deg);opacity:.85}
+.slot__body{padding:clamp(1rem,2vw,1.3rem)}
+.slot__cut{font-family:var(--font-display);font-weight:900;text-transform:uppercase;
+  font-size:clamp(1.2rem,2vw,1.6rem);line-height:.98;margin:0 0 .5rem;color:var(--ink)}
+.slot__award{font-family:var(--font-ui);font-size:.58rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--oxblood);margin:0}
+</style>
+</head>
+<body>
+<div class="optbar">
+  <span>Award winners, no photography</span>
+  <a href="#a">A Medallion</a>
+  <a href="#b">B Ticket strip</a>
+  <a href="#c">C Photo-ready</a>
+  <a href="index.html">Back to the site</a>
+</div>
+
+<main>
+<section class="winners" id="a">
+  <div class="shell">
+    <span class="optlabel">Option A, the medallion</span>
+    <p class="eyebrow">Award winners</p>
+    <h2>Five things people drive here for.</h2>
+    <p class="optnote">The stamp does the work a photo would. Reads as a badge of honour rather than a gap where an image should be.</p>
+    <div class="winners__row" style="margin-top:2rem">
+      <article class="medal"><span class="medal__seal"></span><h3 class="medal__cut">Cheddar Garden Brat</h3><div class="medal__rule"></div><p class="medal__award">Award winner</p><p class="medal__note">Ask for it by name at either counter.</p></article>
+      <article class="medal"><span class="medal__seal"></span><h3 class="medal__cut">Hungarian Style Kielbasa</h3><div class="medal__rule"></div><p class="medal__award">Award winner</p><p class="medal__note">Smoked here, the way it is supposed to be done.</p></article>
+      <article class="medal"><span class="medal__seal"></span><h3 class="medal__cut">Butches Franks</h3><div class="medal__rule"></div><p class="medal__award">Award winner</p><p class="medal__note">A hot dog that tastes like it came from a butcher.</p></article>
+      <article class="medal"><span class="medal__seal"></span><h3 class="medal__cut">Thick-Cut Bacon</h3><div class="medal__rule"></div><p class="medal__award">Award winner</p><p class="medal__note">Smoked in house, cut heavy.</p></article>
+      <article class="medal"><span class="medal__seal"></span><h3 class="medal__cut">Regular Bacon</h3><div class="medal__rule"></div><p class="medal__award">Award winner</p><p class="medal__note">The everyday one, and still an award winner.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="winners" id="b" style="background:var(--paper)">
+  <div class="shell">
+    <span class="optlabel">Option B, the ticket strip</span>
+    <p class="eyebrow">Award winners</p>
+    <h2>Five things people drive here for.</h2>
+    <p class="optnote">Dark slabs with the name doing all the work, and the stamp ghosted into the corner. Boldest of the three; matches the persona slabs further up the page.</p>
+    <div class="winners__row" style="margin-top:2rem">
+      <article class="tkt"><span class="tkt__seal"></span><div class="tkt__top"><p class="tkt__no">No. 01</p><h3 class="tkt__cut">Cheddar Garden Brat</h3></div><p class="tkt__band">Award winner</p></article>
+      <article class="tkt"><span class="tkt__seal"></span><div class="tkt__top"><p class="tkt__no">No. 02</p><h3 class="tkt__cut">Hungarian Style Kielbasa</h3></div><p class="tkt__band">Award winner</p></article>
+      <article class="tkt"><span class="tkt__seal"></span><div class="tkt__top"><p class="tkt__no">No. 03</p><h3 class="tkt__cut">Butches Franks</h3></div><p class="tkt__band">Award winner</p></article>
+      <article class="tkt"><span class="tkt__seal"></span><div class="tkt__top"><p class="tkt__no">No. 04</p><h3 class="tkt__cut">Thick-Cut Bacon</h3></div><p class="tkt__band">Award winner</p></article>
+      <article class="tkt"><span class="tkt__seal"></span><div class="tkt__top"><p class="tkt__no">No. 05</p><h3 class="tkt__cut">Regular Bacon</h3></div><p class="tkt__band">Award winner</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="winners" id="c">
+  <div class="shell">
+    <span class="optlabel">Option C, photo-ready</span>
+    <p class="eyebrow">Award winners</p>
+    <h2>Five things people drive here for.</h2>
+    <p class="optnote">Keeps a proper image slot so the real photos drop straight in later, but the stamp and the framing make it look intentional in the meantime rather than unfinished.</p>
+    <div class="winners__row" style="margin-top:2rem">
+      <article class="slot"><div class="slot__img"><span>Photo to come</span><span class="slot__seal"></span></div><div class="slot__body"><h3 class="slot__cut">Cheddar Garden Brat</h3><p class="slot__award">Award winner</p></div></article>
+      <article class="slot"><div class="slot__img"><span>Photo to come</span><span class="slot__seal"></span></div><div class="slot__body"><h3 class="slot__cut">Hungarian Style Kielbasa</h3><p class="slot__award">Award winner</p></div></article>
+      <article class="slot"><div class="slot__img"><span>Photo to come</span><span class="slot__seal"></span></div><div class="slot__body"><h3 class="slot__cut">Butches Franks</h3><p class="slot__award">Award winner</p></div></article>
+      <article class="slot"><div class="slot__img"><span>Photo to come</span><span class="slot__seal"></span></div><div class="slot__body"><h3 class="slot__cut">Thick-Cut Bacon</h3><p class="slot__award">Award winner</p></div></article>
+      <article class="slot"><div class="slot__img"><span>Photo to come</span><span class="slot__seal"></span></div><div class="slot__body"><h3 class="slot__cut">Regular Bacon</h3><p class="slot__award">Award winner</p></div></article>
+    </div>
+  </div>
+</section>
+</main>
+<script src="assets/js/site.js?v=20260825b"></script>
+</body>
+</html>
