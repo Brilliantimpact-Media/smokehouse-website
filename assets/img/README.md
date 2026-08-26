@@ -26,6 +26,21 @@ So these slots still need a real shoot and cannot be filled from the old site:
   and the Durand building exterior
 
 
+## Favicon (2026-08-26)
+
+Built from the flame alone — the full wordmark is illegible at 16px. Paths 10
+and 11 of `logo.svg` are the flame; identified by measuring every path with
+`getBBox()` in the browser (they are the two tall shapes at the far left,
+spanning y 10..112 while the wordmark sits at y 28..105).
+
+`favicon.svg` is a cream flame on a rounded charcoal tile. A solid tile rather
+than transparency, so it stays legible against both light and dark browser
+chrome. PNG fallbacks at 16 and 32, a 180px apple-touch-icon, and a multi-size
+`favicon.ico` at the site root for the bare `/favicon.ico` request.
+
+If the logo artwork changes, the flame path indices change with it — re-measure
+rather than assuming 10 and 11.
+
 ## Logo — `logo.svg` (cleaned 2026-08-26)
 
 **Use `logo.svg`.** One vector lockup, painted with `currentColor` through a CSS
