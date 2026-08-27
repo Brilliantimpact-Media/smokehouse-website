@@ -1302,12 +1302,31 @@ td { border-bottom: 1px solid var(--rule); }
   letter-spacing: .18em; text-transform: uppercase; color: var(--ink-2);
 }
 
+/* Small screens: each row becomes a labelled pair, attribute then our claim
+   then theirs. The head stays as a two-up legend; hiding it (as this block used
+   to) left the two lines unattributed, which is what made it read as a jumble. */
 @media (max-width: 700px) {
-  .spec__head, .spec__row { grid-template-columns: 1fr; gap: .45rem; }
-  .spec__what { text-align: left; order: -1; color: var(--ink-3); }
-  .spec__store { justify-content: flex-start; text-align: left; flex-direction: row-reverse; }
-  .spec__side--store { text-align: left; }
-  .spec__head { display: none; }
+  .spec__head {
+    grid-template-columns: 1fr auto; gap: .9rem;
+    padding-block: .8rem; align-items: baseline;
+  }
+  .spec__col { display: none; }
+  .spec__side { font-size: 1rem; letter-spacing: .01em; }
+  .spec__side--store { text-align: right; justify-self: end; }
+
+  .spec__row { grid-template-columns: 1fr; gap: .4rem; padding-block: 1.05rem 1.15rem; }
+  .spec__what {
+    text-align: left; order: -1; color: var(--ink-3);
+    font-size: .58rem; letter-spacing: .2em;
+  }
+  .spec__shop, .spec__store {
+    justify-content: flex-start; text-align: left;
+    gap: .55rem; font-size: .95rem;
+  }
+  .spec__shop { font-weight: 600; }
+  /* the mark trails the text in the markup; pull it left so both claims line up */
+  .spec__store { flex-direction: row-reverse; justify-content: flex-end; }
+  .spec__mark { width: 1.3rem; height: 1.3rem; font-size: .72rem; }
 }
 html:not(.js) .vs__shot--shop  { clip-path: inset(0 50% 0 0); }
 html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
@@ -1906,8 +1925,11 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
    RESPONSIVE QA (2026-08-26). Fluid fixes only; desktop layout unchanged.
    ========================================================================== */
 
-/* Nothing may push the page sideways. */
-html, body { max-width: 100%; overflow-x: hidden; }
+/* Nothing may push the page sideways. overflow-x:hidden would make body a
+   scroll container and kill position:sticky on the dry-aging panel, so use
+   clip, which does not. Overflow is verified zero at every width regardless. */
+html, body { max-width: 100%; }
+body { overflow-x: clip; }
 
 /* Touch targets. Hit areas grow without moving anything visually. */
 .nav-toggle { min-height: 44px; min-width: 44px; }
@@ -1977,4 +1999,6 @@ html, body { max-width: 100%; overflow-x: hidden; }
 /* Reviews: one full-width label per view on phones, snap kept. */
 @media (max-width: 560px) {
   .rcar__track { grid-auto-columns: 100%; }
+}
+
 }

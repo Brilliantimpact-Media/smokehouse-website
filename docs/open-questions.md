@@ -197,3 +197,19 @@ each case.
     **Needs a real device:** the cut chart's tap regions on custom-processing are
     inherently small on a 320px screen, iOS 100vh behaviour on the hero and the
     pinned dry-aging section, and momentum scrolling inside the popup.
+
+28. **Mobile fixes 2026-08-26 (desktop untouched).**
+    a) REGRESSION from item 27: the `overflow-x: hidden` guard on html/body made
+    body a scroll container, which kills `position: sticky`. The dry-aging panel
+    stopped pinning, so it scrolled away on panel 01 and left a long black field.
+    Replaced with `overflow-x: clip` on body, which does not create a scroll
+    container. Verified the panel pins at top 0 through all four steps on both
+    mobile and desktop.
+    b) Dry-aging on phones: shorter scroll track (320vh vs 420vh), copy anchored
+    just above the grass with `align-content: end` so the slack collects at the
+    top instead of opening a gap mid-panel.
+    c) Comparison ledger on phones: the pre-existing mobile block was hiding
+    `.spec__head` entirely, leaving the two claims in every row unattributed,
+    which is what made it read as a jumble. The head is now a two-up legend and
+    the row layout was tightened. Consolidated into that one block rather than
+    layering a second media query over it.

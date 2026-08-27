@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&family=Caveat:wght@600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=20260826g">
+<link rel="stylesheet" href="assets/css/site.css?v=20260826m">
 <style>
 /* ==========================================================================
    HOMEPAGE, scoped to this page.
@@ -131,6 +131,19 @@
   background: var(--oxblood); margin-top: 1.2rem;
 }
 .seq__label { color: color-mix(in srgb, var(--paper) 66%, transparent); }
+
+/* Phones: the panel is short and the counter is hidden, so 100vh left a large
+   dead field under the copy. Tighter padding and a shorter scroll track. */
+@media (max-width: 760px) {
+  .seq { height: 320vh; }
+  /* anchor the copy just above the grass so the slack collects at the top,
+     under the header, instead of opening a gap in the middle of the panel */
+  .seq__sticky { align-content: end; padding-bottom: calc(22vh + 46px); gap: 1rem; }
+  .seq__panel h3 { font-size: clamp(2.3rem, 12.5vw, 3.4rem); margin-bottom: .8rem; }
+  .seq__panel h3::after { margin-top: .9rem; width: 72px; height: 4px; }
+  .seq__panel p { font-size: 1.02rem; }
+  .seq__label { bottom: calc(9vh + 60px); font-size: .64rem; }
+}
 .seq__bar { height: 3px; background: color-mix(in srgb, var(--paper) 13%, transparent); }
 .seq__bar i {
   background: var(--oxblood);
@@ -672,7 +685,7 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=20260826g"></script>
+<script src="assets/js/site.js?v=20260826m"></script>
 <script>
 (function () {
   "use strict";
