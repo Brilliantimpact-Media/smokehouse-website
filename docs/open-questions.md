@@ -183,3 +183,17 @@ each case.
     overlaps now is the dry-aging panel crossfade, which is intentional and
     settles to a single panel; measured one visible panel at rest at every scroll
     position.
+
+27. **Responsive QA pass, 2026-08-26.** Swept all six pages from 320px to 1440px.
+    Fixed: hero photos blowing out of their grid track above 900px (my
+    align-self:stretch plus .photo's aspect-ratio drove width from row height);
+    the wholesale table forcing a 520px minimum page width on small phones;
+    best-seller and product grids jumping 2 to 4 columns at a single breakpoint,
+    now auto-fit so the count steps 1-2-3-4 fluidly; hover-only item counts
+    hidden from touch users; small tap targets on nav, footer links, carousel
+    dots and inline CTAs; modal sizing on small screens and in landscape.
+    Desktop verified byte-identical at 1280: sign 283px, card 268px, 4 and 4
+    columns, modal 660px, reviews 3.2 per view, header logo 78px.
+    **Needs a real device:** the cut chart's tap regions on custom-processing are
+    inherently small on a 320px screen, iOS 100vh behaviour on the hero and the
+    pinned dry-aging section, and momentum scrolling inside the popup.

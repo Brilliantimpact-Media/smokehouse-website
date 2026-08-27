@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&family=Caveat:wght@600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=20260825b">
+<link rel="stylesheet" href="assets/css/site.css?v=20260826g">
 <style>
 /* ==========================================================================
    HOMEPAGE, scoped to this page.
@@ -179,12 +179,11 @@
 .winners .annot { margin-bottom: 0; }
 .winners__cta { margin-top: .3rem; }
 .winners__row {
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(1.5rem, 2.8vw, 2.5rem); align-items: start;
+  display: grid; align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 225px), 1fr));
+  gap: clamp(1.5rem, 2.8vw, 2.5rem);
   max-width: 1180px; margin-inline: auto;
 }
-@media (max-width: 900px) { .winners__row { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 520px) { .winners__row { grid-template-columns: 1fr; } }
 
 /* --- closing -------------------------------------------------------------- */
 .closing {
@@ -673,7 +672,7 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=20260825b"></script>
+<script src="assets/js/site.js?v=20260826g"></script>
 <script>
 (function () {
   "use strict";
@@ -839,7 +838,7 @@
       panels.forEach(function (pn, i) { pn.classList.toggle("active", i === idx); });
       seqNum.textContent = "0" + (idx + 1);
       seqBar.style.width = (q * 100) + "%";
-      seq.style.setProperty("--q", (q * 100) + "%");
+      seq.style.setProperty("--q", (4 + q * 92) + "%");   /* keep the cow on-canvas at both ends */
     };
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);

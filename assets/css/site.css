@@ -393,7 +393,12 @@ figure.photo { margin: 0; }
 
 /* --- Tables (wholesale / product ranges) --------------------------------- */
 .table-wrap { overflow-x: auto; border: 1px solid var(--rule); }
-table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: .96rem; }
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { border-collapse: collapse; width: 100%; min-width: min(520px, 100%); font-size: .96rem; }
+@media (max-width: 560px) {
+  table { min-width: 0; font-size: .9rem; }
+  th, td { padding: .7rem .75rem; }
+}
 th, td { text-align: left; padding: .9rem 1.1rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
 th { font-family: var(--font-ui); font-size: .76rem; font-weight: 600; letter-spacing: .1em;
      text-transform: uppercase; color: var(--ink-3); background: var(--paper-2); }
@@ -1651,9 +1656,12 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
 
 /* --- products: the vintage category signs -------------------------------- */
 .products { padding-block: clamp(5rem, 12vh, 9rem); background: var(--paper-2); }
-.signgrid { display: grid; gap: 1.1rem; grid-template-columns: repeat(4, 1fr); margin-top: 2.5rem; }
-@media (max-width: 1100px) { .signgrid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px)  { .signgrid { grid-template-columns: 1fr; } }
+/* auto-fit rather than fixed counts: the column count steps 1-2-3-4 on its own
+   as space allows, instead of halving tile width at a single breakpoint. */
+.signgrid {
+  display: grid; gap: clamp(.9rem, 1.6vw, 1.1rem); margin-top: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 245px), 1fr));
+}
 
 .sign {
   position: relative; aspect-ratio: 4/3; display: block; width: 100%;
@@ -1694,14 +1702,18 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
               0 8px 20px rgba(20,16,13,.45);
 }
 /* hover C: the item count reveals. Space is reserved so nothing shifts. */
+/* Visible by default so touch users never lose the count; the reveal is an
+   enhancement only where a real pointer can hover. */
 .sign__count {
   font-family: var(--font-ui); font-weight: 700; font-size: clamp(.5rem, 1.6cqw, .68rem);
   letter-spacing: .2em; text-transform: uppercase; flex: none;
   color: color-mix(in srgb, var(--paper) 82%, transparent);
-  opacity: 0; transform: translateY(5px);
   transition: opacity .3s ease, transform .3s cubic-bezier(.16,1,.3,1);
 }
-.sign:hover .sign__count, .sign:focus-visible .sign__count { opacity: 1; transform: none; }
+@media (hover: hover) and (pointer: fine) {
+  .sign__count { opacity: 0; transform: translateY(5px); }
+  .sign:hover .sign__count, .sign:focus-visible .sign__count { opacity: 1; transform: none; }
+}
 @media (prefers-reduced-motion: reduce) {
   .sign__seal, .sign__count { transition: none; }
   .sign:hover .sign__seal { transform: none; }
@@ -1874,7 +1886,9 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
   font-size: clamp(2.2rem, 5.6vw, 4.2rem);
 }
 .hero .lede { max-width: 38ch; }
-.hero__grid .photo { align-self: stretch; }
+/* NOT align-self:stretch: with .photo's aspect-ratio the row height would
+   drive the width and the picture blows out of its grid track above 900px. */
+.hero__grid .photo { align-self: center; }
 
 /* Dark bands pick up the smoke and grain the dry-aging panel uses. */
 .band-dark { position: relative; isolation: isolate; overflow: hidden; }
@@ -1887,3 +1901,80 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
 
 /* The sign row sits on paper-2 wherever it appears, as on the homepage. */
 .products { padding-block: clamp(5rem, 12vh, 9rem); background: var(--paper-2); }
+
+/* ==========================================================================
+   RESPONSIVE QA (2026-08-26). Fluid fixes only; desktop layout unchanged.
+   ========================================================================== */
+
+/* Nothing may push the page sideways. */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+/* Touch targets. Hit areas grow without moving anything visually. */
+.nav-toggle { min-height: 44px; min-width: 44px; }
+.link-cta { position: relative; }
+.link-cta::after {
+  content: ""; position: absolute; left: 0; right: 0;
+  top: 50%; height: 44px; transform: translateY(-50%);
+}
+.rcar__dot { position: relative; }
+.rcar__dot::after {
+  content: ""; position: absolute; left: 0; right: 0;
+  top: 50%; height: 44px; transform: translateY(-50%);
+}
+.spec__side { position: relative; }
+@media (pointer: coarse) {
+  .spec__side { min-height: 44px; }
+  .nav a { padding-block: .55rem; }
+}
+
+/* Lift effects are pointless on touch and can stick after a tap. */
+@media (hover: none) {
+  .card--best:hover, .sign:hover, .card--raised:hover { transform: none; }
+}
+
+/* The cow starts fully off-canvas at zero progress; keep it on the line. */
+.seq__cow { min-width: 46px; }
+
+/* Popup on small screens: full width, comfortable scroll, bigger close target. */
+@media (max-width: 600px) {
+  .pmodal { max-width: 96vw; }
+  .pmodal__sheet { padding: 2.6rem 1.1rem 1.6rem; }
+  .pmodal__head { flex-direction: column; gap: .7rem; text-align: center; padding-inline: 0; }
+  .pmodal__body { max-height: 62vh; padding-inline: .2rem; }
+  .pmodal__close { width: 46px; height: 46px; top: .7rem; right: .7rem; }
+}
+
+/* One wide tile per row reads better as a band than a big square. */
+@media (max-width: 560px) { .sign { aspect-ratio: 16 / 9; } }
+
+
+/* Long CTA labels must not set a minimum page width on small phones. */
+@media (max-width: 480px) {
+  .btn { width: 100%; justify-content: center; text-align: center; white-space: normal; }
+  .btn-row { flex-direction: column; align-items: stretch; gap: .8rem; }
+  .btn-row .btn { margin: 0; }
+}
+
+/* Footer and colophon links are navigation, so they get real tap area. */
+@media (pointer: coarse) {
+  .site-footer li a, .colophon a { display: inline-block; padding-block: .5rem; }
+  .site-footer ul { gap: .2rem; }
+}
+
+/* Touch has no hover, so hint the tappable regions rather than relying on it. */
+@media (pointer: coarse) {
+  .cut-chart .cut polygon { stroke: color-mix(in srgb, var(--ink) 14%, transparent); }
+}
+
+/* Modal must stay usable in landscape, where 62vh is only a couple of rows. */
+@media (max-height: 520px) {
+  .pmodal__sheet { padding-block: 1.6rem 1rem; }
+  .pmodal__body { max-height: 52vh; }
+  .pmodal__title { font-size: clamp(1.4rem, 5vw, 2rem); }
+  .pmodal__seal { width: clamp(44px, 6vw, 64px); }
+}
+
+/* Reviews: one full-width label per view on phones, snap kept. */
+@media (max-width: 560px) {
+  .rcar__track { grid-auto-columns: 100%; }
+}
