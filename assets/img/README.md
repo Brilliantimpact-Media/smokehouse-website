@@ -263,3 +263,23 @@ MIXED PROVENANCE, note for launch: Beef, Pork, Sausage, Venison and Poultry are
 the client's real (probably licensed stock) photographs. Lamb, Misc. and Woodville
 Deli are generated. They sit in the same row, so the three stand-ins should be
 reshot or re-licensed alongside the five best-seller product shots.
+
+## og-share.jpg (social share card)
+
+1200x630, the standard Open Graph ratio. Built 2026-09-01 from
+hero-steak-WEB-PULLED.jpg with a gradient scrim, the site logo in cream, an
+oxblood rule and a thin inner border. 152 KB.
+
+The logo is the real one: assets/img/logo.svg rendered via macOS qlmanage, then
+inverted to an alpha mask and tinted. It includes the small "THE", which the
+client-supplied logo-ondark.png does not, so the card matches the site header.
+
+TWO THINGS TO FIX AT LAUNCH:
+1. og:image and og:url are ABSOLUTE URLs pointing at
+   brilliantimpact-media.github.io/smokehouse-website/. When the site moves to
+   its real host and domain, every one of those on all six pages must be updated
+   or the share card will break.
+2. The card uses the web-pulled hero, which is not a final asset and is very
+   likely licensed stock. Confirm the licence with John before the site is
+   shared publicly; a share card gets cached and redistributed by Facebook and
+   Apple, which is wider exposure than a page background.

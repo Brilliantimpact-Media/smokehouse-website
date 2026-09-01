@@ -213,3 +213,14 @@ each case.
     which is what made it read as a jumble. The head is now a two-up legend and
     the row layout was tightened. Consolidated into that one block rather than
     layering a second media query over it.
+
+29. **Social share card added 2026-09-01.** No page had any Open Graph or Twitter
+    Card tag, so every share of this site showed a blank image slot. Added a
+    1200x630 card (assets/img/og-share.jpg) plus the full tag set on all six
+    pages, sitewide rather than per-page at the client's direction.
+    **Blocking at launch:** og:image and og:url are absolute URLs on the current
+    GitHub Pages address. They must be rewritten when hosting and domain are
+    settled. Also confirm the hero photo licence with John, since the card is
+    cached and redistributed by Facebook and Apple.
+    Note: Facebook and iMessage cache these aggressively. Once a link has been
+    shared, changing the image needs Facebook's Sharing Debugger to clear.
