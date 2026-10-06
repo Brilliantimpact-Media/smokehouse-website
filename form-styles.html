@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Form Treatments | Style Options</title>
+<meta name="description" content="Internal preview. Four ways to frame the embedded JotForm, using the live Slaughter Date Request.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#171310">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&family=Caveat:wght@600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=20261007i">
+<meta name="robots" content="noindex">
+<style>
+.fs-sec{padding-block:clamp(3rem,7vh,5rem);border-top:1px solid var(--rule)}
+.fs-tag{background:var(--oxblood);color:var(--paper);font-family:var(--font-ui);font-size:.62rem;
+  font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.4rem .8rem;display:inline-block;margin-bottom:1rem}
+.fs-note{font-family:var(--font-ui);font-size:.86rem;color:var(--ink-3);max-width:70ch;line-height:1.65;margin:0 0 2rem}
+.fs-note strong{color:var(--ink-2)}
+.fs-flag{border-left:3px solid var(--oxblood);padding:.7rem 0 .7rem 1rem;
+  font-family:var(--font-ui);font-size:.86rem;line-height:1.65;color:var(--ink-2);max-width:70ch;margin:0 0 2rem}
+.fs-split{display:grid;gap:clamp(1.6rem,4vw,3rem);align-items:start}
+@media (min-width:860px){.fs-split{grid-template-columns:1fr minmax(0,440px)}}
+
+/* ---------- B: centred, full height, no inner scroll ---------- */
+.fs-b{max-width:720px;margin-inline:auto}
+.fs-b .formslot__frame:has(iframe){max-height:none;overflow:visible}
+.fs-b .formslot__frame:has(iframe)::after{display:none}
+
+/* ---------- C: on the dark band ---------- */
+.fs-c{max-width:720px;margin-inline:auto}
+.fs-c .formslot__frame:has(iframe){max-height:none;overflow:visible}
+.fs-c .formslot__frame:has(iframe)::after{display:none}
+.fs-c .formslot__frame:has(iframe)::before{background:var(--char-2);color:color-mix(in srgb,var(--paper) 55%,transparent)}
+
+/* ---------- D: stepped, with the meat photo ---------- */
+.fs-step{display:grid;gap:clamp(1.4rem,3vw,2.4rem)}
+@media (min-width:860px){.fs-step{grid-template-columns:minmax(0,300px) 1fr}}
+.fs-step__aside figure{margin:0;border:2px solid var(--ink);background:var(--paper)}
+.fs-step__aside img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+.fs-step__n{font-family:var(--font-type);font-size:.78rem;color:var(--oxblood);
+  letter-spacing:.14em;text-transform:uppercase;margin:0 0 .3rem}
+.fs-step__aside h3{margin:0 0 .5rem;font-size:clamp(1.3rem,2.4vw,1.7rem)}
+.fs-step__aside p{font-size:.92rem;color:var(--ink-3)}
+.fs-step .formslot__frame:has(iframe){max-height:none;overflow:visible}
+.fs-step .formslot__frame:has(iframe)::after{display:none}
+</style>
+</head>
+<body>
+
+<header class="fs-sec" style="border-top:0;padding-bottom:0">
+  <div class="shell">
+    <p class="fs-tag">Internal preview &middot; not linked from the site</p>
+    <h1 style="margin:0 0 1rem">Four ways to frame the form.</h1>
+    <p class="fs-note" style="font-size:1rem;max-width:62ch">All four use the <strong>real Slaughter Date Request</strong>, so what you see is what the client gets. They load as you scroll.</p>
+    <p class="fs-flag"><strong>The honest constraint first.</strong> A JotForm embed is a third-party iframe. Nothing in our stylesheet can reach inside it, so its white ground, its blue headings and its button are fixed from our side. Everything below is about the <em>frame</em> we build around it. The inside is a JotForm setting, and the single biggest improvement is <strong>Jonathan changing the form&rsquo;s own theme in JotForm</strong> to the shop&rsquo;s cream and oxblood, and deleting the logo banner and the title from the top of the form, since the page already says both. Ten minutes of his time beats anything I can do out here.</p>
+  </div>
+</header>
+
+<!-- ============== A ============== -->
+<section class="fs-sec">
+  <div class="shell">
+    <p class="fs-tag">Option A</p>
+    <h2>Framed card in the hero.</h2>
+    <p class="fs-note">What is on the site now, and what Jonathan asked for &mdash; the form sits where the meat photo used to be. <strong>Trade-off:</strong> the hero stays the hero, but a 1,900px form has to scroll inside a 760px box on desktop.</p>
+    <div class="fs-split">
+      <div>
+        <p class="eyebrow eyebrow--plain">Custom processing &middot; Durand</p>
+        <h2 style="margin-top:.3rem">Here&rsquo;s how custom processing works</h2>
+        <p class="lede">Bring us your animal, or let us source one for you. Either way, what comes back is exactly what you asked for, labeled clearly, ready for the freezer.</p>
+      </div>
+      <div class="formslot">
+        <p class="formslot__label">Slaughter date request</p>
+        <div class="formslot__frame">
+          <iframe title="Slaughter date request, option A" src="https://form.jotform.com/260705024846051"
+                  loading="lazy" scrolling="no"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== B ============== -->
+<section class="fs-sec">
+  <div class="shell">
+    <p class="fs-tag">Option B</p>
+    <h2>Its own room.</h2>
+    <p class="fs-note">The form gets a section to itself, centred and narrow, running its full height. <strong>Why I would pick this one:</strong> no nested scrollbar anywhere, the fields are wider so the date dropdown is readable, and a form is a task &mdash; giving it one screen with nothing competing is how a task should be presented.</p>
+    <div class="fs-b">
+      <p class="annot" style="text-align:center;margin-bottom:.4rem">Pick a date and we will confirm it.</p>
+      <div class="formslot">
+        <p class="formslot__label">Slaughter date request</p>
+        <div class="formslot__frame">
+          <iframe title="Slaughter date request, option B" src="https://form.jotform.com/260705024846051"
+                  loading="lazy" scrolling="no"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== C ============== -->
+<section class="fs-sec band-dark">
+  <div class="shell">
+    <p class="fs-tag">Option C</p>
+    <h2>On the dark band.</h2>
+    <p class="fs-note" style="color:color-mix(in srgb,var(--paper) 70%,transparent)">Same as B, but on the charcoal ground the site already uses for its serious moments. <strong>Trade-off:</strong> the contrast makes the form read as important, and it also makes JotForm&rsquo;s white panel look more like a foreign object, not less. This one lives or dies on Jonathan restyling the form itself.</p>
+    <div class="fs-c">
+      <div class="formslot">
+        <p class="formslot__label">Slaughter date request</p>
+        <div class="formslot__frame">
+          <iframe title="Slaughter date request, option C" src="https://form.jotform.com/260705024846051"
+                  loading="lazy" scrolling="no"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== D ============== -->
+<section class="fs-sec">
+  <div class="shell">
+    <p class="fs-tag">Option D</p>
+    <h2>Stepped, with the photo kept.</h2>
+    <p class="fs-note">From the walkthrough at 5:39 &mdash; <em>&ldquo;I do like having a big picture here, so maybe we want to put it on the top, or actually probably better on the bottom.&rdquo;</em> This keeps the meat photo working for its living beside the form instead of being displaced by it, and numbers the form as a step so it reads as the start of a process rather than paperwork.</p>
+    <div class="fs-step">
+      <div class="fs-step__aside">
+        <p class="fs-step__n">Step 01</p>
+        <h3>Get on the calendar</h3>
+        <p>Dates book out, especially in the fall. Tell us what you have and we will confirm your date from there, so you are not stuck waiting on a callback.</p>
+        <figure><img src="assets/img/shop/brisket-sliced.webp" alt="Sliced brisket" loading="lazy"></figure>
+      </div>
+      <div class="formslot">
+        <p class="formslot__label">Slaughter date request</p>
+        <div class="formslot__frame">
+          <iframe title="Slaughter date request, option D" src="https://form.jotform.com/260705024846051"
+                  loading="lazy" scrolling="no"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="fs-sec">
+  <div class="shell shell--narrow">
+    <p class="eyebrow">What to send Jonathan</p>
+    <h2>Three settings inside JotForm.</h2>
+    <ol class="fs-note" style="font-size:.92rem;padding-left:1.2rem">
+      <li style="margin-bottom:.7rem"><strong>Delete the logo banner and the form title.</strong> The page already carries the logo in the header and the form&rsquo;s name on the black bar. Right now it says &ldquo;Slaughter Date Request&rdquo; twice within 40 pixels.</li>
+      <li style="margin-bottom:.7rem"><strong>Set the form theme to the shop&rsquo;s colours.</strong> Background <code>#f2ece0</code>, buttons and required marks <code>#7a1f26</code>, text <code>#171310</code>. JotForm&rsquo;s theme editor does all three.</li>
+      <li><strong>Set the form font to Archivo.</strong> It is the site&rsquo;s body face and it is free in JotForm&rsquo;s font list, so the embed stops reading as someone else&rsquo;s page.</li>
+    </ol>
+    <p class="fs-note">With those three done, any of the four options above look like part of the site. Without them, Option B is the most forgiving, because the form has room and nothing sits next to it to compare against.</p>
+  </div>
+</section>
+
+</body>
+</html>

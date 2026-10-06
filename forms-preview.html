@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Processing Cards | Style Options</title>
+<meta name="description" content="Fast, clear pricing and consistent product for restaurants, bars, gas stations, and schools within about 30 miles of Durand and Woodville, WI.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The SmokeHouse">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Wholesale | Local Meat for Restaurants, Bars &amp; Schools">
+<meta property="og:description" content="Fast, clear pricing and consistent product for restaurants, bars, gas stations, and schools within about 30 miles of Durand and Woodville, WI.">
+<meta property="og:url" content="https://brilliantimpact-media.github.io/smokehouse-website/wholesale.html">
+<meta property="og:image" content="https://brilliantimpact-media.github.io/smokehouse-website/assets/img/og-share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The SmokeHouse, crafted meat and processing, over a dry-aged steak on a slate board">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wholesale | Local Meat for Restaurants, Bars &amp; Schools">
+<meta name="twitter:description" content="Fast, clear pricing and consistent product for restaurants, bars, gas stations, and schools within about 30 miles of Durand and Woodville, WI.">
+<meta name="twitter:image" content="https://brilliantimpact-media.github.io/smokehouse-website/assets/img/og-share.jpg">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/img/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="mask-icon" href="assets/img/favicon.svg" color="#7a1f26">
+<meta name="theme-color" content="#171310">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=20261007i">
+<meta name="robots" content="noindex">
+<style>
+.fp-sec{padding-block:clamp(3.5rem,8vh,6rem);border-top:1px solid var(--rule)}
+.fp-sec:nth-of-type(even){background:var(--paper-2)}
+.fp-tag{background:var(--oxblood);color:var(--paper);font-family:var(--font-ui);font-size:.62rem;
+  font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.4rem .8rem;display:inline-block;margin-bottom:1rem}
+.fp-note{font-family:var(--font-ui);font-size:.84rem;color:var(--ink-3);max-width:68ch;line-height:1.6;margin:0 0 2rem}
+.fgrid{display:grid;gap:clamp(1rem,2vw,1.4rem);grid-template-columns:repeat(auto-fit,minmax(min(100%,235px),1fr))}
+
+/* ---------- A: silhouette ---------- */
+.fa{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:.45rem;
+  min-height:210px;padding:1.3rem;overflow:hidden;text-decoration:none;
+  background:var(--char);color:var(--paper);border:2px solid var(--ink);
+  transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.fa:hover{transform:translateY(-4px)}
+.fa__glyph{position:absolute;right:-14%;top:-10%;width:72%;aspect-ratio:1;
+  background-color:var(--paper);opacity:.1;pointer-events:none;
+  -webkit-mask:var(--g) no-repeat center/contain;mask:var(--g) no-repeat center/contain;
+  transition:transform .5s cubic-bezier(.16,1,.3,1),opacity .35s ease}
+.fa:hover .fa__glyph{transform:scale(1.08) translateX(-4%);opacity:.17}
+.fa__kind{position:relative;font-family:var(--font-ui);font-size:.6rem;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--oxblood)}
+.fa__name{position:relative;font-family:var(--font-display);font-weight:900;text-transform:uppercase;
+  font-size:clamp(1.3rem,2.3vw,1.85rem);line-height:.95;letter-spacing:.01em;margin:0}
+.fa__go{position:relative;margin-top:.6rem;font-family:var(--font-ui);font-size:.62rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:color-mix(in srgb,var(--paper) 70%,transparent)}
+.fa:hover .fa__go{color:var(--paper)}
+
+/* ---------- B: seal ---------- */
+.fb{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.5rem;
+  padding:1.6rem 1.2rem 1.3rem;text-decoration:none;color:var(--ink);
+  background:#e8dec6;border:2px solid var(--ink);position:relative;
+  transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.fb::after{content:"";position:absolute;inset:7px;border:1px solid var(--ink);opacity:.45;pointer-events:none}
+.fb:hover{transform:translateY(-4px)}
+.fb__seal{width:66px;aspect-ratio:1;border-radius:50%;background:var(--oxblood);display:grid;place-items:center;
+  box-shadow:inset 0 0 0 2px var(--oxblood),inset 0 0 0 3px rgba(242,236,224,.85);
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.fb:hover .fb__seal{transform:rotate(-8deg) scale(1.08)}
+.fb__glyph{width:56%;aspect-ratio:1;background-color:var(--paper);
+  -webkit-mask:var(--g) no-repeat center/contain;mask:var(--g) no-repeat center/contain}
+.fb__kind{font-family:var(--font-ui);font-size:.58rem;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--oxblood)}
+.fb__name{font-family:var(--font-display);font-weight:800;text-transform:uppercase;
+  font-size:clamp(1.05rem,1.8vw,1.35rem);line-height:1;margin:0;
+  padding-top:.5rem;border-top:2px solid var(--oxblood);width:100%}
+.fb__go{margin-top:.5rem;font-family:var(--font-ui);font-size:.6rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+
+/* ---------- C: photo sign ---------- */
+.fc{position:relative;aspect-ratio:4/3;display:block;overflow:hidden;text-decoration:none;
+  background:var(--char);color:var(--paper);container-type:inline-size;
+  transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease}
+.fc:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(20,16,13,.35)}
+.fc__bg{position:absolute;inset:0;background-position:center;background-size:cover;
+  filter:brightness(.5) contrast(1.05);transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.fc:hover .fc__bg{transform:scale(1.05)}
+.fc__vig{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,13,.2),rgba(20,16,13,.8))}
+.fc__inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:2.6cqw;padding:9%;text-align:center}
+.fc__seal{width:22%;aspect-ratio:1;border-radius:50%;background:var(--oxblood);display:grid;place-items:center;flex:none;
+  box-shadow:inset 0 0 0 2px var(--oxblood),inset 0 0 0 3px rgba(242,236,224,.8)}
+.fc__glyph{width:56%;aspect-ratio:1;background-color:var(--paper);
+  -webkit-mask:var(--g) no-repeat center/contain;mask:var(--g) no-repeat center/contain}
+.fc__kind{font-family:var(--font-ui);font-size:clamp(.45rem,1.5cqw,.62rem);font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;color:color-mix(in srgb,var(--paper) 78%,transparent)}
+.fc__name{font-family:var(--font-display);font-weight:900;text-transform:uppercase;
+  font-size:clamp(1rem,7.4cqw,2rem);line-height:1;margin:0}
+.fc__go{font-family:var(--font-ui);font-size:clamp(.44rem,1.5cqw,.6rem);font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;background:var(--oxblood);color:var(--paper);
+  padding:.6em 1.5em;box-shadow:inset 0 0 0 1px var(--oxblood),inset 0 0 0 2px rgba(242,236,224,.9)}
+@media (prefers-reduced-motion:reduce){.fa:hover,.fb:hover,.fc:hover{transform:none}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="shell site-header__inner">
+    <!-- Wordmark stands in for the logo, which has not been delivered yet. -->
+    <a class="wordmark" href="index.html" aria-label="The SmokeHouse home"><span class="wordmark__mark" role="img" aria-label="Smokehouse, Crafted Meat and Processing"></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <div class="nav__group">
+        <a href="custom-processing.html">Custom Processing</a>
+        <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Processing forms"></button>
+        <div class="nav__menu">
+          <a href="beef-delegation.html">Beef: Delegation List</a>
+          <a href="beef-processing.html">Beef: Processing List</a>
+          <a href="hog-delegation.html">Hog: Delegation List</a>
+          <a href="hog-processing.html">Hog: Processing List</a>
+        </div>
+      </div>
+      <a href="in-the-case.html">In the Case</a>
+      <a href="wholesale.html">Wholesale</a>
+      <a href="about.html">Reviews &amp; Awards</a>
+      <a href="visit.html">Visit</a>
+    </nav>
+    <a class="btn header-cta" href="custom-processing.html">Schedule Your Slaughter</a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="fp-sec">
+    <div class="shell">
+      <span class="fp-tag">Option A</span>
+      <h2>Silhouette</h2>
+      <p class="fp-note">Dark cards with the animal mark bleeding off the corner as a watermark. Beef and hog read
+        instantly from across the page, before you read a word. Closest in feel to the dry-aging panel.</p>
+      <div class="fgrid">
+        <a class="fa" href="beef-delegation.html" style="--g:url('assets/img/cat/beef.png')">
+          <span class="fa__glyph"></span>
+          <span class="fa__kind">Beef</span>
+          <span class="fa__name">Delegation List</span>
+          <span class="fa__go">Open the form</span>
+        </a>
+        <a class="fa" href="beef-processing.html" style="--g:url('assets/img/cat/beef.png')">
+          <span class="fa__glyph"></span>
+          <span class="fa__kind">Beef</span>
+          <span class="fa__name">Processing List</span>
+          <span class="fa__go">Open the form</span>
+        </a>
+        <a class="fa" href="hog-delegation.html" style="--g:url('assets/img/cat/pork.png')">
+          <span class="fa__glyph"></span>
+          <span class="fa__kind">Hog</span>
+          <span class="fa__name">Delegation List</span>
+          <span class="fa__go">Open the form</span>
+        </a>
+        <a class="fa" href="hog-processing.html" style="--g:url('assets/img/cat/pork.png')">
+          <span class="fa__glyph"></span>
+          <span class="fa__kind">Hog</span>
+          <span class="fa__name">Processing List</span>
+          <span class="fa__go">Open the form</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="fp-sec">
+    <div class="shell">
+      <span class="fp-tag">Option B</span>
+      <h2>Seal on parchment</h2>
+      <p class="fp-note">The popup's parchment and double frame, with the oxblood seal from the products row.
+        Quietest of the three, and it keeps the section light so the dark hero above still leads.</p>
+      <div class="fgrid">
+        <a class="fb" href="beef-delegation.html" style="--g:url('assets/img/cat/beef.png')">
+          <span class="fb__seal"><span class="fb__glyph"></span></span>
+          <span class="fb__kind">Beef</span>
+          <span class="fb__name">Delegation List</span>
+          <span class="fb__go">Open the form</span>
+        </a>
+        <a class="fb" href="beef-processing.html" style="--g:url('assets/img/cat/beef.png')">
+          <span class="fb__seal"><span class="fb__glyph"></span></span>
+          <span class="fb__kind">Beef</span>
+          <span class="fb__name">Processing List</span>
+          <span class="fb__go">Open the form</span>
+        </a>
+        <a class="fb" href="hog-delegation.html" style="--g:url('assets/img/cat/pork.png')">
+          <span class="fb__seal"><span class="fb__glyph"></span></span>
+          <span class="fb__kind">Hog</span>
+          <span class="fb__name">Delegation List</span>
+          <span class="fb__go">Open the form</span>
+        </a>
+        <a class="fb" href="hog-processing.html" style="--g:url('assets/img/cat/pork.png')">
+          <span class="fb__seal"><span class="fb__glyph"></span></span>
+          <span class="fb__kind">Hog</span>
+          <span class="fb__name">Processing List</span>
+          <span class="fb__go">Open the form</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="fp-sec">
+    <div class="shell">
+      <span class="fp-tag">Option C</span>
+      <h2>Photo sign</h2>
+      <p class="fp-note">The same vintage sign as Our Products, scaled down, using the beef and pork photography
+        we already have. Strongest visually, and it makes the forms feel like part of the product range.</p>
+      <div class="fgrid">
+        <a class="fc" href="beef-delegation.html" style="--g:url('assets/img/cat/beef.png')">
+          <span class="fc__bg" style="background-image:url('assets/img/cat/photo/beef.webp')"></span>
+          <span class="fc__vig"></span>
+          <span class="fc__inner">
+            <span class="fc__seal"><span class="fc__glyph"></span></span>
+            <span class="fc__kind">Beef</span>
+            <span class="fc__name">Delegation List</span>
+            <span class="fc__go">Open the form</span>
+          </span>
+        </a>
+        <a class="fc" href="beef-processing.html" style="--g:url('assets/img/cat/beef.png')">
+          <span class="fc__bg" style="background-image:url('assets/img/cat/photo/beef.webp')"></span>
+          <span class="fc__vig"></span>
+          <span class="fc__inner">
+            <span class="fc__seal"><span class="fc__glyph"></span></span>
+            <span class="fc__kind">Beef</span>
+            <span class="fc__name">Processing List</span>
+            <span class="fc__go">Open the form</span>
+          </span>
+        </a>
+        <a class="fc" href="hog-delegation.html" style="--g:url('assets/img/cat/pork.png')">
+          <span class="fc__bg" style="background-image:url('assets/img/cat/photo/pork.webp')"></span>
+          <span class="fc__vig"></span>
+          <span class="fc__inner">
+            <span class="fc__seal"><span class="fc__glyph"></span></span>
+            <span class="fc__kind">Hog</span>
+            <span class="fc__name">Delegation List</span>
+            <span class="fc__go">Open the form</span>
+          </span>
+        </a>
+        <a class="fc" href="hog-processing.html" style="--g:url('assets/img/cat/pork.png')">
+          <span class="fc__bg" style="background-image:url('assets/img/cat/photo/pork.webp')"></span>
+          <span class="fc__vig"></span>
+          <span class="fc__inner">
+            <span class="fc__seal"><span class="fc__glyph"></span></span>
+            <span class="fc__kind">Hog</span>
+            <span class="fc__name">Processing List</span>
+            <span class="fc__go">Open the form</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="footer-grid">
+      <div>
+        <a class="wordmark" href="index.html" aria-label="The SmokeHouse home"><span class="wordmark__mark" role="img" aria-label="Smokehouse, Crafted Meat and Processing"></span></a>
+        <p class="tagline">Woodville, Durand</p>
+        <p class="one-liner">Meat processing that’s crafted locally, because your family deserves the real thing.</p>
+      </div>
+      <div>
+        <h2>Quick Links</h2>
+        <ul>
+          <li><a class="footer-feature" href="employment.html">Employment opportunities</a></li>
+          <li><a href="custom-processing.html">Custom processing</a></li>
+          <li><a href="in-the-case.html">In the case</a></li>
+          <li><a href="wholesale.html">Wholesale</a></li>
+          <li><a href="custom-processing.html">Schedule your slaughter date</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Visit</h2>
+        <ul>
+          <li><a href="visit.html">Durand: 715-672-8073</a></li>
+          <li><a href="visit.html">Woodville: 715-698-6328</a></li>
+          <li><a href="visit.html">Contact us</a></li>
+          <li><a href="about.html">Reviews and awards</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="colophon">
+      <span>&copy; <span id="year">2026</span> The SmokeHouse. Durand &amp; Woodville, Wisconsin.</span>
+      <span>Mon–Wed 8–5 · Thu–Fri 8–6 · Sat 8–1</span>
+      <span class="colophon__legal"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js?v=20261006u"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
