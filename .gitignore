@@ -49,3 +49,6 @@ Thumbs.db
 # Deploy tooling
 .vercel
 .netlify
+
+# Local dev server config (machine-specific)
+.claude/
