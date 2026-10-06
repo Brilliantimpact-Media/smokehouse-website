@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 Directions | Style Options</title>
+<meta name="description" content="Internal preview. Three designs for the SmokeHouse 404 page.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#171310">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&family=Caveat:wght@600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=20261007i">
+<meta name="robots" content="noindex">
+<style>
+.op-bar{background:var(--oxblood);color:var(--paper);font-family:var(--font-ui);font-size:.62rem;
+  font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.75rem var(--gutter)}
+.op-bar b{font-weight:700}
+.op-bar span{font-weight:400;letter-spacing:.06em;text-transform:none;opacity:.8;margin-left:.8rem}
+
+/* shared: the animal silhouettes, recoloured through a mask */
+.beast{display:block;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain}
+.beast--cow{aspect-ratio:420/262}
+.beast--pig{aspect-ratio:560/291}
+
+/* ============ A : THEY GOT OUT ============ */
+.a4{position:relative;background:var(--char);color:var(--paper);overflow:hidden;
+  min-height:86vh;display:grid;place-content:center;text-align:center;
+  padding:clamp(3rem,8vh,6rem) var(--gutter)}
+.a4__num{font-family:var(--font-display);font-weight:900;
+  font-size:clamp(7rem,27vw,21rem);line-height:.78;letter-spacing:-.045em;
+  margin:0;color:var(--paper);user-select:none}
+/* the ground they stand on, so it reads as a baseline and not a line drawn
+   through the cow */
+.a4__rule{height:3px;background:color-mix(in srgb,var(--paper) 26%,transparent);
+  margin:0 0 clamp(1.3rem,2.6vw,2rem);position:relative}
+.a4__herd{position:relative;height:clamp(58px,8vw,104px);
+  margin-top:clamp(.6rem,1.4vw,1.1rem)}
+.a4__herd .beast{position:absolute;bottom:0;background-color:var(--paper)}
+.a4__cow{left:4%;width:clamp(96px,15vw,196px)}
+.a4__pig{right:6%;width:clamp(78px,12vw,158px);opacity:.9}
+.a4 h1{font-family:var(--font-display);font-weight:900;color:var(--paper);
+  font-size:clamp(1.8rem,4.4vw,3.2rem);line-height:1;margin:0 0 .6rem;text-transform:uppercase}
+.a4 .hand{font-family:var(--font-hand);font-size:clamp(1.1rem,2.4vw,1.6rem);
+  color:var(--kraft);margin:0 0 1.9rem}
+@media (prefers-reduced-motion:no-preference){
+  .a4__cow{animation:a4graze 5.5s ease-in-out infinite}
+  .a4__pig{animation:a4trot 6.5s ease-in-out infinite}
+}
+@keyframes a4graze{0%,100%{transform:translateX(0)}50%{transform:translateX(14px)}}
+@keyframes a4trot{0%,100%{transform:translateX(0)}50%{transform:translateX(-18px)}}
+/* the ghost button is drawn in ink, which disappears on this ground */
+.a4 .btn--ghost{background:transparent;color:var(--paper);border-color:var(--paper);
+  box-shadow:4px 4px 0 color-mix(in srgb,var(--paper) 22%,transparent)}
+.a4 .btn--ghost:hover{background:var(--paper);color:var(--ink)}
+
+/* ============ B : NOTHING ON THIS HOOK ============ */
+.b4{position:relative;background:var(--paper);color:var(--ink);overflow:hidden;
+  min-height:86vh;display:grid;place-content:center;text-align:center;
+  padding:clamp(3rem,8vh,6rem) var(--gutter)}
+.b4__num{font-family:var(--font-display);font-weight:900;
+  font-size:clamp(7rem,27vw,21rem);line-height:.8;letter-spacing:-.04em;margin:0;
+  color:transparent;-webkit-text-stroke:3px var(--ink);user-select:none;position:relative}
+.b4__chart{position:relative;display:inline-block}
+/* the dashed primal lines from the cut charts, run straight through the numerals */
+.b4__chart::before,.b4__chart::after{content:"";position:absolute;left:-6%;right:-6%;
+  border-top:2px dashed color-mix(in srgb,var(--oxblood) 70%,transparent)}
+.b4__chart::before{top:34%}
+.b4__chart::after{top:67%}
+.b4__herd{display:flex;align-items:flex-end;justify-content:center;
+  gap:clamp(1.4rem,4vw,3.4rem);margin:clamp(1rem,2.4vw,2rem) 0 1.7rem}
+.b4__herd .beast{background-color:var(--oxblood)}
+.b4__herd .beast--cow{width:clamp(104px,16vw,208px)}
+.b4__herd .beast--pig{width:clamp(84px,13vw,168px)}
+.b4 h1{font-size:clamp(1.8rem,4.4vw,3.2rem);line-height:1;margin:0 0 .55rem}
+.b4 .hand{font-family:var(--font-hand);font-size:clamp(1.1rem,2.4vw,1.6rem);
+  color:var(--ink-3);margin:0 0 1.9rem}
+
+/* ============ C : WRONG PASTURE ============ */
+.c4{position:relative;background:var(--oxblood);color:var(--paper);overflow:hidden;
+  min-height:86vh;display:grid;place-content:center;text-align:center;
+  padding:clamp(3rem,8vh,7rem) var(--gutter) clamp(7rem,14vh,10rem)}
+.c4__num{font-family:var(--font-display);font-weight:900;
+  font-size:clamp(7rem,27vw,21rem);line-height:.8;letter-spacing:-.045em;margin:0;
+  color:var(--paper);user-select:none}
+.c4 h1{font-family:var(--font-display);font-weight:900;color:var(--paper);
+  font-size:clamp(1.7rem,4vw,2.9rem);line-height:1;margin:.4rem 0 .55rem;text-transform:uppercase}
+.c4 .hand{font-family:var(--font-hand);font-size:clamp(1.1rem,2.4vw,1.6rem);
+  color:color-mix(in srgb,var(--paper) 78%,transparent);margin:0 0 1.9rem}
+/* a strip of grass across the foot, with the pair out on it */
+.c4__field{position:absolute;left:0;right:0;bottom:0;height:clamp(84px,13vh,132px)}
+.c4__field::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34px;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='26' height='22'><path d='M0 22 L4 3 L7 22 Z M7 22 L12 9 L15 22 Z M14 22 L20 1 L24 22 Z' fill='%230e0c09'/></svg>") repeat-x bottom}
+.c4__field .beast{position:absolute;bottom:14px;background-color:var(--char)}
+.c4__field .beast--cow{left:8%;width:clamp(92px,14vw,186px)}
+.c4__field .beast--pig{right:10%;width:clamp(76px,11vw,150px)}
+@media (prefers-reduced-motion:no-preference){
+  .c4__field .beast--cow{animation:a4graze 6s ease-in-out infinite}
+  .c4__field .beast--pig{animation:a4trot 7s ease-in-out infinite}
+}
+.c4 .btn{background:var(--paper);color:var(--ink);border-color:var(--ink)}
+.c4 .btn--ghost{background:transparent;color:var(--paper);border-color:var(--paper)}
+</style>
+</head>
+<body>
+
+<!-- ======================= A ======================= -->
+<p class="op-bar"><b>Option A &middot; They got out</b><span>Charcoal, numerals carry the page, the pair wander the baseline</span></p>
+<section class="a4">
+  <p class="a4__num" aria-hidden="true">404</p>
+  <div class="a4__herd">
+    <span class="beast beast--cow a4__cow" aria-hidden="true" style="-webkit-mask-image:url('assets/img/cow.png');mask-image:url('assets/img/cow.png')"></span>
+    <span class="beast beast--pig a4__pig" aria-hidden="true" style="-webkit-mask-image:url('assets/img/pig.png');mask-image:url('assets/img/pig.png')"></span>
+  </div>
+  <div class="a4__rule"></div>
+  <h1>They got out.</h1>
+  <p class="hand">This page is not in the pen either.</p>
+  <div class="btn-row" style="justify-content:center">
+    <a class="btn btn--on-dark" href="index.html">Back to the homepage</a>
+    <a class="btn btn--ghost" href="custom-processing.html">Schedule Your Slaughter</a>
+  </div>
+</section>
+
+<!-- ======================= B ======================= -->
+<p class="op-bar"><b>Option B &middot; Nothing on this hook</b><span>Butcher paper, outlined numerals, the cut-chart dashes run through them</span></p>
+<section class="b4">
+  <span class="b4__chart"><span class="b4__num" aria-hidden="true">404</span></span>
+  <div class="b4__herd">
+    <span class="beast beast--cow" aria-hidden="true" style="-webkit-mask-image:url('assets/img/cow.png');mask-image:url('assets/img/cow.png')"></span>
+    <span class="beast beast--pig" aria-hidden="true" style="-webkit-mask-image:url('assets/img/pig.png');mask-image:url('assets/img/pig.png')"></span>
+  </div>
+  <h1>Nothing hanging on this one.</h1>
+  <p class="hand">Plenty in the case, though.</p>
+  <div class="btn-row" style="justify-content:center">
+    <a class="btn" href="index.html">Back to the homepage</a>
+    <a class="btn btn--ghost" href="in-the-case.html">See what is in the case</a>
+  </div>
+</section>
+
+<!-- ======================= C ======================= -->
+<p class="op-bar"><b>Option C &middot; Wrong pasture</b><span>Full oxblood, and the grass-and-cow motif you liked, out across the foot</span></p>
+<section class="c4">
+  <p class="c4__num" aria-hidden="true">404</p>
+  <h1>Wrong pasture.</h1>
+  <p class="hand">We cannot find that page anywhere.</p>
+  <div class="btn-row" style="justify-content:center">
+    <a class="btn" href="index.html">Back to the homepage</a>
+    <a class="btn btn--ghost" href="visit.html">Find us</a>
+  </div>
+  <div class="c4__field" aria-hidden="true">
+    <span class="beast beast--cow" style="-webkit-mask-image:url('assets/img/cow.png');mask-image:url('assets/img/cow.png')"></span>
+    <span class="beast beast--pig" style="-webkit-mask-image:url('assets/img/pig.png');mask-image:url('assets/img/pig.png')"></span>
+  </div>
+</section>
+
+</body>
+</html>

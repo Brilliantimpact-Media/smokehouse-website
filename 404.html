@@ -83,6 +83,66 @@
   ]
 }
 </script>
+<style>
+/* --- 404: wrong pasture ---------------------------------------------------
+   The cow and the pig are the site's existing silhouettes, recoloured through
+   a CSS mask so they take the band's colour rather than needing their own
+   artwork. The grass is an inline SVG tiled along the foot, so it stretches to
+   any width with no asset to keep in step. url() is written inline on the
+   elements because a url() carried in a custom property would resolve against
+   the stylesheet's folder, not this document. */
+.lost {
+  position: relative; overflow: hidden;
+  background: var(--oxblood); color: var(--paper);
+  min-height: min(76vh, 760px);
+  display: grid; place-content: center; text-align: center;
+  padding: clamp(3rem, 8vh, 6rem) var(--gutter) clamp(7.5rem, 15vh, 11rem);
+  border: 0 !important;
+}
+.lost__num {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(7rem, 27vw, 21rem); line-height: .8; letter-spacing: -.045em;
+  margin: 0; color: var(--paper); user-select: none;
+}
+.lost h1 {
+  font-family: var(--font-display); font-weight: 900; color: var(--paper);
+  font-size: clamp(1.7rem, 4vw, 2.9rem); line-height: 1;
+  margin: .4rem 0 .55rem; text-transform: uppercase;
+}
+.lost__hand {
+  font-family: var(--font-hand); font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+  color: color-mix(in srgb, var(--paper) 78%, transparent);
+  margin: 0 auto 1.9rem; max-width: none;
+}
+.lost .btn { background: var(--paper); color: var(--ink); border-color: var(--ink); }
+.lost .btn--ghost { background: transparent; color: var(--paper); border-color: var(--paper); }
+.lost .btn--ghost:hover { background: var(--paper); color: var(--ink); }
+
+.lost__field { position: absolute; left: 0; right: 0; bottom: 0; height: clamp(84px, 13vh, 132px); }
+.lost__field::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 34px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='26' height='22'><path d='M0 22 L4 3 L7 22 Z M7 22 L12 9 L15 22 Z M14 22 L20 1 L24 22 Z' fill='%230e0c09'/></svg>") repeat-x bottom;
+}
+.lost__beast {
+  position: absolute; bottom: 14px; display: block;
+  background-color: var(--char);
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: center; mask-position: center;
+  -webkit-mask-size: contain; mask-size: contain;
+}
+.lost__cow { left: 8%;  width: clamp(92px, 14vw, 186px); aspect-ratio: 420 / 262; }
+.lost__pig { right: 10%; width: clamp(76px, 11vw, 150px); aspect-ratio: 560 / 291; }
+@media (prefers-reduced-motion: no-preference) {
+  .lost__cow { animation: lostGraze 6s ease-in-out infinite; }
+  .lost__pig { animation: lostTrot 7s ease-in-out infinite; }
+}
+@keyframes lostGraze { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(14px); } }
+@keyframes lostTrot  { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-18px); } }
+@media (max-width: 560px) {
+  .lost__cow { left: 4%; }
+  .lost__pig { right: 5%; }
+}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -113,32 +173,17 @@
 </header>
 
 <main id="main">
-  <section class="hero">
-    <div class="shell shell--narrow">
-      <p class="eyebrow eyebrow--plain">404</p>
-      <h1>That page went in the freezer.</h1>
-      <p class="lede">We cannot find it. It may have moved, or the link may have a typo in it. Here is where most people are headed.</p>
-      <div class="btn-row" style="margin-top:1.6rem">
-        <a class="btn" href="custom-processing.html">Schedule Your Slaughter</a>
-        <a class="btn btn--ghost" href="index.html">Back to the homepage</a>
-      </div>
+  <section class="lost">
+    <p class="lost__num" aria-hidden="true">404</p>
+    <h1>Wrong pasture.</h1>
+    <p class="lost__hand">We cannot find that page anywhere.</p>
+    <div class="btn-row" style="justify-content:center">
+      <a class="btn" href="index.html">Back to the homepage</a>
+      <a class="btn btn--ghost" href="visit.html">Find us</a>
     </div>
-  </section>
-
-  <section>
-    <div class="shell">
-      <p class="eyebrow">Everything else</p>
-      <h2>Try one of these.</h2>
-      <ul class="tags" style="margin-top:1.6rem">
-        <li><a href="custom-processing.html">Custom processing</a></li>
-        <li><a href="in-the-case.html">In the case</a></li>
-        <li><a href="wholesale.html">Wholesale</a></li>
-        <li><a href="about.html">Reviews and awards</a></li>
-        <li><a href="awards.html">Awards</a></li>
-        <li><a href="visit.html">Visit and contact</a></li>
-        <li><a href="employment.html">Employment</a></li>
-      </ul>
-      <p style="margin-top:2rem">Still stuck? Call Durand on <a href="tel:+17156728073">715-672-8073</a> or Woodville on <a href="tel:+17156986328">715-698-6328</a>.</p>
+    <div class="lost__field" aria-hidden="true">
+      <span class="lost__beast lost__cow" style="-webkit-mask-image:url('assets/img/cow.png');mask-image:url('assets/img/cow.png')"></span>
+      <span class="lost__beast lost__pig" style="-webkit-mask-image:url('assets/img/pig.png');mask-image:url('assets/img/pig.png')"></span>
     </div>
   </section>
 </main>
