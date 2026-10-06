@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Visit &amp; Contact | The SmokeHouse, Durand &amp; Woodville, WI</title>
+<title>Visit &amp; Contact | The SmokeHouse, Durand WI</title>
 <meta name="description" content="Hours, directions, and phone numbers for both SmokeHouse locations. Call to schedule your slaughter date or place an order.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The SmokeHouse">
@@ -19,6 +19,7 @@
 <meta name="twitter:title" content="Visit &amp; Contact | The SmokeHouse, Durand &amp; Woodville, WI">
 <meta name="twitter:description" content="Hours, directions, and phone numbers for both SmokeHouse locations. Call to schedule your slaughter date or place an order.">
 <meta name="twitter:image" content="https://brilliantimpact-media.github.io/smokehouse-website/assets/img/og-share.jpg">
+<link rel="canonical" href="https://brilliantimpact-media.github.io/smokehouse-website/visit.html">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="assets/img/favicon-16.png" sizes="16x16" type="image/png">
@@ -28,7 +29,60 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=20260826m">
+<link rel="stylesheet" href="assets/css/site.css?v=20261007i">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://brilliantimpact-media.github.io/smokehouse-website/#durand",
+      "name": "The SmokeHouse, Durand",
+      "description": "Full-service butchering: on-site slaughter, dry-aging, custom processing and retail.",
+      "image": "https://brilliantimpact-media.github.io/smokehouse-website/assets/img/shop/durand-building.webp",
+      "url": "https://brilliantimpact-media.github.io/smokehouse-website/",
+      "telephone": "+1-715-672-8073",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "W5823 State Hwy 85",
+        "addressLocality": "Durand",
+        "addressRegion": "WI",
+        "postalCode": "54736",
+        "addressCountry": "US"
+      },
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday"], "opens": "08:00", "closes": "17:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Thursday","Friday"], "opens": "08:00", "closes": "18:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "13:00" }
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://brilliantimpact-media.github.io/smokehouse-website/#woodville",
+      "name": "The SmokeHouse, Woodville",
+      "description": "Retail counter, deli, grab-n-go and processing pickup.",
+      "image": "https://brilliantimpact-media.github.io/smokehouse-website/assets/img/shop/woodville-building.webp",
+      "url": "https://brilliantimpact-media.github.io/smokehouse-website/visit.html",
+      "telephone": "+1-715-698-6328",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "124 River St",
+        "addressLocality": "Woodville",
+        "addressRegion": "WI",
+        "postalCode": "54023",
+        "addressCountry": "US"
+      },
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday"], "opens": "08:00", "closes": "17:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Thursday","Friday"], "opens": "08:00", "closes": "18:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "13:00" }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -39,13 +93,22 @@
     <a class="wordmark" href="index.html" aria-label="The SmokeHouse home"><span class="wordmark__mark" role="img" aria-label="Smokehouse, Crafted Meat and Processing"></span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
     <nav class="nav" id="primary-nav" aria-label="Primary">
-      <a href="custom-processing.html">Custom Processing</a>
+      <div class="nav__group">
+        <a href="custom-processing.html">Custom Processing</a>
+        <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Processing forms"></button>
+        <div class="nav__menu">
+          <a href="beef-delegation.html">Beef: Delegation List</a>
+          <a href="beef-processing.html">Beef: Processing List</a>
+          <a href="hog-delegation.html">Hog: Delegation List</a>
+          <a href="hog-processing.html">Hog: Processing List</a>
+        </div>
+      </div>
       <a href="in-the-case.html">In the Case</a>
       <a href="wholesale.html">Wholesale</a>
-      <a href="about.html">About</a>
+      <a href="about.html">Reviews &amp; Awards</a>
       <a href="visit.html">Visit</a>
     </nav>
-    <a class="btn header-cta" href="visit.html#schedule">Schedule your order today</a>
+    <a class="btn header-cta" href="custom-processing.html">Schedule Your Slaughter</a>
   </div>
 </header>
 
@@ -63,15 +126,17 @@
     <div class="shell">
       <div class="locations">
         <div class="location">
+          <figure class="location__shot"><img src="assets/img/shop/durand-building.webp" alt="The Durand SmokeHouse building, with its painted sign reading fresh, frozen and smoked meats" loading="lazy" width="480" height="480"></figure>
           <h2 style="font-size:clamp(1.5rem,2.4vw,2rem)">Durand</h2>
-          <p class="location__role">Slaughter · dry-aging · custom processing</p>
+          <p class="location__role">On-site slaughter · dry-aging · custom processing · retail</p>
           <address>W5823 State Hwy 85<br>Durand, WI 54736</address>
           <p><a href="tel:+17156728073">715-672-8073</a></p>
           <p><a class="link-cta" href="https://maps.google.com/?q=W5823+State+Hwy+85,+Durand,+WI+54736" rel="noopener">Directions</a></p>
         </div>
         <div class="location">
+          <figure class="location__shot"><img src="assets/img/shop/woodville-building.webp" alt="The Woodville SmokeHouse storefront, award ribbons either side of the sign" loading="lazy" width="480" height="480"></figure>
           <h2 style="font-size:clamp(1.5rem,2.4vw,2rem)">Woodville</h2>
-          <p class="location__role">Retail · deli · grab-n-go</p>
+          <p class="location__role">Retail · deli · grab-n-go · processing pickup</p>
           <address>124 River St.<br>Woodville, WI 54023</address>
           <p><a href="tel:+17156986328">715-698-6328</a></p>
           <p><a class="link-cta" href="https://maps.google.com/?q=124+River+St,+Woodville,+WI+54023" rel="noopener">Directions</a></p>
@@ -94,20 +159,20 @@
     </div>
   </section>
 
-  <section id="schedule" class="band-dark">
+  <section id="schedule">
     <div class="shell hero__grid">
       <div>
-        <p class="eyebrow">Ready to order</p>
-        <blockquote class="quote">Schedule your order today</blockquote>
+        <p class="eyebrow">Get in touch</p>
+        <h2>Send us a note.</h2>
+        <p>Questions about an order, a date, or what is in the case. Use the form and it comes straight to us.
+          If you are booking processing, the <a href="custom-processing.html">slaughter date form</a> is the faster route.</p>
       </div>
-      <div>
-        <p>Reach out to schedule a slaughter date or place your order, by phone or in person. Custom processing and wholesale run through Durand; retail and deli questions go to Woodville.</p>
-        <div class="btn-row">
-          <a class="btn btn--on-dark" href="tel:+17156728073">Call Durand: 715-672-8073</a>
-          <a class="btn btn--on-dark btn--ghost" href="tel:+17156986328">Call Woodville: 715-698-6328</a>
+      <div class="formslot">
+        <p class="formslot__label">Contact</p>
+        <div class="formslot__frame" data-jotform="">
+          <p class="formslot__pending"><strong>Form goes here.</strong><br>
+            Waiting on the JotForm link for the contact form.</p>
         </div>
-        <p style="margin-top:1.6rem">Or email <a href="mailto:info@thedurandsmokehouse.com">info@thedurandsmokehouse.com</a>.</p>
-        <p class="note" style="background:transparent;border-color:currentColor;color:inherit"><strong>Build note:</strong> the current site has a “Slaughter Date Request” form. An online request form here would serve the guide’s “easy scheduling, phone or online” goal, but it needs a decision on where submissions go (email? whose inbox?). Flagged in <code>docs/open-questions.md</code>; until then, phone is the honest CTA.</p>
       </div>
     </div>
   </section>
@@ -118,16 +183,17 @@
     <div class="footer-grid">
       <div>
         <a class="wordmark" href="index.html" aria-label="The SmokeHouse home"><span class="wordmark__mark" role="img" aria-label="Smokehouse, Crafted Meat and Processing"></span></a>
-        <p class="tagline">Crafted Meat, Trusted Processing</p>
+        <p class="tagline">Woodville, Durand</p>
         <p class="one-liner">Meat processing that’s crafted locally, because your family deserves the real thing.</p>
       </div>
       <div>
-        <h2>Shop</h2>
+        <h2>Quick Links</h2>
         <ul>
+          <li><a class="footer-feature" href="employment.html">Employment opportunities</a></li>
           <li><a href="custom-processing.html">Custom processing</a></li>
           <li><a href="in-the-case.html">In the case</a></li>
           <li><a href="wholesale.html">Wholesale</a></li>
-          <li><a href="visit.html#schedule">Schedule your slaughter date</a></li>
+          <li><a href="custom-processing.html">Schedule your slaughter date</a></li>
         </ul>
       </div>
       <div>
@@ -135,19 +201,20 @@
         <ul>
           <li><a href="visit.html">Durand: 715-672-8073</a></li>
           <li><a href="visit.html">Woodville: 715-698-6328</a></li>
-          <li><a href="mailto:info@thedurandsmokehouse.com">info@thedurandsmokehouse.com</a></li>
-          <li><a href="about.html">About the shop</a></li>
+          <li><a href="visit.html">Contact us</a></li>
+          <li><a href="about.html">Reviews and awards</a></li>
         </ul>
       </div>
     </div>
     <div class="colophon">
       <span>&copy; <span id="year">2026</span> The SmokeHouse. Durand &amp; Woodville, Wisconsin.</span>
       <span>Mon–Wed 8–5 · Thu–Fri 8–6 · Sat 8–1</span>
+      <span class="colophon__legal"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
     </div>
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=20260826m"></script>
+<script src="assets/js/site.js?v=20261006u"></script>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

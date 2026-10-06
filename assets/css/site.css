@@ -367,15 +367,38 @@ figure.photo { margin: 0; }
 
 /* --- Locations ----------------------------------------------------------- */
 .locations { display: grid; gap: clamp(2rem, 4vw, 3.5rem); }
-@media (min-width: 800px) { .locations { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 800px) {
+  .locations {
+    grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(6, auto);
+    /* the gap was a single column gap while this was one row; as a six-row
+       subgrid it would open up between every line, so rows go back to zero and
+       the spacing is carried by the elements' own margins */
+    column-gap: clamp(2rem, 4vw, 3.5rem); row-gap: 0;
+  }
+  /* Subgrid keeps both columns on the same baselines. Durand's service list
+     wraps to two lines and Woodville's does not, which otherwise knocks the
+     address, phone and Directions of one column out of step with the other. */
+  .location {
+    display: grid; grid-template-rows: subgrid; grid-row: span 6;
+    align-content: start; row-gap: 0;
+  }
+}
 .location__role {
   font-family: var(--font-ui); font-size: .76rem; font-weight: 600;
   letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3);
-  margin: 0 0 .8rem;
+  line-height: 1.55; margin: 0 0 1rem;
 }
+/* the contact details are a separate job from the name, so they get their own
+   hairline. With subgrid above, that rule lines up across both locations. */
 .location address {
-  font-style: normal; margin: 0 0 1.1rem; line-height: 1.7;
+  font-style: normal; margin: 0 0 .3rem; line-height: 1.6;
+  padding-top: .95rem; border-top: 1px solid var(--rule);
 }
+/* the heading sits tight under its own subheading, and the phone tight under
+   the address, so each location reads as one block rather than four */
+.location h2 { margin-bottom: .18rem; line-height: 1.05; }
+.location address + p { margin-top: 0; }
+.location a[href^="tel"] + * { margin-top: .9rem; }
 .location a[href^="tel"] {
   font-family: var(--font-ui); font-weight: 600; text-decoration: none;
   border-bottom: 1.5px solid var(--rule-strong);
@@ -1446,13 +1469,12 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
   line-height: 1.15; flex: none; text-align: center;
 }
 .rlabel__est b { display: block; font-size: .82rem; letter-spacing: .08em; }
+/* the strip carries the rating now, not the motto */
 .rlabel__motto {
-  margin: 0 auto; display: flex; align-items: center;
-  gap: clamp(.25rem, .8vw, .5rem);
-  font-family: var(--font-ui);
-  font-size: clamp(.44rem, .62vw, .56rem); font-weight: 700;
-  letter-spacing: clamp(.06em, .14vw, .17em);
-  text-transform: uppercase; color: var(--ink-2);
+  margin: 0 auto; display: flex; align-items: center; justify-content: center;
+  color: var(--oxblood); line-height: 1;
+  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+  letter-spacing: clamp(.12em, .5vw, .3em);
   white-space: nowrap; min-width: 0; max-width: none;
 }
 .rlabel__cleaver { width: clamp(20px, 2.4vw, 30px); }
@@ -1641,6 +1663,26 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
 .best__shot--real { padding: 0; overflow: hidden; display: block; }
 .best__shot--real::before { display: none; }
 .best__shot--real img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* The shop's own seal, sat on the corner of the shot. Gold where the product
+   holds a gold medal, the red stamp otherwise. Scoped under .best__shot and
+   reset, because a bare span in a .photo is the placeholder label and picks up
+   its border, padding and cream ground. Inset rather than overhanging, since
+   .best__shot--real clips its overflow to hold the photo square. */
+.best__shot .best__seal {
+  position: absolute; display: block; right: 9px; bottom: 9px; z-index: 2;
+  width: clamp(54px, 26%, 86px); aspect-ratio: 1;
+  max-width: none; padding: 0; border: 0; background: none;
+  transform: rotate(-7deg);
+  transition: transform .35s ease;
+  filter: drop-shadow(0 4px 10px rgba(20, 16, 13, .35));
+  pointer-events: none;
+}
+.best__shot .best__seal img { width: 100%; height: 100%; display: block; }
+.card--best:hover .best__shot .best__seal { transform: rotate(-3deg) scale(1.06); }
+@media (prefers-reduced-motion: reduce) {
+  .best__shot .best__seal { transition: none; }
+  .card--best:hover .best__shot .best__seal { transform: rotate(-7deg); }
+}
 
 
 /* ==========================================================================
@@ -1732,6 +1774,13 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
 @media (hover: hover) and (pointer: fine) {
   .sign__count { opacity: 0; transform: translateY(5px); }
   .sign:hover .sign__count, .sign:focus-visible .sign__count { opacity: 1; transform: none; }
+.sign__note {
+  font-family: var(--font-ui); font-weight: 600; font-size: clamp(.46rem, 1.35cqw, .6rem);
+  letter-spacing: .1em; text-transform: uppercase; flex: none; max-width: 88%;
+  text-align: center; line-height: 1.35; margin-top: -1.6cqw;
+  color: var(--paper);
+  text-shadow: 0 1px 6px rgba(20,16,13,.85);
+}
 }
 @media (prefers-reduced-motion: reduce) {
   .sign__seal, .sign__count { transition: none; }
@@ -1822,8 +1871,14 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
   margin: .4rem 0 0; text-align: center;
 }
 /* one column that scrolls, rather than two that read side by side */
+.pmodal__note {
+  font-family: var(--font-ui); font-size: .64rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; line-height: 1.5;
+  color: var(--oxblood); margin: .5rem 0 0; text-align: center;
+}
 .pmodal__body {
   position: relative; max-height: min(66vh, 680px); overflow-y: auto;
+  overscroll-behavior: contain;      /* stop the page scrolling at the list ends */
   padding-inline: clamp(1rem,2.4vw,2rem);
   scrollbar-width: thin;
   scrollbar-color: color-mix(in srgb, var(--oxblood) 70%, transparent) transparent;
@@ -2001,4 +2056,311 @@ body { overflow-x: clip; }
   .rcar__track { grid-auto-columns: 100%; }
 }
 
+/* Employment reads as a white button with black text, so it carries more
+   weight than the links under it (client, walkthrough 11:38). */
+.site-footer .footer-feature {
+  display: inline-block; text-decoration: none;
+  font-family: var(--font-ui); font-weight: 700;
+  font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink); background: var(--paper);
+  border: 0; padding: .58rem .95rem; margin-bottom: .45rem;
+  transition: background .2s ease, color .2s ease;
+}
+.site-footer .footer-feature:hover { background: var(--oxblood); color: var(--paper); }
+@media (prefers-reduced-motion: reduce) { .site-footer .footer-feature { transition: none; } }
+
+/* --- a closing band that runs a photo under the final call to action ----- */
+.endshot {
+  position: relative; isolation: isolate; overflow: hidden;
+  padding-block: clamp(4rem, 10vh, 7rem) !important;
+  text-align: center; background: var(--char); color: var(--paper);
+  border: 0 !important;
+}
+.endshot__img {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.endshot::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to bottom, rgba(14,12,9,.74), rgba(14,12,9,.9));
+}
+.endshot h2 { color: var(--paper); margin-inline: auto; }
+.endshot p { color: color-mix(in srgb, var(--paper) 78%, transparent); margin-inline: auto; }
+.endshot .btn-row { margin-top: 1.3rem; }
+.colophon__legal a { text-decoration: none; border-bottom: 1px solid transparent; }
+.colophon__legal a:hover { border-color: currentColor; }
+
+/* --- Review stars and the Google rating button ------------------------- */
+.greview {
+  display: inline-flex; align-items: center; gap: .7rem;
+  margin-top: clamp(1.4rem, 2.6vw, 2rem); padding: .75rem 1.2rem;
+  background: var(--paper); border: 2px solid var(--ink);
+  text-decoration: none; color: var(--ink);
+  transition: background-color .22s ease, color .22s ease, transform .3s cubic-bezier(.16,1,.3,1);
+}
+.greview:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); }
+.greview__score {
+  font-family: var(--font-display); font-weight: 900; font-size: 1.45rem; line-height: 1;
+}
+.greview__stars { color: var(--oxblood); letter-spacing: .08em; font-size: .95rem; }
+.greview:hover .greview__stars { color: color-mix(in srgb, var(--oxblood) 65%, var(--paper)); }
+.greview__label {
+  font-family: var(--font-ui); font-weight: 700; font-size: .72rem;
+  letter-spacing: .16em; text-transform: uppercase;
+}
+@media (max-width: 480px) { .greview { width: 100%; justify-content: center; } }
+@media (prefers-reduced-motion: reduce) { .greview:hover { transform: none; } }
+
+/* --- Location cards: circular building photo ---------------------------- */
+.location__shot {
+  width: clamp(126px, 16vw, 178px); aspect-ratio: 1; margin: 0 0 1.05rem;
+  border-radius: 50%; overflow: hidden; position: relative;
+  background: var(--paper-3);
+  border: 2px solid var(--ink);
+  outline: 1px solid color-mix(in srgb, var(--ink) 42%, transparent);
+  outline-offset: 5px;
+  display: grid; place-items: center; text-align: center;
+}
+.location__shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.location__shot::before {
+  content: ""; position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent 0 11px,
+    color-mix(in srgb, var(--rule-strong) 45%, transparent) 11px 12px);
+  opacity: .55;
+}
+.location__shot span {
+  position: relative; padding: 0 .6rem;
+  font-family: var(--font-ui); font-size: .58rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); line-height: 1.5;
+}
+.location__shot:has(img)::before, .location__shot:has(img) span { display: none; }
+.band-dark .location__shot { border-color: var(--paper); outline-color: color-mix(in srgb, var(--paper) 40%, transparent); }
+
+/* --- award winners row ---------------------------------------------------- */
+.winners { padding-block: clamp(5rem, 12vh, 9rem) !important; background: var(--paper-2); }
+/* the hand-written line and the case link read as one pair, so kill the
+   annot's own bottom margin rather than fighting it from below */
+.winners .annot { margin-bottom: 0; }
+.winners__cta { margin-top: .3rem; }
+.winners__row {
+  display: grid; align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 225px), 1fr));
+  gap: clamp(1.5rem, 2.8vw, 2.5rem);
+  max-width: 1180px; margin-inline: auto;
+}
+
+
+/* --- Embedded form slot (JotForm) --------------------------------------- */
+/* the label and the frame are one card, so the rule and the offset ring go
+   round the pair rather than round each half */
+.formslot {
+  display: flex; flex-direction: column;
+  border: 2px solid var(--ink);
+  outline: 1px solid color-mix(in srgb, var(--ink) 42%, transparent);
+  outline-offset: 6px;
+}
+/* The label is the card's header bar rather than a caption floating above it,
+   so an embedded form (which arrives with its own white ground and its own
+   typography) reads as something the page framed deliberately. */
+.formslot__label {
+  font-family: var(--font-ui); font-size: .62rem; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--paper); background: var(--ink);
+  margin: 0; padding: .72rem 1rem;
+  max-width: none;   /* it is a <p>, so the global 66ch measure would clip the bar */
+}
+.formslot__frame {
+  position: relative; min-height: 420px;
+  background: var(--paper);
+  display: grid; place-items: center;
+}
+/* the placeholder is centred; a real embed must fill the box instead, or the
+   grid shrinks the iframe to zero width */
+.formslot__frame:has(iframe) {
+  display: block; min-height: 0;
+  /* the script sizes the iframe to the whole form, which runs to ~1900px and
+     would swamp the hero, so the box caps it and scrolls */
+  max-height: min(760px, 82vh); overflow-y: auto; overscroll-behavior: contain;
+}
+.formslot__frame iframe { width: 100%; min-height: 620px; border: 0; display: block;
+  position: relative; z-index: 1; }
+/* a third-party iframe shows nothing at all while it negotiates, so the box
+   says what is happening instead of sitting empty. The form's own white ground
+   covers this the moment it paints. */
+.formslot__frame:has(iframe)::before {
+  content: "Loading the form\2026";
+  position: absolute; inset: 0; z-index: 0;
+  display: grid; place-items: center;
+  font-family: var(--font-ui); font-size: .8rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-3); background: var(--paper);
+}
+/* and a fade at the foot of the scroll box, so it is obvious the form runs on */
+.formslot__frame:has(iframe)::after {
+  content: ""; position: sticky; z-index: 2; bottom: 0; left: 0;
+  display: block; height: 40px; pointer-events: none;
+  background: linear-gradient(to top, rgba(255,255,255,.96), rgba(255,255,255,0));
+}
+/* On a phone a scroll box inside a scrolling page is a trap, so the form runs
+   to its full height there and the page does the scrolling. */
+@media (max-width: 760px) {
+  .formslot__frame:has(iframe) { max-height: none; overflow: visible; }
+  .formslot__frame:has(iframe)::after { display: none; }
+}
+.formslot__pending {
+  font-family: var(--font-ui); font-size: .9rem; line-height: 1.6;
+  color: var(--ink-3); text-align: center; max-width: 30ch; margin: 0; padding: 2rem;
+}
+/* a CTA that belongs to the form sits under it, outside the card's rule */
+.btn-row--underform { margin-top: 1rem; }
+.btn-row--underform .btn { width: 100%; justify-content: center; text-align: center; }
+
+.band-dark .formslot { border-color: var(--paper); outline-color: color-mix(in srgb, var(--paper) 40%, transparent); }
+.band-dark .formslot__label { color: var(--char); background: var(--paper); }
+
+
+/* --- Nav dropdown for the processing forms ------------------------------ */
+.nav__group { position: relative; display: flex; align-items: center; gap: .3rem; }
+.nav__toggle {
+  width: 22px; height: 22px; padding: 0; border: 0; background: none;
+  cursor: pointer; position: relative; flex: none;
+}
+.nav__toggle::before {
+  content: ""; position: absolute; top: 6px; left: 6px;
+  width: 7px; height: 7px;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(45deg); transition: transform .25s ease;
+}
+.nav__toggle[aria-expanded="true"]::before { transform: rotate(-135deg); }
+.nav__menu {
+  position: absolute; top: calc(100% + .6rem); left: 0; z-index: 50;
+  min-width: 15rem; padding: .5rem 0;
+  background: var(--paper); border: 2px solid var(--ink);
+  box-shadow: 0 16px 36px rgba(20,16,13,.22);
+  display: none; flex-direction: column;
+}
+.nav__group:hover .nav__menu,
+.nav__group:focus-within .nav__menu,
+.nav__menu[data-open="true"] { display: flex; }
+.nav__menu a {
+  padding: .6rem 1rem; font-size: .88rem; color: var(--ink); text-decoration: none;
+}
+.nav__menu a:hover { background: var(--ink); color: var(--paper); }
+.site-header--overlay:not(.is-scrolled) .nav__menu a { color: var(--ink); }
+
+@media (max-width: 900px) {
+  .nav__group { flex-direction: column; align-items: flex-start; width: 100%; }
+  .nav__menu {
+    position: static; min-width: 0; width: 100%; border: 0; box-shadow: none;
+    background: none; padding: .2rem 0 .4rem 1rem;
+  }
+  .nav__menu a { padding: .5rem 0; }
+  .nav__menu a:hover { background: none; text-decoration: underline; }
+  .nav__toggle { position: absolute; right: 0; top: .2rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Processing cards riding the seam between the hero and the statement.
+   The rail is pulled up so the top of each card sits on the dark hero and the
+   bottom lands on paper. It is not a section of its own.
+   -------------------------------------------------------------------------- */
+.formrail {
+  --pull: clamp(46px, 6vw, 88px);
+  position: relative; z-index: 5;
+  margin-top: calc(-1 * var(--pull));
+  margin-bottom: 0;
+}
+/* the rail already supplies the breathing room, so the section it lands on
+   does not need its full top padding as well */
+.formrail + .statement { padding-top: clamp(1.8rem, 3.6vw, 3rem) !important; }
+.formrail__grid {
+  display: grid; gap: clamp(.9rem, 1.8vw, 1.3rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 225px), 1fr));
+}
+.ocard {
+  position: relative; display: flex; flex-direction: column; justify-content: flex-end;
+  gap: .4rem; min-height: 188px; padding: 1.2rem; overflow: hidden; text-decoration: none;
+  background: var(--char); color: var(--paper); border: 2px solid var(--ink);
+  box-shadow: 0 18px 40px rgba(20,16,13,.42);
+  transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease;
+}
+.ocard:hover { transform: translateY(-6px); box-shadow: 0 26px 54px rgba(20,16,13,.5); }
+.ocard:focus-visible { outline: 3px solid var(--oxblood); outline-offset: 3px; }
+.ocard__an {
+  position: absolute; right: 2%; top: 8%; width: 68%; aspect-ratio: 420 / 262;
+  background-color: var(--paper); opacity: .14; pointer-events: none;
+  /* mask-image comes from the element's inline style so the path resolves
+     against the page, not this stylesheet */
+  -webkit-mask-repeat: no-repeat; -webkit-mask-position: center; -webkit-mask-size: contain;
+          mask-repeat: no-repeat;         mask-position: center;         mask-size: contain;
+  transition: transform .5s cubic-bezier(.16,1,.3,1), opacity .35s ease;
+}
+.ocard:hover .ocard__an { transform: translateX(-5%) scale(1.05); opacity: .22; }
+.ocard__kind {
+  position: relative; font-family: var(--font-ui); font-size: .58rem; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--oxblood);
+}
+.ocard__name {
+  position: relative; margin: 0;
+  font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(1.18rem, 2.1vw, 1.6rem); line-height: .96;
+}
+.ocard__go {
+  position: relative; margin-top: .5rem;
+  font-family: var(--font-ui); font-size: .6rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--paper) 68%, transparent);
+}
+.ocard:hover .ocard__go { color: var(--paper); }
+@media (prefers-reduced-motion: reduce) { .ocard:hover { transform: none; } }
+/* Phones: cards go full width, so the animal has to shrink and move out of the
+   type's way or it runs straight through the card name. */
+@media (max-width: 560px) {
+  .formrail { --pull: 42px; }
+  .ocard { min-height: 150px; }
+  /* no room to shift left here: the card is full width and the animal would
+     run into the name, so it stays at the edge on phones */
+  .ocard__an { width: 42%; right: 1%; top: 10%; opacity: .16; }
+  /* keep the card name clear of the animal at full width */
+  .ocard__kind, .ocard__name, .ocard__go { max-width: 58%; }
+}
+
+/* --------------------------------------------------------------------------
+   Cut charts: both animals side by side on desktop with their own panel under
+   each; a Beef/Hog tab set on phones, where two charts at half width make the
+   small primals impossible to hit.
+   -------------------------------------------------------------------------- */
+.ccx { display: grid; gap: clamp(2rem, 4vw, 3.5rem); }
+.ccx__sp {
+  font-family: var(--font-ui); font-size: .6rem; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--oxblood);
+  margin: 0 0 .6rem;
+}
+.ccx .cut-info { margin-top: clamp(1.2rem, 2.4vw, 1.8rem); min-height: 0; }
+.ccx__tabs { display: flex; gap: .6rem; margin-bottom: 1.6rem; }
+.ccx__tab {
+  font-family: var(--font-ui); font-size: .68rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  padding: .7rem 1.5rem; border: 2px solid var(--ink);
+  background: none; color: var(--ink); cursor: pointer; min-height: 44px;
+}
+.ccx__tab[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+
+/* Both columns reserve the same box for the artwork, so the panels underneath
+   start on the same line however tall each animal happens to draw. */
+/* cow is 1672x941, hog 1500x822; the taller ratio sets a shared box at every
+   width, so the panel underneath never shifts when the tabs swap animal */
+.ccx__art { display: grid; place-items: center; aspect-ratio: 1672 / 941; }
+.ccx__art .cut-chart { width: 100%; }
+/* the hog artwork is longer than the cow, so hold it back a little to keep the
+   two animals reading at a similar weight */
+.ccx__col--pig .ccx__art .cut-chart { width: 90%; }
+
+@media (min-width: 900px) {
+  .ccx { grid-template-columns: 1fr 1fr; align-items: start; }
+  .ccx__tabs { display: none; }
+  .ccx__col { display: block !important; }   /* tabs never hide a column here */
+}
+@media (max-width: 899px) {
+  .ccx__col[data-on="false"] { display: none; }
+  .ccx__col--pig .cut-chart { max-width: 100%; }
 }

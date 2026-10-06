@@ -338,6 +338,35 @@
   }
 
 
+  // --- Processing-forms dropdown (click to open on touch) ------------------
+  (function () {
+    var g = document.querySelector(".nav__group");
+    if (!g) return;
+    var btn = g.querySelector(".nav__toggle"), menu = g.querySelector(".nav__menu");
+    if (!btn || !menu) return;
+    var set = function (open) {
+      btn.setAttribute("aria-expanded", String(open));
+      menu.setAttribute("data-open", String(open));
+    };
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      set(btn.getAttribute("aria-expanded") !== "true");
+    });
+    document.addEventListener("click", function (e) { if (!g.contains(e.target)) set(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") set(false); });
+  })();
+
+  // --- Sample cut sheet lightbox ------------------------------------------
+  (function () {
+    var open = document.querySelector("[data-sheet-open]");
+    var dlg = document.getElementById("sheetModal");
+    if (!open || !dlg) return;
+    open.addEventListener("click", function () { dlg.showModal(); });
+    var close = dlg.querySelector("[data-sheet-close]");
+    if (close) close.addEventListener("click", function () { dlg.close(); });
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+  })();
+
   // --- Review carousel -----------------------------------------------------
   // Two labels per view above 860px, one below. Native scroll-snap does the
   // swiping; the buttons and dots drive the same scroll position.
@@ -395,10 +424,11 @@
     buildDots();
   })();
 
-  // --- Cut chart (custom-processing) ---------------------------------------
-  var chart = document.querySelector(".cut-chart");
-  if (chart) {
-    var CUTS = {
+  // --- Cut charts (custom-processing): beef and hog -----------------------
+  (function () {
+    var charts = document.querySelectorAll(".cut-chart");
+    if (!charts.length) return;
+    var BEEF = {
       chuck:     { name: "Chuck",      becomes: "Chuck roasts, chuck steaks, stew meat, and the best ground beef on the animal.", sheet: "Roast size, how many roasts, and how much goes to grind." },
       rib:       { name: "Rib",        becomes: "Ribeyes, prime rib, and back ribs.", sheet: "Ribeye thickness, bone-in or boneless, and whether a standing rib roast comes out whole." },
       shortloin: { name: "Short Loin", becomes: "T-bones, porterhouse, strip steaks, and the tenderloin.", sheet: "T-bones as they are, or strips with the tenderloin pulled whole." },
@@ -409,36 +439,62 @@
       flank:     { name: "Flank",      becomes: "Flank steak and stir-fry strips.", sheet: "Kept as a steak or sent to grind." },
       shank:     { name: "Shank",      becomes: "Soup bones and osso buco, the start of the best broth you\u2019ll make.", sheet: "Soup bones kept or passed. Keep them." }
     };
-    var hi = {};
-    chart.querySelectorAll("[data-cut-img]").forEach(function (im) {
-      hi[im.getAttribute("data-cut-img")] = im;
+    var HOG = {"shoulder": {"name": "Shoulder", "becomes": "Pork steaks, shoulder roasts, porketta, and the best sausage meat on the hog.", "sheet": "Roasts, steaks, or ground for brats and sausage. Most people split it."}, "picnic": {"name": "Picnic", "becomes": "Picnic roasts and smoked picnics, or straight to grind.", "sheet": "Fresh or smoked, roast or ground."}, "rib": {"name": "Rib", "becomes": "Back ribs and rib chops.", "sheet": "Ribs kept whole, or chops cut to your thickness."}, "loin": {"name": "Loin", "becomes": "Pork chops, loin roasts, and the tenderloin.", "sheet": "Chop thickness, how many to a package, and whether the tenderloin comes out whole."}, "belly": {"name": "Belly", "becomes": "Bacon, side pork, pork belly chunks, and seasoned belly.", "sheet": "Smoked and sliced for bacon, thick or regular, or left fresh as side pork."}, "ham": {"name": "Ham", "becomes": "Smoked hams, ham steaks, and fresh ham roasts. Their most decorated product.", "sheet": "Whole or half, bone-in or boneless, fresh or smoked."}, "head": {"name": "Head", "becomes": "Jowl, and trim that goes to sausage.", "sheet": "Kept or passed. Most pass it; ask if you want the jowl."}, "hockfront": {"name": "Hock", "becomes": "Smoked hocks for beans, soup and greens.", "sheet": "Kept or passed. Keep them."}, "hockrear": {"name": "Hock", "becomes": "Smoked hocks for beans, soup and greens.", "sheet": "Kept or passed. Keep them."}};
+    var DATA = { beef: BEEF, hog: HOG };
+    var FIRST = { beef: "rib", hog: "loin" };
+
+    charts.forEach(function (chart) {
+      var species = chart.getAttribute("data-species") || "beef";
+      var copy = DATA[species];
+      // match the panel by species, not by DOM proximity: the chart sits inside
+      // a wrapper, so walking up from it finds the wrong element
+      var panel = document.querySelector('.cut-info[data-for="' + species + '"]')
+               || document.querySelector(".cut-info");
+      if (!panel) return;
+      var nameEl = panel.querySelector("[data-cut-name]"),
+          becEl  = panel.querySelector("[data-cut-becomes]"),
+          shEl   = panel.querySelector("[data-cut-sheet]");
+      var hi = {};
+      chart.querySelectorAll("[data-cut-img]").forEach(function (im) {
+        hi[im.getAttribute("data-cut-img")] = im;
+      });
+      var regions = chart.querySelectorAll(".cut");
+      var activate = function (key, el) {
+        var d = copy[key];
+        if (!d) return;
+        nameEl.textContent = d.name;
+        becEl.textContent = d.becomes;
+        shEl.textContent = d.sheet;
+        regions.forEach(function (r) { r.classList.toggle("active", r === el); });
+        Object.keys(hi).forEach(function (k) { hi[k].classList.toggle("on", k === key); });
+      };
+      regions.forEach(function (r) {
+        var key = r.getAttribute("data-cut");
+        var go = function () { activate(key, r); };
+        r.addEventListener("mouseenter", go);
+        r.addEventListener("focus", go);
+        r.addEventListener("click", go);
+        r.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); }
+        });
+      });
+      var def = chart.querySelector('[data-cut="' + FIRST[species] + '"]');
+      if (def) activate(FIRST[species], def);
     });
-    var nameEl = document.getElementById("cut-name");
-    var becomesEl = document.getElementById("cut-becomes");
-    var sheetEl = document.getElementById("cut-sheet");
-    var regions = chart.querySelectorAll(".cut");
-    var activate = function (key, el) {
-      var d = CUTS[key];
-      if (!d) return;
-      nameEl.textContent = d.name;
-      becomesEl.textContent = d.becomes;
-      sheetEl.textContent = d.sheet;
-      regions.forEach(function (r) { r.classList.toggle("active", r === el); });
-      Object.keys(hi).forEach(function (k) { hi[k].classList.toggle("on", k === key); });
-    };
-    regions.forEach(function (r) {
-      var key = r.getAttribute("data-cut");
-      var go = function () { activate(key, r); };
-      r.addEventListener("mouseenter", go);
-      r.addEventListener("focus", go);
-      r.addEventListener("click", go);
-      r.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); }
+
+    // Beef / Hog tabs, only shown below 900px
+    document.querySelectorAll(".ccx__tab").forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        var want = tab.getAttribute("data-species");
+        document.querySelectorAll(".ccx__tab").forEach(function (t) {
+          t.setAttribute("aria-selected", String(t === tab));
+        });
+        document.querySelectorAll(".ccx__col").forEach(function (c) {
+          c.setAttribute("data-on", String(c.getAttribute("data-species") === want));
+        });
       });
     });
-    var def = chart.querySelector('[data-cut="rib"]');
-    if (def) { def.classList.add("active"); if (hi.rib) hi.rib.classList.add("on"); }
-  }
+  })();
 
   // --- Parallax ------------------------------------------------------------
   // [data-parallax="0.15"] drifts at 15% of scroll speed while its section
@@ -475,6 +531,8 @@
       "Venison": "venison.png", "Lamb": "lamb.png", "Poultry": "poultry.svg",
       "Woodville Deli": "deli.svg", "Misc.": "misc.svg"
     };
+    // categories we process but do not sell over the counter
+    var NOTE = { "Venison": "Processing only, not available for sale in store" };
     var SHOT = {
       "Beef": "beef", "Pork": "pork", "Sausage": "sausage", "Venison": "venison",
       "Lamb": "lamb", "Poultry": "poultry", "Woodville Deli": "deli", "Misc.": "misc"
@@ -492,6 +550,11 @@
     var openCat = function (cat) {
       document.getElementById("pmodalTitle").textContent = cat.name;
       document.getElementById("pmodalSub").textContent = cat.count + " items";
+      var noteEl = document.getElementById("pmodalNote");
+      if (noteEl) {
+        noteEl.textContent = NOTE[cat.name] || "";
+        noteEl.hidden = !NOTE[cat.name];
+      }
       var pg = document.getElementById("pmodalGlyph");
       setMask(pg, "assets/img/cat/" + GLYPH[cat.name]);
       var body = document.getElementById("pmodalBody");
@@ -559,6 +622,7 @@
             '<span class="sign__seal"><span class="sign__glyph"></span></span>' +
             '<span class="sign__title">' + cat.name + '</span>' +
             '<span class="sign__count" aria-hidden="true">' + cat.count + ' items</span>' +
+          (NOTE[cat.name] ? '<span class="sign__note">' + NOTE[cat.name] + '</span>' : '') +
             '<span class="sign__btn">View Products</span>' +
           '</span>';
         b.querySelector(".sign__bg").style.backgroundImage =
@@ -569,4 +633,26 @@
       });
     });
   }
+})();
+
+/* JOTFORM EMBED HEIGHT
+   A JotForm embed posts its own content height to the parent as
+   "setHeight:<px>:<formID>". Without reading it the iframe keeps its CSS height
+   and the bottom of the form is simply unreachable. Handling the message here
+   rather than loading JotForm's embed script keeps a third-party script off the
+   page. The frame is capped in CSS, so a long form scrolls in its own box. */
+(function () {
+  var frames = document.querySelectorAll('iframe[src*="form.jotform.com"]');
+  if (!frames.length) return;
+  window.addEventListener("message", function (e) {
+    if (!/^https:\/\/([a-z0-9-]+\.)?jotform\.com$/.test(e.origin)) return;
+    if (typeof e.data !== "string") return;
+    var m = /^setHeight:(\d+)(?::(\d+))?/.exec(e.data);
+    if (!m) return;
+    for (var i = 0; i < frames.length; i++) {
+      if (!m[2] || frames[i].src.indexOf(m[2]) > -1) {
+        frames[i].style.height = m[1] + "px";
+      }
+    }
+  });
 })();
