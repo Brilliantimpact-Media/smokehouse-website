@@ -2200,6 +2200,13 @@ body { overflow-x: clip; }
   display: block; height: 40px; pointer-events: none;
   background: linear-gradient(to top, rgba(255,255,255,.96), rgba(255,255,255,0));
 }
+/* On a page whose only job is to host the form there is nothing to scroll
+   past, and these cutting-instruction forms run to nearly 5000px. Capping that
+   into a 760px window would be miserable, so it runs full height and the page
+   does the scrolling. */
+.formslot--full .formslot__frame:has(iframe) { max-height: none; overflow: visible; }
+.formslot--full .formslot__frame:has(iframe)::after { display: none; }
+
 /* On a phone a scroll box inside a scrolling page is a trap, so the form runs
    to its full height there and the page does the scrolling. */
 @media (max-width: 760px) {
