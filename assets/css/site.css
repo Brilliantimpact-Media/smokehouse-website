@@ -2207,6 +2207,13 @@ body { overflow-x: clip; }
 .formslot--full .formslot__frame:has(iframe) { max-height: none; overflow: visible; }
 .formslot--full .formslot__frame:has(iframe)::after { display: none; }
 
+/* The contact form runs past 1400px while the note beside it is three lines.
+   Rather than scroll the form inside a box, it runs full height and the note
+   rides along, so the left column is not a long empty strip. */
+@media (min-width: 900px) {
+  #schedule .hero__grid > div:first-child { position: sticky; top: 7rem; align-self: start; }
+}
+
 /* On a phone a scroll box inside a scrolling page is a trap, so the form runs
    to its full height there and the page does the scrolling. */
 @media (max-width: 760px) {
