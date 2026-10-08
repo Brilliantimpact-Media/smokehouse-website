@@ -2235,13 +2235,17 @@ body { overflow-x: clip; }
    beside it is sticky and rides along. */
 .hero__grid--formfirst { align-items: start; }
 @media (min-width: 900px) {
-  #schedule .visit__aside { position: sticky; top: 7rem; align-self: start; }
+  #schedule .visit__aside,
+  #wholesale-top .visit__aside { position: sticky; top: 7rem; align-self: start; }
 }
 @media (max-width: 899px) {
-  /* on a phone the note should introduce the form, not follow it */
+  /* on a phone the copy should introduce the form, not follow it */
   .hero__grid--formfirst { display: flex; flex-direction: column; }
   .hero__grid--formfirst .visit__aside { order: -1; }
 }
+/* wholesale keeps the copy first on desktop too, so the pitch is read before
+   the form; only Visit leads with the form itself */
+@media (min-width: 900px) { #wholesale-top .visit__aside { order: -1; } }
 .visit__hours { margin-top: clamp(2rem, 4vw, 3rem); }
 .visit__hours .eyebrow { margin-bottom: .4rem; }
 .visit__hours h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin-bottom: 1rem; }
