@@ -1,0 +1,74 @@
+<!doctype html><meta charset="utf-8"><title>icon raster</title>
+<body style="font:13px ui-monospace,monospace;padding:14px">
+<p>Rasterises the PNG favicons from the client's vector logo. Open it on the
+local server, then read <code>window.__ICONS</code>. Each is rendered at 4x and
+box-filtered down, so the flame's curves come from the vector rather than from
+upscaling a small bitmap.</p>
+<pre id="log">working…</pre>
+<script>
+const PAPER = "#f2ece0", INK = "#000000", DECAL = "#b11e24", BRICK = "#720e16";
+const MX = 8.72, MY = 14.34, MW = 85.94, MH = 187.77;   // mark bbox via getBBox
+const CLS = { "cls-1": DECAL, "cls-2": BRICK };
+
+function markShapes(text) {
+  return [...text.matchAll(/<(?:path|polygon)\b[^>]*\/>/g)].map(m => m[0]).filter(tag => {
+    const g = /(?:\sd|\spoints)="([^"]+)"/.exec(tag);
+    if (!g) return false;
+    const n = [...g[1].matchAll(/-?\d+\.?\d*/g)].map(Number);
+    return Math.max(...n.filter((_, i) => i % 2 === 0)) < 100;
+  });
+}
+const paint = tag => {
+  const m = /class="(cls-\d)"/.exec(tag);
+  return m ? tag.replace(m[0], `fill="${CLS[m[1]]}"`)
+           : tag.replace(/^<(path|polygon)\s/, `<$1 fill="${INK}" `);
+};
+
+function wrap(inner, box, pad, rx) {
+  const s = Math.min((box - 2*pad)/MW, (box - 2*pad)/MH);
+  const tx = (box - MW*s)/2 - MX*s, ty = (box - MH*s)/2 - MY*s;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${box} ${box}">`
+       + `<rect width="${box}" height="${box}" rx="${rx}" fill="${PAPER}"/>`
+       + `<g transform="translate(${tx} ${ty}) scale(${s})">${inner}</g></svg>`;
+}
+
+function raster(svg, size) {
+  return new Promise((res, rej) => {
+    const img = new Image(), S = size * 4;
+    img.onload = () => {
+      const hi = document.createElement("canvas"); hi.width = hi.height = S;
+      hi.getContext("2d").drawImage(img, 0, 0, S, S);
+      const c = document.createElement("canvas"); c.width = c.height = size;
+      const cx = c.getContext("2d");
+      cx.imageSmoothingEnabled = true; cx.imageSmoothingQuality = "high";
+      cx.drawImage(hi, 0, 0, size, size);
+      res(c.toDataURL("image/png"));
+    };
+    img.onerror = rej;
+    img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  });
+}
+
+(async () => {
+  const text = await (await fetch("../assets/img/logo-color.svg")).text();
+  const shapes = markShapes(text);
+  const full = shapes.map(paint).join("");
+
+  // 16px drops the five mortar courses - under a pixel each, they turn the
+  // chimney into a smudge. Two rects spanning the brickwork keep the
+  // silhouette, which is the part that reads at that size.
+  const flames = shapes.filter(t => t.startsWith("<path")).map(paint).join("");
+  const solid = `<rect x="8.72" y="113.85" width="85.94" height="14.88" fill="${BRICK}"/>`
+              + `<rect x="14.69" y="128.73" width="74.41" height="73.38" fill="${BRICK}"/>`
+              + flames;
+
+  window.__ICONS = {
+    "favicon-32.png":       await raster(wrap(full,  100, 9,  17), 32),
+    "favicon-16.png":       await raster(wrap(solid, 100, 4,  17), 16),
+    "apple-touch-icon.png": await raster(wrap(full,  100, 16,  0), 180),
+  };
+  document.getElementById("log").textContent =
+    "shapes in mark: " + shapes.length + "\n" +
+    Object.entries(window.__ICONS).map(([k, v]) => k + "  " + v.length + " chars").join("\n");
+})();
+</script>

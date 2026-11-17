@@ -1,14 +1,19 @@
 # The SmokeHouse — brand colour palette
 
-Source of truth: `assets/img/logo-color.png`. Both reds were read out of the
-artwork by pixel count, not sampled by eye. Re-derive at any time with:
+Source of truth: `assets/img/logo-color.svg`, the client's own vector file,
+which declares both reds outright. Read them back at any time with:
 
 ```
-python3 tools/brand-colors.py assets/img/logo-color.png
+python3 tools/brand-colors.py
 ```
 
-The logo contains exactly two saturated reds and nothing else. There is no
-third red, and no gradient between them.
+The logo contains exactly two reds and nothing else. There is no third red,
+and no gradient between them.
+
+These were originally recovered from a PNG export by counting pixels - 2,967
+of `#B11E24` and 3,252 of `#720E16` - because no vector file existed yet. The
+SVG arrived afterwards and confirmed both values exactly, so the figures below
+are the artwork's own, not a measurement of it.
 
 ## The two reds
 
@@ -91,6 +96,23 @@ rule.** No rule in the stylesheet should contain a red hex literal.
 | `--char` | `#14100D` | Charcoal ground, dark bands |
 | `--char-2` | `#1F1915` | Charcoal, lifted |
 | `--accent-ink` | `#F7F2E8` | Type on a red ground |
+
+## The logo files
+
+| File | Use |
+|---|---|
+| `logo-color.svg` | Black type, red chimney - light grounds |
+| `logo-reverse.svg` | White type, red chimney - dark header, footer, dark bands |
+| `logo-mono-white.svg` | All white with a grey tagline - spare, for where the red cannot go |
+
+All three are the client's artboards with the `viewBox` cropped from
+`0 0 753.32 215.33` to the artwork's own bounds, `8.72 14.34 736.16 188.04`,
+so the box carries no padding. The paths themselves are untouched. The lockup
+is 3.9150:1, which is what `--logo-h` is multiplied by in the stylesheet.
+
+The favicons are generated from `logo-color.svg` by
+`tools/make-icon-pngs.html`; `favicon.svg` and `mask-icon.svg` reuse its paths
+directly.
 
 ## Reporting dashboard
 

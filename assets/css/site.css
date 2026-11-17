@@ -12,11 +12,13 @@
   --steel:        #8b8681;
 
   /* --- Brand reds, sampled from the logo artwork (2026-11-17) -------------
-     These are the ONLY two reds in assets/img/logo-color.png. Counted by
-     pixel, not picked by eye: 2,967 px of #b11e24 (the flame and the bright
-     bricks) and 3,252 px of #720e16 (the chimney cap and the dark bricks).
-     Re-derive with tools/brand-colors.py. Same palette is to be used for the
-     SmokeHouse reporting dashboard - see BRAND-COLORS.md. */
+     These are the only two reds in the logo, and the client's own SVG now
+     declares both of them outright. They were first read out of the PNG by
+     pixel count - 2,967 px of #b11e24 (the flame and the bright bricks),
+     3,252 px of #720e16 (the chimney cap and the dark bricks) - and the SVG
+     that arrived afterwards confirmed each one exactly. Re-check with
+     tools/brand-colors.py. Same palette is to be used for the SmokeHouse
+     reporting dashboard - see BRAND-COLORS.md. */
   --brand-red:        #b11e24;   /* lighter decal red - accents and details  */
   --brand-brick:      #720e16;   /* darker brick red  - buttons and CTAs     */
   --brand-brick-dark: #590b11;   /* derived from brick, hover/active only    */
@@ -227,7 +229,7 @@ p:last-child { margin-bottom: 0; }
 .nav a[aria-current="page"] { color: var(--ink); border-color: var(--ink); }
 .header-cta { display: none; }
 /* The header needs 1,167px of content width to hold the logo, the full nav and
-   this button on one line (257 + 559 + 279 + three 24px gaps). Below ~1,263px
+   this button on one line (258 + 559 + 279 + three 24px gaps). Below ~1,263px
    of viewport there isn't that much, and the nav and the button both wrapped to
    two lines. The nav is navigation and the button is a convenience the hero
    repeats, so the button is what waits. */
@@ -1008,7 +1010,10 @@ td { border-bottom: 1px solid var(--rule); }
    ships as two exports instead: logo-color for paper grounds, logo-reverse
    (white type, red chimney) for the dark header, the footer and band-dark.
    logo-mono-white is the all-white spare for anywhere the red cannot go.
-   Both are PNG at 737x189; SVG would be sharper and smaller if it turns up.
+   All three are the client's own SVG, cropped from the 753x215 artboard to the
+   artwork's own bbox (8.72 14.34 736.16 188.04) so the box holds no padding.
+   The paths are untouched. The PNG exports they replaced are gone; the PNG
+   favicons are rendered from this same vector by tools/make-icon-pngs.html.
    ========================================================================== */
 .wordmark {
   display: block; line-height: 0; text-decoration: none;
@@ -1021,13 +1026,13 @@ td { border-bottom: 1px solid var(--rule); }
 .wordmark__mark {
   display: block;
   height: var(--logo-h, 54px);
-  width: calc(var(--logo-h, 54px) * 3.8995);   /* 737 / 189 */
-  background: url("../img/logo-color.png") no-repeat center / contain;
+  width: calc(var(--logo-h, 54px) * 3.9150);   /* 736.16 / 188.04, the artwork's own bbox */
+  background: url("../img/logo-color.svg") no-repeat center / contain;
   -webkit-mask: none; mask: none;
 }
 .site-header--overlay:not(.is-scrolled) .wordmark__mark,
 .site-footer .wordmark__mark,
-.band-dark .wordmark__mark { background-image: url("../img/logo-reverse.png"); }
+.band-dark .wordmark__mark { background-image: url("../img/logo-reverse.svg"); }
 /* over the hero photo the mark reverses; once the bar goes solid it inks up */
 .site-header--overlay:not(.is-scrolled) .wordmark { color: var(--paper); }
 .site-footer .wordmark,
