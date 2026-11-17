@@ -62,10 +62,16 @@ function raster(svg, size) {
               + `<rect x="14.69" y="128.73" width="74.41" height="73.38" fill="${BRICK}"/>`
               + flames;
 
+  // Padding was 9 / 4 / 16 and read as cramped. Each size takes as much as it
+  // can afford: 32px holds only ~10px of chimney for five mortar courses, so
+  // past about 12 they stop resolving and it just looks soft - that is a size
+  // limit, not a padding choice. 16px draws a solid chimney and tolerates
+  // more. favicon.svg has no such ceiling and uses 20 (make-icon-svgs.py);
+  // it is also what every current browser actually renders in the tab.
   window.__ICONS = {
-    "favicon-32.png":       await raster(wrap(full,  100, 9,  17), 32),
-    "favicon-16.png":       await raster(wrap(solid, 100, 4,  17), 16),
-    "apple-touch-icon.png": await raster(wrap(full,  100, 16,  0), 180),
+    "favicon-32.png":       await raster(wrap(full,  100, 12, 17), 32),
+    "favicon-16.png":       await raster(wrap(solid, 100, 10, 17), 16),
+    "apple-touch-icon.png": await raster(wrap(full,  100, 22,  0), 180),
   };
   document.getElementById("log").textContent =
     "shapes in mark: " + shapes.length + "\n" +
