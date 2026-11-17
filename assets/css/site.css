@@ -235,9 +235,9 @@ p:last-child { margin-bottom: 0; }
 .nav a:hover { color: var(--ink); border-color: var(--rule-strong); }
 .nav a[aria-current="page"] { color: var(--ink); border-color: var(--ink); }
 .header-cta { display: none; }
-/* The header needs 1,165px of content width to hold the logo, the full nav and
-   this button on one line (258 + 580 + 279 + two 24px gaps), and no viewport
-   under about 1,261px provides it. Below that the nav and the button both
+/* The header needs 1,189px of content width to hold the logo, the full nav and
+   this button on one line (282 + 580 + 279 + two 24px gaps), and no viewport
+   under about 1,285px provides it. Below that the nav and the button both
    wrapped to two lines. The nav is navigation and the button is a convenience
    the hero repeats on every page, so the button is what waits. */
 @media (min-width: 1300px) { .header-cta { display: inline-flex; padding: .7rem 1.15rem; font-size: .85rem; white-space: nowrap; } }
@@ -1047,10 +1047,12 @@ td { border-bottom: 1px solid var(--rule); }
 .site-footer .wordmark,
 .band-dark .wordmark { color: var(--paper); }
 .site-footer .wordmark { --logo-h: 82px; margin-bottom: .9rem; }
-/* 66px keeps the full lockup legible without pushing the nav to wrap above 1280px */
-.site-header .wordmark { --logo-h: 66px; }
-@media (max-width: 1000px) { .site-header .wordmark { --logo-h: 60px; } }
-@media (max-width: 560px)  { .site-header .wordmark { --logo-h: 46px; } .site-footer .wordmark { --logo-h: 64px; } }
+/* The tagline inside the lockup is only 12.6% of its height, so it sets the
+   floor: at 66px it rendered 8.3px tall on ~1px strokes and went soft. 72px
+   lifts it to 9.1px and still leaves 50px of slack in the header. */
+.site-header .wordmark { --logo-h: 72px; }
+@media (max-width: 1000px) { .site-header .wordmark { --logo-h: 64px; } }
+@media (max-width: 560px)  { .site-header .wordmark { --logo-h: 52px; } .site-footer .wordmark { --logo-h: 64px; } }
 
 /* --- Tagline (confirmed 2026-08-25) -------------------------------------- */
 .tagline {
