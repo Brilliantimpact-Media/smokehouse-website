@@ -48,6 +48,7 @@
   --font-display: "Big Shoulders Display", "Archivo", Impact, sans-serif;
   --font-body:    "Archivo", "Helvetica Neue", Arial, sans-serif;
   --font-ui:      "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-nav:     "Montserrat", "Archivo", "Helvetica Neue", Arial, sans-serif;
   --font-hand:    "Caveat", "Segoe Script", cursive;
   --font-type:    "Courier Prime", "Courier New", monospace;
 
@@ -217,23 +218,29 @@ p:last-child { margin-bottom: 0; }
   font-size: .58rem; font-weight: 500; letter-spacing: .2em;
   color: var(--ink-3); margin-top: .18rem;
 }
-.nav { display: flex; align-items: center; gap: clamp(1rem, 2vw, 1.9rem); }
+/* margin-left: auto gathers the nav and the button together on the right
+   instead of letting space-between strand the nav mid-header. */
+.nav { display: flex; align-items: center; gap: clamp(.9rem, 1.7vw, 1.6rem); margin-left: auto; }
 .nav a {
-  font-family: var(--font-ui); font-size: .9rem; font-weight: 500;
+  font-family: var(--font-nav); font-size: .7rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .06em;
+  white-space: nowrap;
   text-decoration: none; color: var(--ink-2);
   padding-block: .35rem;
   border-bottom: 1.5px solid transparent;
   transition: color .15s ease, border-color .15s ease;
 }
+/* uppercase sits high in its box, so the underline needs pulling back up */
+.nav > a, .nav__group > a { line-height: 1.2; }
 .nav a:hover { color: var(--ink); border-color: var(--rule-strong); }
 .nav a[aria-current="page"] { color: var(--ink); border-color: var(--ink); }
 .header-cta { display: none; }
-/* The header needs 1,167px of content width to hold the logo, the full nav and
-   this button on one line (258 + 559 + 279 + three 24px gaps). Below ~1,263px
-   of viewport there isn't that much, and the nav and the button both wrapped to
-   two lines. The nav is navigation and the button is a convenience the hero
-   repeats, so the button is what waits. */
-@media (min-width: 1300px) { .header-cta { display: inline-flex; padding: .7rem 1.15rem; font-size: .85rem; } }
+/* The header needs 1,165px of content width to hold the logo, the full nav and
+   this button on one line (258 + 580 + 279 + two 24px gaps), and no viewport
+   under about 1,261px provides it. Below that the nav and the button both
+   wrapped to two lines. The nav is navigation and the button is a convenience
+   the hero repeats on every page, so the button is what waits. */
+@media (min-width: 1300px) { .header-cta { display: inline-flex; padding: .7rem 1.15rem; font-size: .85rem; white-space: nowrap; } }
 
 .nav-toggle {
   display: inline-flex; align-items: center; gap: .5rem;
@@ -552,7 +559,8 @@ tr:last-child td { border-bottom: 0; }
   transition: background .35s ease, border-color .35s ease;
 }
 .site-header--overlay:not(.is-scrolled) .wordmark,
-.site-header--overlay:not(.is-scrolled) .nav a { color: var(--paper); }
+.site-header--overlay:not(.is-scrolled) .nav a,
+.site-header--overlay:not(.is-scrolled) .nav__toggle { color: var(--paper); }
 .site-header--overlay:not(.is-scrolled) .wordmark small { color: color-mix(in srgb, var(--paper) 65%, transparent); }
 .site-header--overlay:not(.is-scrolled) .nav a:hover { border-color: color-mix(in srgb, var(--paper) 45%, transparent); }
 .site-header--overlay:not(.is-scrolled) .nav-toggle { color: var(--paper); border-color: color-mix(in srgb, var(--paper) 45%, transparent); }
@@ -571,7 +579,8 @@ tr:last-child td { border-bottom: 0; }
 @media (max-width: 899px) {
   /* the dropdown panel always sits on paper, whatever state the bar is in */
   .site-header--overlay .nav { background: var(--paper); border-bottom: 1px solid var(--rule); }
-  .site-header--overlay:not(.is-scrolled) .nav a { color: var(--ink-2); }
+  .site-header--overlay:not(.is-scrolled) .nav a,
+  .site-header--overlay:not(.is-scrolled) .nav__toggle { color: var(--ink-2); }
 }
 
 /* --- Cinematic hero --------------------------------------------------------- */
@@ -2309,16 +2318,25 @@ body { overflow-x: clip; }
 
 
 /* --- Nav dropdown for the processing forms ------------------------------ */
-.nav__group { position: relative; display: flex; align-items: center; gap: .3rem; }
+.nav__group { position: relative; display: flex; align-items: center; gap: .34rem; }
+/* The caret used to be a 22px box around a 7px glyph, so the gap after
+   "Custom Processing" measured 55px against 29px everywhere else. The box now
+   hugs the glyph; the 44px touch target is restored by ::after, which takes no
+   layout width. */
 .nav__toggle {
-  width: 22px; height: 22px; padding: 0; border: 0; background: none;
+  width: 9px; height: 9px; padding: 0; border: 0; background: none;
   cursor: pointer; position: relative; flex: none;
+  color: inherit;
 }
 .nav__toggle::before {
-  content: ""; position: absolute; top: 6px; left: 6px;
+  content: ""; position: absolute; top: -1px; left: 0;
   width: 7px; height: 7px;
-  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  border-right: 1.6px solid currentColor; border-bottom: 1.6px solid currentColor;
   transform: rotate(45deg); transition: transform .25s ease;
+}
+.nav__toggle::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 44px; height: 44px; transform: translate(-50%, -50%);
 }
 .nav__toggle[aria-expanded="true"]::before { transform: rotate(-135deg); }
 .nav__menu {
@@ -2351,8 +2369,12 @@ body { overflow-x: clip; }
   .nav__group:focus-within .nav__menu,
   .nav__menu[data-open="true"] { transition: visibility 0s; }
 }
+/* The uppercase cascades in from .nav a, which is right - the submenu is part
+   of the nav - but caps read larger, so it needs to sit under the nav's own
+   size rather than over it. */
 .nav__menu a {
-  padding: .6rem 1rem; font-size: .88rem; color: var(--ink); text-decoration: none;
+  padding: .6rem 1rem; font-size: .68rem; color: var(--ink); text-decoration: none;
+  font-family: var(--font-nav); font-weight: 500; letter-spacing: .05em;
 }
 .nav__menu a:hover { background: var(--ink); color: var(--paper); }
 .site-header--overlay:not(.is-scrolled) .nav__menu a { color: var(--ink); }
