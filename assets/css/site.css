@@ -226,7 +226,12 @@ p:last-child { margin-bottom: 0; }
 .nav a:hover { color: var(--ink); border-color: var(--rule-strong); }
 .nav a[aria-current="page"] { color: var(--ink); border-color: var(--ink); }
 .header-cta { display: none; }
-@media (min-width: 1080px) { .header-cta { display: inline-flex; padding: .7rem 1.15rem; font-size: .85rem; } }
+/* The header needs 1,167px of content width to hold the logo, the full nav and
+   this button on one line (257 + 559 + 279 + three 24px gaps). Below ~1,263px
+   of viewport there isn't that much, and the nav and the button both wrapped to
+   two lines. The nav is navigation and the button is a convenience the hero
+   repeats, so the button is what waits. */
+@media (min-width: 1300px) { .header-cta { display: inline-flex; padding: .7rem 1.15rem; font-size: .85rem; } }
 
 .nav-toggle {
   display: inline-flex; align-items: center; gap: .5rem;
