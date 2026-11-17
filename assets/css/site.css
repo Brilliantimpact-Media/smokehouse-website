@@ -975,32 +975,39 @@ td { border-bottom: 1px solid var(--rule); }
 .photo { background: var(--paper-3); border-color: var(--ink); }
 
 /* ==========================================================================
-   LOGO — one vector mark, coloured by CSS.
-   The supplied artboard carried several overlapping copies plus leftover live
-   text that bled into the canvas; assets/img/logo.svg is the single clean
-   lockup extracted from it. Painted with currentColor via a mask, so one file
-   serves every ground instead of shipping a file per colourway.
+   LOGO — the client's supplied lockup, two colourways.
+   This used to be a traced single-colour mark painted with currentColor. The
+   real logo has a red chimney, and a mask has only one colour to give, so it
+   ships as two exports instead: logo-color for paper grounds, logo-reverse
+   (white type, red chimney) for the dark header, the footer and band-dark.
+   logo-mono-white is the all-white spare for anywhere the red cannot go.
+   Both are PNG at 737x189; SVG would be sharper and smaller if it turns up.
    ========================================================================== */
 .wordmark {
   display: block; line-height: 0; text-decoration: none;
   color: var(--ink);
   transition: color .3s ease;
 }
+/* The client's own lockup. It was a single-colour mask tinted by currentColor,
+   which would have flattened the red chimney to one tone, so it is a real image
+   now and the dark-ground contexts swap to the reversed export instead. */
 .wordmark__mark {
   display: block;
   height: var(--logo-h, 54px);
-  width: calc(var(--logo-h, 54px) * 2.6863);   /* 455.04 / 169.39 */
-  background-color: currentColor;
-  -webkit-mask: url("../img/logo.svg") no-repeat center / contain;
-          mask: url("../img/logo.svg") no-repeat center / contain;
+  width: calc(var(--logo-h, 54px) * 3.8995);   /* 737 / 189 */
+  background: url("../img/logo-color.png") no-repeat center / contain;
+  -webkit-mask: none; mask: none;
 }
+.site-header--overlay:not(.is-scrolled) .wordmark__mark,
+.site-footer .wordmark__mark,
+.band-dark .wordmark__mark { background-image: url("../img/logo-reverse.png"); }
 /* over the hero photo the mark reverses; once the bar goes solid it inks up */
 .site-header--overlay:not(.is-scrolled) .wordmark { color: var(--paper); }
 .site-footer .wordmark,
 .band-dark .wordmark { color: var(--paper); }
 .site-footer .wordmark { --logo-h: 82px; margin-bottom: .9rem; }
-/* header mark was 54px, too timid next to the footer lockup; matched to it */
-.site-header .wordmark { --logo-h: 78px; }
+/* 66px keeps the full lockup legible without pushing the nav to wrap above 1280px */
+.site-header .wordmark { --logo-h: 66px; }
 @media (max-width: 1000px) { .site-header .wordmark { --logo-h: 60px; } }
 @media (max-width: 560px)  { .site-header .wordmark { --logo-h: 46px; } .site-footer .wordmark { --logo-h: 64px; } }
 
