@@ -10,12 +10,31 @@
   --rule:         #cfc3ae;
   --rule-strong:  #a8998a;
   --steel:        #8b8681;
-  --oxblood:      #7a1f26;   /* rich fresh-meat red */
-  --oxblood-deep: #4d1218;   /* dark burgundy */
-  --oxblood-soft: #9a2c33;
-  --accent:       #7a1f26;
-  --accent-ink:   #f7f2e8;
-  --focus:        #7a1f26;
+
+  /* --- Brand reds, sampled from the logo artwork (2026-11-17) -------------
+     These are the ONLY two reds in assets/img/logo-color.png. Counted by
+     pixel, not picked by eye: 2,967 px of #b11e24 (the flame and the bright
+     bricks) and 3,252 px of #720e16 (the chimney cap and the dark bricks).
+     Re-derive with tools/brand-colors.py. Same palette is to be used for the
+     SmokeHouse reporting dashboard - see BRAND-COLORS.md. */
+  --brand-red:        #b11e24;   /* lighter decal red - accents and details  */
+  --brand-brick:      #720e16;   /* darker brick red  - buttons and CTAs     */
+  --brand-brick-dark: #590b11;   /* derived from brick, hover/active only    */
+
+  /* Role aliases. Change a role here, never a raw hex in a rule below. */
+  --btn-bg:       var(--brand-brick);        /* primary button ground        */
+  --btn-bg-hover: var(--brand-brick-dark);
+  --accent:       var(--brand-red);          /* decorative marks, rules, type */
+  --accent-ink:   #f7f2e8;                   /* type on a red ground          */
+  --focus:        var(--brand-brick);
+
+  /* Legacy names, kept so the 112 existing call sites keep working. Both
+     oxblood tints collapse onto the decal red: the palette is two reds now,
+     and -soft only ever existed to lift the old red off dark grounds, which
+     the brighter decal red does on its own. */
+  --oxblood:      var(--brand-red);
+  --oxblood-soft: var(--brand-red);
+  --oxblood-deep: var(--brand-brick-dark);
   --char:         #14100d;   /* charcoal ground */
   --char-2:       #1f1915;
 
@@ -142,13 +161,16 @@ p:last-child { margin-bottom: 0; }
   text-decoration: none;
   border: 2px solid var(--ink);
   border-radius: 2px;
-  background: var(--accent);
+  background: var(--btn-bg);
   color: var(--accent-ink);
   box-shadow: 4px 4px 0 var(--ink);
   transition: transform .12s ease, box-shadow .12s ease, background-color .2s ease, color .2s ease;
 }
-.btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
-.btn:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--ink); }
+.btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); background: var(--btn-bg-hover); }
+.btn:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--ink); background: var(--btn-bg-hover); }
+/* --ghost has no red ground, so the hover above must not tint it */
+.btn--ghost:hover, .btn--ghost:active { background: var(--ink); }
+.btn--on-dark.btn--ghost:hover, .btn--on-dark.btn--ghost:active { background: var(--paper); }
 .btn--ghost { background: transparent; color: var(--ink); }
 .btn--ghost:hover { background: var(--ink); color: var(--paper); }
 .btn--on-dark { border-color: var(--paper); box-shadow: 4px 4px 0 var(--paper); }
@@ -1823,7 +1845,7 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
   text-shadow: 0 2px 10px rgba(20,16,13,.5);
 }
 .sign__btn {
-  background: var(--oxblood); color: var(--paper);
+  background: var(--btn-bg); color: var(--paper);
   font-family: var(--font-ui); font-weight: 700;
   font-size: clamp(.56rem, 1.9cqw, .8rem); letter-spacing: .2em; text-transform: uppercase;
   padding: .8em 2em; flex: none; margin-top: 1cqw;
@@ -1860,7 +1882,7 @@ html:not(.js) .vs__shot--store { clip-path: inset(0 0 0 50%); }
 .pmodal__close {
   position: absolute; top: clamp(.9rem,2vw,1.5rem); right: clamp(.9rem,2vw,1.5rem); z-index: 3;
   width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer;
-  background: var(--oxblood); display: grid; place-items: center;
+  background: var(--btn-bg); display: grid; place-items: center;
   transition: background-color .22s ease, transform .22s ease;
 }
 .pmodal__close:hover { background: var(--oxblood-deep); transform: rotate(90deg); }
