@@ -235,12 +235,14 @@ p:last-child { margin-bottom: 0; }
 .nav a:hover { color: var(--ink); border-color: var(--rule-strong); }
 .nav a[aria-current="page"] { color: var(--ink); border-color: var(--ink); }
 .header-cta { display: none; }
-/* The header needs 1,189px of content width to hold the logo, the full nav and
-   this button on one line (282 + 580 + 279 + two 24px gaps), and no viewport
-   under about 1,285px provides it. Below that the nav and the button both
-   wrapped to two lines. The nav is navigation and the button is a convenience
-   the hero repeats on every page, so the button is what waits. */
-@media (min-width: 1300px) { .header-cta { display: inline-flex; padding: .7rem 1.15rem; font-size: .85rem; white-space: nowrap; } }
+/* The header needs 1,114px of content width to hold the logo, the full nav and
+   this button on one line (282 + 505 + 279 + two 24px gaps), which a viewport
+   of about 1,210px provides. Below that the nav and the button both wrap to
+   two lines, and the nav wins - the button is a convenience the hero repeats
+   on every page. This sat at 1,300px while the nav was 580px wide; shortening
+   "Reviews & Awards" to "Awards" took 76px out of it, so the button comes back
+   to 1,280px laptops. 1,240px leaves 30px of slack. */
+@media (min-width: 1240px) { .header-cta { display: inline-flex; padding: .7rem 1.15rem; font-size: .85rem; white-space: nowrap; } }
 
 .nav-toggle {
   display: inline-flex; align-items: center; gap: .5rem;
